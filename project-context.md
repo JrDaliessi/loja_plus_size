@@ -1,16 +1,16 @@
 # Project Context
 
 project: Plus Store
-project_state: FOUNDATION_READY
+project_state: REQUIREMENTS_READY
 active_capabilities: [product, software]
-active_artifact: PRODUCT-PRD
+active_artifact: ARCHITECTURE
 artifact_state: DISCOVERY
-phase: Dia 1A executado — Product PRD em revisão humana
+phase: Dia 1A aprovado — Dia 1B autorizado
 last_release: none
 
 ## Current Goal
 
-Obter revisão e aprovação humana do Product PRD antes de iniciar arquitetura e specification no Dia 1B.
+Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP-01` sem iniciar implementação.
 
 ## Blockers
 
@@ -29,7 +29,7 @@ Obter revisão e aprovação humana do Product PRD antes de iniciar arquitetura 
 ## Current Context
 
 - brief: `project-brief.md`
-- requirements: `docs/product/prd.md` (`0.1-draft`, aguardando aprovação)
+- requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
 - architecture: `architecture.md` (a criar após requisitos aprovados)
 - active artifact: `docs/product/`
 - relevant ADRs: none
@@ -43,7 +43,7 @@ Obter revisão e aprovação humana do Product PRD antes de iniciar arquitetura 
 
 ## Next Action
 
-Revisar `docs/product/prd.md`; após aprovação explícita, executar o Dia 1B com arquitetura, domínio e feature PRD/spec de `SR-MVP-01`.
+Executar o Dia 1B com arquitetura, ADRs necessários, domínio e feature PRD/spec de `SR-MVP-01`; depois solicitar aprovação antes do Dia 2.
 
 ## History
 

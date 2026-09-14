@@ -1,7 +1,7 @@
 # Product
 
 - Product PRD: `docs/product/prd.md`
-- Versão atual: `0.1-draft`
-- Estado: aguardando revisão e aprovação humana no Dia 1A.
+- Versão atual: `1.0`
+- Estado: `REQUIREMENTS_APPROVED` em 2026-09-14.
 
-Arquitetura e feature specs dependem do gate `REQUIREMENTS_APPROVED`.
+Arquitetura e feature specs estão autorizadas no Dia 1B; implementação permanece bloqueada.

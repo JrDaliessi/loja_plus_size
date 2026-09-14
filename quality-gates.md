@@ -7,7 +7,7 @@
 - [x] fontes e dependências de fundação verificadas
 - [x] critérios de sucesso e riscos iniciais definidos
 - [x] rastreabilidade de fontes preservada
-- [ ] requisitos centrais do produto aprovados no Dia 1
+- [x] requisitos centrais do produto aprovados no Dia 1
 - [ ] resultado funcional validado
 - [x] documentação de fundação atualizada
 

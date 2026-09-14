@@ -8,7 +8,7 @@ project:
   delivery_model: incremental
   product_model: ecommerce_vertical_headless_omnichannel
   market: fashion_plus_size_brazil
-  state: FOUNDATION_READY
+  state: REQUIREMENTS_READY
 classification:
   technology_required: true
   toolchain_required: true

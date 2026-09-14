@@ -54,7 +54,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 1 | GOV-001 | Aprovar Dia 0 | DONE |
 | 2 | ENV-001 | Selecionar/instalar Node.js 24 LTS | ambiente validado |
 | 3 | SUPA-001 | Autorizar a conexão atual ao projeto `olkadbgumpiybehslobk` e executar baseline read-only | infraestrutura conhecida |
-| 4 | PRD-001 | Revisar e aprovar o Product PRD criado | REQUIREMENTS_APPROVED |
+| 4 | PRD-001 | Product PRD criado e aprovado | DONE |
 | 5 | ARC-001 | Definir arquitetura inicial e ADRs necessários | ARCHITECTURE_READY |
 | 6 | DS-001 | Derivar tokens e critérios acessíveis do Purple Noir para o primeiro slice | VALIDATION_READY |
 | 7 | FPRD-CAT-001 | Refinar primeira small release de catálogo/variantes | REQUIREMENTS_APPROVED |
@@ -64,8 +64,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
-| PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | IN_PROGRESS |
-| ARCHITECTURE | `architecture.md` | PRODUCT-PRD | IDEA |
+| PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
+| ARCHITECTURE | `architecture.md` | PRODUCT-PRD | DISCOVERY |
 | FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | PRODUCT-PRD, ARCHITECTURE | IDEA |
 | TEST-CATALOG | cenários RED do domínio e aplicação | feature spec | IDEA |
 

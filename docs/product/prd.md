@@ -5,9 +5,9 @@
 | Campo | Valor |
 |---|---|
 | ID | `PRODUCT-PRD` |
-| Versão | `0.1-draft` |
-| Estado | `REVIEW_REQUIRED` |
-| Project state | `FOUNDATION_READY` |
+| Versão | `1.0` |
+| Estado | `APPROVED` |
+| Project state | `REQUIREMENTS_READY` |
 | Capability | `product` |
 | Responsável pelo aceite | Humano responsável pelo produto |
 | Derived from | `SRC-VISION-001`, `SRC-STACK-001`, `SRC-DESIGN-001`, `project-brief.md` |
@@ -495,19 +495,19 @@ A primeira small release proposta é `SR-MVP-01`, pois estabelece a identidade d
 
 ## Requirements Approval Checklist
 
-- [ ] Visão e problema representam o produto desejado.
-- [ ] Público, necessidades e proposta de valor estão corretos.
-- [ ] Escopo do MVP está aprovado.
-- [ ] Separação MVP/V1–V6 está aprovada.
-- [ ] Regras centrais de variante/SKU e estoque estão aprovadas.
-- [ ] Checkout visitante e Mercado Pago como primeiro provedor estão aprovados.
-- [ ] Direção Purple Noir está preservada.
-- [ ] Requisitos de privacidade, segurança e acessibilidade estão aprovados.
-- [ ] `SR-MVP-01` está aprovada como primeira small release.
-- [ ] Open questions podem permanecer adiadas nos prazos registrados.
+- [x] Visão e problema representam o produto desejado.
+- [x] Público, necessidades e proposta de valor estão corretos.
+- [x] Escopo do MVP está aprovado.
+- [x] Separação MVP/V1–V6 está aprovada.
+- [x] Regras centrais de variante/SKU e estoque estão aprovadas.
+- [x] Checkout visitante e Mercado Pago como primeiro provedor estão aprovados.
+- [x] Direção Purple Noir está preservada.
+- [x] Requisitos de privacidade, segurança e acessibilidade estão aprovados.
+- [x] `SR-MVP-01` está aprovada como primeira small release.
+- [x] Open questions podem permanecer adiadas nos prazos registrados.
 
 ## Approval
 
-Status: **PENDENTE DE REVISÃO HUMANA**.
+Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-Para atingir o gate `REQUIREMENTS_APPROVED`, o humano deve aprovar explicitamente este PRD ou solicitar correções. Somente depois disso poderão ser produzidos `architecture.md`, eventuais ADRs e o Feature PRD/Spec de `SR-MVP-01`.
+Gate atingido: `REQUIREMENTS_APPROVED`. O Dia 1B está autorizado a produzir `architecture.md`, eventuais ADRs e o Feature PRD/Spec de `SR-MVP-01`, sem implementar código funcional.
