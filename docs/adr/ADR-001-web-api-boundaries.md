@@ -1,6 +1,6 @@
 ---
 id: ADR-001
-status: proposed
+status: accepted
 date: 2026-09-14
 affects: [apps/web, apps/api, packages/contracts, packages/ui]
 derived_from: [PRODUCT-PRD, SRC-STACK-001]
@@ -65,4 +65,4 @@ domain -> nenhuma tecnologia externa
 
 ## Approval
 
-Pendente de aprovação humana no encerramento do Dia 1B.
+Aceito pelo humano em 2026-09-14 no encerramento do Dia 1B.

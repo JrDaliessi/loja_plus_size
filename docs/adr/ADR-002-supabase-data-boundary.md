@@ -1,6 +1,6 @@
 ---
 id: ADR-002
-status: proposed
+status: accepted
 date: 2026-09-14
 affects: [database, auth, storage, rls, apps/api, apps/web]
 derived_from: [PRODUCT-PRD, PRD-NFR-002, PRD-NFR-005]
@@ -70,4 +70,4 @@ Propor as seguintes fronteiras:
 
 ## Approval
 
-Pendente de aprovação humana e de confirmação técnica após o baseline Supabase.
+Aceito pelo humano em 2026-09-14. A decisão arquitetural está aprovada; a confirmação técnica após o baseline Supabase permanece um bloqueio antes de schema ou migrations.

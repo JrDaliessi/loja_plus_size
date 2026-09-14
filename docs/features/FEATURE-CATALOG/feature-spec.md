@@ -2,7 +2,7 @@
 id: FSPEC-CAT001
 feature: FEATURE-CATALOG
 small_release: SR-MVP-01
-status: spec_review
+status: spec_ready
 derived_from:
   - PRODUCT-PRD
   - FEATURE-CATALOG/feature-prd.md
@@ -18,7 +18,7 @@ adrs: [ADR-001, ADR-002, ADR-003]
 - Feature: `FEATURE-CATALOG`
 - Small release: `SR-MVP-01`
 - Capability: software/product
-- State: `REQUIREMENTS_READY`, aguardando aprovação da spec
+- State: `SPEC_READY`
 - Objective: materializar contratos implementáveis para catálogo e variante/SKU sem executar a implementação.
 
 ## Requirements Covered
@@ -414,8 +414,8 @@ No implementation test will be authored in Dia 1B.
 
 ## Definition of Done
 
-- [ ] Feature PRD and spec approved.
-- [ ] Architecture and ADRs approved.
+- [x] Feature PRD and spec approved.
+- [x] Architecture and ADRs approved.
 - [ ] Every `FPRD-CAT001-AC-*` maps to at least one test ID.
 - [ ] RED observed for essential tests before implementation.
 - [ ] Domain/application compile independently of Prisma/Nest presentation.
@@ -433,11 +433,10 @@ No implementation test will be authored in Dia 1B.
 1. Node.js must be upgraded from 22.14.0 to at least 24.11 for the current Prisma 8 RC.
 2. Supabase management access and read-only baseline are required.
 3. Exact Prisma 8 packages/versions must be rechecked and pinned.
-4. Architecture, ADRs, domain proposals and this spec require human approval.
-5. Authorization baseline must be specified in the Dia 2 validation plan before protected endpoints can be implemented.
+4. Authorization baseline must be specified in the Dia 2 validation plan before protected endpoints can be implemented.
 
 ## Approval
 
-Status: **PENDENTE DE APROVAÇÃO HUMANA**.
+Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-Approval reaches `SPEC_READY` but does not authorize implementation. The next command remains Dia 2, where tests and validation contracts must be created first.
+O gate `SPEC_READY` foi alcançado, mas não autoriza implementação. O próximo comando permanece Dia 2, quando os contratos de validação e testes RED deverão ser criados primeiro.

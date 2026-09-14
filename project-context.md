@@ -1,16 +1,16 @@
 # Project Context
 
 project: Plus Store
-project_state: REQUIREMENTS_READY
+project_state: ARCHITECTURE_READY
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: REQUIREMENTS_READY
-phase: Dia 1B executado — arquitetura e spec em revisão humana
+artifact_state: SPEC_READY
+phase: Dia 1 concluído — aguardando comando Dia 2
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana da arquitetura, ADRs, modelo de domínio e Feature PRD/Spec da `SR-MVP-01`.
+Aguardar autorização explícita para o Dia 2 e então produzir o contrato de validação e os testes RED da `SR-MVP-01`.
 
 ## Blockers
 
@@ -30,7 +30,7 @@ Obter aprovação humana da arquitetura, ADRs, modelo de domínio e Feature PRD/
 
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
-- architecture: `architecture.md` (`0.1-draft`, aguardando aprovação)
+- architecture: `architecture.md` (`1.0`, `APPROVED`)
 - active artifact: `docs/features/FEATURE-CATALOG/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-003-prisma-8-conditional-adoption.md`
 - quality gates: `quality-gates.md`
@@ -43,7 +43,7 @@ Obter aprovação humana da arquitetura, ADRs, modelo de domínio e Feature PRD/
 
 ## Next Action
 
-Revisar e aprovar o pacote do Dia 1B. Após aprovação, marcar `ARCHITECTURE_READY`/`SPEC_READY` e solicitar autorização explícita para o Dia 2.
+Aguardar o comando explícito `dia 2`. Nessa fase, validar entradas e resolver os bloqueios de Node.js/Supabase necessários antes dos testes RED dependentes do ambiente.
 
 ## History
 

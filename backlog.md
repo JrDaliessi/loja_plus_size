@@ -11,8 +11,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DISCOVERY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | DISCOVERY |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | DISCOVERY |
-| CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IDEA |
-| VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IDEA |
+| CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | READY |
+| VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | READY |
 | INV-001 | Feature | Estoque e movimentos por SKU como fonte única | P0 | VAR-001 | nenhuma operação vende quantidade indisponível | IDEA |
 | STO-001 | Feature | Vitrine, categorias e página de produto rica | P0 | CAT-001, VAR-001, DS-001 | produto indexável mostra preço, variantes e conteúdo | IDEA |
 | SEA-001 | Feature | Busca e filtros por tamanho, preço, cor, categoria, tecido, caimento e ocasião | P0 | CAT-001, VAR-001 | consultas essenciais retornam resultados corretos | IDEA |
@@ -57,9 +57,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 2 | ENV-001 | Selecionar/instalar Node.js 24.11+ | ambiente validado |
 | 3 | SUPA-001 | Autorizar a conexão atual ao projeto `olkadbgumpiybehslobk` e executar baseline read-only | infraestrutura conhecida |
 | 4 | PRD-001 | Product PRD criado e aprovado | DONE |
-| 5 | ARC-001 | Revisar arquitetura inicial e ADRs propostos | ARCHITECTURE_READY |
-| 6 | FPRD-CAT-001 | Revisar requisitos da primeira small release | REQUIREMENTS_APPROVED |
-| 7 | FSPEC-CAT-001 | Revisar spec da primeira small release | SPEC_READY |
+| 5 | ARC-001 | Arquitetura inicial e ADRs aprovados | DONE |
+| 6 | FPRD-CAT-001 | Requisitos da primeira small release aprovados | DONE |
+| 7 | FSPEC-CAT-001 | Spec da primeira small release aprovada | DONE |
 | 8 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | implementação desbloqueada |
 | 9 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
 | 10 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
@@ -69,9 +69,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
 | PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
-| ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | IN_PROGRESS |
-| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | aprovação humana dos requisitos/spec | IN_PROGRESS |
-| TEST-CATALOG | cenários RED do domínio e aplicação | feature spec | IDEA |
+| ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | DONE |
+| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | aprovação humana dos requisitos/spec | READY |
+| TEST-CATALOG | cenários RED do domínio e aplicação | feature spec | READY |
 
 ## Política de priorização
 

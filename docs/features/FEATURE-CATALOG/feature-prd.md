@@ -1,7 +1,7 @@
 ---
 id: FEATURE-CATALOG
 small_release: SR-MVP-01
-status: requirements_review
+status: requirements_approved
 derived_from:
   - PRODUCT-PRD
   - PRD-FR-CAT-001
@@ -195,7 +195,6 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 - acesso administrativo/read-only ao Supabase antes de definir migrations;
 - baseline de schemas, grants, RLS, extensions e Storage;
 - autorização mínima de staff antes de expor mutações;
-- decisão sobre convenções propostas de SKU/barcode/publicação.
 
 ## Risks
 
@@ -208,7 +207,7 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 | `FPRD-CAT001-RISK-005` | Endpoint admin sem autorização suficiente | Gate bloqueia exposição/deploy. |
 | `FPRD-CAT001-RISK-006` | Scope creep para vitrine/admin completo | Non-scope e backlog preservados. |
 
-## Decisions Requiring Approval
+## Approved Decisions
 
 1. SKU canônico em maiúsculas e comparação case-insensitive.
 2. Barcode opcional e único quando informado; validação GTIN/EAN posterior ao padrão comercial real.
@@ -219,6 +218,6 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 
 ## Approval
 
-Status: **PENDENTE DE APROVAÇÃO HUMANA**.
+Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-O gate `REQUIREMENTS_APPROVED` desta feature só fecha quando as seis decisões acima e os critérios de aceite forem aprovados. Isso não autoriza implementação; o Dia 2 deve primeiro derivar testes RED.
+O gate `REQUIREMENTS_APPROVED` desta feature está concluído. Este aceite não autoriza implementação; o Dia 2 deve primeiro derivar a estratégia de validação e os testes RED.

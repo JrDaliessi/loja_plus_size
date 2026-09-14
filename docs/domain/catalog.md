@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | ID | `DOMAIN-CATALOG-001` |
-| Estado | `REVIEW_REQUIRED` |
+| Estado | `APPROVED` |
 | Derived from | `PRD-FR-CAT-001..003`, `PRD-FR-VAR-001..003`, `PRD-BR-001..004`, `CAT-001`, `VAR-001` |
 | Affects | `FEATURE-CATALOG`, `SR-MVP-02`, `SR-MVP-03` |
 
@@ -165,9 +165,9 @@ Estado `ACTIVE` não significa “em estoque”. O módulo de catálogo descreve
 | `CAT-INV-011` | Cor real da mídia não é alterada por regra de catálogo ou tema. | `PRD-NFR-015` |
 | `CAT-INV-012` | Archiving preserva identidade e referências; não recicla SKU. | Fonte única e integração futura |
 
-## Proposed Publication Policy
+## Approved Publication Policy
 
-Esta política é uma decisão nova e precisa de aprovação no Dia 1B.
+Esta política foi aprovada no Dia 1B em 2026-09-14.
 
 Um produto pode se tornar `ACTIVE` somente quando possuir:
 
@@ -255,14 +255,14 @@ O adapter Prisma 8 não pode depender de códigos `P2002`; violações serão ma
 - exclusão física de registros referenciados;
 - integração com marketplaces.
 
-## Open Decisions
+## Approved and Deferred Decisions
 
-1. Normalização de SKU diferencia maiúsculas/minúsculas? Proposta: armazenar formato canônico em maiúsculas e comparar sem case.
-2. Barcode aceita quais padrões? Proposta: string normalizada, validadores por padrão adicionados quando o negócio informar GTIN/EAN.
-3. Produto pode ter múltiplas categorias? Proposta: sim, com uma categoria principal para navegação/SEO.
-4. Variante pode mudar de SKU? Proposta: somente em `DRAFT`; após ativação, criar nova variante e arquivar a anterior.
-5. Produto esgotado permanece público? Decisão adiada para `SR-MVP-03` após inventory.
+1. SKU é armazenado em formato canônico maiúsculo e comparado sem distinção de caixa.
+2. Barcode é opcional, normalizado e único quando informado; validadores GTIN/EAN serão adicionados quando o padrão comercial real for definido.
+3. Produto pode pertencer a múltiplas categorias, com exatamente uma categoria principal para navegação/SEO.
+4. SKU só pode mudar em `DRAFT`; após ativação, deve-se criar nova variante e arquivar a anterior.
+5. A visibilidade pública de produto esgotado permanece deliberadamente adiada para `SR-MVP-03`, após o contrato de inventory.
 
 ## Approval
 
-Status: **PENDENTE DE APROVAÇÃO HUMANA**. A aprovação confirma vocabulário, invariantes e política de publicação proposta.
+Status: **APROVADO EM 2026-09-14**. O aceite humano confirma vocabulário, invariantes e política de publicação.

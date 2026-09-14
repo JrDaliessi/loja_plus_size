@@ -3,19 +3,20 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `REQUIREMENTS_READY`
-- Review status: `PENDING_HUMAN_APPROVAL`
-- Project state: `REQUIREMENTS_READY`
-- Phase: Dia 1B
+- Artifact state: `SPEC_READY`
+- Review status: `APPROVED_2026-09-14`
+- Project state: `ARCHITECTURE_READY`
+- Phase: Dia 1 concluído
 
 ## Completed
 
 - Product PRD 1.0 approved.
-- Architecture draft created.
+- Architecture 1.0 approved.
 - Catalog domain model created.
 - Feature requirements and acceptance criteria derived.
 - Feature Spec created.
-- Architecture, data, security and Prisma decisions recorded as proposed ADRs.
+- Architecture, data, security and Prisma decisions accepted in ADR-001 through ADR-003.
+- Feature requirements, acceptance criteria, domain decisions and Feature Spec approved by the human on 2026-09-14.
 
 ## Hard Blockers Before Implementation
 
@@ -37,21 +38,15 @@
 - Impact: persistence and migration APIs require a bounded spike.
 - Minimum unblock: verify/pin exact packages and pass the spike defined by ADR-003.
 
-### Human decision
+## Approved Decisions
 
-- Evidence: architecture, ADRs and feature-specific policies are marked proposed.
-- Impact: Dia 2 cannot be authorized until review.
-- Minimum unblock: approve or correct the Dia 1B package.
-
-## Pending Decisions
-
-1. Approve ADR-001, ADR-002 and ADR-003.
-2. Approve SKU canonicalization and immutability after activation.
-3. Approve optional/unique barcode policy.
-4. Approve multiple categories with one primary category.
-5. Approve minimum publication policy.
-6. Approve minimal staff authorization as prerequisite for admin mutations.
+1. ADR-001, ADR-002 and ADR-003 are accepted.
+2. SKU uses uppercase canonicalization and becomes immutable after activation.
+3. Barcode is optional and unique when present.
+4. A product can have multiple categories with one primary category.
+5. The minimum publication policy is approved.
+6. Minimal staff authorization is a prerequisite for admin mutations.
 
 ## Next Action
 
-Review and approve the Dia 1B package. After approval, mark architecture `ARCHITECTURE_READY`, feature `SPEC_READY`, and request explicit authorization for Dia 2.
+Await the explicit `dia 2` command. Dia 2 must validate its entry, build the validation Context Pack and address the environment blockers required to produce trustworthy RED tests.

@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-CATALOG
   small_release: SR-MVP-01
   capability: software
-  state: REQUIREMENTS_READY
-  review_status: pending_human_approval
+  state: SPEC_READY
+  review_status: approved_2026_09_14
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -37,7 +37,6 @@ hard_blockers_before_implementation:
   - node_24_11_or_newer
   - supabase_management_access
   - prisma_8_spike_and_exact_pins
-  - day_1b_human_approval
 quality_gates:
   - requirements_traceability
   - architecture_compliance
@@ -45,4 +44,4 @@ quality_gates:
   - database_constraints
   - security_and_authorization
   - storage_reconciliation
-next_action: approve_day_1b_then_start_day_2
+next_action: await_explicit_day_2_command

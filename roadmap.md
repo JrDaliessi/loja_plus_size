@@ -8,8 +8,8 @@ O roadmap preserva integralmente a visão dos documentos, mas entrega valor em p
 |---|---|---|
 | Dia 0 | Governança, contexto, stack, roadmap, backlog, gates e workflows | DONE |
 | Emenda Dia 0 | Purple Noir incorporado como fonte e contrato visual | DONE |
-| Dia 1 | Product PRD aprovado; arquitetura e primeira feature spec em revisão | IN_PROGRESS |
-| Dia 2 | Estratégia de validação e testes RED do primeiro slice | PLANNED |
+| Dia 1 | Product PRD, arquitetura, ADRs e primeira Feature Spec aprovados | DONE |
+| Dia 2 | Estratégia de validação e testes RED do primeiro slice | NEXT |
 | Dia 3 | Implementação mínima GREEN | PLANNED |
 | Dia 4 | Estados e fluxos auxiliares planejados | PLANNED |
 | Dia 5 | Refactoring e hardening | PLANNED |

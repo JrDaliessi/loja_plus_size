@@ -5,13 +5,13 @@
 | Campo | Valor |
 |---|---|
 | ID | `ARCHITECTURE-001` |
-| Versão | `0.1-draft` |
-| Estado | `REVIEW_REQUIRED` |
+| Versão | `1.0` |
+| Estado | `APPROVED` |
 | Fase | Dia 1B |
 | Derived from | `PRODUCT-PRD 1.0`, `project-stack.md`, `SRC-STACK-001` |
 | Primeiro slice | `SR-MVP-01 / FEATURE-CATALOG` |
 
-Este documento define a arquitetura inicial proporcional ao MVP. Decisões novas permanecem propostas até aprovação humana. Ele não autoriza scaffold, instalação de dependências, schema ou migrations.
+Este documento define a arquitetura inicial proporcional ao MVP. As decisões desta versão foram aprovadas pelo humano em 2026-09-14. Ele não autoriza scaffold, instalação de dependências, schema ou migrations.
 
 ## Architecture Drivers
 
@@ -291,9 +291,9 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 
 | ADR | Decisão | Estado |
 |---|---|---|
-| `ADR-001` | Monorepo e fronteiras Next.js/NestJS | `PROPOSED` |
-| `ADR-002` | Backend-only para dados comerciais e schema não exposto no Supabase | `PROPOSED` |
-| `ADR-003` | Adoção condicionada do Prisma 8 RC | `PROPOSED` |
+| `ADR-001` | Monorepo e fronteiras Next.js/NestJS | `ACCEPTED` |
+| `ADR-002` | Backend-only para dados comerciais e schema não exposto no Supabase | `ACCEPTED` |
+| `ADR-003` | Adoção condicionada do Prisma 8 RC | `ACCEPTED` |
 
 ## Explicitly Deferred
 
@@ -316,15 +316,15 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 - [x] Prisma 8 RC está isolado e seus riscos atuais estão registrados.
 - [x] Crescimento é orientado por módulos e small releases.
 - [x] Infraestrutura futura não foi ativada.
-- [ ] ADRs e arquitetura aprovados pelo humano.
+- [x] ADRs e arquitetura aprovados pelo humano.
 - [ ] Baseline real do Supabase verificado antes de schema/migrations.
 - [ ] Node.js 24.11+ validado antes do scaffold do Prisma 8.
 
 ## Approval
 
-Status: **PENDENTE DE APROVAÇÃO HUMANA**.
+Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-O aceite deste documento aprovará os três ADRs propostos e permitirá concluir o gate `ARCHITECTURE_READY`. Não autoriza o Dia 2 nem implementação.
+Gate atingido: `ARCHITECTURE_READY`. O aceite inclui os três ADRs, mantendo obrigatórios o baseline Supabase e o desbloqueio Node/Prisma antes de qualquer implementação. O Dia 2 depende de comando explícito.
 
 ## Official Technical References
 

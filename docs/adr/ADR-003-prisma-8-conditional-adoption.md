@@ -1,6 +1,6 @@
 ---
 id: ADR-003
-status: proposed
+status: accepted
 date: 2026-09-14
 affects: [apps/api, database, migrations, testing, ci]
 derived_from: [project-stack.md, human-decision-2026-09-13]
@@ -61,7 +61,7 @@ Esses valores são evidência temporal, não autorização para instalar. As ver
 
 ## Approval
 
-Pendente de aprovação humana no encerramento do Dia 1B. A aprovação aceita o uso condicionado, não o risco de instalar sem o spike.
+Aceito pelo humano em 2026-09-14. O aceite confirma o uso condicionado e não autoriza instalar sem o spike e os pins exatos.
 
 ## Official Reference
 
