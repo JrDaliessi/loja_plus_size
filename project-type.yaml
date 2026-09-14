@@ -1,0 +1,30 @@
+version: 4
+project:
+  name: Plus Store
+  name_status: provisional
+  type:
+    - software
+    - product
+  delivery_model: incremental
+  product_model: ecommerce_vertical_headless_omnichannel
+  market: fashion_plus_size_brazil
+  state: REQUIREMENTS_READY
+classification:
+  technology_required: true
+  toolchain_required: true
+  architecture_required: true
+  data_sensitivity:
+    - identity
+    - addresses
+    - body_measurements_optional
+    - purchase_history
+    - payment_metadata
+  critical_areas:
+    - authentication
+    - authorization
+    - inventory
+    - checkout
+    - payments
+    - webhooks
+    - personal_data
+    - marketplace_sync
