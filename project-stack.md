@@ -27,7 +27,7 @@ Filas futuras: Redis + BullMQ.
 | Camada | Decisão |
 |---|---|
 | Linguagem | TypeScript ponta a ponta |
-| Runtime | Node.js 24 LTS |
+| Runtime | Node.js 24 LTS; 24.11+ enquanto exigido pelo Prisma 8 RC atual |
 | Monorepo | pnpm Workspaces + Turborepo |
 | Frontend | Next.js 16.3.x, App Router e React |
 | Renderização | Server Components por padrão; Client Components somente para interação |
@@ -71,9 +71,10 @@ Filas futuras: Redis + BullMQ.
 Em 2026-09-13 o Prisma 8 é RC, ainda sem paridade completa com Prisma 7. A decisão humana é manter Prisma 8 conforme o documento. Antes do scaffold:
 
 1. fixar versões RC exatas e commitar o lockfile;
-2. validar se consultas, transações e nested writes necessários ao primeiro slice estão disponíveis;
-3. criar ADR caso uma lacuna exija Prisma 7 ou SQL/driver direto;
-4. não promover uma mudança de ORM sem aprovação humana.
+2. validar Node.js 24.11+ e TypeScript 5.9+ enquanto forem requisitos da RC;
+3. validar se consultas, transações e nested writes necessários ao primeiro slice estão disponíveis;
+4. criar ADR caso uma lacuna exija Prisma 7 ou SQL/driver direto;
+5. não promover uma mudança de ORM sem aprovação humana.
 
 ## Decisões deliberadamente adiadas
 

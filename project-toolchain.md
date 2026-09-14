@@ -4,7 +4,7 @@
 
 | Ferramenta | Exigido | Encontrado | Estado |
 |---|---:|---:|---|
-| Node.js | 24 LTS | 22.14.0 | BLOQUEADO para scaffold |
+| Node.js | 24.11+ para o Prisma 8 RC atual | 22.14.0 | BLOQUEADO para scaffold |
 | pnpm | linha atual compatível | 11.19.0 | disponível |
 | Git | versão suportada | 2.48.1 | disponível |
 | Repositório Git | inicializado | sim | disponível |
@@ -47,4 +47,4 @@ Turborepo deverá declarar dependências e outputs corretos, permitir dry-run e 
 
 ## Desbloqueio mínimo
 
-Instalar/selecionar Node.js 24 LTS e confirmar `node --version` antes de gerar o monorepo. A mudança do runtime da máquina é externa ao repositório e requer ação ou autorização humana específica.
+Instalar/selecionar Node.js 24.11+ e confirmar `node --version` antes de gerar o monorepo. A mudança do runtime da máquina é externa ao repositório e requer ação ou autorização humana específica.

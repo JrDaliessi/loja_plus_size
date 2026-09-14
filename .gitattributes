@@ -1,0 +1,5 @@
+# Stable cross-platform text representation
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+.env.example text eol=lf

@@ -1,20 +1,20 @@
 # Project Context
 
 project: Plus Store
-project_state: REQUIREMENTS_READY
+project_state: ARCHITECTURE_READY
 active_capabilities: [product, software]
-active_artifact: ARCHITECTURE
-artifact_state: DISCOVERY
-phase: Dia 1A aprovado — Dia 1B autorizado
+active_artifact: FEATURE-CATALOG
+artifact_state: SPEC_READY
+phase: Dia 1 concluído — aguardando comando Dia 2
 last_release: none
 
 ## Current Goal
 
-Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP-01` sem iniciar implementação.
+Aguardar autorização explícita para o Dia 2 e então produzir o contrato de validação e os testes RED da `SR-MVP-01`.
 
 ## Blockers
 
-- HARD: Node.js local é 22.14.0; a stack aprovada exige Node.js 24 antes do scaffold.
+- HARD: Node.js local é 22.14.0; o Prisma 8 RC atual exige Node.js 24.11+ na linha 24 antes do scaffold.
 - DECISION: Prisma 8 permanece RC; confirmar o pin exato no início da implementação.
 - HARD antes de banco/migrations: o projeto Supabase `olkadbgumpiybehslobk` não está autorizado na conexão atual.
 
@@ -30,9 +30,9 @@ Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP
 
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
-- architecture: `architecture.md` (a criar após requisitos aprovados)
-- active artifact: `docs/product/`
-- relevant ADRs: none
+- architecture: `architecture.md` (`1.0`, `APPROVED`)
+- active artifact: `docs/features/FEATURE-CATALOG/`
+- relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-003-prisma-8-conditional-adoption.md`
 - quality gates: `quality-gates.md`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
@@ -43,7 +43,7 @@ Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP
 
 ## Next Action
 
-Executar o Dia 1B com arquitetura, ADRs necessários, domínio e feature PRD/spec de `SR-MVP-01`; depois solicitar aprovação antes do Dia 2.
+Aguardar o comando explícito `dia 2`. Nessa fase, validar entradas e resolver os bloqueios de Node.js/Supabase necessários antes dos testes RED dependentes do ambiente.
 
 ## History
 

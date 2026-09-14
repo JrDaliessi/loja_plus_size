@@ -8,6 +8,9 @@
 - [x] critérios de sucesso e riscos iniciais definidos
 - [x] rastreabilidade de fontes preservada
 - [x] requisitos centrais do produto aprovados no Dia 1
+- [x] arquitetura e ADRs aprovados no Dia 1
+- [x] Feature PRD e Feature Spec da `SR-MVP-01` aprovados
+- [ ] estratégia de validação e testes RED do Dia 2 concluídos
 - [ ] resultado funcional validado
 - [x] documentação de fundação atualizada
 
