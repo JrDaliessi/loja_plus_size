@@ -4,19 +4,19 @@ project: Plus Store
 project_state: ARCHITECTURE_READY
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: SPEC_READY
-phase: Dia 1 concluído — aguardando comando Dia 2
+artifact_state: BLOCKED
+phase: Dia 2 em execução — RED unitário confirmado, integração bloqueada
 last_release: none
 
 ## Current Goal
 
-Aguardar autorização explícita para o Dia 2 e então produzir o contrato de validação e os testes RED da `SR-MVP-01`.
+Desbloquear o baseline Supabase e um PostgreSQL isolado para concluir os sete testes de integração pendentes da `SR-MVP-01`.
 
 ## Blockers
 
-- HARD: Node.js local é 22.14.0; o Prisma 8 RC atual exige Node.js 24.11+ na linha 24 antes do scaffold.
-- DECISION: Prisma 8 permanece RC; confirmar o pin exato no início da implementação.
-- HARD antes de banco/migrations: o projeto Supabase `olkadbgumpiybehslobk` não está autorizado na conexão atual.
+- HARD: o projeto Supabase `olkadbgumpiybehslobk` continua ausente da conexão atual; baseline, Storage e Data API não podem ser validados.
+- HARD: PostgreSQL 13/17 existe localmente, mas exige credencial indisponível; não há Docker nem branch Supabase isolada autorizada para testes destrutivos/concorrentes.
+- HARD antes de persistence: Prisma 8 permanece RC; CLI `8.0.0-rc.15` e adapter `@prisma/orm-postgres@8.0.0-rc.11` ainda exigem spike conjunto.
 
 ## Active Risks
 
@@ -32,6 +32,7 @@ Aguardar autorização explícita para o Dia 2 e então produzir o contrato de v
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
 - active artifact: `docs/features/FEATURE-CATALOG/`
+- validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-003-prisma-8-conditional-adoption.md`
 - quality gates: `quality-gates.md`
 - stack: `project-stack.md`
@@ -43,7 +44,7 @@ Aguardar autorização explícita para o Dia 2 e então produzir o contrato de v
 
 ## Next Action
 
-Aguardar o comando explícito `dia 2`. Nessa fase, validar entradas e resolver os bloqueios de Node.js/Supabase necessários antes dos testes RED dependentes do ambiente.
+Adicionar a conta conectada ao projeto Supabase e escolher um banco de testes isolado. Depois executar baseline read-only, completar os sete testes de integração e revalidar o gate do Dia 2.
 
 ## History
 

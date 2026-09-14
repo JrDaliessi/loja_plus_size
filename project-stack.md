@@ -68,7 +68,7 @@ Filas futuras: Redis + BullMQ.
 
 ## Restrições do Prisma 8
 
-Em 2026-09-13 o Prisma 8 é RC, ainda sem paridade completa com Prisma 7. A decisão humana é manter Prisma 8 conforme o documento. Antes do scaffold:
+Em 2026-09-14 o Prisma 8 continua RC, ainda sem paridade completa com Prisma 7. O registro npm apresentou CLI `8.0.0-rc.15` e adapter PostgreSQL `@prisma/orm-postgres@8.0.0-rc.11`. A decisão humana é manter Prisma 8 conforme o documento. Antes do scaffold de persistence:
 
 1. fixar versões RC exatas e commitar o lockfile;
 2. validar Node.js 24.11+ e TypeScript 5.9+ enquanto forem requisitos da RC;

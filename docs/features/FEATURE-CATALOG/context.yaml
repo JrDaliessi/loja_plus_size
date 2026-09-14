@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-CATALOG
   small_release: SR-MVP-01
   capability: software
-  state: SPEC_READY
-  review_status: approved_2026_09_14
+  state: BLOCKED
+  review_status: day_2_partial_red_2026_09_14
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -34,8 +34,8 @@ active_risks:
   - admin_authorization_dependency
   - sku_concurrency
 hard_blockers_before_implementation:
-  - node_24_11_or_newer
   - supabase_management_access
+  - isolated_postgres_test_target
   - prisma_8_spike_and_exact_pins
 quality_gates:
   - requirements_traceability
@@ -44,4 +44,4 @@ quality_gates:
   - database_constraints
   - security_and_authorization
   - storage_reconciliation
-next_action: await_explicit_day_2_command
+next_action: authorize_supabase_and_isolated_postgres_then_complete_day_2

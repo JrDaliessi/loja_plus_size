@@ -318,7 +318,7 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 - [x] Infraestrutura futura não foi ativada.
 - [x] ADRs e arquitetura aprovados pelo humano.
 - [ ] Baseline real do Supabase verificado antes de schema/migrations.
-- [ ] Node.js 24.11+ validado antes do scaffold do Prisma 8.
+- [x] Node.js 24.11+ validado antes do scaffold do Prisma 8 (`24.21.0`).
 
 ## Approval
 

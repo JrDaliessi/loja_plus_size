@@ -430,10 +430,10 @@ No implementation test will be authored in Dia 1B.
 
 ## Open Issues Blocking Implementation
 
-1. Node.js must be upgraded from 22.14.0 to at least 24.11 for the current Prisma 8 RC.
-2. Supabase management access and read-only baseline are required.
-3. Exact Prisma 8 packages/versions must be rechecked and pinned.
-4. Authorization baseline must be specified in the Dia 2 validation plan before protected endpoints can be implemented.
+1. Supabase management access and read-only baseline are required.
+2. An isolated PostgreSQL test target is required for destructive, rollback and concurrency tests.
+3. Prisma 8 CLI `8.0.0-rc.15` and `@prisma/orm-postgres` `8.0.0-rc.11` were identified; the bounded spike must validate and pin the complete compatible set before persistence.
+4. Authorization integration scenarios remain blocked until the Supabase baseline and isolated test target are available.
 
 ## Approval
 

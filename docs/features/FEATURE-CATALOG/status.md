@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `SPEC_READY`
-- Review status: `APPROVED_2026-09-14`
+- Artifact state: `BLOCKED`
+- Review status: `DAY_2_PARTIAL_RED_2026-09-14`
 - Project state: `ARCHITECTURE_READY`
-- Phase: Dia 1 concluído
+- Phase: Dia 2 em execução
 
 ## Completed
 
@@ -17,20 +17,25 @@
 - Feature Spec created.
 - Architecture, data, security and Prisma decisions accepted in ADR-001 through ADR-003.
 - Feature requirements, acceptance criteria, domain decisions and Feature Spec approved by the human on 2026-09-14.
+- Node.js 24.21.0 selected without removing the system Node.js 22 installation.
+- Reproducible pnpm workspace and test runner created with exact dependency pins.
+- Test plan, 20/20 acceptance-criteria matrix and deterministic fixtures created.
+- Type-check and dependency audit passed.
+- RED confirmed: 4 suites, 21 failed tests and 7 explicit infrastructure `todo` tests.
 
 ## Hard Blockers Before Implementation
-
-### Node runtime
-
-- Evidence: local Node.js is 22.14.0; Prisma 8 RC requires Node.js 24.11+ on the Node 24 line.
-- Impact: scaffold and dependency validation cannot safely begin.
-- Minimum unblock: install/select Node.js 24.11+ and verify `node --version`.
 
 ### Supabase baseline
 
 - Evidence: project `olkadbgumpiybehslobk` is not visible to the connected management account.
 - Impact: existing schema, grants, RLS, migrations and extensions are unknown.
 - Minimum unblock: authorize access and execute read-only baseline before schema work.
+
+### Isolated PostgreSQL test target
+
+- Evidence: local PostgreSQL 13 and 17 services are running, but require an unavailable credential; Docker is absent.
+- Impact: uniqueness, concurrency, cursor and rollback scenarios cannot become trustworthy RED tests.
+- Minimum unblock: authorize a Supabase development branch after cost confirmation or provide secure access to a disposable local database.
 
 ### Prisma 8 compatibility
 
@@ -49,4 +54,4 @@
 
 ## Next Action
 
-Await the explicit `dia 2` command. Dia 2 must validate its entry, build the validation Context Pack and address the environment blockers required to produce trustworthy RED tests.
+Authorize the target Supabase project and an isolated PostgreSQL test target. Then complete the seven pending integration tests and the `VALIDATION_READY` gate. Functional implementation remains prohibited.

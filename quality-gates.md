@@ -10,6 +10,9 @@
 - [x] requisitos centrais do produto aprovados no Dia 1
 - [x] arquitetura e ADRs aprovados no Dia 1
 - [x] Feature PRD e Feature Spec da `SR-MVP-01` aprovados
+- [x] matriz liga 20/20 critérios de aceite a testes primários
+- [x] type-check verde e RED unitário observado pelo motivo correto
+- [ ] RED PostgreSQL/Supabase observado em ambiente isolado
 - [ ] estratégia de validação e testes RED do Dia 2 concluídos
 - [ ] resultado funcional validado
 - [x] documentação de fundação atualizada

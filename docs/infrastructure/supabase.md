@@ -9,9 +9,9 @@
 - Papel planejado: PostgreSQL, Auth e Storage.
 - Regra de negócio: permanece no NestJS.
 
-## Estado de acesso — 2026-09-13
+## Estado de acesso — 2026-09-14
 
-A conexão Supabase disponível nesta sessão não possui permissão para esse projeto.
+A conexão Supabase disponível nesta sessão não possui permissão para esse projeto. A listagem foi repetida no início do Dia 2 e confirmou o mesmo resultado.
 
 Projetos visíveis na conexão atual:
 
@@ -43,6 +43,8 @@ Autorizar/conectar no Codex a conta ou organização Supabase que contém `olkad
 5. advisors de segurança e performance.
 
 Nenhuma migration ou SQL deve ser aplicada durante essa inspeção.
+
+Para os testes destrutivos de constraints, concorrência e rollback, o projeto também precisa de um banco isolado. As opções admissíveis são uma branch Supabase criada após confirmação de custo ou uma instância PostgreSQL local com credencial fornecida por canal seguro. O banco de produção não será usado como fixture.
 
 ## Política de segurança
 
