@@ -8,7 +8,7 @@ O roadmap preserva integralmente a visão dos documentos, mas entrega valor em p
 |---|---|---|
 | Dia 0 | Governança, contexto, stack, roadmap, backlog, gates e workflows | DONE |
 | Emenda Dia 0 | Purple Noir incorporado como fonte e contrato visual | DONE |
-| Dia 1 | Product PRD aprovado; arquitetura proporcional e primeira feature spec em preparação | IN_PROGRESS |
+| Dia 1 | Product PRD aprovado; arquitetura e primeira feature spec em revisão | IN_PROGRESS |
 | Dia 2 | Estratégia de validação e testes RED do primeiro slice | PLANNED |
 | Dia 3 | Implementação mínima GREEN | PLANNED |
 | Dia 4 | Estados e fluxos auxiliares planejados | PLANNED |
@@ -31,6 +31,7 @@ Small releases propostas:
 5. `SR-MVP-05` — checkout, endereço e frete.
 6. `SR-MVP-06` — Mercado Pago, pedido, idempotência e confirmação.
 7. `SR-MVP-07` — painel administrativo mínimo e release operacional.
+8. `SR-MVP-08` — instalabilidade, offline shell e validação PWA sem operações comerciais offline implícitas.
 
 O Design System Purple Noir é uma dependência transversal das releases com interface e será implementado incrementalmente, começando pelos tokens e componentes usados na primeira tela, sem construir uma biblioteca completa antecipadamente.
 

@@ -19,6 +19,8 @@ routes:
   architecture:
     - architecture.md
     - docs/adr/
+  domain:
+    - docs/domain/
   stack:
     - project-stack.md
     - project-toolchain.md
@@ -63,6 +65,17 @@ relations:
       - architecture.md
       - project-toolchain.md
       - quality-gates.md
+  docs/product/prd.md:
+    affects:
+      - architecture.md
+      - docs/domain/catalog.md
+      - docs/features/FEATURE-CATALOG/
+  architecture.md:
+    depends_on:
+      - docs/product/prd.md
+      - project-stack.md
+    affects:
+      - docs/features/FEATURE-CATALOG/feature-spec.md
   design_system_purple_noir_loja_plus_size.md:
     derived_from:
       - docs/sources/source-map.md

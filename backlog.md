@@ -8,6 +8,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 |---|---|---|---|---|---|---|
 | PROD-001 | Épico | Commerce Core: permitir venda completa sem conta obrigatória | P0 | PRD, arquitetura | pedido pago e rastreável com estoque consistente | DISCOVERY |
 | SUPA-001 | Technical Foundation | Vincular e auditar o projeto Supabase existente | P0 | acesso autorizado | projeto, schema, migrations e advisors inspecionados sem mutação | BLOCKED |
+| PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DISCOVERY |
+| SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | DISCOVERY |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | DISCOVERY |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IDEA |
 | VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IDEA |
@@ -52,21 +54,23 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | Ordem | ID | Ação | Gate |
 |---:|---|---|---|
 | 1 | GOV-001 | Aprovar Dia 0 | DONE |
-| 2 | ENV-001 | Selecionar/instalar Node.js 24 LTS | ambiente validado |
+| 2 | ENV-001 | Selecionar/instalar Node.js 24.11+ | ambiente validado |
 | 3 | SUPA-001 | Autorizar a conexão atual ao projeto `olkadbgumpiybehslobk` e executar baseline read-only | infraestrutura conhecida |
 | 4 | PRD-001 | Product PRD criado e aprovado | DONE |
-| 5 | ARC-001 | Definir arquitetura inicial e ADRs necessários | ARCHITECTURE_READY |
-| 6 | DS-001 | Derivar tokens e critérios acessíveis do Purple Noir para o primeiro slice | VALIDATION_READY |
-| 7 | FPRD-CAT-001 | Refinar primeira small release de catálogo/variantes | REQUIREMENTS_APPROVED |
-| 8 | FSPEC-CAT-001 | Derivar spec e matriz de testes | VALIDATION_READY |
+| 5 | ARC-001 | Revisar arquitetura inicial e ADRs propostos | ARCHITECTURE_READY |
+| 6 | FPRD-CAT-001 | Revisar requisitos da primeira small release | REQUIREMENTS_APPROVED |
+| 7 | FSPEC-CAT-001 | Revisar spec da primeira small release | SPEC_READY |
+| 8 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | implementação desbloqueada |
+| 9 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
+| 10 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
 | PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
-| ARCHITECTURE | `architecture.md` | PRODUCT-PRD | DISCOVERY |
-| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | PRODUCT-PRD, ARCHITECTURE | IDEA |
+| ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | IN_PROGRESS |
+| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | aprovação humana dos requisitos/spec | IN_PROGRESS |
 | TEST-CATALOG | cenários RED do domínio e aplicação | feature spec | IDEA |
 
 ## Política de priorização

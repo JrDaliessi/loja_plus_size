@@ -3,18 +3,18 @@
 project: Plus Store
 project_state: REQUIREMENTS_READY
 active_capabilities: [product, software]
-active_artifact: ARCHITECTURE
-artifact_state: DISCOVERY
-phase: Dia 1A aprovado — Dia 1B autorizado
+active_artifact: FEATURE-CATALOG
+artifact_state: REQUIREMENTS_READY
+phase: Dia 1B executado — arquitetura e spec em revisão humana
 last_release: none
 
 ## Current Goal
 
-Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP-01` sem iniciar implementação.
+Obter aprovação humana da arquitetura, ADRs, modelo de domínio e Feature PRD/Spec da `SR-MVP-01`.
 
 ## Blockers
 
-- HARD: Node.js local é 22.14.0; a stack aprovada exige Node.js 24 antes do scaffold.
+- HARD: Node.js local é 22.14.0; o Prisma 8 RC atual exige Node.js 24.11+ na linha 24 antes do scaffold.
 - DECISION: Prisma 8 permanece RC; confirmar o pin exato no início da implementação.
 - HARD antes de banco/migrations: o projeto Supabase `olkadbgumpiybehslobk` não está autorizado na conexão atual.
 
@@ -30,9 +30,9 @@ Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP
 
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
-- architecture: `architecture.md` (a criar após requisitos aprovados)
-- active artifact: `docs/product/`
-- relevant ADRs: none
+- architecture: `architecture.md` (`0.1-draft`, aguardando aprovação)
+- active artifact: `docs/features/FEATURE-CATALOG/`
+- relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-003-prisma-8-conditional-adoption.md`
 - quality gates: `quality-gates.md`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
@@ -43,7 +43,7 @@ Definir a arquitetura proporcional, o domínio inicial e os contratos da `SR-MVP
 
 ## Next Action
 
-Executar o Dia 1B com arquitetura, ADRs necessários, domínio e feature PRD/spec de `SR-MVP-01`; depois solicitar aprovação antes do Dia 2.
+Revisar e aprovar o pacote do Dia 1B. Após aprovação, marcar `ARCHITECTURE_READY`/`SPEC_READY` e solicitar autorização explícita para o Dia 2.
 
 ## History
 
