@@ -1,6 +1,6 @@
 # Project Stack
 
-Status: aprovado no Dia 0 em 2026-09-13.  
+Status: aprovado no Dia 0 em 2026-09-13.
 Derived from: `stack_loja_plus_size_completa.md` e `loja_plus_size_ideia_completa.md`.
 
 ## Arquitetura escolhida

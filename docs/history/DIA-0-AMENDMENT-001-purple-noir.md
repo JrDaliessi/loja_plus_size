@@ -1,6 +1,6 @@
 # Dia 0 — Emenda 001: Purple Noir
 
-Data: 2026-09-13  
+Data: 2026-09-13
 Estado: incorporada
 
 ## Mudança

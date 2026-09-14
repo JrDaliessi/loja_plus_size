@@ -1,11 +1,11 @@
 # Project Context
 
-project: Plus Store  
-project_state: FOUNDATION_READY  
-active_capabilities: [product, software]  
-active_artifact: PRODUCT-PRD  
-artifact_state: DISCOVERY  
-phase: Dia 1A executado — Product PRD em revisão humana  
+project: Plus Store
+project_state: FOUNDATION_READY
+active_capabilities: [product, software]
+active_artifact: PRODUCT-PRD
+artifact_state: DISCOVERY
+phase: Dia 1A executado — Product PRD em revisão humana
 last_release: none
 
 ## Current Goal
