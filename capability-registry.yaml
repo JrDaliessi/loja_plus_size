@@ -1,0 +1,43 @@
+version: 4
+project:
+  name: Plus Store
+capabilities:
+  core:
+    enabled: true
+    reason: Governança, roteamento de contexto, validação e documentação viva.
+  product:
+    enabled: true
+    reason: Transformar a visão ampla em PRD, requisitos aprovados e small releases.
+    deliverables:
+      - docs/product/prd.md
+      - feature PRDs
+      - roadmap.md
+      - backlog.md
+  software:
+    enabled: true
+    reason: Implementar e validar web, API, banco, integrações e operação.
+    deliverables:
+      - architecture.md
+      - feature specs
+      - tests
+      - applications
+  documents:
+    enabled: false
+    activate_when: Um documento final além da documentação de engenharia entrar no backlog.
+  content:
+    enabled: false
+    activate_when: Blog, campanhas ou conteúdo editorial entrarem em uma small release.
+  research:
+    enabled: false
+  education:
+    enabled: false
+  linkedin:
+    enabled: false
+  automation:
+    enabled: false
+    activate_when: Filas, notificações, sincronizações ou campanhas automatizadas entrarem em escopo.
+  hybrid:
+    enabled: false
+policy:
+  activate_minimum_sufficient_set: true
+  require_registry_update_before_activation: true

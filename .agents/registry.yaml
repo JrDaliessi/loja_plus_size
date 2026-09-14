@@ -1,0 +1,102 @@
+version: 4
+project:
+  name: Plus Store
+  type:
+    - software
+    - product
+capabilities:
+  core:
+    enabled: true
+  product:
+    enabled: true
+  software:
+    enabled: true
+  documents:
+    enabled: false
+  content:
+    enabled: false
+  automation:
+    enabled: false
+agents:
+  conductor:
+    file: .agents/workflows/engineering-conductor-agent.md
+    always_enforced: true
+    hot_load: true
+  context_router:
+    file: .agents/workflows/context-governance-routing-agent.md
+    always_enforced: true
+    hot_load: true
+  living_documentation:
+    file: .agents/workflows/living-documentation-agent.md
+    always_enforced: true
+    hot_load: false
+  quality_gate:
+    file: .agents/workflows/quality-gate-agent.md
+    always_enforced: true
+    hot_load: false
+  product_requirements:
+    file: .agents/capabilities/product/product-requirements-agent.md
+    load_when:
+      capability: product
+      activity:
+        - discovery
+        - requirements
+        - prioritization
+  architecture:
+    file: .agents/capabilities/software/architecture-agent.md
+    load_when:
+      capability: software
+      activity:
+        - architecture
+        - specification
+  domain_modeling:
+    file: .agents/capabilities/software/domain-modeling-agent.md
+    load_when:
+      capability: software
+      activity:
+        - domain_modeling
+        - specification
+  tdd:
+    file: .agents/capabilities/software/tdd-first-agent.md
+    always_enforced_when:
+      capability: software
+      activity:
+        - implementation
+        - bugfix
+  xp_pair_programmer:
+    file: .agents/capabilities/software/xp-pair-programmer-agent.md
+    load_when:
+      capability: software
+      activity:
+        - implementation
+  refactoring:
+    file: .agents/capabilities/software/refactoring-agent.md
+    load_when:
+      capability: software
+      activity:
+        - refactoring
+        - hardening
+  security:
+    file: .agents/capabilities/software/security-agent.md
+    load_when:
+      capability: software
+      activity:
+        - authentication
+        - authorization
+        - database
+        - payments
+        - webhooks
+        - release
+  ui_ux:
+    file: .agents/capabilities/software/ui-ux-agent.md
+    load_when:
+      capability: software
+      activity:
+        - experience_validation
+        - accessibility
+        - responsive_design
+guards:
+  tdd_for_software_behavior: true
+  ai_jail_for_external_mutation: true
+  require_human_approval_between_days: true
+  max_specialists_without_justification: 3
