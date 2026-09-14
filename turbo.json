@@ -1,0 +1,18 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "tasks": {
+    "type-check": {
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^type-check"],
+      "outputs": ["coverage/**"],
+      "cache": false
+    },
+    "test:catalog:red": {
+      "dependsOn": ["type-check"],
+      "outputs": [],
+      "cache": false
+    }
+  }
+}

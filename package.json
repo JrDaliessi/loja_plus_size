@@ -1,0 +1,19 @@
+{
+  "name": "plus-store",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24.11.0 <25",
+    "pnpm": "11.19.0"
+  },
+  "scripts": {
+    "test": "turbo run test",
+    "test:catalog:red": "turbo run test:catalog:red --filter=@plus-store/api",
+    "type-check": "turbo run type-check"
+  },
+  "devDependencies": {
+    "turbo": "2.10.13",
+    "typescript": "5.9.3"
+  }
+}

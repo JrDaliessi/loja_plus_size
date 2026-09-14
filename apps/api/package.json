@@ -1,0 +1,22 @@
+{
+  "name": "@plus-store/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.11.0 <25"
+  },
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:catalog:red": "jest --runInBand --testPathPatterns=src/features/catalog/tests/red",
+    "type-check": "tsc --project tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:",
+    "@swc/jest": "catalog:",
+    "@types/jest": "catalog:",
+    "@types/node": "catalog:",
+    "jest": "catalog:",
+    "typescript": "catalog:"
+  }
+}
