@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model SpikeUser {
+  id        BigInt      @id @default(autoincrement())
+  email     String      @unique(map: "prisma7_spike_users_email_key")
+  name      String?
+  posts     SpikePost[]
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("prisma7_spike_users")
+}
+
+model SpikePost {
+  id        BigInt    @id @default(autoincrement())
+  title     String
+  authorId  BigInt    @map("author_id")
+  author    SpikeUser @relation(fields: [authorId], references: [id], onDelete: Cascade, map: "prisma7_spike_posts_author_id_fkey")
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([authorId], map: "prisma7_spike_posts_author_id_idx")
+  @@map("prisma7_spike_posts")
+}

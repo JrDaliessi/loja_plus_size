@@ -1,0 +1,36 @@
+packages:
+  - apps/*
+  - packages/*
+
+overrides:
+  deepmerge-ts: 8.0.0
+  lodash: 4.18.1
+  mysql2: 3.23.1
+  pg: 8.23.0
+
+allowBuilds:
+  '@parcel/watcher': false
+  '@prisma/engines': true
+  '@swc/core': true
+  esbuild: false
+  msgpackr-extract: false
+  prisma: true
+  unrs-resolver: true
+  workerd: false
+
+catalog:
+  '@swc/core': 1.16.2
+  '@swc/jest': 0.2.39
+  '@types/jest': 30.0.0
+  '@types/node': 24.13.4
+  jest: 30.5.1
+  typescript: 5.9.3
+
+minimumReleaseAgeExclude:
+  - '@turbo/darwin-64@2.10.13'
+  - '@turbo/darwin-arm64@2.10.13'
+  - '@turbo/linux-64@2.10.13'
+  - '@turbo/linux-arm64@2.10.13'
+  - '@turbo/windows-64@2.10.13'
+  - '@turbo/windows-arm64@2.10.13'
+  - turbo@2.10.13

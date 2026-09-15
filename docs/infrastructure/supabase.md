@@ -9,40 +9,46 @@
 - Papel planejado: PostgreSQL, Auth e Storage.
 - Regra de negócio: permanece no NestJS.
 
-## Estado de acesso — 2026-09-13
+## Estado de acesso — 2026-09-14
 
-A conexão Supabase disponível nesta sessão não possui permissão para esse projeto.
+Acesso MCP confirmado após aceite do convite pela conta conectada. Chamadas
+diretas para o project ref, SQL somente leitura, extensions, migrations, Edge
+Functions e advisors foram concluídas com sucesso.
 
-Projetos visíveis na conexão atual:
-
-- `agenda_eventos` — `xdgiksuvpuwibwdvmbnw`
-- `fin_control` — `nrisvhzlkqwzaphztaxf`
-
-O projeto `olkadbgumpiybehslobk` não apareceu na listagem autorizada. Chamadas de leitura para metadados, URL, tabelas, migrations, Edge Functions e security advisors falharam por falta de permissão.
+Evidência detalhada: `docs/infrastructure/supabase-baseline-2026-09-14.md`.
 
 ## Estado operacional
 
-- Schema: desconhecido; não assumir vazio.
-- Migrations: desconhecidas.
-- RLS/policies: desconhecidas.
-- Extensions: desconhecidas.
-- Edge Functions: desconhecidas.
-- Security/performance advisors: não inspecionados.
+- Schema `public`: vazio; schema `app`: ainda ausente.
+- Migrations: nenhuma.
+- Grants comerciais `anon`/`authenticated`: nenhum.
+- RLS/policies comerciais: nenhuma porque ainda não há tabelas.
+- Storage buckets: nenhum.
+- Edge Functions: nenhuma.
+- Security/performance advisors: zero findings no baseline.
 - Chave publishable: fornecida pelo humano, mas não persistida em documentação ou Git.
 - Chave anon legada: fornecida, porém não será usada no novo cliente.
 - Chaves secret/service role: não fornecidas e não devem ser compartilhadas em conversa ou código cliente.
 
-## Ação mínima de desbloqueio
+## Ambiente de testes
 
-Autorizar/conectar no Codex a conta ou organização Supabase que contém `olkadbgumpiybehslobk`. Depois, repetir somente:
+Os testes destrutivos de constraints, concorrência e rollback usam o PostgreSQL
+17 local `plus_store_day2_test` na porta 55432. O harness rejeita host remoto e
+database diferente desse nome. O Supabase principal não é fixture.
 
-1. dados do projeto e URL;
-2. tabelas do schema `public`;
-3. migrations;
-4. extensions e Edge Functions;
-5. advisors de segurança e performance.
+Uma branch Supabase foi avaliada, mas não criada: o preço informado era US$
+0,01344/h e exigiria confirmação de custo. O cluster local removeu essa
+necessidade no Dia 2.
 
-Nenhuma migration ou SQL deve ser aplicada durante essa inspeção.
+## Conexões Prisma 7
+
+- `DATABASE_URL`: conexão pooled usada pelo runtime NestJS;
+- `DIRECT_URL`: conexão direta usada somente por CLI, introspection e migrations;
+- ambas são segredos de backend e nunca usam prefixo `NEXT_PUBLIC_`;
+- o spike local aceita apenas
+  `127.0.0.1:55432/plus_store_day2_prisma7_spike`;
+- nenhuma URL PostgreSQL real do Supabase é armazenada no Git ou enviada em
+  conversa.
 
 ## Política de segurança
 

@@ -10,7 +10,11 @@
 - [x] requisitos centrais do produto aprovados no Dia 1
 - [x] arquitetura e ADRs aprovados no Dia 1
 - [x] Feature PRD e Feature Spec da `SR-MVP-01` aprovados
-- [ ] estratégia de validação e testes RED do Dia 2 concluídos
+- [x] matriz liga 20/20 critérios de aceite a testes primários
+- [x] type-check verde e RED unitário observado pelo motivo correto
+- [x] RED PostgreSQL observado no banco local isolado; baseline Supabase concluído sem mutação
+- [x] estratégia de validação e testes RED do Dia 2 concluídos
+- [x] Prisma 7.10.0 estável pinado; migration/spike/auditoria validados no ambiente isolado
 - [ ] resultado funcional validado
 - [x] documentação de fundação atualizada
 

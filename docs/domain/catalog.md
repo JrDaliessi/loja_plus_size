@@ -241,7 +241,8 @@ As interfaces pertencem à application/domain. Implementações Prisma/Supabase 
 | `CATALOG_PUBLICATION_INCOMPLETE` | Produto não atende à política de publicação. |
 | `CATALOG_MEDIA_NOT_RECONCILED` | Objeto e metadado de mídia não estão consistentes. |
 
-O adapter Prisma 8 não pode depender de códigos `P2002`; violações serão mapeadas por mecanismo validado no spike.
+O adapter Prisma 7 traduz `P2002` em erro de domínio usando também o campo ou
+constraint afetada. Tipos Prisma não atravessam a fronteira de infrastructure.
 
 ## Out of Scope
 

@@ -1,0 +1,33 @@
+{
+  "name": "@plus-store/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.11.0 <25"
+  },
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:catalog:red": "jest --runInBand --testPathPatterns=src/features/catalog/tests/red",
+    "test:catalog:postgres:red": "jest --runInBand --runTestsByPath src/features/catalog/tests/red/catalog-postgres.red.spec.ts",
+    "spike:prisma7": "prisma generate && node spikes/prisma7/run-spike.ts",
+    "type-check:prisma7-spike": "prisma generate && tsc --project spikes/prisma7/tsconfig.json --noEmit",
+    "type-check": "tsc --project tsconfig.json --noEmit",
+    "prisma:generate": "prisma generate"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:",
+    "@swc/jest": "catalog:",
+    "@types/jest": "catalog:",
+    "@types/node": "catalog:",
+    "jest": "catalog:",
+    "prisma": "7.10.0",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "dotenv": "17.4.2",
+    "pg": "8.23.0"
+  }
+}

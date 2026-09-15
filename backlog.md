@@ -7,8 +7,10 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | ID | Tipo | Item / valor | Prioridade | Dependências | Pronto quando | Estado |
 |---|---|---|---|---|---|---|
 | PROD-001 | Épico | Commerce Core: permitir venda completa sem conta obrigatória | P0 | PRD, arquitetura | pedido pago e rastreável com estoque consistente | DISCOVERY |
-| SUPA-001 | Technical Foundation | Vincular e auditar o projeto Supabase existente | P0 | acesso autorizado | projeto, schema, migrations e advisors inspecionados sem mutação | BLOCKED |
-| PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DISCOVERY |
+| SUPA-001 | Technical Foundation | Vincular e auditar o projeto Supabase existente | P0 | acesso autorizado | projeto, schema, migrations e advisors inspecionados sem mutação | DONE |
+| PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DONE |
+| PRISMA-002 | Technical Foundation | Substituir Prisma 8 RC por Prisma 7 estável | P0 | PRISMA-001, aprovação humana | versão estável pinada, migration/spike validados e auditoria limpa | DONE |
+| DEBT-DEP-001 | Dívida Técnica | Remover `glob@10.5.0` deprecated da árvore de cobertura Jest | P3 | atualização upstream de `test-exclude`/Jest | instalação sem a versão deprecated e regressão verde | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | DISCOVERY |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | DISCOVERY |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | READY |
@@ -54,15 +56,18 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | Ordem | ID | Ação | Gate |
 |---:|---|---|---|
 | 1 | GOV-001 | Aprovar Dia 0 | DONE |
-| 2 | ENV-001 | Selecionar/instalar Node.js 24.11+ | ambiente validado |
-| 3 | SUPA-001 | Autorizar a conexão atual ao projeto `olkadbgumpiybehslobk` e executar baseline read-only | infraestrutura conhecida |
+| 2 | ENV-001 | Selecionar/instalar Node.js 24.11+ | DONE — 24.21.0 |
+| 3 | SUPA-001 | Autorizar a conexão atual ao projeto `olkadbgumpiybehslobk` e executar baseline read-only | DONE |
 | 4 | PRD-001 | Product PRD criado e aprovado | DONE |
 | 5 | ARC-001 | Arquitetura inicial e ADRs aprovados | DONE |
 | 6 | FPRD-CAT-001 | Requisitos da primeira small release aprovados | DONE |
 | 7 | FSPEC-CAT-001 | Spec da primeira small release aprovada | DONE |
-| 8 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | implementação desbloqueada |
-| 9 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
-| 10 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
+| 8 | TEST-CAT-001 | Matriz 20/20, fixtures e RED unitário | DONE |
+| 9 | TEST-CAT-002 | RED PostgreSQL/Supabase de constraints, concorrência e acesso | DONE |
+| 10 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | DONE — riscos RC documentados |
+| 11 | PRISMA-002 | Migrar para Prisma 7 estável e repetir gates do Dia 2 | DONE — ADR-004, versão 7.10.0 e auditoria limpa |
+| 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
+| 13 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -70,8 +75,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 |---|---|---|---|
 | PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
 | ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | DONE |
-| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | aprovação humana dos requisitos/spec | READY |
-| TEST-CATALOG | cenários RED do domínio e aplicação | feature spec | READY |
+| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | testes RED completos | VALIDATION_READY |
+| TEST-CATALOG | matriz, fixtures e cenários RED | Supabase/PostgreSQL isolado | DONE |
 
 ## Política de priorização
 

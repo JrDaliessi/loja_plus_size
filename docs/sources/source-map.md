@@ -20,7 +20,7 @@ As cópias no repositório são byte a byte iguais aos anexos originais localiza
 ## Verificações temporais do Dia 0
 
 - Next.js 16.3.3: Active LTS em 2026-09-13.
-- Node.js 24: LTS; ambiente local ainda em 22.14.0.
-- Prisma 8: Release Candidate, mantido por decisão humana conforme o documento.
+- Node.js 24: runtime `24.21.0` instalado e selecionado no projeto; Node 22 global foi preservado.
+- Prisma 8: proposta da fonte preservada, substituída pela decisão humana ADR-004; Prisma 7.10.0 estável é a stack ativa.
 - Supabase: mudanças recentes de Data API e restrições de schemas devem ser observadas na implementação.
 - Purple Noir: todas as combinações principais foram revisadas; texto branco sobre o violeta `#8B5CF6` mede 4,23:1 e requer ajuste para texto normal.

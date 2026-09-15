@@ -18,6 +18,8 @@ test-results/
 Thumbs.db
 .idea/
 .vscode/
+.tmp/
+.codex-remote-attachments/
 
 # Supabase local state
 .supabase/

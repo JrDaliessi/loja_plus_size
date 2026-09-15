@@ -35,7 +35,7 @@ Next.js 16 / React
         v
 NestJS / Application + Domain
         |
-        +--> Prisma 8 --> PostgreSQL / Supabase
+        +--> Prisma 7 --> PostgreSQL / Supabase
         +--> Supabase Auth (identidade)
         +--> Supabase Storage (mídia)
         +--> Mercado Pago / frete / canais (releases futuras)
@@ -212,14 +212,17 @@ Essa proposta depende do baseline do projeto Supabase. Se o schema existente imp
 - Toda migration deve ter rollback/recuperação e validação.
 - Transações mantêm locks pelo menor tempo possível e nunca aguardam APIs externas.
 
-### Prisma 8
+### Prisma 7
 
-Prisma 8 permanece a decisão aprovada, mas está em Release Candidate. A arquitetura não dependerá de recursos ainda ausentes, incluindo a maioria dos nested writes, atomic `increment`, configuração de isolation level e códigos de erro no estilo `P2002`, até validação.
+Prisma 7 estável é a decisão ativa conforme ADR-004. CLI, Client, adapter `pg` e
+driver têm versões exatas fixadas. A persistência permanece encapsulada em
+adapters para impedir dependência de Prisma em domain/application.
 
-- CLI e biblioteca PostgreSQL terão versões exatas fixadas no scaffold.
-- `@prisma/client` não será assumido como runtime do Prisma 8.
-- A persistência será encapsulada em adapters para limitar impacto de mudança da RC.
-- Operações críticas poderão exigir SQL explícito ou revisão da decisão, sempre por ADR e aprovação humana.
+- `DIRECT_URL` é usada pelo CLI e por migrations;
+- `DATABASE_URL` pooled é usada pelo runtime NestJS;
+- erros conhecidos, como `P2002`, são traduzidos por código e campo afetado;
+- SQL explícito exige revisão, testes e rastreabilidade;
+- Prisma 8 só pode ser retomado após GA e novo ADR aprovado.
 
 ## Supabase Boundaries
 
@@ -293,7 +296,8 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 |---|---|---|
 | `ADR-001` | Monorepo e fronteiras Next.js/NestJS | `ACCEPTED` |
 | `ADR-002` | Backend-only para dados comerciais e schema não exposto no Supabase | `ACCEPTED` |
-| `ADR-003` | Adoção condicionada do Prisma 8 RC | `ACCEPTED` |
+| `ADR-003` | Adoção condicionada do Prisma 8 RC | `SUPERSEDED` |
+| `ADR-004` | Adoção do Prisma 7 estável | `ACCEPTED` |
 
 ## Explicitly Deferred
 
@@ -313,18 +317,20 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 - [x] Fronteiras web/API/domain/infrastructure estão explícitas.
 - [x] UI não acessa banco diretamente.
 - [x] Estratégia de Supabase, Auth, RLS e secrets está explícita.
-- [x] Prisma 8 RC está isolado e seus riscos atuais estão registrados.
+- [x] Prisma 7 estável está isolado em infrastructure, pinado e validado.
 - [x] Crescimento é orientado por módulos e small releases.
 - [x] Infraestrutura futura não foi ativada.
 - [x] ADRs e arquitetura aprovados pelo humano.
-- [ ] Baseline real do Supabase verificado antes de schema/migrations.
-- [ ] Node.js 24.11+ validado antes do scaffold do Prisma 8.
+- [x] Baseline real do Supabase verificado antes de schema/migrations.
+- [x] Node.js 24 LTS validado com o Prisma 7 (`24.21.0`).
 
 ## Approval
 
 Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-Gate atingido: `ARCHITECTURE_READY`. O aceite inclui os três ADRs, mantendo obrigatórios o baseline Supabase e o desbloqueio Node/Prisma antes de qualquer implementação. O Dia 2 depende de comando explícito.
+Gate atingido: `ARCHITECTURE_READY`. ADR-004, aprovado em 2026-09-15,
+substitui somente ADR-003. Baseline Supabase e toolchain Node/Prisma foram
+validados; implementação continua dependendo do comando explícito do Dia 3.
 
 ## Official Technical References
 
@@ -333,4 +339,4 @@ Gate atingido: `ARCHITECTURE_READY`. O aceite inclui os três ADRs, mantendo obr
 - Supabase Data API security: `https://supabase.com/docs/guides/api/securing-your-api`
 - Supabase RLS: `https://supabase.com/docs/guides/database/postgres/row-level-security`
 - Prisma ORM release status: `https://www.prisma.io/docs/prisma-orm/release-status`
-- Prisma 8 with NestJS: `https://www.prisma.io/docs/guides/frameworks/nestjs`
+- Prisma 7 PostgreSQL: `https://www.prisma.io/docs/orm/v7/core-concepts/supported-databases/postgresql`

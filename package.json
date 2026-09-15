@@ -1,0 +1,25 @@
+{
+  "name": "plus-store",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24.11.0 <25",
+    "pnpm": "11.19.0"
+  },
+  "scripts": {
+    "db:test:start": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/day2-postgres.ps1 Start",
+    "db:test:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/day2-postgres.ps1 Stop",
+    "db:test:status": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/day2-postgres.ps1 Status",
+    "test": "turbo run test",
+    "test:catalog:red": "turbo run test:catalog:red --filter=@plus-store/api",
+    "test:catalog:postgres:red": "pnpm --filter @plus-store/api run test:catalog:postgres:red",
+    "spike:prisma7": "pnpm --filter @plus-store/api run spike:prisma7",
+    "type-check:prisma7-spike": "pnpm --filter @plus-store/api run type-check:prisma7-spike",
+    "type-check": "turbo run type-check"
+  },
+  "devDependencies": {
+    "turbo": "2.10.13",
+    "typescript": "5.9.3"
+  }
+}
