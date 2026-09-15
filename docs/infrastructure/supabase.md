@@ -40,6 +40,16 @@ Uma branch Supabase foi avaliada, mas não criada: o preço informado era US$
 0,01344/h e exigiria confirmação de custo. O cluster local removeu essa
 necessidade no Dia 2.
 
+## Conexões Prisma 7
+
+- `DATABASE_URL`: conexão pooled usada pelo runtime NestJS;
+- `DIRECT_URL`: conexão direta usada somente por CLI, introspection e migrations;
+- ambas são segredos de backend e nunca usam prefixo `NEXT_PUBLIC_`;
+- o spike local aceita apenas
+  `127.0.0.1:55432/plus_store_day2_prisma7_spike`;
+- nenhuma URL PostgreSQL real do Supabase é armazenada no Git ou enviada em
+  conversa.
+
 ## Política de segurança
 
 - Usar publishable key no cliente; nunca expor secret/service role.

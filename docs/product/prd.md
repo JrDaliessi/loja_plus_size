@@ -357,7 +357,7 @@ Estas capacidades preservam a visão completa, mas não autorizam implementaçã
 | `PRD-NFR-001` | Arquitetura | TypeScript ponta a ponta em monorepo pnpm + Turborepo. |
 | `PRD-NFR-002` | Fronteiras | Next.js entrega experiência/SEO; NestJS concentra regras comerciais e integrações; a web não acessa o banco diretamente. |
 | `PRD-NFR-003` | Contratos | Comunicação web/API via REST documentada por OpenAPI; schemas públicos permanecem sincronizados. |
-| `PRD-NFR-004` | Dados | PostgreSQL/Supabase é a persistência relacional; Prisma 8 permanece condicionado ao pin e validação da RC. |
+| `PRD-NFR-004` | Dados | PostgreSQL/Supabase é a persistência relacional; Prisma 7 estável permanece pinado e isolado em infrastructure. |
 | `PRD-NFR-005` | Segurança | Autenticação usa Supabase Auth e o NestJS valida identidade/autorização antes de operações protegidas. |
 | `PRD-NFR-006` | Privacidade | Dados pessoais e medidas seguem minimização, finalidade, consentimento, retenção e exclusão aplicáveis à LGPD. |
 | `PRD-NFR-007` | Acessibilidade | Navegação por teclado, foco, rótulos, mensagens e contraste devem atender WCAG aplicável. |
@@ -406,7 +406,7 @@ O MVP deve instrumentar definições antes de estabelecer metas numéricas. Base
 
 - Node.js 24 LTS antes do scaffold.
 - pnpm, Turborepo e repositório Git já preparados no nível de governança.
-- Next.js 16.3.x, NestJS, Prisma 8 RC pinado, PostgreSQL/Supabase, Auth e Storage.
+- Next.js 16.3.x, NestJS, Prisma 7.10.0 pinado, PostgreSQL/Supabase, Auth e Storage.
 - Acesso administrativo autorizado ao projeto Supabase `olkadbgumpiybehslobk` antes de baseline, schema ou migrations.
 - Conta e credenciais seguras do Mercado Pago antes de `SR-MVP-06`.
 - Provedor de frete escolhido antes de `SR-MVP-05`.
@@ -430,8 +430,8 @@ O MVP deve instrumentar definições antes de estabelecer metas numéricas. Base
 | ID | Risco | Impacto | Tratamento |
 |---|---|---|---|
 | `PRD-RISK-001` | Escopo completo muito amplo | Atraso e validação tardia | Small releases MVP → V6, sem avanço automático. |
-| `PRD-RISK-002` | Prisma 8 ainda RC | Mudança de API ou lacuna funcional | Pin exato, spike/teste do primeiro slice e ADR se houver desvio. |
-| `PRD-RISK-003` | Ambiente em Node.js 22 | Scaffold incompatível | Atualizar/selecionar Node.js 24 antes de instalar. |
+| `PRD-RISK-002` | Overrides transitivos do Prisma ficarem obsoletos | Regressão ou dependência insegura após upgrade | Pin exato, auditoria e regressão em toda atualização. |
+| `PRD-RISK-003` | Node.js 22 global ser usado por engano | Resultado local divergente | Fixar e selecionar Node.js 24.21.0 nos comandos/CI. |
 | `PRD-RISK-004` | Supabase ainda sem acesso administrativo | Schema/RLS desconhecidos | Baseline read-only antes de qualquer migration. |
 | `PRD-RISK-005` | Concorrência de estoque | Venda acima da disponibilidade | Modelo transacional e testes concorrentes antes do checkout. |
 | `PRD-RISK-006` | Retry/falha de pagamento e webhook | Cobrança, pedido ou baixa duplicados | Idempotência, reconciliação e observabilidade. |

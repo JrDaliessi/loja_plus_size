@@ -18,7 +18,7 @@
 | `FPRD-CAT001-AC-012` | RQ-013 | `CAT-API-001` | presentation | active-only allowlist | `RED_CONFIRMED` |
 | `FPRD-CAT001-AC-013` | RQ-013 | `CAT-API-002` | presentation | absence of inventory fields | `RED_CONFIRMED` |
 | `FPRD-CAT001-AC-014` | RQ-014 | `CAT-APP-004` | application | `CAT-DB-006` cursor query | `RED_CONFIRMED` |
-| `FPRD-CAT001-AC-015` | RQ-015 | `CAT-DB-007` | infrastructure adapter | no Prisma 7 error-code dependency | `RED_CONFIRMED` |
+| `FPRD-CAT001-AC-015` | RQ-015 | `CAT-DB-007` | infrastructure adapter | P2002 + target mapped without Prisma leakage | `RED_CONFIRMED` |
 | `FPRD-CAT001-AC-016` | RQ-016 | `CAT-SEC-001` | application/security | repository remains untouched | `RED_CONFIRMED` |
 | `FPRD-CAT001-AC-017` | RQ-017 | `CAT-SEC-002` | PostgreSQL/Supabase integration | local role contract + remote read-only baseline | `RED_CONFIRMED` |
 | `FPRD-CAT001-AC-018` | RQ-018 | `CAT-APP-005` | domain/application | versioned UTC envelope | `RED_CONFIRMED` |

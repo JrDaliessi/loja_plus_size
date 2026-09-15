@@ -4,7 +4,7 @@ artifact:
   small_release: SR-MVP-01
   capability: software
   state: VALIDATION_READY
-  review_status: day_2_complete_2026_09_14
+  review_status: day_2_corrected_2026_09_15
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -13,10 +13,10 @@ depends_on:
   - architecture.md
   - docs/adr/ADR-001-web-api-boundaries.md
   - docs/adr/ADR-002-supabase-data-boundary.md
-  - docs/adr/ADR-003-prisma-8-conditional-adoption.md
+  - docs/adr/ADR-004-prisma-7-stable-adoption.md
   - docs/infrastructure/supabase.md
   - docs/infrastructure/supabase-baseline-2026-09-14.md
-  - docs/features/FEATURE-CATALOG/prisma8-spike.md
+  - docs/features/FEATURE-CATALOG/prisma7-spike.md
 related_context:
   - project-stack.md
   - quality-gates.md
@@ -31,8 +31,7 @@ requirements:
 acceptance_criteria:
   range: FPRD-CAT001-AC-001..020
 active_risks:
-  - prisma_8_rc
-  - prisma_cli_dev_dependency_advisories
+  - prisma_transitive_overrides_require_revalidation
   - supabase_runtime_secret_pending
   - admin_authorization_dependency
   - sku_concurrency
@@ -47,4 +46,4 @@ quality_gates:
   - database_constraints
   - security_and_authorization
   - storage_reconciliation
-next_action: obtain_day_3_approval_after_prisma_cli_risk_review
+next_action: obtain_day_3_approval

@@ -11,7 +11,7 @@ Cliente
 Next.js 16 / React / TypeScript / PWA
   ↓ REST HTTPS / OpenAPI
 NestJS / TypeScript — regras de negócio
-  ↓ Prisma 8
+  ↓ Prisma 7
 PostgreSQL / Supabase
   ├─ Supabase Auth
   ├─ Supabase Storage
@@ -27,7 +27,7 @@ Filas futuras: Redis + BullMQ.
 | Camada | Decisão |
 |---|---|
 | Linguagem | TypeScript ponta a ponta |
-| Runtime | Node.js 24 LTS; 24.11+ enquanto exigido pelo Prisma 8 RC atual |
+| Runtime | Node.js 24 LTS, fixado em `24.21.0` |
 | Monorepo | pnpm Workspaces + Turborepo |
 | Frontend | Next.js 16.3.x, App Router e React |
 | Renderização | Server Components por padrão; Client Components somente para interação |
@@ -35,7 +35,7 @@ Filas futuras: Redis + BullMQ.
 | Formulários | React Hook Form + Zod |
 | Estado local | Zustand apenas para carrinho local, filtros e estado de interface |
 | API | NestJS, REST e Swagger/OpenAPI |
-| ORM | Prisma 8, atualmente Release Candidate |
+| ORM | Prisma 7 estável, fixado em `7.10.0` |
 | Banco | PostgreSQL hospedado no Supabase |
 | Auth | Supabase Auth; JWT validado no NestJS |
 | Arquivos | Supabase Storage |
@@ -66,20 +66,20 @@ Filas futuras: Redis + BullMQ.
 - Dark Luxury atende header, hero, conta, admin e campanhas; Light Editorial atende catálogo, produto, busca, blog e páginas extensas.
 - Fotografia mantém cor real das peças, diversidade corporal e protagonismo sobre efeitos visuais.
 
-## Restrições do Prisma 8
+## Prisma 7 estável
 
-Em 2026-09-14 o Prisma 8 continua RC, ainda sem paridade completa com Prisma 7. O registro npm apresentou CLI `8.0.0-rc.15` e adapter PostgreSQL `@prisma/orm-postgres@8.0.0-rc.11`. A decisão humana é manter Prisma 8 conforme o documento. Antes do scaffold de persistence:
+Em 2026-09-15, a decisão humana substituiu o Prisma 8 RC pelo Prisma 7 estável,
+conforme ADR-004. A toolchain está fixada em:
 
-1. fixar versões RC exatas e commitar o lockfile;
-2. validar Node.js 24.11+ e TypeScript 5.9+ enquanto forem requisitos da RC;
-3. validar se consultas, transações e nested writes necessários ao primeiro slice estão disponíveis;
-4. criar ADR caso uma lacuna exija Prisma 7 ou SQL/driver direto;
-5. não promover uma mudança de ORM sem aprovação humana.
+- `prisma 7.10.0`;
+- `@prisma/client 7.10.0`;
+- `@prisma/adapter-pg 7.10.0`;
+- `pg 8.23.0`.
 
-O spike `PRISMA-001` foi concluído no Dia 2. O runtime de produção passou na
-auditoria; o CLI RC mantém advisories altos exclusivamente transitivos de
-desenvolvimento. Erros de constraint serão mapeados por `sqlState` e nome da
-constraint dentro do adapter, sem dependência de `P2002`.
+O runtime usa `DATABASE_URL` pooled; CLI, introspection e migrations usam
+`DIRECT_URL`. O adapter permanece isolado em infrastructure e erros de
+unicidade são mapeados por `P2002` e campo afetado. Prisma 8 só será reavaliado
+após GA e novo ADR.
 
 ## Decisões deliberadamente adiadas
 

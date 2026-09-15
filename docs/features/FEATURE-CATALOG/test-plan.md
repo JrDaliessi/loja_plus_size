@@ -72,10 +72,10 @@ Demonstrar, antes da implementação funcional, quais comportamentos faltam e co
 
 ```text
 pnpm type-check
-pnpm type-check:prisma8-spike
+pnpm type-check:prisma7-spike
 pnpm test:catalog:red
 pnpm test:catalog:postgres:red
-pnpm spike:prisma8
+pnpm spike:prisma7
 ```
 
 Durante o Dia 2, `test:catalog:red` deve terminar vermelho pelos contratos ainda não implementados. O comando só se torna verde no Dia 3.
@@ -99,7 +99,7 @@ Execução do Dia 2 confirmada pelo humano em 2026-09-14. A conclusão do gate p
 |---|---|
 | Runtime selecionado | Node.js `24.21.0` via `pnpm env` |
 | Dependências | versões exatas + `pnpm-lock.yaml` |
-| Supply chain | scripts permitidos somente para `@swc/core` e `unrs-resolver`; `@parcel/watcher` negado |
+| Supply chain | scripts permitidos somente para `@swc/core`, `unrs-resolver`, `prisma` e `@prisma/engines`; demais entradas declaradas permanecem negadas |
 | Type-check | PASS — 1 pacote, 1 tarefa |
 | Audit | PASS — nenhuma vulnerabilidade conhecida |
 | RED | CONFIRMADO — 4 suítes falharam, 21 testes falharam, 7 `todo`, 28 total |
@@ -111,7 +111,7 @@ Execução do Dia 2 confirmada pelo humano em 2026-09-14. A conclusão do gate p
 Essa evidência parcial foi substituída pela execução final abaixo; os sete
 `todo` deixaram de existir após o ambiente local isolado ser validado.
 
-## Completion Evidence — 2026-09-14
+## Completion Evidence — corrigida em 2026-09-15
 
 | Verificação | Resultado |
 |---|---|
@@ -119,10 +119,10 @@ Essa evidência parcial foi substituída pela execução final abaixo; os sete
 | PostgreSQL isolado | PASS — PostgreSQL 17, `plus_store_day2_test`, localhost:55432 |
 | Integração RED | CONFIRMADO — 7/7 testes executados e falhando por relações `app.*` ainda ausentes |
 | Suíte RED completa | CONFIRMADO — 5 suítes, 28 testes executados, 28 RED, zero `todo` |
-| Prisma 8 spike | PASS — probe, emit, init, CRUD, SQLSTATE 23505, rollback e marker |
+| Prisma 7 spike | PASS — migration revisada, generate, CRUD, P2002, rollback e cleanup |
 | Type-check | PASS — aplicação e spike |
 | Auditoria de produção | PASS — zero vulnerabilidades conhecidas |
-| Risco de toolchain | 4 advisories altos e peers conflitantes somente na árvore dev do CLI Prisma; documentados |
+| Segurança da toolchain | PASS — auditorias de produção e completa sem vulnerabilidades conhecidas; zero peer conflicts |
 
 Os antigos sete `todo` foram removidos. O teste protege explicitamente contra
 hosts remotos e aceita somente o database local `plus_store_day2_test`.

@@ -9,6 +9,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | PROD-001 | Épico | Commerce Core: permitir venda completa sem conta obrigatória | P0 | PRD, arquitetura | pedido pago e rastreável com estoque consistente | DISCOVERY |
 | SUPA-001 | Technical Foundation | Vincular e auditar o projeto Supabase existente | P0 | acesso autorizado | projeto, schema, migrations e advisors inspecionados sem mutação | DONE |
 | PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DONE |
+| PRISMA-002 | Technical Foundation | Substituir Prisma 8 RC por Prisma 7 estável | P0 | PRISMA-001, aprovação humana | versão estável pinada, migration/spike validados e auditoria limpa | DONE |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | DISCOVERY |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | DISCOVERY |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | READY |
@@ -63,8 +64,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 8 | TEST-CAT-001 | Matriz 20/20, fixtures e RED unitário | DONE |
 | 9 | TEST-CAT-002 | RED PostgreSQL/Supabase de constraints, concorrência e acesso | DONE |
 | 10 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | DONE — riscos RC documentados |
-| 11 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
-| 12 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
+| 11 | PRISMA-002 | Migrar para Prisma 7 estável e repetir gates do Dia 2 | DONE — ADR-004, versão 7.10.0 e auditoria limpa |
+| 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
+| 13 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 

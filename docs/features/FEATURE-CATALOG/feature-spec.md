@@ -8,7 +8,7 @@ derived_from:
   - FEATURE-CATALOG/feature-prd.md
   - DOMAIN-CATALOG-001
   - ARCHITECTURE-001
-adrs: [ADR-001, ADR-002, ADR-003]
+adrs: [ADR-001, ADR-002, ADR-004]
 ---
 
 # Feature Spec — Catalog Source of Truth
@@ -237,15 +237,15 @@ Before the first migration:
 
 1. authorize and inspect the real Supabase project read-only;
 2. inventory schemas, tables, grants, RLS, extensions and migration history;
-3. validate Prisma 8 versions and CLI commands using `--help`/official docs;
-4. run the Prisma 8 compatibility spike;
+3. validate Prisma 7 stable versions and CLI commands using `--help`/official docs;
+4. run the Prisma 7 compatibility spike;
 5. generate migration through the approved migration authority;
 6. review every operation, constraints and indexes;
 7. apply only in an isolated development/preview environment;
 8. run schema, security and rollback verification;
 9. run Supabase security/performance advisors before promotion.
 
-Prisma migration history will be the proposed schema-change authority because Prisma 8 is the approved ORM. Supabase tooling remains responsible for platform baseline, advisors and validation. If the spike proves incompatible histories, a new ADR is mandatory before proceeding.
+Prisma migration history is the proposed schema-change authority because Prisma 7 is the approved ORM. Supabase tooling remains responsible for platform baseline, advisors and validation. CLI operations use `DIRECT_URL`; runtime adapters use pooled `DATABASE_URL`.
 
 ## RLS / Privileges
 
@@ -327,7 +327,7 @@ Dia 2 must derive a matrix from every acceptance criterion before production cod
 1. Domain unit tests for value objects, transitions and publication rules.
 2. Application tests with in-memory/fake ports for orchestration and permissions.
 3. PostgreSQL integration tests for constraints, indexes and concurrent uniqueness.
-4. Prisma adapter contract tests, including error mapping without Prisma 7 codes.
+4. Prisma adapter contract tests, including `P2002` plus field/constraint mapping without leaking Prisma types.
 5. Storage adapter contract tests for upload request/completion/reconciliation.
 6. Controller/OpenAPI tests for status, DTO and error envelope.
 7. Security tests for unauthorized, forbidden and public projections.
@@ -386,7 +386,7 @@ No implementation test will be authored in Dia 1B.
 - architecture/ADRs/spec approved;
 - Node.js 24.11+;
 - Supabase baseline complete;
-- Prisma 8 spike green and versions pinned;
+- Prisma 7 spike green and versions pinned;
 - test strategy RED observed for correct reasons;
 - migration reviewed in isolated environment;
 - admin authorization baseline working;
@@ -405,7 +405,7 @@ No implementation test will be authored in Dia 1B.
 
 | ID | Risk | Control |
 |---|---|---|
-| `FSPEC-CAT001-RISK-001` | Prisma 8 RC API/feature gap | ADR-003, spike, adapter boundary. |
+| `FSPEC-CAT001-RISK-001` | Prisma upgrade/override regression | ADR-004, exact pins, audit, spike and adapter boundary. |
 | `FSPEC-CAT001-RISK-002` | Unknown Supabase schema | Hard block before migration. |
 | `FSPEC-CAT001-RISK-003` | Admin mutation exposed early | Deployment gate and permission tests. |
 | `FSPEC-CAT001-RISK-004` | SKU race | Database unique constraint + concurrency test. |
@@ -416,9 +416,9 @@ No implementation test will be authored in Dia 1B.
 
 - [x] Feature PRD and spec approved.
 - [x] Architecture and ADRs approved.
-- [ ] Every `FPRD-CAT001-AC-*` maps to at least one test ID.
-- [ ] RED observed for essential tests before implementation.
-- [ ] Domain/application compile independently of Prisma/Nest presentation.
+- [x] Every `FPRD-CAT001-AC-*` maps to at least one test ID.
+- [x] RED observed for essential tests before implementation.
+- [x] Domain/application compile independently of Prisma/Nest presentation.
 - [ ] PostgreSQL constraints and adapter contracts pass.
 - [ ] No stock quantity exists in catalog models.
 - [ ] Admin mutations are protected.
@@ -426,17 +426,21 @@ No implementation test will be authored in Dia 1B.
 - [ ] OpenAPI and Zod contracts agree.
 - [ ] Migration, advisors and rollback checks pass.
 - [ ] Lint, type-check, unit, integration and applicable E2E/build are green.
-- [ ] Documentation, backlog and context are updated.
+- [x] Documentation, backlog and context are updated.
 
-## Open Issues Blocking Implementation
+## Prerequisites Resolved in Dia 2
 
-1. Supabase management access and read-only baseline are required.
-2. An isolated PostgreSQL test target is required for destructive, rollback and concurrency tests.
-3. Prisma 8 CLI `8.0.0-rc.15` and `@prisma/orm-postgres` `8.0.0-rc.11` were identified; the bounded spike must validate and pin the complete compatible set before persistence.
-4. Authorization integration scenarios remain blocked until the Supabase baseline and isolated test target are available.
+1. Supabase management access and read-only baseline: complete.
+2. Isolated PostgreSQL target for destructive, rollback and concurrency tests: complete.
+3. Prisma 7.10.0, Client/adapter 7.10.0 and pg 8.23.0: pinned and validated.
+
+The remaining staff authorization work belongs to the approved implementation
+slice and remains protected by RED scenarios.
 
 ## Approval
 
 Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-O gate `SPEC_READY` foi alcançado, mas não autoriza implementação. O próximo comando permanece Dia 2, quando os contratos de validação e testes RED deverão ser criados primeiro.
+O gate `SPEC_READY` foi alcançado em 2026-09-14 e o gate `VALIDATION_READY` foi
+corrigido/concluído em 2026-09-15. Implementação depende de aprovação explícita
+do Dia 3.

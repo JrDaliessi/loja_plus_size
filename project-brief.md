@@ -68,8 +68,8 @@ Construir uma plataforma especializada que ajude a cliente a encontrar roupas qu
 
 ## Risks
 
-- Prisma 8 está em Release Candidate em 2026-09-13 e pode mudar antes da versão final.
-- Ambiente local usa Node.js 22.14.0, abaixo do Node.js 24 definido.
+- Overrides transitivos de segurança do Prisma 7 precisam ser revalidados em toda atualização.
+- Node.js 22.14.0 continua global, mas o projeto seleciona explicitamente Node.js 24.21.0.
 - Pagamento, reserva/baixa de estoque, webhooks e sincronização multicanal exigem idempotência e consistência transacional.
 - Medidas corporais, perfis, CRM e segmentação exigem minimização de dados e governança LGPD.
 - Escopo completo é grande; construir tudo antes de validar vendas aumentaria prazo e risco.
@@ -79,7 +79,7 @@ Construir uma plataforma especializada que ajude a cliente a encontrar roupas qu
 
 - Node.js 24 LTS e pnpm.
 - Next.js 16.3.x, React, TypeScript, Tailwind CSS e shadcn/ui.
-- NestJS, REST/OpenAPI e Prisma 8.
+- NestJS, REST/OpenAPI e Prisma 7 estável.
 - Projeto Supabase com PostgreSQL, Auth e Storage.
 - Projeto Supabase existente: `olkadbgumpiybehslobk`.
 - Mercado Pago e provedor de frete a selecionar antes da integração.
@@ -109,4 +109,4 @@ Sim. Ver `project-stack.md` e `project-toolchain.md`.
 
 - Dia 0 aprovado pelo humano em 2026-09-13.
 - Diretriz humana: seguir à risca os documentos fornecidos e preservá-los para consulta futura.
-- Prisma 8 mantido conforme o documento, com risco de RC explicitamente aceito pela continuidade do Dia 0.
+- Prisma 8 foi inicialmente mantido conforme a fonte, mas a decisão humana de 2026-09-15 adotou Prisma 7 estável; ver ADR-004.

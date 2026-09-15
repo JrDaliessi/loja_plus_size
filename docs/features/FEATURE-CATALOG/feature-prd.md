@@ -14,7 +14,7 @@ depends_on:
   - ARCHITECTURE-001
   - ADR-001
   - ADR-002
-  - ADR-003
+  - ADR-004
 affects:
   - SR-MVP-02
   - SR-MVP-03
@@ -147,7 +147,7 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 | `FPRD-CAT001-RQ-012` | Fornecer visão administrativa completa por ID. | `CAT-001` |
 | `FPRD-CAT001-RQ-013` | Fornecer visão pública por slug sem dados internos ou disponibilidade inventada. | `PRD-FR-VAR-003`, `PRD-FR-STO-003` |
 | `FPRD-CAT001-RQ-014` | Listar produtos por cursor e filtros limitados ao slice. | `CAT-001` |
-| `FPRD-CAT001-RQ-015` | Mapear violações de persistence para erros públicos estáveis sem depender de códigos Prisma 7. | `ADR-003` |
+| `FPRD-CAT001-RQ-015` | Mapear `P2002` e o campo/constraint de persistence para erros públicos estáveis sem vazar Prisma fora de infrastructure. | `ADR-004` |
 | `FPRD-CAT001-RQ-016` | Proteger mutações administrativas com identidade e permissão mínima antes de exposição. | `PRD-BR-024`, `ADR-002` |
 | `FPRD-CAT001-RQ-017` | Manter tabelas comerciais fora da superfície Data API por padrão. | `PRD-NFR-002`, `ADR-002` |
 | `FPRD-CAT001-RQ-018` | Emitir eventos internos versionados sem exigir broker. | `SRC-STACK-001` |
@@ -190,8 +190,8 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 ## Dependencies
 
 - arquitetura e ADRs deste Dia 1B aprovados;
-- Node.js 24.11+ antes do scaffold Prisma 8;
-- versões Prisma 8 verificadas e pinadas;
+- Node.js 24 LTS selecionado antes do scaffold Prisma 7;
+- versões Prisma 7, Client, adapter e driver verificadas e pinadas;
 - acesso administrativo/read-only ao Supabase antes de definir migrations;
 - baseline de schemas, grants, RLS, extensions e Storage;
 - autorização mínima de staff antes de expor mutações;
@@ -201,7 +201,7 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 | ID | Risco | Tratamento |
 |---|---|---|
 | `FPRD-CAT001-RISK-001` | Schema Supabase existente conflitar com `app` | Baseline e ADR antes de migration. |
-| `FPRD-CAT001-RISK-002` | Prisma 8 não cobrir operação necessária | Spike, adapter e decisão explícita. |
+| `FPRD-CAT001-RISK-002` | Upgrade/override Prisma introduzir regressão | Pin, auditoria, spike e adapter isolado. |
 | `FPRD-CAT001-RISK-003` | Confundir variante ativa com estoque disponível | Contratos sem `available` até inventory. |
 | `FPRD-CAT001-RISK-004` | Upload deixar objeto órfão ou metadado quebrado | Reconciliação e recuperação testadas. |
 | `FPRD-CAT001-RISK-005` | Endpoint admin sem autorização suficiente | Gate bloqueia exposição/deploy. |
@@ -220,4 +220,6 @@ Esta release não representa ainda uma loja comprável nem promete disponibilida
 
 Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
-O gate `REQUIREMENTS_APPROVED` desta feature está concluído. Este aceite não autoriza implementação; o Dia 2 deve primeiro derivar a estratégia de validação e os testes RED.
+O gate `REQUIREMENTS_APPROVED` desta feature está concluído. O Dia 2 derivou e
+validou os contratos RED; implementação continua dependendo da aprovação do
+Dia 3.

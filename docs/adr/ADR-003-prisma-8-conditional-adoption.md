@@ -1,12 +1,16 @@
 ---
 id: ADR-003
-status: accepted
+status: superseded
 date: 2026-09-14
 affects: [apps/api, database, migrations, testing, ci]
 derived_from: [project-stack.md, human-decision-2026-09-13]
+superseded_by: ADR-004
 ---
 
 # ADR-003 — Adoção condicionada do Prisma 8 RC
+
+> **SUPERADO EM 2026-09-15 POR ADR-004.** Mantido como evidência da decisão e
+> do spike originais; não governa novas implementações.
 
 ## Context
 

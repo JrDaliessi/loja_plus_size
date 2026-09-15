@@ -1,12 +1,15 @@
 ---
 id: PRISMA-001
 feature: FEATURE-CATALOG
-status: completed_with_known_risks
+status: superseded
 date: 2026-09-14
 derived_from: [ADR-003, FSPEC-CAT001]
 ---
 
 # Prisma 8 RC — Spike do Dia 2
+
+> **EVIDÊNCIA HISTÓRICA:** este spike foi substituído pelo Prisma 7 estável em
+> 2026-09-15, conforme ADR-004. Não governa a implementação atual.
 
 ## Objetivo e isolamento
 
