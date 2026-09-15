@@ -9,7 +9,11 @@
   "scripts": {
     "test": "jest --runInBand",
     "test:catalog:red": "jest --runInBand --testPathPatterns=src/features/catalog/tests/red",
-    "type-check": "tsc --project tsconfig.json --noEmit"
+    "test:catalog:postgres:red": "jest --runInBand --runTestsByPath src/features/catalog/tests/red/catalog-postgres.red.spec.ts",
+    "spike:prisma8": "node spikes/prisma8/run-spike.ts",
+    "type-check:prisma8-spike": "tsc --project spikes/prisma8/tsconfig.json --noEmit",
+    "type-check": "tsc --project tsconfig.json --noEmit",
+    "contract:emit": "prisma contract emit"
   },
   "devDependencies": {
     "@swc/core": "catalog:",
@@ -17,6 +21,12 @@
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
     "jest": "catalog:",
+    "prisma": "8.0.0-rc.15",
     "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@prisma/orm-postgres": "8.0.0-rc.11",
+    "dotenv": "17.4.2",
+    "pg": "8.22.0"
   }
 }

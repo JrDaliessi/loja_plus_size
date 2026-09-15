@@ -5,7 +5,10 @@ packages:
 allowBuilds:
   '@parcel/watcher': false
   '@swc/core': true
+  esbuild: false
+  msgpackr-extract: false
   unrs-resolver: true
+  workerd: false
 
 catalog:
   '@swc/core': 1.16.2
@@ -23,3 +26,4 @@ minimumReleaseAgeExclude:
   - '@turbo/windows-64@2.10.13'
   - '@turbo/windows-arm64@2.10.13'
   - turbo@2.10.13
+  - prisma@8.0.0-rc.15

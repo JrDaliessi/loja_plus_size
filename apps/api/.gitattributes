@@ -1,0 +1,6 @@
+spikes/prisma8/contract.json linguist-generated
+spikes/prisma8/contract.d.ts linguist-generated
+spikes/prisma8/ops.json linguist-generated
+spikes/prisma8/migration.json linguist-generated
+migrations/snapshots/**/contract.json linguist-generated
+migrations/snapshots/**/contract.d.ts linguist-generated
