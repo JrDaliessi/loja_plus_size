@@ -1,12 +1,15 @@
 import 'dotenv/config';
-import { defineConfig as ormConfig } from '@prisma/orm-postgres/config';
-import { definePrismaConfig } from 'prisma/config';
+import { defineConfig } from 'prisma/config';
 
-export default definePrismaConfig({
-  orm: ormConfig({
-    contract: "./spikes/prisma8/contract.prisma",
-    db: {
-      connection: process.env['DATABASE_URL']!,
-    },
-  }),
+const localSpikeDatabaseUrl =
+  'postgresql://postgres@127.0.0.1:55432/plus_store_day2_prisma7_spike';
+
+export default defineConfig({
+  schema: './spikes/prisma7/schema.prisma',
+  migrations: {
+    path: './spikes/prisma7/migrations',
+  },
+  datasource: {
+    url: process.env['DIRECT_URL'] ?? localSpikeDatabaseUrl,
+  },
 });

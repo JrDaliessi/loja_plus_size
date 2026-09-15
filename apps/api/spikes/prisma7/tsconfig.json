@@ -5,9 +5,8 @@
     "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "resolveJsonModule": true,
     "rootDir": ".",
     "types": ["node"]
   },
-  "include": ["*.ts", "*.d.ts"]
+  "include": ["*.ts", "generated/**/*.ts"]
 }

@@ -1,11 +1,15 @@
 import { mapCatalogPersistenceError } from '../../infrastructure/persistence/catalog-persistence-error.mapper';
 
 describe('FEATURE-CATALOG persistence RED contract', () => {
-  test('CAT-DB-007 / AC-015 maps unique violations without Prisma 7 error codes', () => {
+  test('CAT-DB-007 / AC-015 maps Prisma 7 P2002 SKU violations', () => {
     expect(() =>
       mapCatalogPersistenceError({
-        constraint: 'product_variants_sku_key',
-        message: 'unique constraint violation',
+        code: 'P2002',
+        message: 'Unique constraint failed',
+        meta: {
+          modelName: 'ProductVariant',
+          target: ['sku'],
+        },
       }),
     ).toThrow('CATALOG_SKU_CONFLICT');
   });

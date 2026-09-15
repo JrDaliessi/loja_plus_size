@@ -12,6 +12,7 @@ $day2PostgresData = Join-Path $day2RepositoryRoot '.tmp\postgres-day2'
 $day2PostgresLog = Join-Path $day2PostgresData 'postgres.log'
 $day2PostgresPort = 55432
 $day2DatabaseName = 'plus_store_day2_test'
+$day2PrismaSpikeDatabaseName = 'plus_store_day2_prisma7_spike'
 
 $day2InitDb = Join-Path $day2PostgresBin 'initdb.exe'
 $day2PgCtl = Join-Path $day2PostgresBin 'pg_ctl.exe'
@@ -49,15 +50,18 @@ function Start-Day2Postgres {
     }
   }
 
-  $day2DatabaseExists = & $day2Psql -h 127.0.0.1 -p $day2PostgresPort -U postgres -d postgres -t -A -c "select 1 from pg_database where datname = '$day2DatabaseName';"
-  if ($day2DatabaseExists -ne '1') {
-    & $day2CreateDb -h 127.0.0.1 -p $day2PostgresPort -U postgres $day2DatabaseName
-    if ($LASTEXITCODE -ne 0) {
-      throw "createdb failed with exit code $LASTEXITCODE"
+  foreach ($day2RequiredDatabase in @($day2DatabaseName, $day2PrismaSpikeDatabaseName)) {
+    $day2DatabaseExists = & $day2Psql -h 127.0.0.1 -p $day2PostgresPort -U postgres -d postgres -t -A -c "select 1 from pg_database where datname = '$day2RequiredDatabase';"
+    if ($day2DatabaseExists -ne '1') {
+      & $day2CreateDb -h 127.0.0.1 -p $day2PostgresPort -U postgres $day2RequiredDatabase
+      if ($LASTEXITCODE -ne 0) {
+        throw "createdb failed for $day2RequiredDatabase with exit code $LASTEXITCODE"
+      }
     }
   }
 
   Write-Output "PostgreSQL test target ready: postgresql://postgres@127.0.0.1:$day2PostgresPort/$day2DatabaseName"
+  Write-Output "Prisma 7 spike target ready: postgresql://postgres@127.0.0.1:$day2PostgresPort/$day2PrismaSpikeDatabaseName"
 }
 
 function Stop-Day2Postgres {
