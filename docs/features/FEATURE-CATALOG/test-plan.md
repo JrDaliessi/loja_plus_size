@@ -123,6 +123,7 @@ Essa evidência parcial foi substituída pela execução final abaixo; os sete
 | Type-check | PASS — aplicação e spike |
 | Auditoria de produção | PASS — zero vulnerabilidades conhecidas |
 | Segurança da toolchain | PASS — auditorias de produção e completa sem vulnerabilidades conhecidas; zero peer conflicts |
+| Aviso não vulnerável | `glob@10.5.0` deprecated somente na árvore dev de cobertura Jest; `DEBT-DEP-001` |
 
 Os antigos sete `todo` foram removidos. O teste protege explicitamente contra
 hosts remotos e aceita somente o database local `plus_store_day2_test`.
