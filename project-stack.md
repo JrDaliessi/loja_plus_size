@@ -76,6 +76,11 @@ Em 2026-09-14 o Prisma 8 continua RC, ainda sem paridade completa com Prisma 7. 
 4. criar ADR caso uma lacuna exija Prisma 7 ou SQL/driver direto;
 5. não promover uma mudança de ORM sem aprovação humana.
 
+O spike `PRISMA-001` foi concluído no Dia 2. O runtime de produção passou na
+auditoria; o CLI RC mantém advisories altos exclusivamente transitivos de
+desenvolvimento. Erros de constraint serão mapeados por `sqlState` e nome da
+constraint dentro do adapter, sem dependência de `P2002`.
+
 ## Decisões deliberadamente adiadas
 
 - Nome comercial definitivo.

@@ -6,7 +6,7 @@
 |---|---|
 | ID | `TESTPLAN-CAT001` |
 | Small release | `SR-MVP-01` |
-| Estado | `BLOCKED` — RED unitário confirmado; integração pendente |
+| Estado | `VALIDATION_READY` — RED unitário e PostgreSQL confirmados |
 | Derived from | `FPRD-CAT001-RQ-001..018`, `FPRD-CAT001-AC-001..020`, `FSPEC-CAT001`, `CAT-INV-001..012` |
 | Runtime validado | Node.js `24.21.0` LTS |
 | Package manager | pnpm `11.19.0` |
@@ -34,9 +34,9 @@ Demonstrar, antes da implementação funcional, quais comportamentos faltam e co
 | `CAT-DOM-*` | Domain | Jest, funções puras e fixtures determinísticas | disponível |
 | `CAT-APP-*` | Application | Jest, fake ports e unidade de trabalho observável | disponível |
 | `CAT-API-*` | Presentation/contract | Jest sobre projeções; Nest/Supertest após controller existir | parcial |
-| `CAT-DB-*` | PostgreSQL/Prisma | banco isolado, constraints e concorrência real | bloqueado por acesso/credencial de banco isolado e spike Prisma 8 |
-| `CAT-STO-*` | Supabase Storage | contract tests e cenários de reconciliação pela API | bloqueado por acesso ao projeto alvo |
-| `CAT-SEC-*` | Authorization/Data API | negação por padrão, projeção pública e grants/RLS | unitário disponível; integração Supabase bloqueada |
+| `CAT-DB-*` | PostgreSQL/Prisma | banco local isolado, constraints e concorrência real | executável; RED por schema `app` ainda ausente |
+| `CAT-STO-*` | Supabase Storage | contract tests e cenários de reconciliação | RED de contrato confirmado; baseline remoto confirma bucket ausente |
+| `CAT-SEC-*` | Authorization/Data API | negação por padrão, projeção pública e grants/RLS | RED unitário/local executável; baseline remoto sem grants comerciais |
 | `CAT-TRACE-*` | Architecture/traceability | verificação de campos proibidos e matriz completa | disponível |
 
 ## RED Contract
@@ -72,7 +72,10 @@ Demonstrar, antes da implementação funcional, quais comportamentos faltam e co
 
 ```text
 pnpm type-check
+pnpm type-check:prisma8-spike
 pnpm test:catalog:red
+pnpm test:catalog:postgres:red
+pnpm spike:prisma8
 ```
 
 Durante o Dia 2, `test:catalog:red` deve terminar vermelho pelos contratos ainda não implementados. O comando só se torna verde no Dia 3.
@@ -82,9 +85,9 @@ Durante o Dia 2, `test:catalog:red` deve terminar vermelho pelos contratos ainda
 - [x] todos os 20 critérios possuem teste primário na matriz;
 - [x] fixtures determinísticas foram definidas;
 - [x] RED de domínio/aplicação/API confirmado pelo motivo correto;
-- [ ] testes PostgreSQL essenciais executáveis e RED pelo motivo correto;
-- [ ] testes Supabase/Storage/Data API executáveis e RED pelo motivo correto;
-- [ ] gate `VALIDATION_READY` aprovado.
+- [x] testes PostgreSQL essenciais executáveis e RED pelo motivo correto;
+- [x] contratos Storage/Data API executáveis e baseline Supabase verificado;
+- [x] gate técnico `VALIDATION_READY` concluído; avanço ao Dia 3 depende de aprovação humana.
 
 ## Approval
 
@@ -105,4 +108,21 @@ Execução do Dia 2 confirmada pelo humano em 2026-09-14. A conclusão do gate p
 | Rastreabilidade | PASS — 20/20 critérios presentes na matriz e nos testes |
 | Credenciais no repositório | zero tokens detectados |
 
-Os sete `todo` são cenários de PostgreSQL/Supabase que não podem ser validados honestamente sem um banco isolado autorizado e acesso ao projeto alvo. Eles não contam como RED nem como aprovação.
+Essa evidência parcial foi substituída pela execução final abaixo; os sete
+`todo` deixaram de existir após o ambiente local isolado ser validado.
+
+## Completion Evidence — 2026-09-14
+
+| Verificação | Resultado |
+|---|---|
+| Supabase baseline | PASS somente leitura; `public` vazio, `app` ausente, zero migrations/buckets/functions/advisors |
+| PostgreSQL isolado | PASS — PostgreSQL 17, `plus_store_day2_test`, localhost:55432 |
+| Integração RED | CONFIRMADO — 7/7 testes executados e falhando por relações `app.*` ainda ausentes |
+| Suíte RED completa | CONFIRMADO — 5 suítes, 28 testes executados, 28 RED, zero `todo` |
+| Prisma 8 spike | PASS — probe, emit, init, CRUD, SQLSTATE 23505, rollback e marker |
+| Type-check | PASS — aplicação e spike |
+| Auditoria de produção | PASS — zero vulnerabilidades conhecidas |
+| Risco de toolchain | 4 advisories altos e peers conflitantes somente na árvore dev do CLI Prisma; documentados |
+
+Os antigos sete `todo` foram removidos. O teste protege explicitamente contra
+hosts remotos e aceita somente o database local `plus_store_day2_test`.

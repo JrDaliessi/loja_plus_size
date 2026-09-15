@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `BLOCKED`
-- Review status: `DAY_2_PARTIAL_RED_2026-09-14`
+- Artifact state: `VALIDATION_READY`
+- Review status: `DAY_2_COMPLETE_2026-09-14`
 - Project state: `ARCHITECTURE_READY`
-- Phase: Dia 2 em execução
+- Phase: Dia 2 concluído; aguardando aprovação do Dia 3
 
 ## Completed
 
@@ -22,26 +22,34 @@
 - Test plan, 20/20 acceptance-criteria matrix and deterministic fixtures created.
 - Type-check and dependency audit passed.
 - RED confirmed: 4 suites, 21 failed tests and 7 explicit infrastructure `todo` tests.
+- Supabase baseline read-only completed with an empty commercial surface and zero advisor findings.
+- PostgreSQL 17 isolated locally in `plus_store_day2_test`; seven integration `todo` cases became executable RED tests.
+- Prisma 8 spike completed for probe, contract emit, additive initialization, CRUD, unique violation, transaction rollback and marker verification.
+- Production dependency audit passed with zero known vulnerabilities.
+- Final RED evidence: 5 suites, 28 failed tests, zero `todo`; every failure reaches an approved missing behavior/schema contract.
 
-## Hard Blockers Before Implementation
+## Resolved Blockers
 
-### Supabase baseline
+### Supabase baseline — resolved
 
-- Evidence: project `olkadbgumpiybehslobk` is not visible to the connected management account.
-- Impact: existing schema, grants, RLS, migrations and extensions are unknown.
-- Minimum unblock: authorize access and execute read-only baseline before schema work.
+- Evidence: direct MCP access, metadata, SQL baseline, extensions, migrations, Edge Functions and advisors all succeeded.
+- Result: `public` is empty, `app` is absent, and there are no commercial grants, policies or buckets.
 
-### Isolated PostgreSQL test target
+### Isolated PostgreSQL test target — resolved
 
-- Evidence: local PostgreSQL 13 and 17 services are running, but require an unavailable credential; Docker is absent.
-- Impact: uniqueness, concurrency, cursor and rollback scenarios cannot become trustworthy RED tests.
-- Minimum unblock: authorize a Supabase development branch after cost confirmation or provide secure access to a disposable local database.
+- Evidence: a dedicated PostgreSQL 17 cluster runs locally on port `55432`, database `plus_store_day2_test`.
+- Result: all seven database/security contracts execute and fail because the approved `app.*` schema is not implemented yet.
 
-### Prisma 8 compatibility
+### Prisma 8 compatibility — resolved with known risks
 
-- Evidence: Prisma 8 remains RC and lacks capabilities commonly used in Prisma 7.
-- Impact: persistence and migration APIs require a bounded spike.
-- Minimum unblock: verify/pin exact packages and pass the spike defined by ADR-003.
+- Evidence: exact pins, generated contract, CRUD, SQLSTATE mapping, transaction rollback and migration marker were validated.
+- Known risk: the development-only CLI tree contains four high advisories and peer conflicts; production audit is clean.
+
+## Prerequisites Before Remote Integration
+
+- provide the backend database connection through a secure environment manager;
+- create and validate the Storage bucket/policies only in an approved release;
+- re-audit the Prisma CLI before release and do not ship it as a production dependency.
 
 ## Approved Decisions
 
@@ -54,4 +62,4 @@
 
 ## Next Action
 
-Authorize the target Supabase project and an isolated PostgreSQL test target. Then complete the seven pending integration tests and the `VALIDATION_READY` gate. Functional implementation remains prohibited.
+Obtain explicit approval for Dia 3 after reviewing the documented Prisma CLI risk. Until then, functional implementation and Supabase migrations remain prohibited.

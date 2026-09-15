@@ -10,7 +10,10 @@
 | Repositório Git | inicializado | sim | disponível |
 | Branch principal | `main` | `main` | disponível |
 | Remote `origin` | GitHub | `https://github.com/JrDaliessi/loja_plus_size.git` | configurado |
-| Supabase project ref | `olkadbgumpiybehslobk` | informado | endpoint e chave pública conhecidos; gestão sem permissão |
+| Supabase project ref | `olkadbgumpiybehslobk` | acesso MCP confirmado | baseline somente leitura concluído |
+| PostgreSQL de testes | 17+ isolado | 17.4 em `127.0.0.1:55432/plus_store_day2_test` | validado |
+| Prisma CLI | 8 RC pinada | `8.0.0-rc.15` | spike validado; risco dev documentado |
+| Prisma PostgreSQL runtime | 8 RC pinada | `8.0.0-rc.11` | CRUD/transação validados |
 
 ## Ferramentas planejadas
 
@@ -53,8 +56,8 @@ Turborepo deverá declarar dependências e outputs corretos, permitir dry-run e 
 - O Node 22.14.0 global não foi removido; comandos automatizados devem selecionar o runtime do `PNPM_HOME`.
 - O pnpm do projeto permanece fixado em `11.19.0`.
 
-## Bloqueios remanescentes
+## Pré-requisitos remanescentes
 
-- autorizar o projeto Supabase alvo para baseline read-only;
-- disponibilizar um PostgreSQL isolado com credencial segura para testes de constraints/concorrência;
-- executar o spike do Prisma 8 com versões RC exatas registradas no Dia 2.
+- fornecer a conexão PostgreSQL do backend pelo gerenciador de segredos antes de integração/deploy remoto;
+- criar bucket/policies de Storage somente na release autorizada;
+- reauditar a árvore de desenvolvimento do CLI Prisma antes do release.

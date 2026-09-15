@@ -12,8 +12,8 @@
 - [x] Feature PRD e Feature Spec da `SR-MVP-01` aprovados
 - [x] matriz liga 20/20 critérios de aceite a testes primários
 - [x] type-check verde e RED unitário observado pelo motivo correto
-- [ ] RED PostgreSQL/Supabase observado em ambiente isolado
-- [ ] estratégia de validação e testes RED do Dia 2 concluídos
+- [x] RED PostgreSQL observado no banco local isolado; baseline Supabase concluído sem mutação
+- [x] estratégia de validação e testes RED do Dia 2 concluídos
 - [ ] resultado funcional validado
 - [x] documentação de fundação atualizada
 

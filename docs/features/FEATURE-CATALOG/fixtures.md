@@ -74,9 +74,9 @@ Mismatch fixture changes product/color ownership and expects `CATALOG_MEDIA_PROD
 
 Events use `2026-09-14T12:00:00.000Z` through an injected clock. Tests must not depend on the machine clock.
 
-## Database Fixtures — Pending Environment
+## Database Fixtures — Isolated Environment
 
-When an isolated PostgreSQL target is authorized, fixtures will add:
+O database local `plus_store_day2_test` usa os mesmos IDs determinísticos e cobre:
 
 - two concurrent transactions attempting the same SKU;
 - two concurrent transactions attempting the same product+color+size;

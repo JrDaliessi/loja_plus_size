@@ -12,7 +12,7 @@ derived_from: [project-stack.md, human-decision-2026-09-13]
 
 A stack aprovada exige Prisma 8. Em 2026-09-14, a documentação oficial ainda o classifica como Release Candidate e informa ausência de recursos relevantes: a maioria dos nested writes, atomic `increment`, configuração de transaction isolation levels, `$extends`, filtros JSON e códigos de erro no estilo `P2002`.
 
-A linha Node.js 24 também exige pelo menos 24.11 para o Prisma 8 atual. O ambiente local permanece em Node.js 22.14.0.
+A linha Node.js 24 também exige pelo menos 24.11 para o Prisma 8 atual. O projeto usa Node.js 24.21.0; o Node 22 global permanece instalado sem ser removido.
 
 ## Decision
 
@@ -28,12 +28,19 @@ Manter Prisma 8 como decisão do projeto, com condições:
 
 ## Release Pin Baseline
 
-A documentação oficial consultada em 2026-09-14 listava:
+A verificação do registro npm em 2026-09-14 confirmou:
 
-- CLI `prisma`: `8.0.0-rc.13`;
-- PostgreSQL library `@prisma/orm-postgres`: `8.0.0-rc.9`.
+- CLI `prisma`: `8.0.0-rc.15`;
+- PostgreSQL library `@prisma/orm-postgres`: `8.0.0-rc.11`;
+- CLI engine transitivo pinado pelo próprio CLI: `@prisma/cli-engine@0.4.0`;
+- PostgreSQL driver exigido pelo probe: `pg@8.22.0`.
 
 Esses valores são evidência temporal, não autorização para instalar. As versões devem ser consultadas novamente e pinadas sem intervalo no início do scaffold.
+
+O spike concluído está em `docs/features/FEATURE-CATALOG/prisma8-spike.md`.
+Ele confirmou CRUD, transação e migration marker, mas também registrou duas
+divergências da RC: ausência de `deleteCount()` na coleção testada e unique
+violation materializada como `SqlQueryError`/`sqlState 23505`.
 
 ## Consequences
 

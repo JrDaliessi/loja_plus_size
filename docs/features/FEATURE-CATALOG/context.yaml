@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-CATALOG
   small_release: SR-MVP-01
   capability: software
-  state: BLOCKED
-  review_status: day_2_partial_red_2026_09_14
+  state: VALIDATION_READY
+  review_status: day_2_complete_2026_09_14
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -15,6 +15,8 @@ depends_on:
   - docs/adr/ADR-002-supabase-data-boundary.md
   - docs/adr/ADR-003-prisma-8-conditional-adoption.md
   - docs/infrastructure/supabase.md
+  - docs/infrastructure/supabase-baseline-2026-09-14.md
+  - docs/features/FEATURE-CATALOG/prisma8-spike.md
 related_context:
   - project-stack.md
   - quality-gates.md
@@ -30,13 +32,14 @@ acceptance_criteria:
   range: FPRD-CAT001-AC-001..020
 active_risks:
   - prisma_8_rc
-  - supabase_baseline_unknown
+  - prisma_cli_dev_dependency_advisories
+  - supabase_runtime_secret_pending
   - admin_authorization_dependency
   - sku_concurrency
-hard_blockers_before_implementation:
-  - supabase_management_access
-  - isolated_postgres_test_target
-  - prisma_8_spike_and_exact_pins
+hard_blockers_before_implementation: []
+remote_integration_prerequisites:
+  - secure_supabase_database_connection
+  - approved_storage_bucket_and_policies
 quality_gates:
   - requirements_traceability
   - architecture_compliance
@@ -44,4 +47,4 @@ quality_gates:
   - database_constraints
   - security_and_authorization
   - storage_reconciliation
-next_action: authorize_supabase_and_isolated_postgres_then_complete_day_2
+next_action: obtain_day_3_approval_after_prisma_cli_risk_review

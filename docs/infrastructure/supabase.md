@@ -11,40 +11,34 @@
 
 ## Estado de acesso — 2026-09-14
 
-A conexão Supabase disponível nesta sessão não possui permissão para esse projeto. A listagem foi repetida no início do Dia 2 e confirmou o mesmo resultado.
+Acesso MCP confirmado após aceite do convite pela conta conectada. Chamadas
+diretas para o project ref, SQL somente leitura, extensions, migrations, Edge
+Functions e advisors foram concluídas com sucesso.
 
-Projetos visíveis na conexão atual:
-
-- `agenda_eventos` — `xdgiksuvpuwibwdvmbnw`
-- `fin_control` — `nrisvhzlkqwzaphztaxf`
-
-O projeto `olkadbgumpiybehslobk` não apareceu na listagem autorizada. Chamadas de leitura para metadados, URL, tabelas, migrations, Edge Functions e security advisors falharam por falta de permissão.
+Evidência detalhada: `docs/infrastructure/supabase-baseline-2026-09-14.md`.
 
 ## Estado operacional
 
-- Schema: desconhecido; não assumir vazio.
-- Migrations: desconhecidas.
-- RLS/policies: desconhecidas.
-- Extensions: desconhecidas.
-- Edge Functions: desconhecidas.
-- Security/performance advisors: não inspecionados.
+- Schema `public`: vazio; schema `app`: ainda ausente.
+- Migrations: nenhuma.
+- Grants comerciais `anon`/`authenticated`: nenhum.
+- RLS/policies comerciais: nenhuma porque ainda não há tabelas.
+- Storage buckets: nenhum.
+- Edge Functions: nenhuma.
+- Security/performance advisors: zero findings no baseline.
 - Chave publishable: fornecida pelo humano, mas não persistida em documentação ou Git.
 - Chave anon legada: fornecida, porém não será usada no novo cliente.
 - Chaves secret/service role: não fornecidas e não devem ser compartilhadas em conversa ou código cliente.
 
-## Ação mínima de desbloqueio
+## Ambiente de testes
 
-Autorizar/conectar no Codex a conta ou organização Supabase que contém `olkadbgumpiybehslobk`. Depois, repetir somente:
+Os testes destrutivos de constraints, concorrência e rollback usam o PostgreSQL
+17 local `plus_store_day2_test` na porta 55432. O harness rejeita host remoto e
+database diferente desse nome. O Supabase principal não é fixture.
 
-1. dados do projeto e URL;
-2. tabelas do schema `public`;
-3. migrations;
-4. extensions e Edge Functions;
-5. advisors de segurança e performance.
-
-Nenhuma migration ou SQL deve ser aplicada durante essa inspeção.
-
-Para os testes destrutivos de constraints, concorrência e rollback, o projeto também precisa de um banco isolado. As opções admissíveis são uma branch Supabase criada após confirmação de custo ou uma instância PostgreSQL local com credencial fornecida por canal seguro. O banco de produção não será usado como fixture.
+Uma branch Supabase foi avaliada, mas não criada: o preço informado era US$
+0,01344/h e exigiria confirmação de custo. O cluster local removeu essa
+necessidade no Dia 2.
 
 ## Política de segurança
 
