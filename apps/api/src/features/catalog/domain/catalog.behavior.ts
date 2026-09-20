@@ -1,4 +1,6 @@
-import { CatalogNotImplementedError } from './catalog.error';
+import { randomUUID } from 'node:crypto';
+
+import { CatalogError } from './catalog.error';
 import type {
   CatalogEvent,
   CatalogProduct,
@@ -8,51 +10,145 @@ import type {
   PublicationResult,
 } from './catalog.types';
 
-const missing = (capability: string): never => {
-  throw new CatalogNotImplementedError(capability);
+const fail = (code: string, message: string): never => {
+  throw new CatalogError(code, `${code}: ${message}`);
 };
 
-export const canonicalizeSku = (_value: string): string =>
-  missing('canonicalizeSku');
+export const canonicalizeSku = (value: string): string => {
+  const canonical = value.trim().toUpperCase();
+  if (!canonical) {
+    return fail('CATALOG_INVALID_SKU', 'SKU is required');
+  }
+  return canonical;
+};
 
-export const createMoney = (_amount: string, _currency: 'BRL'): Money =>
-  missing('createMoney');
+export const createMoney = (amount: string, currency: 'BRL'): Money => {
+  const normalized = amount.trim();
+  if (!/^\d+(?:\.\d{1,2})?$/.test(normalized) || Number(normalized) <= 0) {
+    return fail('CATALOG_INVALID_PRICE', 'price must be positive with at most two decimal places');
+  }
 
-export const normalizeBarcode = (_value?: string): string | undefined =>
-  missing('normalizeBarcode');
+  const [whole, decimals = ''] = normalized.split('.');
+  return { amount: `${whole}.${decimals.padEnd(2, '0')}`, currency };
+};
+
+export const normalizeBarcode = (value?: string): string | undefined => {
+  const normalized = value?.trim();
+  return normalized || undefined;
+};
 
 export const createOrderedSize = (
-  _code: string,
-  _label: string,
-  _position: number,
-): { code: string; label: string; position: number } =>
-  missing('createOrderedSize');
+  code: string,
+  label: string,
+  position: number,
+): { code: string; label: string; position: number } => {
+  if (!code.trim() || !label.trim() || !Number.isInteger(position) || position < 0) {
+    return fail('CATALOG_INVALID_SIZE', 'size requires code, label and a non-negative position');
+  }
+  return { code: code.trim().toUpperCase(), label: label.trim(), position };
+};
 
 export const addVariant = (
-  _product: CatalogProduct,
-  _variant: ProductVariant,
-): CatalogProduct => missing('addVariant');
+  product: CatalogProduct,
+  variant: ProductVariant,
+): CatalogProduct => {
+  if (variant.productId !== product.id) {
+    return fail('CATALOG_VARIANT_PRODUCT_MISMATCH', 'variant belongs to another product');
+  }
+  if (
+    product.variants.some(
+      (current) => current.colorId === variant.colorId && current.sizeId === variant.sizeId,
+    )
+  ) {
+    return fail('CATALOG_VARIANT_CONFLICT', 'color and size combination already exists');
+  }
+
+  const barcode = normalizeBarcode(variant.barcode);
+  const normalizedVariant: ProductVariant = {
+    ...variant,
+    sku: canonicalizeSku(variant.sku),
+    price: createMoney(variant.price.amount, variant.price.currency),
+    ...(barcode ? { barcode } : {}),
+  };
+  return { ...product, variants: [...product.variants, normalizedVariant] };
+};
 
 export const createProductMedia = (
-  _product: CatalogProduct,
-  _media: ProductMedia,
-): ProductMedia => missing('createProductMedia');
+  product: CatalogProduct,
+  media: ProductMedia,
+): ProductMedia => {
+  const normalizedPath = media.storagePath.replace(/\\/g, '/');
+  if (
+    media.productId !== product.id ||
+    !normalizedPath.startsWith(`${product.id}/`) ||
+    normalizedPath.split('/').includes('..')
+  ) {
+    return fail('CATALOG_MEDIA_PRODUCT_MISMATCH', 'media must stay inside the product namespace');
+  }
+  if (!media.altText.trim() || !Number.isInteger(media.position) || media.position < 0) {
+    return fail('CATALOG_INVALID_MEDIA', 'media requires alt text and a non-negative position');
+  }
+  if (media.variantId && !product.variants.some((variant) => variant.id === media.variantId)) {
+    return fail('CATALOG_MEDIA_PRODUCT_MISMATCH', 'variant does not belong to product');
+  }
+  if (media.colorId && !product.variants.some((variant) => variant.colorId === media.colorId)) {
+    return fail('CATALOG_MEDIA_PRODUCT_MISMATCH', 'color does not belong to product');
+  }
+  return { ...media, storagePath: normalizedPath, altText: media.altText.trim() };
+};
 
 export const evaluatePublication = (
-  _product: CatalogProduct,
-): PublicationResult => missing('evaluatePublication');
+  product: CatalogProduct,
+): PublicationResult => {
+  const issues: string[] = [];
+  if (!product.description.trim()) issues.push('DESCRIPTION_REQUIRED');
+  if (!product.primaryCategoryId || !product.categoryIds.includes(product.primaryCategoryId)) {
+    issues.push('ACTIVE_CATEGORY_REQUIRED');
+  }
+  if (product.media.length === 0) issues.push('ACTIVE_MEDIA_REQUIRED');
+  if (product.variants.every((variant) => variant.status !== 'ACTIVE')) {
+    issues.push('ACTIVE_VARIANT_REQUIRED');
+  }
+  return { canActivate: issues.length === 0, issues };
+};
 
-export const activateProduct = (_product: CatalogProduct): CatalogProduct =>
-  missing('activateProduct');
+export const activateProduct = (product: CatalogProduct): CatalogProduct => {
+  const publication = evaluatePublication(product);
+  if (!publication.canActivate) {
+    return fail(
+      'CATALOG_PUBLICATION_INCOMPLETE',
+      `publication issues: ${publication.issues.join(',')}`,
+    );
+  }
+  return { ...product, status: 'ACTIVE' };
+};
 
-export const archiveProduct = (_product: CatalogProduct): CatalogProduct =>
-  missing('archiveProduct');
+export const archiveProduct = (product: CatalogProduct): CatalogProduct => ({
+  ...product,
+  status: 'ARCHIVED',
+});
 
 export const createCatalogEvent = (
-  _eventType: string,
-  _aggregateId: string,
-  _now: Date,
-): CatalogEvent => missing('createCatalogEvent');
+  eventType: string,
+  aggregateId: string,
+  now: Date,
+): CatalogEvent => ({
+  eventId: randomUUID(),
+  eventType,
+  eventVersion: 1,
+  aggregateId,
+  occurredAt: now.toISOString(),
+});
 
 export const catalogEntityFieldNames = (): readonly string[] =>
-  missing('catalogEntityFieldNames');
+  [
+    'id',
+    'name',
+    'slug',
+    'description',
+    'categoryIds',
+    'primaryCategoryId',
+    'status',
+    'variants',
+    'media',
+  ] as const;
