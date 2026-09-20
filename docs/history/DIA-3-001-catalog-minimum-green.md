@@ -58,6 +58,9 @@ promover mudanças ao Supabase principal.
 - contratos HTTP/OpenAPI/Zod ainda não foram materializados;
 - overrides transitivos do Prisma continuam exigindo reauditoria em upgrades;
 - `glob@10.5.0` deprecated permanece como dívida baixa na árvore de cobertura Jest.
+- previews da Vercel ficam intencionalmente ignorados enquanto `apps/web` não
+  existir; o guard em `vercel.json` deixa de ignorá-los automaticamente quando
+  a aplicação web for materializada.
 
 ## Next Action
 
