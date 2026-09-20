@@ -58,6 +58,7 @@
 - [x] 15 suítes, 76 testes; 82,65% statements, 67,32% branches, 84,09% functions e 84,19% lines
 - [x] thresholds globais de cobertura: 80% statements/lines/functions e 60% branches
 - [x] GitHub Actions materializado com actions fixadas por SHA e PostgreSQL 17 isolado
+- [x] primeira execução remota do pipeline aprovada na PR #6 em 1m07s
 - [x] duas migrations aplicadas do zero em database local vazio antes da regressão final
 - [x] `EXPLAIN (ANALYZE, BUFFERS)` executado com 10.000 linhas; índice usado e dívida de cursor profundo registrada
 - [x] lint, type-check, build e auditorias completa/produção verdes

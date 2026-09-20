@@ -65,6 +65,7 @@
   acquisition wait and 5-second execution timeout, and existing P2002 mappings remain intact.
 - GitHub Actions now runs migrations against isolated PostgreSQL 17, lint,
   type-check, coverage thresholds, build and both dependency audits.
+- The first remote execution passed on PR #6 in 1m07s.
 - Both catalog migrations were applied from an empty local database before the
   final 76-test regression, matching the CI bootstrap sequence.
 - Final Dia 5 evidence: 15 suites, 76 tests passed; 82.65% statements, 67.32%

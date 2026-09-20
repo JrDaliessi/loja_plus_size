@@ -60,6 +60,7 @@ as `DEBT-PERF-001`; no speculative raw SQL was introduced.
 - Lint and type-check: passed.
 - Build: passed.
 - Production and full audits: zero known vulnerabilities.
+- GitHub Actions: first remote run passed on PR #6 in 1m07s.
 - Supabase principal project mutated: no.
 
 ## Remaining Risks

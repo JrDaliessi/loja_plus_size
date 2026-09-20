@@ -69,7 +69,7 @@ validation_evidence:
   build: passed
   runtime_smoke: http_200_public_and_http_401_admin
   dependency_audit: zero_known_vulnerabilities
-  ci_workflow: materialized_with_pinned_actions
+  ci_workflow: passed_on_pr_6
   keyset_explain: index_used_with_5000_rows_filtered_at_midpoint
   supabase_remote_mutated: false
 next_action: obtain_day_6_approval
