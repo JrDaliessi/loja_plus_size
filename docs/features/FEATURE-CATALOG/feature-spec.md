@@ -419,13 +419,13 @@ No implementation test will be authored in Dia 1B.
 - [x] Every `FPRD-CAT001-AC-*` maps to at least one test ID.
 - [x] RED observed for essential tests before implementation.
 - [x] Domain/application compile independently of Prisma/Nest presentation.
-- [ ] PostgreSQL constraints and adapter contracts pass.
-- [ ] No stock quantity exists in catalog models.
-- [ ] Admin mutations are protected.
-- [ ] Public DTO reveals only approved fields.
+- [x] PostgreSQL constraints and adapter contracts pass for the Dia 3 minimum slice.
+- [x] No stock quantity exists in catalog models.
+- [x] Admin mutations are protected at the application permission boundary.
+- [x] Public DTO reveals only approved fields.
 - [ ] OpenAPI and Zod contracts agree.
 - [ ] Migration, advisors and rollback checks pass.
-- [ ] Lint, type-check, unit, integration and applicable E2E/build are green.
+- [x] Lint, type-check, unit, integration and applicable E2E/build are green for the Dia 3 scope.
 - [x] Documentation, backlog and context are updated.
 
 ## Prerequisites Resolved in Dia 2

@@ -11,10 +11,10 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DONE |
 | PRISMA-002 | Technical Foundation | Substituir Prisma 8 RC por Prisma 7 estável | P0 | PRISMA-001, aprovação humana | versão estável pinada, migration/spike validados e auditoria limpa | DONE |
 | DEBT-DEP-001 | Dívida Técnica | Remover `glob@10.5.0` deprecated da árvore de cobertura Jest | P3 | atualização upstream de `test-exclude`/Jest | instalação sem a versão deprecated e regressão verde | READY |
-| SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | DISCOVERY |
+| SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | DISCOVERY |
-| CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | READY |
-| VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | READY |
+| CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IN_PROGRESS |
+| VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IN_PROGRESS |
 | INV-001 | Feature | Estoque e movimentos por SKU como fonte única | P0 | VAR-001 | nenhuma operação vende quantidade indisponível | IDEA |
 | STO-001 | Feature | Vitrine, categorias e página de produto rica | P0 | CAT-001, VAR-001, DS-001 | produto indexável mostra preço, variantes e conteúdo | IDEA |
 | SEA-001 | Feature | Busca e filtros por tamanho, preço, cor, categoria, tecido, caimento e ocasião | P0 | CAT-001, VAR-001 | consultas essenciais retornam resultados corretos | IDEA |
@@ -66,8 +66,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 9 | TEST-CAT-002 | RED PostgreSQL/Supabase de constraints, concorrência e acesso | DONE |
 | 10 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | DONE — riscos RC documentados |
 | 11 | PRISMA-002 | Migrar para Prisma 7 estável e repetir gates do Dia 2 | DONE — ADR-004, versão 7.10.0 e auditoria limpa |
-| 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | segurança validada |
+| 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | IN_PROGRESS — negação antes do repository GREEN; identidade Supabase no Dia 4 |
 | 13 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
+| 14 | IMPL-CAT-001 | Implementação mínima GREEN do catálogo | DONE — 28/28 testes, lint, type-check e build verdes |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -75,7 +76,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 |---|---|---|---|
 | PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
 | ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | DONE |
-| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | testes RED completos | VALIDATION_READY |
+| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | implementação mínima GREEN | IN_PROGRESS |
 | TEST-CATALOG | matriz, fixtures e cenários RED | Supabase/PostgreSQL isolado | DONE |
 
 ## Política de priorização

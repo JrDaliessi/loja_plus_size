@@ -6,7 +6,7 @@
 |---|---|
 | ID | `TESTPLAN-CAT001` |
 | Small release | `SR-MVP-01` |
-| Estado | `VALIDATION_READY` — RED unitário e PostgreSQL confirmados |
+| Estado | `IN_PROGRESS` — RED preservado como evidência e contrato mínimo GREEN no Dia 3 |
 | Derived from | `FPRD-CAT001-RQ-001..018`, `FPRD-CAT001-AC-001..020`, `FSPEC-CAT001`, `CAT-INV-001..012` |
 | Runtime validado | Node.js `24.21.0` LTS |
 | Package manager | pnpm `11.19.0` |
@@ -127,3 +127,21 @@ Essa evidência parcial foi substituída pela execução final abaixo; os sete
 
 Os antigos sete `todo` foram removidos. O teste protege explicitamente contra
 hosts remotos e aceita somente o database local `plus_store_day2_test`.
+
+## Dia 3 GREEN Evidence — 2026-09-20
+
+| Verificação | Resultado |
+|---|---|
+| Suíte completa | PASS — 5 suítes, 28 testes, zero `todo` |
+| PostgreSQL | PASS — 7 cenários reais de constraints, concorrência, transação, cursor e privilégios |
+| Prisma | PASS — generate, validate, 2 migrations e status local atualizado |
+| Cobertura | 81,93% statements; 62,76% branches; 90,32% functions; 80,15% lines |
+| Type-check | PASS |
+| Lint | PASS — ESLint 10.10.0 e typescript-eslint 8.70.0 pinados |
+| Build | PASS |
+| Auditorias | PASS — produção e completa sem vulnerabilidades conhecidas |
+| Supabase remoto | não alterado; migration restrita aos bancos PostgreSQL locais isolados |
+
+Os nomes `tests/red` e `test:catalog:red` foram preservados como rastreabilidade
+do ciclo TDD que originou os contratos. No Dia 3, os mesmos testes passaram GREEN
+sem redução das expectativas aprovadas.

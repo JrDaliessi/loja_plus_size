@@ -1,20 +1,20 @@
 # Project Context
 
 project: Plus Store
-project_state: ARCHITECTURE_READY
+project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: VALIDATION_READY
-phase: Dia 2 corrigido — aguardando aprovação para Dia 3
+artifact_state: IN_PROGRESS
+phase: Dia 3 concluído — aguardando aprovação para Dia 4
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana para iniciar o Dia 3 da `SR-MVP-01` com Prisma 7 estável e implementação mínima GREEN.
+Obter aprovação humana para o Dia 4 da `SR-MVP-01`, expandindo de forma controlada o núcleo GREEN do catálogo.
 
 ## Blockers
 
-- Nenhum bloqueio duro impede implementação local do Dia 3.
+- Nenhum bloqueio duro impede a expansão local do Dia 4.
 - Antes de integração/deploy remoto, o backend ainda precisa receber uma conexão PostgreSQL Supabase por gerenciador de segredos.
 - Antes de mídia remota, o bucket e as policies de Storage precisam de autorização e validação próprias.
 
@@ -34,6 +34,8 @@ Obter aprovação humana para iniciar o Dia 3 da `SR-MVP-01` com Prisma 7 estáv
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
 - active artifact: `docs/features/FEATURE-CATALOG/`
 - validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
+- implementation: `apps/api/src/features/catalog/`
+- database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
 - quality gates: `quality-gates.md`
 - stack: `project-stack.md`
@@ -48,7 +50,7 @@ Obter aprovação humana para iniciar o Dia 3 da `SR-MVP-01` com Prisma 7 estáv
 
 ## Next Action
 
-Solicitar aprovação explícita para o Dia 3. Não aplicar migration no Supabase principal antes dessa aprovação.
+Solicitar aprovação explícita para o Dia 4. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
 
 ## History
 
