@@ -4,13 +4,13 @@ project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: IN_PROGRESS
-phase: Dia 4 concluído — aguardando aprovação para Dia 5
+artifact_state: HARDENING
+phase: Dia 5 concluído — aguardando aprovação para Dia 6
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e contratos ampliados no Dia 4 sem alterar comportamento aprovado.
+Obter aprovação humana para o Dia 6 da `SR-MVP-01`, avaliando experiência, acessibilidade e formato somente onde se aplicam ao slice de backend.
 
 ## Blockers
 
@@ -27,6 +27,7 @@ Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e co
 - Provedor de frete e hospedagem do backend ainda não foram selecionados.
 - O CTA documentado com texto branco sobre `#8B5CF6` tem contraste calculado de 4,23:1; exige tratamento no gate de acessibilidade para texto normal.
 - A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
+- A paginação keyset usa o índice correto, mas o predicate `OR` emitido pelo Prisma filtrou 5.000 entradas em um cursor intermediário com 10.000 registros; ver `DEBT-PERF-001`.
 
 ## Current Context
 
@@ -39,6 +40,8 @@ Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e co
 - database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
 - quality gates: `quality-gates.md`
+- technical debt: `docs/technical-debt.md`
+- CI: `.github/workflows/api-quality.yml`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
 - repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `main`)
@@ -51,7 +54,7 @@ Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e co
 
 ## Next Action
 
-Solicitar aprovação explícita para o Dia 5. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
+Solicitar aprovação explícita para o Dia 6. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
 
 ## History
 

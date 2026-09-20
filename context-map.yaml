@@ -33,6 +33,7 @@ routes:
     - backlog.md
   quality:
     - quality-gates.md
+    - docs/technical-debt.md
   agents:
     - .agents/registry.yaml
     - .agents/workflows/

@@ -17,6 +17,7 @@
 - [x] Prisma 7.10.0 estável pinado; migration/spike/auditoria validados no ambiente isolado
 - [x] resultado funcional mínimo do Dia 3 validado localmente por 28/28 contratos GREEN
 - [x] expansão controlada do Dia 4 validada por 66/66 contratos e smoke HTTP/Prisma local
+- [x] hardening do Dia 5 validado por 76/76 contratos, cobertura mínima e pipeline reproduzível
 - [x] documentação de fundação atualizada
 
 ## Evidência do Dia 3 — 2026-09-20
@@ -45,6 +46,22 @@
 - [x] 11 suítes, 66 testes; 81,48% statements e 83,11% lines
 - [x] lint, type-check, build e auditorias completa/produção verdes
 - [x] Supabase principal preservado sem migration, bucket, policy ou escrita
+
+## Evidência do Dia 5 — 2026-09-20
+
+- [x] claims Supabase vinculadas ao issuer configurado e validadas por audiência/sessão
+- [x] bearer tokens excessivos são negados antes do acesso ao provedor
+- [x] UUIDs de rota e correlation IDs externos são limitados na borda HTTP
+- [x] falhas lançadas por Storage e Prisma são convertidas em erros estáveis sem detalhes do provedor
+- [x] reconciliação de Storage limitada a dez operações concorrentes
+- [x] transações interativas limitadas a 2 s de espera e 5 s de execução
+- [x] 15 suítes, 76 testes; 82,65% statements, 67,32% branches, 84,09% functions e 84,19% lines
+- [x] thresholds globais de cobertura: 80% statements/lines/functions e 60% branches
+- [x] GitHub Actions materializado com actions fixadas por SHA e PostgreSQL 17 isolado
+- [x] duas migrations aplicadas do zero em database local vazio antes da regressão final
+- [x] `EXPLAIN (ANALYZE, BUFFERS)` executado com 10.000 linhas; índice usado e dívida de cursor profundo registrada
+- [x] lint, type-check, build e auditorias completa/produção verdes
+- [x] Supabase principal preservado sem mutation remota
 
 ## Gate de contexto
 

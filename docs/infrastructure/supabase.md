@@ -72,3 +72,18 @@ necessidade no Dia 2.
 - A validação remota permanece pendente de conexão por secrets, permissões de
   staff aprovadas e resolução do incidente de rejeição de JWT registrado em
   `https://status.supabase.com/` em 2026-09-20.
+
+## Hardening local do Dia 5 — 2026-09-20
+
+- Claims verificadas por `getClaims` também precisam corresponder ao issuer
+  `${SUPABASE_URL}/auth/v1`, audiência autenticada e sessão válida.
+- Bearer tokens maiores que 8 KiB são negados antes de qualquer chamada ao Auth.
+- A autorização continua aceitando somente permissões allowlisted em
+  `app_metadata`; `user_metadata` permanece ignorado.
+- Exceções lançadas pelo SDK de Storage são normalizadas sem expor endpoint,
+  credenciais ou mensagens internas.
+- A reconciliação processa no máximo dez verificações de objeto simultâneas e
+  continua limitada a cem paths por execução.
+- A documentação atual do Supabase foi revalidada para `getClaims`, upload
+  assinado, metadata de autorização, conexão pooled e mudanças incompatíveis.
+- Nenhuma configuração, identidade, bucket, policy ou objeto remoto foi alterado.

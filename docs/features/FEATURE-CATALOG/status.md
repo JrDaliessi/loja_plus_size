@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `IN_PROGRESS`
-- Review status: `DAY_4_COMPLETE_2026-09-20`
+- Artifact state: `HARDENING`
+- Review status: `DAY_5_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 4 concluído; aguardando aprovação do Dia 5
+- Phase: Dia 5 concluído; aguardando aprovação do Dia 6
 
 ## Completed
 
@@ -55,6 +55,23 @@
   63.63% branches, 85.54% functions and 83.11% lines.
 - Type-check, lint, build and production/full audits are green.
 - The Supabase principal project was not mutated during Dia 4.
+- Dia 5 added issuer/audience/session validation for Supabase claims and rejects
+  oversized bearer tokens before provider access.
+- Route UUIDs and correlation identifiers are now bounded at the HTTP boundary;
+  invalid values fail closed without reaching application services.
+- Storage provider exceptions are normalized and reconciliation is limited to ten
+  concurrent requests.
+- Prisma read failures are normalized, interactive transactions use a 2-second
+  acquisition wait and 5-second execution timeout, and existing P2002 mappings remain intact.
+- GitHub Actions now runs migrations against isolated PostgreSQL 17, lint,
+  type-check, coverage thresholds, build and both dependency audits.
+- Both catalog migrations were applied from an empty local database before the
+  final 76-test regression, matching the CI bootstrap sequence.
+- Final Dia 5 evidence: 15 suites, 76 tests passed; 82.65% statements, 67.32%
+  branches, 84.09% functions and 84.19% lines.
+- A 10,000-row `EXPLAIN (ANALYZE, BUFFERS)` used the catalog composite index and
+  completed in 0.862 ms, but exposed a deep-cursor scan recorded as `DEBT-PERF-001`.
+- The Supabase principal project was not mutated during Dia 5.
 
 ## Resolved Blockers
 
@@ -98,4 +115,4 @@
 
 ## Next Action
 
-Obtain explicit approval for Dia 5. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
+Obtain explicit approval for Dia 6. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
