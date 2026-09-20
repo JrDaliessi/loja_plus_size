@@ -5,16 +5,16 @@ project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
 artifact_state: IN_PROGRESS
-phase: Dia 3 concluído — aguardando aprovação para Dia 4
+phase: Dia 4 concluído — aguardando aprovação para Dia 5
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana para o Dia 4 da `SR-MVP-01`, expandindo de forma controlada o núcleo GREEN do catálogo.
+Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e contratos ampliados no Dia 4 sem alterar comportamento aprovado.
 
 ## Blockers
 
-- Nenhum bloqueio duro impede a expansão local do Dia 4.
+- Nenhum bloqueio duro impede o refinamento local do Dia 5.
 - Antes de integração/deploy remoto, o backend ainda precisa receber uma conexão PostgreSQL Supabase por gerenciador de segredos.
 - Antes de mídia remota, o bucket e as policies de Storage precisam de autorização e validação próprias.
 
@@ -26,6 +26,7 @@ Obter aprovação humana para o Dia 4 da `SR-MVP-01`, expandindo de forma contro
 - Overrides transitivos de segurança devem ser reavaliados em toda atualização do Prisma e removidos quando o upstream incorporar os patches.
 - Provedor de frete e hospedagem do backend ainda não foram selecionados.
 - O CTA documentado com texto branco sobre `#8B5CF6` tem contraste calculado de 4,23:1; exige tratamento no gate de acessibilidade para texto normal.
+- A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
 
 ## Current Context
 
@@ -34,7 +35,7 @@ Obter aprovação humana para o Dia 4 da `SR-MVP-01`, expandindo de forma contro
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
 - active artifact: `docs/features/FEATURE-CATALOG/`
 - validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
-- implementation: `apps/api/src/features/catalog/`
+- implementation: `apps/api/src/features/catalog/`, `apps/api/src/main.ts`, `apps/api/src/app.module.ts`
 - database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
 - quality gates: `quality-gates.md`
@@ -50,7 +51,7 @@ Obter aprovação humana para o Dia 4 da `SR-MVP-01`, expandindo de forma contro
 
 ## Next Action
 
-Solicitar aprovação explícita para o Dia 4. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
+Solicitar aprovação explícita para o Dia 5. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
 
 ## History
 

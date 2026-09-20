@@ -15,6 +15,10 @@
 | Prisma CLI | 7 estável pinada | `7.10.0` | validado com Node 24.21.0 |
 | Prisma Client/adapter PostgreSQL | 7 estável pinada | `@prisma/client 7.10.0`, `@prisma/adapter-pg 7.10.0`, `pg 8.23.0` | CRUD, P2002 e transação validados |
 | ESLint | estável compatível com Node 24 | `eslint 10.10.0`, `@eslint/js 10.0.1`, `typescript-eslint 8.70.0` | lint verde |
+| NestJS/OpenAPI | estável atual | `@nestjs/core 12.0.3`, `@nestjs/swagger 12.0.1` | HTTP e OpenAPI validados |
+| Supabase JS | estável atual | `@supabase/supabase-js 2.116.0` | adapter `getClaims` e Storage validados localmente |
+| Zod | estável atual | `4.6.5` | request e JSON Schema sincronizados |
+| esbuild | estável atual | `0.28.2` | bundle Node ESM executável validado |
 
 ## Ferramentas planejadas
 
@@ -22,7 +26,7 @@
 - Orquestração: Turborepo.
 - Qualidade: ESLint e TypeScript strict materializados; Prettier entra apenas quando houver gate de formatação aprovado.
 - Frontend: Next.js CLI e shadcn CLI apenas após versões fixadas.
-- Backend: Nest CLI somente se o scaffold gerado respeitar a arquitetura aprovada.
+- Backend: NestJS 12 materializado sem scaffold monolítico; composição permanece fora do domínio.
 - Banco: Prisma 7 CLI, `@prisma/adapter-pg`, Supabase CLI e SQL revisado.
 - E2E: Playwright.
 - CI: GitHub Actions.
@@ -38,7 +42,7 @@
   `mysql2 3.23.1` e `pg 8.23.0`; todos exigem regressão e auditoria ao mudar
   Prisma.
 - Scripts de instalação permitidos somente para dependências justificadas:
-  `@swc/core`, `unrs-resolver`, `prisma` e `@prisma/engines`.
+  `@swc/core`, `esbuild`, `unrs-resolver`, `prisma` e `@prisma/engines`.
 
 ## Comandos-alvo dos quality gates
 
@@ -51,7 +55,8 @@ pnpm test
 pnpm build
 ```
 
-`pnpm test:e2e` será adicionado quando existir um entrypoint HTTP/browser testável; não é simulado no slice backend/domain atual.
+O entrypoint HTTP já possui testes de integração via NestJS/Supertest e smoke do
+bundle; um comando E2E separado entra apenas quando houver ambiente externo.
 
 Turborepo deverá declarar dependências e outputs corretos, permitir dry-run e evitar cache em tarefas persistentes ou mutáveis.
 

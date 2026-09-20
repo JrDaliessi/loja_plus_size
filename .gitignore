@@ -1,5 +1,6 @@
 # dependencies and builds
 node_modules/
+.pnpm-store/
 .next/
 dist/
 coverage/

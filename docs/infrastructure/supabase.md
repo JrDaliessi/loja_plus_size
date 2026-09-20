@@ -58,3 +58,17 @@ necessidade no Dia 2.
 - Não usar `user_metadata` para autorização.
 - Manter autorização administrativa em dados controlados pela aplicação.
 - Fixar versões de clientes e commitar lockfile.
+
+## Integração local do Dia 4 — 2026-09-20
+
+- `@supabase/supabase-js 2.116.0` foi fixado no lockfile.
+- O backend valida bearer tokens com `auth.getClaims(jwt)`; `getSession()` não é
+  usado como prova de identidade.
+- Permissões de catálogo são lidas somente de `app_metadata`; valores em
+  `user_metadata` são ignorados mesmo quando usam nomes de permissão válidos.
+- O adapter de Storage aceita apenas JPEG, PNG e WebP até 10 MB, gera path sob
+  o namespace do produto e solicita upload assinado com `upsert: false`.
+- Bucket, policies, objetos e Auth do projeto principal não foram alterados.
+- A validação remota permanece pendente de conexão por secrets, permissões de
+  staff aprovadas e resolução do incidente de rejeição de JWT registrado em
+  `https://status.supabase.com/` em 2026-09-20.

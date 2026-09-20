@@ -4,7 +4,7 @@ artifact:
   small_release: SR-MVP-01
   capability: software
   state: IN_PROGRESS
-  review_status: day_3_complete_2026_09_20
+  review_status: day_4_complete_2026_09_20
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -33,8 +33,9 @@ acceptance_criteria:
 active_risks:
   - prisma_transitive_overrides_require_revalidation
   - supabase_runtime_secret_pending
-  - admin_authorization_dependency
+  - remote_staff_permissions_not_configured
   - remote_migration_not_promoted
+  - supabase_jwt_incident_requires_remote_revalidation
 hard_blockers_before_implementation: []
 remote_integration_prerequisites:
   - secure_supabase_database_connection
@@ -51,13 +52,19 @@ implementation:
   application: apps/api/src/features/catalog/application/
   persistence_schema: apps/api/prisma/schema.prisma
   migrations: apps/api/prisma/migrations/
+  http: apps/api/src/features/catalog/presentation/http/
+  auth: apps/api/src/features/catalog/infrastructure/auth/
+  storage: apps/api/src/features/catalog/infrastructure/storage/
+  runtime: apps/api/src/main.ts
 validation_evidence:
-  tests: 28_passed
-  suites: 5_passed
-  coverage_statements: 81.93
+  tests: 66_passed
+  suites: 11_passed
+  coverage_statements: 81.48
+  coverage_lines: 83.11
   lint: passed
   type_check: passed
   build: passed
+  runtime_smoke: http_200_public_and_http_401_admin
   dependency_audit: zero_known_vulnerabilities
   supabase_remote_mutated: false
-next_action: obtain_day_4_approval
+next_action: obtain_day_5_approval

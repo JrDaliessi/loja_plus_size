@@ -97,11 +97,22 @@ export class FakeProductRepository implements ProductRepository {
     limit: number;
   }): Promise<{ items: CatalogProduct[]; nextCursor?: string }> {
     this.calls.push('listPublic');
-    const items = [...this.records.values()]
+    const records = [...this.records.values()]
       .filter((item) => item.status === 'ACTIVE')
-      .sort((left, right) => left.id.localeCompare(right.id))
-      .slice(0, input.limit);
-    return { items };
+      .sort((left, right) => left.id.localeCompare(right.id));
+    const cursorId = input.cursor
+      ? Buffer.from(input.cursor, 'base64url').toString('utf8')
+      : undefined;
+    const start = cursorId
+      ? Math.max(0, records.findIndex((item) => item.id === cursorId) + 1)
+      : 0;
+    const items = records.slice(start, start + input.limit);
+    const last = items.at(-1);
+    const nextCursor =
+      start + items.length < records.length && last
+        ? Buffer.from(last.id, 'utf8').toString('base64url')
+        : undefined;
+    return nextCursor ? { items, nextCursor } : { items };
   }
 }
 

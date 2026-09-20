@@ -423,7 +423,7 @@ No implementation test will be authored in Dia 1B.
 - [x] No stock quantity exists in catalog models.
 - [x] Admin mutations are protected at the application permission boundary.
 - [x] Public DTO reveals only approved fields.
-- [ ] OpenAPI and Zod contracts agree.
+- [x] OpenAPI and Zod contracts agree for the Dia 4 HTTP slice.
 - [ ] Migration, advisors and rollback checks pass.
 - [x] Lint, type-check, unit, integration and applicable E2E/build are green for the Dia 3 scope.
 - [x] Documentation, backlog and context are updated.
@@ -442,5 +442,5 @@ slice and remains protected by RED scenarios.
 Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
 O gate `SPEC_READY` foi alcançado em 2026-09-14 e o gate `VALIDATION_READY` foi
-corrigido/concluído em 2026-09-15. Implementação depende de aprovação explícita
-do Dia 3.
+corrigido/concluído em 2026-09-15. Dias 3 e 4 foram aprovados e executados; o
+próximo gate depende de aprovação explícita do Dia 5.
