@@ -4,17 +4,17 @@ project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: QUALITY_VALIDATION
-phase: Dia 6 concluído — aguardando aprovação para Dia 7
+artifact_state: READY_FOR_RELEASE
+phase: Dia 7 concluído — release candidate sem promoção remota
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana para o Dia 7 da `SR-MVP-01` e executar o gate final sem promover migrations, Storage ou deploy remoto sem autorização específica.
+Revisar o release candidate da `SR-MVP-01` e, após decisão humana, definir a primeira small release demonstrável em `apps/web` para preview na Vercel.
 
 ## Blockers
 
-- Nenhum bloqueio duro impede a avaliação de qualidade local do Dia 7.
+- O projeto Supabase principal está `INACTIVE`; isso bloqueia migration, Auth e validação remota.
 - Antes de integração/deploy remoto, o backend ainda precisa receber uma conexão PostgreSQL Supabase por gerenciador de segredos.
 - Antes de mídia remota, o bucket e as policies de Storage precisam de autorização e validação próprias.
 
@@ -37,6 +37,9 @@ Obter aprovação humana para o Dia 7 da `SR-MVP-01` e executar o gate final sem
 - active artifact: `docs/features/FEATURE-CATALOG/`
 - validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
 - experience validation: `docs/features/FEATURE-CATALOG/experience-validation.md`
+- release candidate: `docs/releases/SR-MVP-01-catalog-release-candidate.md`
+- release readiness: `docs/features/FEATURE-CATALOG/release-readiness.md`
+- rollback: `docs/features/FEATURE-CATALOG/rollback-plan.md`
 - implementation: `apps/api/src/features/catalog/`, `apps/api/src/main.ts`, `apps/api/src/app.module.ts`
 - database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
@@ -55,7 +58,9 @@ Obter aprovação humana para o Dia 7 da `SR-MVP-01` e executar o gate final sem
 
 ## Next Action
 
-Solicitar aprovação explícita para o Dia 7. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
+Revisar/mesclar o PR #6 e iniciar o discovery de uma small release `apps/web`
+demonstrável na Vercel. Não reativar o Supabase, aplicar migration ou criar
+Storage sem autorização específica.
 
 ## History
 

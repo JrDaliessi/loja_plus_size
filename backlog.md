@@ -73,6 +73,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 15 | EXP-CAT-001 | Expandir contratos HTTP, Prisma, Auth e Storage | DONE — 66/66 testes, runtime smoke, build ESM executável e auditoria limpa |
 | 16 | HARDEN-CAT-001 | Refinar segurança, falhas externas, limites de transação e pipeline | DONE — 76/76 testes, thresholds de cobertura, build e auditorias verdes |
 | 17 | UX-CAT-001 | Validar experiência e formato consumível da API | DONE — OpenAPI/Swagger corrigidos e 80/80 testes verdes |
+| 18 | REL-CAT-001 | Executar gate final e preparar release candidate do catálogo | DONE — `READY_FOR_RELEASE`; promoção remota bloqueada pelo Supabase inativo |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -80,7 +81,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 |---|---|---|---|
 | PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
 | ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | DONE |
-| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | gate final do Dia 7 | QUALITY_VALIDATION |
+| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | revisão/merge do release candidate; promoção remota separada | READY_FOR_RELEASE |
 | TEST-CATALOG | matriz, fixtures e cenários RED | Supabase/PostgreSQL isolado | DONE |
 
 ## Política de priorização

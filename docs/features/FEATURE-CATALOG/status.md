@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `QUALITY_VALIDATION`
-- Review status: `DAY_6_COMPLETE_2026-09-20`
+- Artifact state: `READY_FOR_RELEASE`
+- Review status: `DAY_7_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 6 concluído; aguardando aprovação do Dia 7
+- Phase: Dia 7 concluído; release candidate aguardando revisão/merge, sem promoção remota
 
 ## Completed
 
@@ -87,6 +87,17 @@
 - Visual accessibility, responsive layout, SEO and PWA remain deferred to the
   first applicable web releases; they were not marked as approved.
 - The Supabase principal project was not mutated during Dia 6.
+- Day 7 reapplied both migrations from an empty PostgreSQL 17 database and
+  confirmed a second deployment was idempotent.
+- Database inspection confirmed RLS on 10/10 tables, zero public/Data API grants,
+  zero missing foreign-key indexes, 12 foreign keys, 18 checks and 32 indexes.
+- Tracked-file secret scanning found no JWT or Supabase secret-key pattern.
+- The principal Supabase project is `INACTIVE`; table/migration inspection timed
+  out and no reactivation or mutation was attempted.
+- Security and performance advisors returned zero findings, but remain
+  inconclusive for promotion while the database is inactive.
+- A release candidate, release-readiness report and rollback/recovery plan were
+  created. The artifact is not marked `RELEASED`.
 
 ## Resolved Blockers
 
@@ -130,4 +141,6 @@
 
 ## Next Action
 
-Obtain explicit approval for Dia 7. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
+Review/merge PR #6, then define and approve the first demonstrable `apps/web`
+small release for Vercel. Remote Supabase activation, migrations and Storage
+mutations remain separate actions requiring explicit authorization.

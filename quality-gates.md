@@ -19,6 +19,7 @@
 - [x] expansão controlada do Dia 4 validada por 66/66 contratos e smoke HTTP/Prisma local
 - [x] hardening do Dia 5 validado por 76/76 contratos, cobertura mínima e pipeline reproduzível
 - [x] experiência da API do Dia 6 validada por 80/80 contratos; gates visuais diferidos sem falso aceite
+- [x] gate final do Dia 7 concluído e release candidate registrado sem confundir merge com deploy
 - [x] documentação de fundação atualizada
 
 ## Evidência do Dia 3 — 2026-09-20
@@ -75,6 +76,19 @@
 - [x] lint, type-check, build e auditorias completa/produção verdes
 - [x] UI, contraste, responsividade, SEO e PWA classificados como diferidos, não aprovados
 - [x] Supabase principal preservado sem mutation remota
+
+## Evidência do Dia 7 — 2026-09-20
+
+- [x] duas migrations aplicadas do zero em PostgreSQL 17 isolado
+- [x] segunda execução idempotente e migration status atualizado
+- [x] 10/10 tabelas com RLS e zero grants para `PUBLIC`/`anon`/`authenticated`
+- [x] zero foreign keys sem índice; 12 FKs, 18 checks e 32 indexes inspecionados
+- [x] revisão PostgreSQL cobriu UUIDv7, paginação keyset, índices parciais/compostos e transações curtas
+- [x] varredura de arquivos versionados sem JWT ou chave secret Supabase
+- [x] release readiness e rollback/recovery documentados
+- [x] advisors remotos sem findings, classificados como inconclusivos para promoção com projeto `INACTIVE`
+- [x] principal Supabase preservado sem mutation remota
+- [x] estado final honesto: `READY_FOR_RELEASE`, não `RELEASED`
 
 ## Gate de contexto
 
@@ -139,3 +153,15 @@
 - Dívida e riscos remanescentes classificados.
 - Backlog, contexto, release record e rastreabilidade atualizados.
 - Aprovação humana registrada.
+
+### Estado de `SR-MVP-01-RC1`
+
+- [x] critérios e regressão do escopo candidato satisfeitos
+- [x] pipeline obrigatório da revisão anterior verde; execução do commit final será anexada ao PR #6
+- [x] migration local do zero e idempotência validadas
+- [x] rollback e recuperação documentados
+- [x] dívida e riscos remanescentes classificados
+- [x] backlog, contexto, release candidate e rastreabilidade atualizados
+- [ ] Supabase reativado e conexão remota segura disponível
+- [ ] migration, Auth, advisors pós-promoção e Storage validados no ambiente remoto
+- [ ] backend implantado e observabilidade pública validada

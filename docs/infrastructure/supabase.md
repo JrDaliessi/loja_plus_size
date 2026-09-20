@@ -87,3 +87,15 @@ necessidade no Dia 2.
 - A documentação atual do Supabase foi revalidada para `getClaims`, upload
   assinado, metadata de autorização, conexão pooled e mudanças incompatíveis.
 - Nenhuma configuração, identidade, bucket, policy ou objeto remoto foi alterado.
+
+## Gate somente leitura do Dia 7 — 2026-09-20
+
+- O projeto `olkadbgumpiybehslobk` foi confirmado em `sa-east-1`, PostgreSQL 17.
+- O status retornado foi `INACTIVE`; leituras de tabelas e migrations expiraram.
+- Advisors de segurança e performance retornaram zero findings, mas o resultado
+  é inconclusivo para promoção enquanto o banco permanecer inativo.
+- Nenhuma tentativa de restore/reativação foi feita, pois isso exige autorização
+  externa específica.
+- O PostgreSQL 17 local confirmou migrations do zero, idempotência, RLS em 10/10
+  tabelas, nenhum grant Data API e nenhuma FK sem índice.
+- O projeto principal permaneceu sem mutação.

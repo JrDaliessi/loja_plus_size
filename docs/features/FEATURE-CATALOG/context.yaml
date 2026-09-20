@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-CATALOG
   small_release: SR-MVP-01
   capability: software
-  state: HARDENING
-  review_status: day_5_complete_2026_09_20
+  state: READY_FOR_RELEASE
+  review_status: day_7_complete_2026_09_20
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -36,6 +36,7 @@ active_risks:
   - remote_staff_permissions_not_configured
   - remote_migration_not_promoted
   - supabase_jwt_incident_requires_remote_revalidation
+  - supabase_project_inactive_blocks_remote_promotion
   - deep_cursor_predicate_requires_optimization_before_storefront_scale
 hard_blockers_before_implementation: []
 remote_integration_prerequisites:
@@ -58,8 +59,8 @@ implementation:
   storage: apps/api/src/features/catalog/infrastructure/storage/
   runtime: apps/api/src/main.ts
 validation_evidence:
-  tests: 76_passed
-  suites: 15_passed
+  tests: 80_passed
+  suites: 16_passed
   coverage_statements: 82.65
   coverage_branches: 67.32
   coverage_functions: 84.09
@@ -70,6 +71,11 @@ validation_evidence:
   runtime_smoke: http_200_public_and_http_401_admin
   dependency_audit: zero_known_vulnerabilities
   ci_workflow: passed_on_pr_6
+  fresh_migration: passed_twice_with_second_run_idempotent
+  rls_tables: 10_of_10
+  public_data_api_grants: 0
+  missing_foreign_key_indexes: 0
+  remote_project_status: inactive
   keyset_explain: index_used_with_5000_rows_filtered_at_midpoint
   supabase_remote_mutated: false
-next_action: obtain_day_6_approval
+next_action: review_release_candidate_then_define_first_apps_web_slice
