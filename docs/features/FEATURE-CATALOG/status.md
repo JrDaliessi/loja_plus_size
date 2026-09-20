@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `IN_PROGRESS`
-- Review status: `DAY_4_COMPLETE_2026-09-20`
+- Artifact state: `READY_FOR_RELEASE`
+- Review status: `DAY_7_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 4 concluído; aguardando aprovação do Dia 5
+- Phase: Dia 7 concluído; release candidate aguardando revisão/merge, sem promoção remota
 
 ## Completed
 
@@ -55,6 +55,51 @@
   63.63% branches, 85.54% functions and 83.11% lines.
 - Type-check, lint, build and production/full audits are green.
 - The Supabase principal project was not mutated during Dia 4.
+- Dia 5 added issuer/audience/session validation for Supabase claims and rejects
+  oversized bearer tokens before provider access.
+- Route UUIDs and correlation identifiers are now bounded at the HTTP boundary;
+  invalid values fail closed without reaching application services.
+- Storage provider exceptions are normalized and reconciliation is limited to ten
+  concurrent requests.
+- Prisma read failures are normalized, interactive transactions use a 2-second
+  acquisition wait and 5-second execution timeout, and existing P2002 mappings remain intact.
+- GitHub Actions now runs migrations against isolated PostgreSQL 17, lint,
+  type-check, coverage thresholds, build and both dependency audits.
+- The first remote execution passed on PR #6 in 1m07s.
+- Both catalog migrations were applied from an empty local database before the
+  final 76-test regression, matching the CI bootstrap sequence.
+- Final Dia 5 evidence: 15 suites, 76 tests passed; 82.65% statements, 67.32%
+  branches, 84.09% functions and 84.19% lines.
+- A 10,000-row `EXPLAIN (ANALYZE, BUFFERS)` used the catalog composite index and
+  completed in 0.862 ms, but exposed a deep-cursor scan recorded as `DEBT-PERF-001`.
+- The Supabase principal project was not mutated during Dia 5.
+- Day 6 validated the API-consumer experience without expanding the approved
+  backend-only scope into `apps/web`.
+- OpenAPI now marks all admin operations with bearer authentication, documents
+  bounded public pagination inputs and lists relevant success/failure outcomes.
+- Swagger UI and OpenAPI JSON are covered as navigable and machine-readable
+  artifacts by `CAT-EXP-004`.
+- Day 6 RED was observed for three missing documentation contracts before the
+  controller metadata was corrected.
+- Final Day 6 evidence: 16 suites, 80 tests passed; 82.65% statements, 67.32%
+  branches, 84.09% functions and 84.19% lines.
+- Type-check, lint, build and production/full audits are green.
+- Visual accessibility, responsive layout, SEO and PWA remain deferred to the
+  first applicable web releases; they were not marked as approved.
+- The Supabase principal project was not mutated during Dia 6.
+- Day 7 reapplied both migrations from an empty PostgreSQL 17 database and
+  confirmed a second deployment was idempotent.
+- Database inspection confirmed RLS on 10/10 tables, zero public/Data API grants,
+  zero missing foreign-key indexes, 12 foreign keys, 18 checks and 32 indexes.
+- Tracked-file secret scanning found no JWT or Supabase secret-key pattern.
+- The principal Supabase project is `INACTIVE`; table/migration inspection timed
+  out and no reactivation or mutation was attempted.
+- Security and performance advisors returned zero findings, but remain
+  inconclusive for promotion while the database is inactive.
+- A release candidate, release-readiness report and rollback/recovery plan were
+  created. The artifact is not marked `RELEASED`.
+- GitHub Actions run `35539866962` passed the complete API Quality pipeline for
+  release-candidate commit `f2f2a16` in 1m00s.
 
 ## Resolved Blockers
 
@@ -98,4 +143,6 @@
 
 ## Next Action
 
-Obtain explicit approval for Dia 5. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
+Review/merge PR #6, then define and approve the first demonstrable `apps/web`
+small release for Vercel. Remote Supabase activation, migrations and Storage
+mutations remain separate actions requiring explicit authorization.

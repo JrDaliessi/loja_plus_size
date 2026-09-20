@@ -145,3 +145,20 @@ hosts remotos e aceita somente o database local `plus_store_day2_test`.
 Os nomes `tests/red` e `test:catalog:red` foram preservados como rastreabilidade
 do ciclo TDD que originou os contratos. No Dia 3, os mesmos testes passaram GREEN
 sem redução das expectativas aprovadas.
+
+## Dia 6 Experience Evidence — 2026-09-20
+
+| Verificação | Resultado |
+|---|---|
+| RED de experiência da API | CONFIRMADO — 3 falhas por autenticação, paginação e outcomes ausentes do OpenAPI |
+| GREEN específico | PASS — `CAT-EXP-001..004`, 4/4 testes |
+| Swagger UI | PASS — `/docs/` entrega HTML navegável |
+| OpenAPI JSON | PASS — `/docs-json` entrega o contrato legível por máquina |
+| Regressão completa | PASS — 16 suítes, 80 testes |
+| Cobertura | 82,65% statements; 67,32% branches; 84,09% functions; 84,19% lines |
+| Gates estáticos | type-check, lint e build PASS |
+| Auditorias | produção e completa sem vulnerabilidades conhecidas |
+
+Critérios de interface visual foram classificados como não aplicáveis ao escopo
+aprovado de `SR-MVP-01`, não como aprovados. A matriz completa está em
+`experience-validation.md`.

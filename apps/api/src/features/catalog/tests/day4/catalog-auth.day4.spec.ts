@@ -7,6 +7,10 @@ import {
 
 const verifiedClaims = {
   sub: '018f0f4d-0000-7000-8000-000000000010',
+  iss: 'https://olkadbgumpiybehslobk.supabase.co/auth/v1',
+  aud: 'authenticated',
+  exp: 1_900_000_000,
+  session_id: '018f0f4d-0000-7000-8000-000000000011',
   role: 'authenticated',
   is_anonymous: false,
   app_metadata: {
@@ -23,7 +27,10 @@ describe('FEATURE-CATALOG Dia 4 Supabase identity adapter', () => {
       data: { claims: verifiedClaims },
       error: null,
     }));
-    const adapter = new SupabaseCatalogIdentityAdapter({ auth: { getClaims } });
+    const adapter = new SupabaseCatalogIdentityAdapter(
+      { auth: { getClaims } },
+      verifiedClaims.iss,
+    );
 
     await expect(adapter.authenticate('Bearer verified-token')).resolves.toEqual({
       id: verifiedClaims.sub,
@@ -38,11 +45,14 @@ describe('FEATURE-CATALOG Dia 4 Supabase identity adapter', () => {
     'Basic abc',
     'Bearer',
   ])('CAT-SEC-003 rejects a missing or malformed authorization header: %p', async (header) => {
-    const adapter = new SupabaseCatalogIdentityAdapter({
-      auth: {
-        getClaims: jest.fn<SupabaseClaimsClient['auth']['getClaims']>(),
+    const adapter = new SupabaseCatalogIdentityAdapter(
+      {
+        auth: {
+          getClaims: jest.fn<SupabaseClaimsClient['auth']['getClaims']>(),
+        },
       },
-    });
+      verifiedClaims.iss,
+    );
 
     await expect(adapter.authenticate(header)).rejects.toMatchObject({
       code: 'CATALOG_UNAUTHENTICATED',
@@ -57,11 +67,14 @@ describe('FEATURE-CATALOG Dia 4 Supabase identity adapter', () => {
     ];
 
     for (const response of responses) {
-      const adapter = new SupabaseCatalogIdentityAdapter({
-        auth: {
-          getClaims: jest.fn<SupabaseClaimsClient['auth']['getClaims']>(async () => response),
+      const adapter = new SupabaseCatalogIdentityAdapter(
+        {
+          auth: {
+            getClaims: jest.fn<SupabaseClaimsClient['auth']['getClaims']>(async () => response),
+          },
         },
-      });
+        verifiedClaims.iss,
+      );
       await expect(adapter.authenticate('Bearer invalid-token')).rejects.toMatchObject({
         code: 'CATALOG_UNAUTHENTICATED',
       });
@@ -69,13 +82,16 @@ describe('FEATURE-CATALOG Dia 4 Supabase identity adapter', () => {
   });
 
   test('CAT-SEC-005 converts identity-provider failures into a stable authentication error', async () => {
-    const adapter = new SupabaseCatalogIdentityAdapter({
-      auth: {
-        getClaims: jest.fn<SupabaseClaimsClient['auth']['getClaims']>(async () => {
-          throw new Error('network details must not escape');
-        }),
+    const adapter = new SupabaseCatalogIdentityAdapter(
+      {
+        auth: {
+          getClaims: jest.fn<SupabaseClaimsClient['auth']['getClaims']>(async () => {
+            throw new Error('network details must not escape');
+          }),
+        },
       },
-    });
+      verifiedClaims.iss,
+    );
 
     await expect(adapter.authenticate('Bearer unavailable-token')).rejects.toMatchObject({
       code: 'CATALOG_UNAUTHENTICATED',

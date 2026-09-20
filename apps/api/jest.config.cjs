@@ -5,6 +5,14 @@ module.exports = {
     '!src/features/catalog/tests/**',
   ],
   coverageDirectory: 'coverage',
+  coverageThreshold: {
+    global: {
+      branches: 60,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
   extensionsToTreatAsEsm: ['.ts'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   roots: ['<rootDir>/src'],

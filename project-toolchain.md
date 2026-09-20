@@ -19,6 +19,7 @@
 | Supabase JS | estável atual | `@supabase/supabase-js 2.116.0` | adapter `getClaims` e Storage validados localmente |
 | Zod | estável atual | `4.6.5` | request e JSON Schema sincronizados |
 | esbuild | estável atual | `0.28.2` | bundle Node ESM executável validado |
+| GitHub Actions | actions oficiais fixadas por SHA | checkout `v7.0.1`, pnpm/setup `v2.1.0` | pipeline API materializado |
 
 ## Ferramentas planejadas
 
@@ -52,11 +53,16 @@ Comandos já materializados no workspace:
 pnpm lint
 pnpm type-check
 pnpm test
+pnpm test:coverage
 pnpm build
 ```
 
 O entrypoint HTTP já possui testes de integração via NestJS/Supertest e smoke do
 bundle; um comando E2E separado entra apenas quando houver ambiente externo.
+
+`test:coverage` aplica thresholds globais de 80% para statements, lines e
+functions e 60% para branches. `.github/workflows/api-quality.yml` reproduz os
+gates com Node 24.21.0, pnpm 11.19.0 e PostgreSQL 17 isolado.
 
 Turborepo deverá declarar dependências e outputs corretos, permitir dry-run e evitar cache em tarefas persistentes ou mutáveis.
 

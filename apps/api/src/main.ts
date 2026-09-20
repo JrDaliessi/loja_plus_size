@@ -42,7 +42,10 @@ const bootstrap = async (): Promise<void> => {
       },
     },
   );
-  const catalogIdentity = new SupabaseCatalogIdentityAdapter(supabase);
+  const catalogIdentity = new SupabaseCatalogIdentityAdapter(
+    supabase,
+    `${new URL(config.supabaseUrl).origin}/auth/v1`,
+  );
   const app = await NestFactory.create(
     AppModule.register({ catalogIdentity, catalogService }),
   );

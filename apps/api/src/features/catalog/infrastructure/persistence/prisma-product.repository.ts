@@ -78,6 +78,14 @@ const persistenceUnavailable = (): CatalogError =>
     'CATALOG_PERSISTENCE_UNAVAILABLE: Prisma product delegate is incomplete',
   );
 
+const executePersistence = async <T>(operation: () => Promise<T>): Promise<T> => {
+  try {
+    return await operation();
+  } catch (error) {
+    return mapCatalogPersistenceError(error);
+  }
+};
+
 const parseStatus = (status: string): ProductStatus => {
   const parsed = productStatusSchema.safeParse(status);
   if (!parsed.success) {
@@ -173,8 +181,8 @@ export class PrismaProductRepository implements ProductRepository {
   async create(product: CatalogProduct): Promise<CatalogProduct> {
     const delegate = this.client().product;
     if (!delegate.create) throw persistenceUnavailable();
-    try {
-      const record = await delegate.create({
+    const record = await executePersistence(() =>
+      delegate.create!({
         data: {
           id: product.id,
           name: product.name,
@@ -189,32 +197,34 @@ export class PrismaProductRepository implements ProductRepository {
           },
         },
         include: relations,
-      });
-      return mapRecord(record);
-    } catch (error) {
-      return mapCatalogPersistenceError(error);
-    }
+      }),
+    );
+    return mapRecord(record);
   }
 
   async findById(id: string): Promise<CatalogProduct | null> {
     const delegate = this.client().product;
     if (!delegate.findUnique) throw persistenceUnavailable();
-    const record = await delegate.findUnique({ where: { id }, include: relations });
+    const record = await executePersistence(() =>
+      delegate.findUnique!({ where: { id }, include: relations }),
+    );
     return record ? mapRecord(record) : null;
   }
 
   async findBySlug(slug: string): Promise<CatalogProduct | null> {
     const delegate = this.client().product;
     if (!delegate.findUnique) throw persistenceUnavailable();
-    const record = await delegate.findUnique({ where: { slug }, include: relations });
+    const record = await executePersistence(() =>
+      delegate.findUnique!({ where: { slug }, include: relations }),
+    );
     return record ? mapRecord(record) : null;
   }
 
   async save(product: CatalogProduct): Promise<CatalogProduct> {
     const delegate = this.client().product;
     if (!delegate.update) throw persistenceUnavailable();
-    try {
-      const record = await delegate.update({
+    const record = await executePersistence(() =>
+      delegate.update!({
         where: { id: product.id },
         data: {
           name: product.name,
@@ -223,11 +233,9 @@ export class PrismaProductRepository implements ProductRepository {
           status: product.status,
         },
         include: relations,
-      });
-      return mapRecord(record);
-    } catch (error) {
-      return mapCatalogPersistenceError(error);
-    }
+      }),
+    );
+    return mapRecord(record);
   }
 
   async listPublic(input: {
@@ -249,12 +257,14 @@ export class PrismaProductRepository implements ProductRepository {
           ],
         }
       : { status: 'ACTIVE' };
-    const records = await delegate.findMany({
-      where,
-      include: relations,
-      orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
-      take: input.limit + 1,
-    });
+    const records = await executePersistence(() =>
+      delegate.findMany!({
+        where,
+        include: relations,
+        orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+        take: input.limit + 1,
+      }),
+    );
     const pageRecords = records.slice(0, input.limit);
     const items = pageRecords.map(mapRecord);
     const last = pageRecords.at(-1);

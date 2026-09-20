@@ -4,17 +4,17 @@ project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: IN_PROGRESS
-phase: Dia 4 concluído — aguardando aprovação para Dia 5
+artifact_state: READY_FOR_RELEASE
+phase: Dia 7 concluído — release candidate sem promoção remota
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e contratos ampliados no Dia 4 sem alterar comportamento aprovado.
+Revisar o release candidate da `SR-MVP-01` e, após decisão humana, definir a primeira small release demonstrável em `apps/web` para preview na Vercel.
 
 ## Blockers
 
-- Nenhum bloqueio duro impede o refinamento local do Dia 5.
+- O projeto Supabase principal está `INACTIVE`; isso bloqueia migration, Auth e validação remota.
 - Antes de integração/deploy remoto, o backend ainda precisa receber uma conexão PostgreSQL Supabase por gerenciador de segredos.
 - Antes de mídia remota, o bucket e as policies de Storage precisam de autorização e validação próprias.
 
@@ -27,6 +27,7 @@ Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e co
 - Provedor de frete e hospedagem do backend ainda não foram selecionados.
 - O CTA documentado com texto branco sobre `#8B5CF6` tem contraste calculado de 4,23:1; exige tratamento no gate de acessibilidade para texto normal.
 - A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
+- A paginação keyset usa o índice correto, mas o predicate `OR` emitido pelo Prisma filtrou 5.000 entradas em um cursor intermediário com 10.000 registros; ver `DEBT-PERF-001`.
 
 ## Current Context
 
@@ -35,10 +36,16 @@ Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e co
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
 - active artifact: `docs/features/FEATURE-CATALOG/`
 - validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
+- experience validation: `docs/features/FEATURE-CATALOG/experience-validation.md`
+- release candidate: `docs/releases/SR-MVP-01-catalog-release-candidate.md`
+- release readiness: `docs/features/FEATURE-CATALOG/release-readiness.md`
+- rollback: `docs/features/FEATURE-CATALOG/rollback-plan.md`
 - implementation: `apps/api/src/features/catalog/`, `apps/api/src/main.ts`, `apps/api/src/app.module.ts`
 - database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
 - quality gates: `quality-gates.md`
+- technical debt: `docs/technical-debt.md`
+- CI: `.github/workflows/api-quality.yml`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
 - repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `main`)
@@ -51,7 +58,9 @@ Obter aprovação humana para o Dia 5 da `SR-MVP-01`, refinando os adapters e co
 
 ## Next Action
 
-Solicitar aprovação explícita para o Dia 5. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
+Revisar/mesclar o PR #6 e iniciar o discovery de uma small release `apps/web`
+demonstrável na Vercel. Não reativar o Supabase, aplicar migration ou criar
+Storage sem autorização específica.
 
 ## History
 

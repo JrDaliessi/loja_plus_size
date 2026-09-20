@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const identifierSchema = z.uuid();
+export const catalogIdentifierSchema = z.uuid();
 
 export const createProductDraftRequestSchema = z
   .object({
@@ -12,8 +12,8 @@ export const createProductDraftRequestSchema = z
       .max(200)
       .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     description: z.string().trim().min(1).max(10_000),
-    categoryIds: z.array(identifierSchema).min(1).max(20),
-    primaryCategoryId: identifierSchema,
+    categoryIds: z.array(catalogIdentifierSchema).min(1).max(20),
+    primaryCategoryId: catalogIdentifierSchema,
   })
   .strict()
   .superRefine((input, context) => {

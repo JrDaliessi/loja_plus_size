@@ -1,5 +1,3 @@
-import { randomUUID } from 'node:crypto';
-
 import {
   ArgumentsHost,
   Catch,
@@ -8,10 +6,10 @@ import {
 import { z } from 'zod';
 
 import { CatalogError } from '../../domain/catalog.error';
-
-interface HttpRequestLike {
-  headers: Record<string, string | string[] | undefined>;
-}
+import {
+  type CorrelationRequest,
+  resolveCorrelationId,
+} from './correlation-id';
 
 interface HttpResponseLike {
   status(code: number): HttpResponseLike;
@@ -53,19 +51,13 @@ const presentCatalogError = (error: CatalogError): ErrorPresentation => {
   return { status: 500, code: 'CATALOG_INTERNAL_ERROR', message: 'Unexpected catalog error' };
 };
 
-const readCorrelationId = (request: HttpRequestLike): string => {
-  const value = request.headers['x-correlation-id'];
-  const candidate = Array.isArray(value) ? value[0] : value;
-  return candidate?.trim() || randomUUID();
-};
-
 @Catch()
 export class CatalogHttpExceptionFilter implements ExceptionFilter {
   catch(error: unknown, host: ArgumentsHost): void {
     const http = host.switchToHttp();
-    const request = http.getRequest<HttpRequestLike>();
+    const request = http.getRequest<CorrelationRequest>();
     const response = http.getResponse<HttpResponseLike>();
-    const correlationId = readCorrelationId(request);
+    const correlationId = resolveCorrelationId(request);
     const presentation =
       error instanceof z.ZodError
         ? {

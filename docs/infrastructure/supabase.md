@@ -72,3 +72,30 @@ necessidade no Dia 2.
 - A validação remota permanece pendente de conexão por secrets, permissões de
   staff aprovadas e resolução do incidente de rejeição de JWT registrado em
   `https://status.supabase.com/` em 2026-09-20.
+
+## Hardening local do Dia 5 — 2026-09-20
+
+- Claims verificadas por `getClaims` também precisam corresponder ao issuer
+  `${SUPABASE_URL}/auth/v1`, audiência autenticada e sessão válida.
+- Bearer tokens maiores que 8 KiB são negados antes de qualquer chamada ao Auth.
+- A autorização continua aceitando somente permissões allowlisted em
+  `app_metadata`; `user_metadata` permanece ignorado.
+- Exceções lançadas pelo SDK de Storage são normalizadas sem expor endpoint,
+  credenciais ou mensagens internas.
+- A reconciliação processa no máximo dez verificações de objeto simultâneas e
+  continua limitada a cem paths por execução.
+- A documentação atual do Supabase foi revalidada para `getClaims`, upload
+  assinado, metadata de autorização, conexão pooled e mudanças incompatíveis.
+- Nenhuma configuração, identidade, bucket, policy ou objeto remoto foi alterado.
+
+## Gate somente leitura do Dia 7 — 2026-09-20
+
+- O projeto `olkadbgumpiybehslobk` foi confirmado em `sa-east-1`, PostgreSQL 17.
+- O status retornado foi `INACTIVE`; leituras de tabelas e migrations expiraram.
+- Advisors de segurança e performance retornaram zero findings, mas o resultado
+  é inconclusivo para promoção enquanto o banco permanecer inativo.
+- Nenhuma tentativa de restore/reativação foi feita, pois isso exige autorização
+  externa específica.
+- O PostgreSQL 17 local confirmou migrations do zero, idempotência, RLS em 10/10
+  tabelas, nenhum grant Data API e nenhuma FK sem índice.
+- O projeto principal permaneceu sem mutação.

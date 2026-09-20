@@ -424,7 +424,8 @@ No implementation test will be authored in Dia 1B.
 - [x] Admin mutations are protected at the application permission boundary.
 - [x] Public DTO reveals only approved fields.
 - [x] OpenAPI and Zod contracts agree for the Dia 4 HTTP slice.
-- [ ] Migration, advisors and rollback checks pass.
+- [x] Local fresh migration, idempotency and release-candidate rollback checks pass.
+- [ ] Remote migration, post-promotion advisors and recovery validation pass before `RELEASED`.
 - [x] Lint, type-check, unit, integration and applicable E2E/build are green for the Dia 3 scope.
 - [x] Documentation, backlog and context are updated.
 

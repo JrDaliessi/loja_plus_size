@@ -16,6 +16,13 @@ const allowedPermissions = [
 const claimsSchema = z
   .object({
     sub: z.uuid(),
+    iss: z.url(),
+    aud: z.union([
+      z.literal('authenticated'),
+      z.array(z.string()).refine((audience) => audience.includes('authenticated')),
+    ]),
+    exp: z.number().int().positive(),
+    session_id: z.uuid(),
     role: z.literal('authenticated'),
     is_anonymous: z.literal(false),
     app_metadata: z
@@ -45,12 +52,15 @@ const unauthenticated = (): CatalogError =>
   );
 
 export class SupabaseCatalogIdentityAdapter {
-  constructor(private readonly client: SupabaseClaimsClient) {}
+  constructor(
+    private readonly client: SupabaseClaimsClient,
+    private readonly expectedIssuer: string,
+  ) {}
 
   async authenticate(authorization?: string): Promise<CatalogActor> {
     const match = /^Bearer\s+(\S+)$/i.exec(authorization ?? '');
     const jwt = match?.[1];
-    if (!jwt) {
+    if (!jwt || jwt.length > 8_192) {
       throw unauthenticated();
     }
 
@@ -65,7 +75,10 @@ export class SupabaseCatalogIdentityAdapter {
       throw unauthenticated();
     }
     const parsed = claimsSchema.safeParse(result.data?.claims);
-    if (!parsed.success) {
+    if (
+      !parsed.success ||
+      parsed.data.iss !== this.expectedIssuer
+    ) {
       throw unauthenticated();
     }
 
