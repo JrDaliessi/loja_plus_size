@@ -93,13 +93,5 @@ export const listPublicCatalogProducts = async (
   if (!Number.isInteger(input.limit) || input.limit < 1 || input.limit > 100) {
     throw new CatalogError('CATALOG_INVALID_PAGE', 'CATALOG_INVALID_PAGE: limit must be between 1 and 100');
   }
-  const page = await products.listPublic({ ...input, limit: input.limit + 1 });
-  const items = page.items.slice(0, input.limit);
-  const last = items.at(-1);
-  const nextCursor =
-    page.nextCursor ??
-    (page.items.length > input.limit && last
-      ? Buffer.from(last.id, 'utf8').toString('base64url')
-      : undefined);
-  return nextCursor ? { items, nextCursor } : { items };
+  return products.listPublic(input);
 };

@@ -10,12 +10,16 @@ export interface PersistenceFailure {
   };
 }
 
-export const mapCatalogPersistenceError = (error: PersistenceFailure): never => {
-  const target = Array.isArray(error.meta?.target)
-    ? error.meta.target.join(',')
-    : (error.meta?.target ?? error.constraint ?? '');
+export const mapCatalogPersistenceError = (error: unknown): never => {
+  const failure =
+    typeof error === 'object' && error !== null
+      ? (error as Partial<PersistenceFailure>)
+      : {};
+  const target = Array.isArray(failure.meta?.target)
+    ? failure.meta.target.join(',')
+    : (failure.meta?.target ?? failure.constraint ?? '');
 
-  if (error.code === 'P2002') {
+  if (failure.code === 'P2002') {
     if (target.includes('sku')) {
       throw new CatalogError('CATALOG_SKU_CONFLICT', 'CATALOG_SKU_CONFLICT: SKU already exists');
     }
