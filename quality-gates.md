@@ -16,6 +16,7 @@
 - [x] estratégia de validação e testes RED do Dia 2 concluídos
 - [x] Prisma 7.10.0 estável pinado; migration/spike/auditoria validados no ambiente isolado
 - [x] resultado funcional mínimo do Dia 3 validado localmente por 28/28 contratos GREEN
+- [x] expansão controlada do Dia 4 validada por 66/66 contratos e smoke HTTP/Prisma local
 - [x] documentação de fundação atualizada
 
 ## Evidência do Dia 3 — 2026-09-20
@@ -29,8 +30,21 @@
 - [x] lint, type-check, testes e build verdes
 - [x] auditorias de produção e completa sem vulnerabilidades conhecidas
 - [x] Supabase principal preservado sem mutação
-- [ ] adapters NestJS/Prisma/Auth/Storage e contratos HTTP/OpenAPI pertencem ao Dia 4
+- [x] adapters NestJS/Prisma/Auth/Storage e contratos HTTP/OpenAPI implementados no Dia 4
 - [ ] migration remota, advisors pós-migration e rollback de promoção permanecem bloqueados até ambiente autorizado
+
+## Evidência do Dia 4 — 2026-09-20
+
+- [x] Zod é a origem do JSON Schema publicado no OpenAPI do slice
+- [x] endpoints retornam `201/200/401/403/404/409/422` conforme contrato
+- [x] correlação é propagada em respostas de sucesso e erro
+- [x] repository Prisma usa paginação keyset e transação compartilhada
+- [x] identidade usa `getClaims`, rejeita anônimo e ignora permissões de `user_metadata`
+- [x] upload assinado usa path controlado pelo servidor, limite de 10 MB e `upsert: false`
+- [x] build ESM executável validado em runtime contra PostgreSQL 17 isolado
+- [x] 11 suítes, 66 testes; 81,48% statements e 83,11% lines
+- [x] lint, type-check, build e auditorias completa/produção verdes
+- [x] Supabase principal preservado sem migration, bucket, policy ou escrita
 
 ## Gate de contexto
 

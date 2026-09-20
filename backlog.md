@@ -66,9 +66,10 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 9 | TEST-CAT-002 | RED PostgreSQL/Supabase de constraints, concorrência e acesso | DONE |
 | 10 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | DONE — riscos RC documentados |
 | 11 | PRISMA-002 | Migrar para Prisma 7 estável e repetir gates do Dia 2 | DONE — ADR-004, versão 7.10.0 e auditoria limpa |
-| 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | IN_PROGRESS — negação antes do repository GREEN; identidade Supabase no Dia 4 |
+| 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | IN_PROGRESS — `getClaims` e `app_metadata` validados localmente; configuração remota de permissões pendente |
 | 13 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
 | 14 | IMPL-CAT-001 | Implementação mínima GREEN do catálogo | DONE — 28/28 testes, lint, type-check e build verdes |
+| 15 | EXP-CAT-001 | Expandir contratos HTTP, Prisma, Auth e Storage | DONE — 66/66 testes, runtime smoke, build ESM executável e auditoria limpa |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 

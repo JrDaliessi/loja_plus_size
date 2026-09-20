@@ -4,9 +4,9 @@
 
 - Small release: `SR-MVP-01`
 - Artifact state: `IN_PROGRESS`
-- Review status: `DAY_3_COMPLETE_2026-09-20`
+- Review status: `DAY_4_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 3 concluído; aguardando aprovação do Dia 4
+- Phase: Dia 4 concluído; aguardando aprovação do Dia 5
 
 ## Completed
 
@@ -38,6 +38,23 @@
 - Test coverage: 81.93% statements, 62.76% branches, 90.32% functions and 80.15% lines.
 - Production and full dependency audits passed with zero known vulnerabilities after ESLint tooling was pinned.
 - The Supabase principal project was not mutated during Dia 3.
+- NestJS 12 routes now expose create, activate, archive and public-list behavior
+  with stable HTTP status/error contracts and correlation IDs.
+- Zod 4 request validation and generated OpenAPI JSON Schema share one source.
+- The concrete Prisma repository maps catalog records, uses two-column keyset
+  pagination and shares the interactive transaction through AsyncLocalStorage.
+- Supabase identity validation uses `getClaims`; only approved permissions from
+  `app_metadata` are accepted and `user_metadata` is ignored.
+- The Storage adapter issues non-upsert signed uploads for server-controlled
+  image paths and verifies object completion without creating remote resources.
+- The runtime composition validates environment variables and rejects
+  non-publishable Supabase keys.
+- The esbuild Node ESM bundle started successfully against PostgreSQL 17 local;
+  public listing returned 200 and an admin request without bearer returned 401.
+- Final Dia 4 evidence: 11 suites, 66 tests passed, zero todo; 81.48% statements,
+  63.63% branches, 85.54% functions and 83.11% lines.
+- Type-check, lint, build and production/full audits are green.
+- The Supabase principal project was not mutated during Dia 4.
 
 ## Resolved Blockers
 
@@ -73,12 +90,12 @@
 
 ## Remaining Expansion Work
 
-- concrete Prisma repository and transaction adapters;
-- NestJS controllers, request schemas, OpenAPI and HTTP error envelope;
-- verified Supabase identity adapter for staff authorization;
-- Storage request/completion/reconciliation adapter;
 - migration review against an authorized preview environment and Supabase advisors before remote promotion.
+- real staff permissions in Supabase Auth and end-to-end verification after the
+  current JWT rejection incident is resolved;
+- creation/review of the private Storage bucket and policies in an authorized environment;
+- remaining admin commands and queries from the Feature Spec in later approved increments.
 
 ## Next Action
 
-Obtain explicit approval for Dia 4. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
+Obtain explicit approval for Dia 5. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
