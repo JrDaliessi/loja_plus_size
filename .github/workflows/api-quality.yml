@@ -1,0 +1,69 @@
+name: API Quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: api-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Lint, test, build and audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: plus_store_day2_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d plus_store_day2_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      CATALOG_TEST_DATABASE_URL: postgresql://postgres@127.0.0.1:55432/plus_store_day2_test
+      DIRECT_URL: postgresql://postgres@127.0.0.1:55432/plus_store_day2_test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install pinned Node.js and pnpm
+        uses: pnpm/setup@ce3b1e5f04cd26dbb4614172464b544b5633cc92 # v2.1.0
+        with:
+          version: 11.19.0
+          runtime: node@24.21.0
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply catalog migrations to isolated PostgreSQL
+        run: pnpm --filter @plus-store/api exec prisma migrate deploy --config prisma.config.ts
+
+      - name: Lint and type-check
+        run: pnpm run lint
+
+      - name: Test with coverage thresholds
+        run: pnpm run test:coverage
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Audit production dependencies
+        run: pnpm audit --prod
+
+      - name: Audit full dependency graph
+        run: pnpm audit

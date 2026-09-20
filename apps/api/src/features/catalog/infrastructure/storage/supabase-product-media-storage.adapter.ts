@@ -83,7 +83,12 @@ export class SupabaseProductMediaStorageAdapter {
     if (!bucket.createSignedUploadUrl) {
       throw storageUnavailable();
     }
-    const result = await bucket.createSignedUploadUrl(storagePath, { upsert: false });
+    let result: Awaited<ReturnType<StorageBucketClient['createSignedUploadUrl']>>;
+    try {
+      result = await bucket.createSignedUploadUrl(storagePath, { upsert: false });
+    } catch {
+      throw storageUnavailable();
+    }
     if (result.error || !result.data) {
       throw storageUnavailable();
     }
@@ -114,10 +119,15 @@ export class SupabaseProductMediaStorageAdapter {
     if (!bucket.list) {
       throw storageUnavailable();
     }
-    const result = await bucket.list(segments[0], {
-      limit: 1,
-      search: segments[1],
-    });
+    let result: Awaited<ReturnType<StorageBucketClient['list']>>;
+    try {
+      result = await bucket.list(segments[0], {
+        limit: 1,
+        search: segments[1],
+      });
+    } catch {
+      throw storageUnavailable();
+    }
     if (result.error || !result.data) {
       throw storageUnavailable();
     }
@@ -132,14 +142,22 @@ export class SupabaseProductMediaStorageAdapter {
         'CATALOG_INVALID_MEDIA_RECONCILIATION: at most 100 paths are allowed',
       );
     }
-    const existence = await Promise.all(
-      uniquePaths.map(async (storagePath) => ({
-        storagePath,
-        exists: await this.objectExists(storagePath),
-      })),
-    );
-    return existence
-      .filter((result) => !result.exists)
-      .map((result) => result.storagePath);
+    const missing: string[] = [];
+    const batchSize = 10;
+    for (let start = 0; start < uniquePaths.length; start += batchSize) {
+      const batch = uniquePaths.slice(start, start + batchSize);
+      const existence = await Promise.all(
+        batch.map(async (storagePath) => ({
+          storagePath,
+          exists: await this.objectExists(storagePath),
+        })),
+      );
+      missing.push(
+        ...existence
+          .filter((result) => !result.exists)
+          .map((result) => result.storagePath),
+      );
+    }
+    return missing;
   }
 }

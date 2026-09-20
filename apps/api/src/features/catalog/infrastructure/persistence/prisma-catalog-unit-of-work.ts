@@ -9,6 +9,7 @@ export interface PrismaCatalogExecutor {
 export interface PrismaTransactionalClient extends PrismaCatalogExecutor {
   $transaction<T>(
     operation: (client: PrismaCatalogExecutor) => Promise<T>,
+    options?: { maxWait: number; timeout: number },
   ): Promise<T>;
 }
 
@@ -31,8 +32,9 @@ export class PrismaCatalogUnitOfWork implements CatalogUnitOfWork {
   ) {}
 
   run<T>(operation: () => Promise<T>): Promise<T> {
-    return this.client.$transaction((transaction) =>
-      this.context.run(transaction, operation),
+    return this.client.$transaction(
+      (transaction) => this.context.run(transaction, operation),
+      { maxWait: 2_000, timeout: 5_000 },
     );
   }
 }

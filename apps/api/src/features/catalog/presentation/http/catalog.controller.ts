@@ -19,6 +19,7 @@ import {
 } from '@nestjs/swagger';
 
 import {
+  catalogIdentifierSchema,
   catalogPageQuerySchema,
   createProductDraftRequestJsonSchema,
   createProductDraftRequestSchema,
@@ -64,25 +65,25 @@ export class CatalogController {
   @Post('admin/catalog/products/:productId/activate')
   @HttpCode(200)
   @ApiOperation({ summary: 'Activate a complete catalog product' })
-  activateProduct(
+  async activateProduct(
     @Headers('authorization') authorization: string | undefined,
     @Param('productId') productId: string,
   ) {
-    return this.identity
-      .authenticate(authorization)
-      .then((actor) => this.service.activate(actor, productId));
+    const validatedProductId = catalogIdentifierSchema.parse(productId);
+    const actor = await this.identity.authenticate(authorization);
+    return this.service.activate(actor, validatedProductId);
   }
 
   @Post('admin/catalog/products/:productId/archive')
   @HttpCode(200)
   @ApiOperation({ summary: 'Archive a catalog product' })
-  archiveProduct(
+  async archiveProduct(
     @Headers('authorization') authorization: string | undefined,
     @Param('productId') productId: string,
   ) {
-    return this.identity
-      .authenticate(authorization)
-      .then((actor) => this.service.archive(actor, productId));
+    const validatedProductId = catalogIdentifierSchema.parse(productId);
+    const actor = await this.identity.authenticate(authorization);
+    return this.service.archive(actor, validatedProductId);
   }
 
   @Get('catalog/products')

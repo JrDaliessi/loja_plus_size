@@ -42,7 +42,7 @@ export const mapCatalogPersistenceError = (error: unknown): never => {
   }
 
   throw new CatalogError(
-    'CATALOG_PERSISTENCE_FAILURE',
-    'CATALOG_PERSISTENCE_FAILURE: catalog persistence failed',
+    'CATALOG_PERSISTENCE_UNAVAILABLE',
+    'CATALOG_PERSISTENCE_UNAVAILABLE: catalog persistence failed',
   );
 };
