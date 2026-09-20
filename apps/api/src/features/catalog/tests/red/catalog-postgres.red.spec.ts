@@ -1,4 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process';
+import { jest } from '@jest/globals';
 
 const databaseUrl =
   process.env.CATALOG_TEST_DATABASE_URL ??

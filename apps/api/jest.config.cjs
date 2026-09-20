@@ -5,6 +5,7 @@ module.exports = {
     '!src/features/catalog/tests/**',
   ],
   coverageDirectory: 'coverage',
+  extensionsToTreatAsEsm: ['.ts'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   roots: ['<rootDir>/src'],
   testEnvironment: 'node',
@@ -14,10 +15,14 @@ module.exports = {
       '@swc/jest',
       {
         jsc: {
-          parser: { syntax: 'typescript' },
+          parser: { syntax: 'typescript', decorators: true },
+          transform: {
+            legacyDecorator: true,
+            decoratorMetadata: true,
+          },
           target: 'es2022',
         },
-        module: { type: 'commonjs' },
+        module: { type: 'es6' },
       },
     ],
   },

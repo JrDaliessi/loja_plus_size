@@ -7,29 +7,44 @@
     "node": ">=24.11.0 <25"
   },
   "scripts": {
-    "test": "jest --runInBand",
-    "test:catalog:red": "jest --runInBand --testPathPatterns=src/features/catalog/tests/red",
-    "test:catalog:postgres:red": "jest --runInBand --runTestsByPath src/features/catalog/tests/red/catalog-postgres.red.spec.ts",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
+    "test:catalog:red": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --testPathPatterns=src/features/catalog/tests/red",
+    "test:catalog:day4": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --testPathPatterns=src/features/catalog/tests/day4",
+    "test:catalog:postgres:red": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --runTestsByPath src/features/catalog/tests/red/catalog-postgres.red.spec.ts",
     "spike:prisma7": "prisma generate --config spikes/prisma7/prisma.config.ts && node spikes/prisma7/run-spike.ts",
     "type-check:prisma7-spike": "prisma generate --config spikes/prisma7/prisma.config.ts && tsc --project spikes/prisma7/tsconfig.json --noEmit",
-    "type-check": "tsc --project tsconfig.json --noEmit",
+    "type-check": "prisma generate --config prisma.config.ts && tsc --project tsconfig.json --noEmit",
     "lint": "eslint \"src/**/*.ts\"",
-    "build": "tsc --project tsconfig.json",
+    "build": "prisma generate --config prisma.config.ts && node scripts/build.mjs",
+    "start": "node dist/main.js",
     "prisma:generate": "prisma generate --config prisma.config.ts"
   },
   "devDependencies": {
+    "@jest/globals": "30.5.1",
+    "@nestjs/testing": "12.0.3",
     "@swc/core": "catalog:",
     "@swc/jest": "catalog:",
     "@types/jest": "catalog:",
     "@types/node": "catalog:",
+    "@types/supertest": "7.2.1",
+    "esbuild": "0.28.2",
     "jest": "catalog:",
     "prisma": "7.10.0",
+    "supertest": "7.2.2",
     "typescript": "catalog:"
   },
   "dependencies": {
+    "@nestjs/common": "12.0.3",
+    "@nestjs/core": "12.0.3",
+    "@nestjs/platform-express": "12.0.3",
+    "@nestjs/swagger": "12.0.1",
     "@prisma/adapter-pg": "7.10.0",
     "@prisma/client": "7.10.0",
+    "@supabase/supabase-js": "2.116.0",
     "dotenv": "17.4.2",
-    "pg": "8.23.0"
+    "pg": "8.23.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "zod": "4.6.5"
   }
 }
