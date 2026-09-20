@@ -15,8 +15,22 @@
 - [x] RED PostgreSQL observado no banco local isolado; baseline Supabase concluído sem mutação
 - [x] estratégia de validação e testes RED do Dia 2 concluídos
 - [x] Prisma 7.10.0 estável pinado; migration/spike/auditoria validados no ambiente isolado
-- [ ] resultado funcional validado
+- [x] resultado funcional mínimo do Dia 3 validado localmente por 28/28 contratos GREEN
 - [x] documentação de fundação atualizada
+
+## Evidência do Dia 3 — 2026-09-20
+
+- [x] domínio e casos de uso mínimos implementados a partir dos testes RED
+- [x] autorização negativa acontece antes de qualquer repository access
+- [x] projeção pública usa allowlist e não inventa disponibilidade
+- [x] schema privado `app`, constraints, índices, RLS e revogações validados localmente
+- [x] concorrência de slug/SKU/variante/barcode e rollback transacional verificados
+- [x] Prisma generate, validate e migrate status verdes
+- [x] lint, type-check, testes e build verdes
+- [x] auditorias de produção e completa sem vulnerabilidades conhecidas
+- [x] Supabase principal preservado sem mutação
+- [ ] adapters NestJS/Prisma/Auth/Storage e contratos HTTP/OpenAPI pertencem ao Dia 4
+- [ ] migration remota, advisors pós-migration e rollback de promoção permanecem bloqueados até ambiente autorizado
 
 ## Gate de contexto
 

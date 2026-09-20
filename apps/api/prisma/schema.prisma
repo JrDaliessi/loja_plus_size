@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["app"]
+}
+
+model Product {
+  id          String              @id @db.Uuid
+  name        String
+  slug        String              @unique(map: "products_slug_key")
+  description String
+  status      String              @default("DRAFT")
+  brandId     String?             @map("brand_id") @db.Uuid
+  brand       Brand?              @relation(fields: [brandId], references: [id], onDelete: Restrict, map: "products_brand_id_fkey")
+  categories  ProductCategory[]
+  collections ProductCollection[]
+  variants    ProductVariant[]
+  media       ProductMedia[]
+  createdAt   DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime            @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([brandId], map: "products_brand_id_idx")
+  @@index([status, createdAt, id], map: "products_status_created_at_id_idx")
+  @@map("products")
+  @@schema("app")
+}
+
+model Category {
+  id           String            @id @db.Uuid
+  name         String
+  slug         String            @unique(map: "categories_slug_key")
+  parentId     String?           @map("parent_id") @db.Uuid
+  parent       Category?         @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Restrict, map: "categories_parent_id_fkey")
+  children     Category[]        @relation("CategoryHierarchy")
+  displayOrder Int               @default(0) @map("display_order")
+  status       String            @default("ACTIVE")
+  products     ProductCategory[]
+  createdAt    DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([parentId], map: "categories_parent_id_idx")
+  @@map("categories")
+  @@schema("app")
+}
+
+model Brand {
+  id        String    @id @db.Uuid
+  name      String
+  slug      String    @unique(map: "brands_slug_key")
+  status    String    @default("ACTIVE")
+  products  Product[]
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("brands")
+  @@schema("app")
+}
+
+model Collection {
+  id        String              @id @db.Uuid
+  name      String
+  slug      String              @unique(map: "collections_slug_key")
+  status    String              @default("ACTIVE")
+  products  ProductCollection[]
+  createdAt DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime            @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("collections")
+  @@schema("app")
+}
+
+model Color {
+  id           String           @id @db.Uuid
+  name         String
+  slug         String           @unique(map: "colors_slug_key")
+  visualValue  String?          @map("visual_value")
+  displayOrder Int              @default(0) @map("display_order")
+  status       String           @default("ACTIVE")
+  variants     ProductVariant[]
+  media        ProductMedia[]
+  createdAt    DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("colors")
+  @@schema("app")
+}
+
+model Size {
+  id           String           @id @db.Uuid
+  code         String           @unique(map: "sizes_code_key")
+  label        String
+  displayOrder Int              @default(0) @map("display_order")
+  status       String           @default("ACTIVE")
+  variants     ProductVariant[]
+  createdAt    DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("sizes")
+  @@schema("app")
+}
+
+model ProductCategory {
+  productId  String   @map("product_id") @db.Uuid
+  categoryId String   @map("category_id") @db.Uuid
+  isPrimary  Boolean  @default(false) @map("is_primary")
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict, map: "product_categories_product_id_fkey")
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict, map: "product_categories_category_id_fkey")
+
+  @@id([productId, categoryId], map: "product_categories_pkey")
+  @@index([categoryId], map: "product_categories_category_id_idx")
+  @@map("product_categories")
+  @@schema("app")
+}
+
+model ProductCollection {
+  productId    String     @map("product_id") @db.Uuid
+  collectionId String     @map("collection_id") @db.Uuid
+  product      Product    @relation(fields: [productId], references: [id], onDelete: Restrict, map: "product_collections_product_id_fkey")
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Restrict, map: "product_collections_collection_id_fkey")
+
+  @@id([productId, collectionId], map: "product_collections_pkey")
+  @@index([collectionId], map: "product_collections_collection_id_idx")
+  @@map("product_collections")
+  @@schema("app")
+}
+
+model ProductVariant {
+  id          String         @id @db.Uuid
+  productId   String         @map("product_id") @db.Uuid
+  colorId     String         @map("color_id") @db.Uuid
+  sizeId      String         @map("size_id") @db.Uuid
+  sku         String         @unique(map: "product_variants_sku_key")
+  barcode     String?
+  priceAmount Decimal        @map("price_amount") @db.Decimal(12, 2)
+  currency    String         @default("BRL")
+  status      String         @default("DRAFT")
+  product     Product        @relation(fields: [productId], references: [id], onDelete: Restrict, map: "product_variants_product_id_fkey")
+  color       Color          @relation(fields: [colorId], references: [id], onDelete: Restrict, map: "product_variants_color_id_fkey")
+  size        Size           @relation(fields: [sizeId], references: [id], onDelete: Restrict, map: "product_variants_size_id_fkey")
+  media       ProductMedia[]
+  createdAt   DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime       @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([productId, colorId, sizeId], map: "product_variants_product_color_size_key")
+  @@index([colorId], map: "product_variants_color_id_idx")
+  @@index([sizeId], map: "product_variants_size_id_idx")
+  @@index([productId, status], map: "product_variants_product_id_status_idx")
+  @@map("product_variants")
+  @@schema("app")
+}
+
+model ProductMedia {
+  id          String          @id @db.Uuid
+  productId   String          @map("product_id") @db.Uuid
+  variantId   String?         @map("variant_id") @db.Uuid
+  colorId     String?         @map("color_id") @db.Uuid
+  storagePath String          @map("storage_path")
+  kind        String          @default("IMAGE")
+  role        String
+  altText     String          @map("alt_text")
+  position    Int             @default(0)
+  product     Product         @relation(fields: [productId], references: [id], onDelete: Restrict, map: "product_media_product_id_fkey")
+  variant     ProductVariant? @relation(fields: [variantId], references: [id], onDelete: Restrict, map: "product_media_variant_id_fkey")
+  color       Color?          @relation(fields: [colorId], references: [id], onDelete: Restrict, map: "product_media_color_id_fkey")
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime        @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([storagePath], map: "product_media_storage_path_key")
+  @@index([variantId], map: "product_media_variant_id_idx")
+  @@index([colorId], map: "product_media_color_id_idx")
+  @@index([productId, position, id], map: "product_media_product_id_position_id_idx")
+  @@map("product_media")
+  @@schema("app")
+}

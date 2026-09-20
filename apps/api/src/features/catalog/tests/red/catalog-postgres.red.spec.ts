@@ -11,6 +11,11 @@ interface SqlResult {
   stderr: string;
 }
 
+const psqlEnvironment = {
+  ...process.env,
+  PGCLIENTENCODING: process.platform === 'win32' ? 'WIN1252' : 'UTF8',
+};
+
 const assertIsolatedDatabase = (): void => {
   const target = new URL(databaseUrl);
   const localHosts = new Set(['127.0.0.1', 'localhost', '::1']);
@@ -46,6 +51,7 @@ const runSql = (statement: string): SqlResult => {
   assertIsolatedDatabase();
   const result = spawnSync(psqlBinary, argsFor(statement), {
     encoding: 'utf8',
+    env: psqlEnvironment,
     windowsHide: true,
   });
 
@@ -170,6 +176,7 @@ const runConcurrent = async (
   const execute = (statement: string): Promise<SqlResult> =>
     new Promise((resolve, reject) => {
       const child = spawn(psqlBinary, argsFor(statement), {
+        env: psqlEnvironment,
         windowsHide: true,
       });
       let stdout = '';

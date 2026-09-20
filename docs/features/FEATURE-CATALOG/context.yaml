@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-CATALOG
   small_release: SR-MVP-01
   capability: software
-  state: VALIDATION_READY
-  review_status: day_2_corrected_2026_09_15
+  state: IN_PROGRESS
+  review_status: day_3_complete_2026_09_20
 derived_from:
   - docs/product/prd.md#functional-requirements--mvp
   - docs/product/prd.md#business-rules
@@ -34,7 +34,7 @@ active_risks:
   - prisma_transitive_overrides_require_revalidation
   - supabase_runtime_secret_pending
   - admin_authorization_dependency
-  - sku_concurrency
+  - remote_migration_not_promoted
 hard_blockers_before_implementation: []
 remote_integration_prerequisites:
   - secure_supabase_database_connection
@@ -46,4 +46,18 @@ quality_gates:
   - database_constraints
   - security_and_authorization
   - storage_reconciliation
-next_action: obtain_day_3_approval
+implementation:
+  domain: apps/api/src/features/catalog/domain/
+  application: apps/api/src/features/catalog/application/
+  persistence_schema: apps/api/prisma/schema.prisma
+  migrations: apps/api/prisma/migrations/
+validation_evidence:
+  tests: 28_passed
+  suites: 5_passed
+  coverage_statements: 81.93
+  lint: passed
+  type_check: passed
+  build: passed
+  dependency_audit: zero_known_vulnerabilities
+  supabase_remote_mutated: false
+next_action: obtain_day_4_approval

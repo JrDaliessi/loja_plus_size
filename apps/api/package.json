@@ -10,10 +10,12 @@
     "test": "jest --runInBand",
     "test:catalog:red": "jest --runInBand --testPathPatterns=src/features/catalog/tests/red",
     "test:catalog:postgres:red": "jest --runInBand --runTestsByPath src/features/catalog/tests/red/catalog-postgres.red.spec.ts",
-    "spike:prisma7": "prisma generate && node spikes/prisma7/run-spike.ts",
-    "type-check:prisma7-spike": "prisma generate && tsc --project spikes/prisma7/tsconfig.json --noEmit",
+    "spike:prisma7": "prisma generate --config spikes/prisma7/prisma.config.ts && node spikes/prisma7/run-spike.ts",
+    "type-check:prisma7-spike": "prisma generate --config spikes/prisma7/prisma.config.ts && tsc --project spikes/prisma7/tsconfig.json --noEmit",
     "type-check": "tsc --project tsconfig.json --noEmit",
-    "prisma:generate": "prisma generate"
+    "lint": "eslint \"src/**/*.ts\"",
+    "build": "tsc --project tsconfig.json",
+    "prisma:generate": "prisma generate --config prisma.config.ts"
   },
   "devDependencies": {
     "@swc/core": "catalog:",

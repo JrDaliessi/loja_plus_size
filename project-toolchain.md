@@ -1,6 +1,6 @@
 # Project Toolchain
 
-## Estado verificado em 2026-09-14
+## Estado verificado em 2026-09-20
 
 | Ferramenta | Exigido | Encontrado | Estado |
 |---|---:|---:|---|
@@ -14,12 +14,13 @@
 | PostgreSQL de testes | 17+ isolado | 17.4 em `127.0.0.1:55432/plus_store_day2_test` | validado |
 | Prisma CLI | 7 estável pinada | `7.10.0` | validado com Node 24.21.0 |
 | Prisma Client/adapter PostgreSQL | 7 estável pinada | `@prisma/client 7.10.0`, `@prisma/adapter-pg 7.10.0`, `pg 8.23.0` | CRUD, P2002 e transação validados |
+| ESLint | estável compatível com Node 24 | `eslint 10.10.0`, `@eslint/js 10.0.1`, `typescript-eslint 8.70.0` | lint verde |
 
 ## Ferramentas planejadas
 
 - Gerenciamento: pnpm Workspaces.
 - Orquestração: Turborepo.
-- Qualidade: ESLint, Prettier, TypeScript strict, testes e build.
+- Qualidade: ESLint e TypeScript strict materializados; Prettier entra apenas quando houver gate de formatação aprovado.
 - Frontend: Next.js CLI e shadcn CLI apenas após versões fixadas.
 - Backend: Nest CLI somente se o scaffold gerado respeitar a arquitetura aprovada.
 - Banco: Prisma 7 CLI, `@prisma/adapter-pg`, Supabase CLI e SQL revisado.
@@ -41,15 +42,16 @@
 
 ## Comandos-alvo dos quality gates
 
-Os nomes finais serão materializados junto ao scaffold:
+Comandos já materializados no workspace:
 
 ```text
 pnpm lint
 pnpm type-check
 pnpm test
-pnpm test:e2e
 pnpm build
 ```
+
+`pnpm test:e2e` será adicionado quando existir um entrypoint HTTP/browser testável; não é simulado no slice backend/domain atual.
 
 Turborepo deverá declarar dependências e outputs corretos, permitir dry-run e evitar cache em tarefas persistentes ou mutáveis.
 

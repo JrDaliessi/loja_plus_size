@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `VALIDATION_READY`
-- Review status: `DAY_2_CORRECTED_2026-09-15`
-- Project state: `ARCHITECTURE_READY`
-- Phase: Dia 2 concluído; aguardando aprovação do Dia 3
+- Artifact state: `IN_PROGRESS`
+- Review status: `DAY_3_COMPLETE_2026-09-20`
+- Project state: `OPERATING`
+- Phase: Dia 3 concluído; aguardando aprovação do Dia 4
 
 ## Completed
 
@@ -28,6 +28,16 @@
 - Prisma 7.10.0 spike completed for migration, Client generation, CRUD, P2002, transaction rollback and cleanup.
 - Production and full dependency audits passed with zero known vulnerabilities.
 - Final RED evidence: 5 suites, 28 failed tests, zero `todo`; every failure reaches an approved missing behavior/schema contract.
+- Domain, application, public projection and persistence-error contracts implemented with no NestJS or Prisma types crossing inward boundaries.
+- Minimal authorization denies mutation before repository access and keeps write/publish permissions distinct.
+- Prisma catalog schema and two additive migrations materialized for the private `app` schema.
+- PostgreSQL constraints protect slug, SKU, product+color+size and optional barcode uniqueness, including concurrent writes.
+- `anon`, `authenticated` and `PUBLIC` receive no access to the commercial schema; RLS is enabled as defense in depth.
+- Final GREEN evidence: 5 suites, 28 tests passed, zero `todo`.
+- Prisma generate/validate/migrate status, lint, type-check and build passed with Node.js 24.21.0.
+- Test coverage: 81.93% statements, 62.76% branches, 90.32% functions and 80.15% lines.
+- Production and full dependency audits passed with zero known vulnerabilities after ESLint tooling was pinned.
+- The Supabase principal project was not mutated during Dia 3.
 
 ## Resolved Blockers
 
@@ -61,6 +71,14 @@
 5. The minimum publication policy is approved.
 6. Minimal staff authorization is a prerequisite for admin mutations.
 
+## Remaining Expansion Work
+
+- concrete Prisma repository and transaction adapters;
+- NestJS controllers, request schemas, OpenAPI and HTTP error envelope;
+- verified Supabase identity adapter for staff authorization;
+- Storage request/completion/reconciliation adapter;
+- migration review against an authorized preview environment and Supabase advisors before remote promotion.
+
 ## Next Action
 
-Obtain explicit approval for Dia 3. Until then, functional implementation and Supabase migrations remain prohibited.
+Obtain explicit approval for Dia 4. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.

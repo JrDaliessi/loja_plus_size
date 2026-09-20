@@ -16,10 +16,15 @@
     "test:catalog:postgres:red": "pnpm --filter @plus-store/api run test:catalog:postgres:red",
     "spike:prisma7": "pnpm --filter @plus-store/api run spike:prisma7",
     "type-check:prisma7-spike": "pnpm --filter @plus-store/api run type-check:prisma7-spike",
-    "type-check": "turbo run type-check"
+    "type-check": "turbo run type-check",
+    "lint": "turbo run lint",
+    "build": "turbo run build"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.10.0",
     "turbo": "2.10.13",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.70.0"
   }
 }

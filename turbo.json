@@ -4,6 +4,14 @@
     "type-check": {
       "outputs": []
     },
+    "lint": {
+      "dependsOn": ["type-check"],
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": ["type-check", "^build"],
+      "outputs": ["dist/**"]
+    },
     "test": {
       "dependsOn": ["^type-check"],
       "outputs": ["coverage/**"],
