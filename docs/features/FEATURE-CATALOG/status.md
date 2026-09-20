@@ -98,6 +98,8 @@
   inconclusive for promotion while the database is inactive.
 - A release candidate, release-readiness report and rollback/recovery plan were
   created. The artifact is not marked `RELEASED`.
+- GitHub Actions run `35539866962` passed the complete API Quality pipeline for
+  release-candidate commit `f2f2a16` in 1m00s.
 
 ## Resolved Blockers
 

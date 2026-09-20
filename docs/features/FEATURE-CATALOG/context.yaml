@@ -70,7 +70,7 @@ validation_evidence:
   build: passed
   runtime_smoke: http_200_public_and_http_401_admin
   dependency_audit: zero_known_vulnerabilities
-  ci_workflow: passed_on_pr_6
+  ci_workflow: passed_on_pr_6_run_35539866962_for_f2f2a16
   fresh_migration: passed_twice_with_second_run_idempotent
   rls_tables: 10_of_10
   public_data_api_grants: 0

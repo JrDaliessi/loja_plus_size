@@ -89,6 +89,7 @@
 - [x] advisors remotos sem findings, classificados como inconclusivos para promoção com projeto `INACTIVE`
 - [x] principal Supabase preservado sem mutation remota
 - [x] estado final honesto: `READY_FOR_RELEASE`, não `RELEASED`
+- [x] GitHub Actions run `35539866962` verde para o commit candidato `f2f2a16` em 1m00s
 
 ## Gate de contexto
 
@@ -157,7 +158,7 @@
 ### Estado de `SR-MVP-01-RC1`
 
 - [x] critérios e regressão do escopo candidato satisfeitos
-- [x] pipeline obrigatório da revisão anterior verde; execução do commit final será anexada ao PR #6
+- [x] pipeline obrigatório verde no PR #6 para o commit candidato `f2f2a16`
 - [x] migration local do zero e idempotência validadas
 - [x] rollback e recuperação documentados
 - [x] dívida e riscos remanescentes classificados

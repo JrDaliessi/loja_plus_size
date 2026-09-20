@@ -39,6 +39,7 @@ truth required by later inventory, storefront and administration releases.
 - 16 suites and 80 tests passed;
 - 82.65% statements, 67.32% branches, 84.09% functions and 84.19% lines;
 - type-check, lint, build and dependency audits passed;
+- [GitHub Actions run 35539866962](https://github.com/JrDaliessi/loja_plus_size/actions/runs/35539866962) passed for release-candidate commit `f2f2a16` in 1m00s;
 - fresh and idempotent migration deployment passed in isolated PostgreSQL 17;
 - RLS enabled on all 10 commercial tables, with no public/Data API grants;
 - zero missing FK indexes;

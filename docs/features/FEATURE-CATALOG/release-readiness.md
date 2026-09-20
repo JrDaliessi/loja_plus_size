@@ -30,6 +30,7 @@ been promoted to the principal Supabase project.
 | Automated validation | 16 suites, 80 tests; coverage thresholds satisfied | PASS |
 | Static/build | type-check, lint and build | PASS |
 | Supply chain | production and complete audits | PASS — zero known vulnerabilities |
+| Remote CI | GitHub Actions run `35539866962` for commit `f2f2a16` | PASS — 1m00s |
 | Fresh migration | two migrations applied to an empty PostgreSQL 17 database | PASS |
 | Migration idempotency | second `migrate deploy` reported no pending migrations | PASS |
 | Database constraints | 10 PKs, 12 FKs, 18 checks and 32 indexes in the isolated target | PASS |

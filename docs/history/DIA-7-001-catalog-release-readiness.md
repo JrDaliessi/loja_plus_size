@@ -12,6 +12,9 @@ The complete repository artifact passed the applicable quality, architecture,
 security, migration, supply-chain and documentation gates. A release candidate
 and recovery plan were created.
 
+GitHub Actions run `35539866962` passed for release-candidate commit `f2f2a16`
+in 1m00s.
+
 The Supabase project was confirmed as the correct project but was `INACTIVE`.
 Database-backed remote inspection timed out, while security and performance
 advisors returned no findings. No attempt was made to reactivate or mutate it.
