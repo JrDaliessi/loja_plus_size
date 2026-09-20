@@ -34,3 +34,12 @@
 | Storage contract | `CAT-STO-001..002` + baseline remoto sem bucket | contrato RED; criação remota adiada para release autorizada |
 
 Nenhum teste foi marcado como aprovado a partir de mock. Fakes validam somente orquestração de aplicação.
+
+## Day 6 Experience Contracts
+
+| Test | Derived from | Layer | Evidence | Estado |
+|---|---|---|---|---|
+| `CAT-EXP-001` | Feature Spec Security; API consumer experience | OpenAPI | protected operations use bearer security, public list does not | `GREEN` |
+| `CAT-EXP-002` | `FPRD-CAT001-RQ-014` | OpenAPI | cursor and bounded page size are discoverable | `GREEN` |
+| `CAT-EXP-003` | Feature Spec HTTP behavior | OpenAPI | relevant success/error outcomes documented per operation | `GREEN` |
+| `CAT-EXP-004` | Quality gate: final artifact inspection | HTTP/documentation | Swagger HTML and OpenAPI JSON served | `GREEN` |

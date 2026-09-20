@@ -18,6 +18,7 @@
 - [x] resultado funcional mínimo do Dia 3 validado localmente por 28/28 contratos GREEN
 - [x] expansão controlada do Dia 4 validada por 66/66 contratos e smoke HTTP/Prisma local
 - [x] hardening do Dia 5 validado por 76/76 contratos, cobertura mínima e pipeline reproduzível
+- [x] experiência da API do Dia 6 validada por 80/80 contratos; gates visuais diferidos sem falso aceite
 - [x] documentação de fundação atualizada
 
 ## Evidência do Dia 3 — 2026-09-20
@@ -62,6 +63,17 @@
 - [x] duas migrations aplicadas do zero em database local vazio antes da regressão final
 - [x] `EXPLAIN (ANALYZE, BUFFERS)` executado com 10.000 linhas; índice usado e dívida de cursor profundo registrada
 - [x] lint, type-check, build e auditorias completa/produção verdes
+- [x] Supabase principal preservado sem mutation remota
+
+## Evidência do Dia 6 — 2026-09-20
+
+- [x] RED observado para autenticação, paginação e outcomes ausentes do OpenAPI
+- [x] operações admin declaram bearer auth sem tornar a listagem pública protegida
+- [x] paginação pública documenta `limit` 1..50, default 20, e cursor opcional
+- [x] Swagger UI e OpenAPI JSON são servidos e cobertos por teste
+- [x] 16 suítes, 80 testes; thresholds de cobertura preservados
+- [x] lint, type-check, build e auditorias completa/produção verdes
+- [x] UI, contraste, responsividade, SEO e PWA classificados como diferidos, não aprovados
 - [x] Supabase principal preservado sem mutation remota
 
 ## Gate de contexto

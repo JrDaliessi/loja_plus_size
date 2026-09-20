@@ -13,7 +13,7 @@ O roadmap preserva integralmente a visão dos documentos, mas entrega valor em p
 | Dia 3 | Implementação mínima GREEN | DONE — 2026-09-20 |
 | Dia 4 | Estados e fluxos auxiliares planejados | DONE — 2026-09-20 |
 | Dia 5 | Refactoring e hardening | DONE — 2026-09-20 |
-| Dia 6 | UX, acessibilidade, SEO, responsividade e PWA aplicável | PLANNED |
+| Dia 6 | Experiência/formato da API validados; UI/SEO/PWA diferidos ao escopo web aplicável | DONE — 2026-09-20 |
 | Dia 7 | Gates finais, release e compactação | PLANNED |
 
 ## Evolução do produto

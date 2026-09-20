@@ -72,6 +72,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 14 | IMPL-CAT-001 | Implementação mínima GREEN do catálogo | DONE — 28/28 testes, lint, type-check e build verdes |
 | 15 | EXP-CAT-001 | Expandir contratos HTTP, Prisma, Auth e Storage | DONE — 66/66 testes, runtime smoke, build ESM executável e auditoria limpa |
 | 16 | HARDEN-CAT-001 | Refinar segurança, falhas externas, limites de transação e pipeline | DONE — 76/76 testes, thresholds de cobertura, build e auditorias verdes |
+| 17 | UX-CAT-001 | Validar experiência e formato consumível da API | DONE — OpenAPI/Swagger corrigidos e 80/80 testes verdes |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -79,7 +80,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 |---|---|---|---|
 | PRODUCT-PRD | `docs/product/prd.md` | aprovação humana do conteúdo | DONE |
 | ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | DONE |
-| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | implementação mínima GREEN | IN_PROGRESS |
+| FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | gate final do Dia 7 | QUALITY_VALIDATION |
 | TEST-CATALOG | matriz, fixtures e cenários RED | Supabase/PostgreSQL isolado | DONE |
 
 ## Política de priorização

@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-MVP-01`
-- Artifact state: `HARDENING`
-- Review status: `DAY_5_COMPLETE_2026-09-20`
+- Artifact state: `QUALITY_VALIDATION`
+- Review status: `DAY_6_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 5 concluído; aguardando aprovação do Dia 6
+- Phase: Dia 6 concluído; aguardando aprovação do Dia 7
 
 ## Completed
 
@@ -73,6 +73,20 @@
 - A 10,000-row `EXPLAIN (ANALYZE, BUFFERS)` used the catalog composite index and
   completed in 0.862 ms, but exposed a deep-cursor scan recorded as `DEBT-PERF-001`.
 - The Supabase principal project was not mutated during Dia 5.
+- Day 6 validated the API-consumer experience without expanding the approved
+  backend-only scope into `apps/web`.
+- OpenAPI now marks all admin operations with bearer authentication, documents
+  bounded public pagination inputs and lists relevant success/failure outcomes.
+- Swagger UI and OpenAPI JSON are covered as navigable and machine-readable
+  artifacts by `CAT-EXP-004`.
+- Day 6 RED was observed for three missing documentation contracts before the
+  controller metadata was corrected.
+- Final Day 6 evidence: 16 suites, 80 tests passed; 82.65% statements, 67.32%
+  branches, 84.09% functions and 84.19% lines.
+- Type-check, lint, build and production/full audits are green.
+- Visual accessibility, responsive layout, SEO and PWA remain deferred to the
+  first applicable web releases; they were not marked as approved.
+- The Supabase principal project was not mutated during Dia 6.
 
 ## Resolved Blockers
 
@@ -116,4 +130,4 @@
 
 ## Next Action
 
-Obtain explicit approval for Dia 6. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.
+Obtain explicit approval for Dia 7. Remote Supabase migrations and Storage mutations remain prohibited until separately authorized.

@@ -4,17 +4,17 @@ project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
-artifact_state: HARDENING
-phase: Dia 5 concluído — aguardando aprovação para Dia 6
+artifact_state: QUALITY_VALIDATION
+phase: Dia 6 concluído — aguardando aprovação para Dia 7
 last_release: none
 
 ## Current Goal
 
-Obter aprovação humana para o Dia 6 da `SR-MVP-01`, avaliando experiência, acessibilidade e formato somente onde se aplicam ao slice de backend.
+Obter aprovação humana para o Dia 7 da `SR-MVP-01` e executar o gate final sem promover migrations, Storage ou deploy remoto sem autorização específica.
 
 ## Blockers
 
-- Nenhum bloqueio duro impede o refinamento local do Dia 5.
+- Nenhum bloqueio duro impede a avaliação de qualidade local do Dia 7.
 - Antes de integração/deploy remoto, o backend ainda precisa receber uma conexão PostgreSQL Supabase por gerenciador de segredos.
 - Antes de mídia remota, o bucket e as policies de Storage precisam de autorização e validação próprias.
 
@@ -36,6 +36,7 @@ Obter aprovação humana para o Dia 6 da `SR-MVP-01`, avaliando experiência, ac
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
 - active artifact: `docs/features/FEATURE-CATALOG/`
 - validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
+- experience validation: `docs/features/FEATURE-CATALOG/experience-validation.md`
 - implementation: `apps/api/src/features/catalog/`, `apps/api/src/main.ts`, `apps/api/src/app.module.ts`
 - database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
 - relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
@@ -54,7 +55,7 @@ Obter aprovação humana para o Dia 6 da `SR-MVP-01`, avaliando experiência, ac
 
 ## Next Action
 
-Solicitar aprovação explícita para o Dia 6. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
+Solicitar aprovação explícita para o Dia 7. Não aplicar migration no Supabase principal nem criar bucket/policies de Storage sem autorização específica.
 
 ## History
 
