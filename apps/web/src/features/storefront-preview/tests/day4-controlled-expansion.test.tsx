@@ -12,20 +12,20 @@ import { previewMetadata } from '../presentation/preview-metadata';
 
 const assetHashes = new Map<string, string>([
   [
-    '/preview/vestido-aurora.png',
-    '2473727C02E66558274ECDDC1B51F894FF83298AD339E0210A2B028518520B7C',
+    '/preview/vestido-aurora.webp',
+    'C08948FBD237C17D4309D1F7410705B314DAC92F67A5C66E4C1AC82AF0CAB2E5',
   ],
   [
-    '/preview/conjunto-horizonte.png',
-    '548D34CDCD634AC64559F514B0EC2E5C5CEA26218483880C4BB0F49CFD9D62C6',
+    '/preview/conjunto-horizonte.webp',
+    'A74D9AC32427E29FCB633CA79081AD0D1967944CBD7FC90625A93870E56016B3',
   ],
   [
-    '/preview/blusa-essencia.png',
-    'C0CE42E66A8BA9468626CF8798E81462ED543E0C40CD81031D0267B160B9DA57',
+    '/preview/blusa-essencia.webp',
+    '27A7B3A25E21F44C37C526FEAD16FFB1FD94000D59B2AD60C631088589DB9640',
   ],
   [
-    '/preview/saia-movimento.png',
-    '67C9C2FCC31B19FA91464B354023A36FE207DF2E556D81E7D75C1B6F95B1E563',
+    '/preview/saia-movimento.webp',
+    'A1DD124B54620C7BAF5DC15FAAF100EB95BEA7FF0B613E638794D94583442B73',
   ],
 ]);
 
@@ -54,7 +54,7 @@ describe('storefront preview — Dia 4 controlled expansion', () => {
     expect(alert).not.toHaveTextContent(/provider|endpoint|stack/i);
   });
 
-  it('WEBPREVIEW-D4-ASSET-001 preserves every approved local PNG contract', async () => {
+  it('WEBPREVIEW-D4-ASSET-001 preserves every approved local WebP contract', async () => {
     const items = await demoPreviewCollectionSource.list();
 
     expect(items).toHaveLength(assetHashes.size);
@@ -67,9 +67,11 @@ describe('storefront preview — Dia 4 controlled expansion', () => {
       expect(existsSync(assetPath), `Missing ${assetPath}`).toBe(true);
 
       const asset = readFileSync(assetPath);
-      expect(asset.subarray(1, 4).toString('ascii')).toBe('PNG');
-      expect(asset.readUInt32BE(16)).toBe(item.image.width);
-      expect(asset.readUInt32BE(20)).toBe(item.image.height);
+      expect(asset.subarray(0, 4).toString('ascii')).toBe('RIFF');
+      expect(asset.subarray(8, 12).toString('ascii')).toBe('WEBP');
+      expect(asset.subarray(12, 16).toString('ascii')).toBe('VP8 ');
+      expect(asset.readUInt16LE(26) & 0x3fff).toBe(item.image.width);
+      expect(asset.readUInt16LE(28) & 0x3fff).toBe(item.image.height);
       expect(createHash('sha256').update(asset).digest('hex').toUpperCase()).toBe(
         assetHashes.get(item.image.src),
       );

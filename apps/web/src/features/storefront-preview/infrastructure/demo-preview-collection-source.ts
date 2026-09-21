@@ -10,7 +10,7 @@ const demoItems = [
     category: 'Vestidos',
     conceptLabel: 'Conceito visual',
     image: {
-      src: '/preview/vestido-aurora.png',
+      src: '/preview/vestido-aurora.webp',
       alt: 'Imagem conceitual de moda plus size com vestido fluido ameixa',
       width: 1122,
       height: 1402,
@@ -22,7 +22,7 @@ const demoItems = [
     category: 'Conjuntos',
     conceptLabel: 'Conceito visual',
     image: {
-      src: '/preview/conjunto-horizonte.png',
+      src: '/preview/conjunto-horizonte.webp',
       alt: 'Imagem conceitual de moda plus size com conjunto de alfaiataria',
       width: 1122,
       height: 1402,
@@ -34,7 +34,7 @@ const demoItems = [
     category: 'Blusas',
     conceptLabel: 'Conceito visual',
     image: {
-      src: '/preview/blusa-essencia.png',
+      src: '/preview/blusa-essencia.webp',
       alt: 'Imagem conceitual de moda plus size com blusa lilás de caimento leve',
       width: 1122,
       height: 1402,
@@ -46,7 +46,7 @@ const demoItems = [
     category: 'Saias',
     conceptLabel: 'Conceito visual',
     image: {
-      src: '/preview/saia-movimento.png',
+      src: '/preview/saia-movimento.webp',
       alt: 'Imagem conceitual de moda plus size com saia ameixa em movimento',
       width: 1122,
       height: 1402,

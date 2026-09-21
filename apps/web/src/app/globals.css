@@ -488,10 +488,6 @@ main:focus {
     font-size: 0.62rem;
   }
 
-  .site-header nav a:first-child {
-    display: none;
-  }
-
   .brand small {
     display: none;
   }
