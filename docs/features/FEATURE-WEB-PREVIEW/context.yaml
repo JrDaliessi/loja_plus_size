@@ -1,0 +1,84 @@
+version: 4
+artifact:
+  id: FEATURE-WEB-PREVIEW
+  small_release: SR-WEB-PREVIEW-01
+  capability: software
+  state: IN_PROGRESS
+  review_status: day_4_complete_2026_09_21
+derived_from:
+  - docs/product/prd.md
+  - design_system_purple_noir_loja_plus_size.md
+  - architecture.md
+  - docs/adr/ADR-001-web-api-boundaries.md
+depends_on:
+  - project-stack.md
+  - project-toolchain.md
+  - quality-gates.md
+  - vercel.json
+related_context:
+  - docs/features/FEATURE-CATALOG/
+  - docs/releases/SR-MVP-01-catalog-release-candidate.md
+  - docs/features/FEATURE-WEB-PREVIEW/visual-references.md
+affects:
+  - SR-MVP-03
+  - STO-001
+  - DS-001
+requirements:
+  range: FPRD-WEBPREVIEW001-RQ-001..014
+acceptance_criteria:
+  range: FPRD-WEBPREVIEW001-AC-001..014
+active_risks:
+  - demo_content_may_be_mistaken_for_live_catalog
+  - demo_assets_require_origin_and_license_evidence
+  - first_apps_web_commit_enables_vercel_builds
+  - production_must_not_be_promoted_before_preview_approval
+hard_blockers_before_validation: []
+implementation_prerequisites: []
+remote_integration_prerequisites: []
+quality_gates:
+  - requirements_traceability
+  - architecture_compliance
+  - tdd_red_before_green
+  - accessibility
+  - responsive_layout
+  - no_demo_commerce_claims
+  - lint_typecheck_test_build
+  - preview_deployment_ready
+validation:
+  plan: docs/features/FEATURE-WEB-PREVIEW/test-plan.md
+  matrix: docs/features/FEATURE-WEB-PREVIEW/test-matrix.md
+  fixtures: docs/features/FEATURE-WEB-PREVIEW/fixtures.md
+  red_evidence: docs/features/FEATURE-WEB-PREVIEW/red-evidence.md
+  green_evidence: docs/features/FEATURE-WEB-PREVIEW/green-evidence.md
+  day4_evidence: docs/features/FEATURE-WEB-PREVIEW/day4-evidence.md
+  browser_plan: docs/features/FEATURE-WEB-PREVIEW/browser-verification.md
+  asset_provenance: docs/features/FEATURE-WEB-PREVIEW/asset-provenance.md
+  acceptance_criteria_mapped: 14
+  acceptance_criteria_total: 14
+  executable_tests: 23
+  red_tests_before_implementation: 14
+  green_tests: 23
+  passing_guards_before_implementation: 5
+  type_check: passed_web_and_monorepo
+  lint: passed_web_and_monorepo
+  build: passed_web_and_monorepo
+  regression: passed_80_api_and_23_web
+  local_browser: passed_320_375_768_1280_1440
+  browser_console_errors: 0
+  production_dependency_audit: zero_known_vulnerabilities
+  full_dependency_audit: zero_known_vulnerabilities
+implementation:
+  app: apps/web/
+  feature: apps/web/src/features/storefront-preview/
+  ui_tokens: packages/ui/
+  demo_assets: apps/web/public/preview/
+vercel:
+  project_id: prj_F7vW8iP7sqyItuyVPbEk3tgFF3Nm
+  team_id: team_cHPC6ZPXvRJsgt7H9mROAu9C
+  delivery_target: preview
+  production_promotion_authorized: false
+versions:
+  next: 16.3.5
+  react: 19.3.0
+  react_dom: 19.3.0
+next_action: await_human_command_for_day_5_hardening

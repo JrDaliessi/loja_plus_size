@@ -22,6 +22,59 @@
 - [x] gate final do Dia 7 concluído e release candidate registrado sem confundir merge com deploy
 - [x] documentação de fundação atualizada
 
+## Evidência da FEATURE-WEB-PREVIEW
+
+### Dia 2 — 2026-09-20
+
+- [x] requisitos e spec da preview aprovados antes dos testes
+- [x] matriz liga 14/14 critérios de aceite a validações primárias
+- [x] fixtures ready, empty, error, metadata e tokens são determinísticas
+- [x] dependências web estáveis e exatas registradas no lockfile
+- [x] auditorias de dependências de produção e completa sem vulnerabilidades conhecidas
+- [x] type-check web verde com Node.js 24.21.0
+- [x] type-check completo do monorepo verde para API e web
+- [x] RED observado por ausência de comportamento, não por configuração
+- [x] 19 testes executados: 14 RED esperados e 5 guards verdes
+- [x] fronteiras proíbem Supabase, Prisma, fetch remoto e Client Component desnecessário
+- [x] plano de navegador cobre console, overlay, teclado e cinco larguras
+- [x] nenhuma publicação, promoção, secret ou mutação Supabase realizada
+- [x] comportamento mínimo GREEN — Dia 3
+- [x] lint, regressão completa e build Next.js verdes
+- [x] verificação em navegador local
+- [ ] verificação na Preview Deployment
+
+### Dia 3 — 2026-09-21
+
+- [x] 19/19 testes web GREEN após baseline de 14 RED e 5 guards
+- [x] estados ready, empty e error normalizados pela camada de aplicação
+- [x] adapter demo local e determinístico, sem campos ou claims comerciais
+- [x] quatro assets originais inspecionados e rastreados por SHA-256
+- [x] Purple Noir aplicado como Dark Luxury + Light Editorial
+- [x] metadata útil com `noindex, nofollow`
+- [x] axe sem violações serious/critical no componente
+- [x] browser sem overlay ou erros de console
+- [x] CTA, skip link, foco visível e transferência de foco validados
+- [x] 320, 375, 768, 1280 e 1440 px sem overflow; grade 1/2/4
+- [x] web lint, type-check, testes e build Next.js verdes
+- [x] monorepo lint, 80/80 API + 19/19 web e build verdes
+- [x] PostgreSQL isolado desligado após a regressão
+- [x] revisão React: Server Components e zero client boundary desnecessário
+- [x] nenhum Supabase, API remota, secret, commit, push, PR ou deployment
+
+### Dia 4 — 2026-09-21
+
+- [x] RED observado em 4/4 contratos novos pelo motivo esperado
+- [x] estados vazio e erro extraídos em componentes pequenos e acessíveis
+- [x] erro público preserva mensagem normalizada sem detalhes de infraestrutura
+- [x] quatro PNGs validados por assinatura, dimensões reais e SHA-256
+- [x] Open Graph declara `pt_BR` e `noindex, nofollow` permanece ativo
+- [x] 23/23 testes web e 80/80 testes API verdes (103/103 total)
+- [x] lint, type-check e build completos verdes
+- [x] browser verde em 320, 375, 768, 1280 e 1440 px, sem overflow ou console error
+- [x] revisão React preservou Server Components e fronteiras de apresentação
+- [x] PostgreSQL isolado encerrado e nenhuma integração remota adicionada
+- [ ] verificação na Preview Deployment permanece para `AC-013`
+
 ## Evidência do Dia 3 — 2026-09-20
 
 - [x] domínio e casos de uso mínimos implementados a partir dos testes RED

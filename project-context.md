@@ -3,20 +3,21 @@
 project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
-active_artifact: FEATURE-CATALOG
-artifact_state: READY_FOR_RELEASE
-phase: Dia 7 concluído — release candidate sem promoção remota
+active_artifact: FEATURE-WEB-PREVIEW
+artifact_state: IN_PROGRESS
+phase: Dia 4 concluído — expansão controlada e regressão integral validadas
 last_release: none
 
 ## Current Goal
 
-Revisar o release candidate da `SR-MVP-01` e, após decisão humana, definir a primeira small release demonstrável em `apps/web` para preview na Vercel.
+Aguardar aprovação para o hardening da `SR-WEB-PREVIEW-01` no Dia 5,
+preservando o recorte demonstrativo e a ausência de integração remota.
 
 ## Blockers
 
-- O projeto Supabase principal está `INACTIVE`; isso bloqueia migration, Auth e validação remota.
-- Antes de integração/deploy remoto, o backend ainda precisa receber uma conexão PostgreSQL Supabase por gerenciador de segredos.
-- Antes de mídia remota, o bucket e as policies de Storage precisam de autorização e validação próprias.
+- Não há bloqueio duro para o Dia 5 da preview web.
+- O Supabase principal continua `INACTIVE`, bloqueando somente promoção remota
+  do catálogo, Auth, migrations e Storage; a preview não depende desses recursos.
 
 ## Active Risks
 
@@ -26,6 +27,12 @@ Revisar o release candidate da `SR-MVP-01` e, após decisão humana, definir a p
 - Overrides transitivos de segurança devem ser reavaliados em toda atualização do Prisma e removidos quando o upstream incorporar os patches.
 - Provedor de frete e hospedagem do backend ainda não foram selecionados.
 - O CTA documentado com texto branco sobre `#8B5CF6` tem contraste calculado de 4,23:1; exige tratamento no gate de acessibilidade para texto normal.
+- Conteúdo e assets demonstrativos podem ser confundidos com catálogo real se o
+  disclosure, a ausência de preço/estoque e o `noindex` não forem preservados.
+- Os quatro PNGs de origem da preview totalizam 6,745,439 bytes; `next/image`
+  otimiza a entrega, mas `DEBT-WEB-001` registra a redução do artefato no Dia 5.
+- Criar `apps/web` desativa o ignore atual da Vercel; o primeiro push de
+  implementação já precisa compilar.
 - A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
 - A paginação keyset usa o índice correto, mas o predicate `OR` emitido pelo Prisma filtrou 5.000 entradas em um cursor intermediário com 10.000 registros; ver `DEBT-PERF-001`.
 
@@ -34,9 +41,17 @@ Revisar o release candidate da `SR-MVP-01` e, após decisão humana, definir a p
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
-- active artifact: `docs/features/FEATURE-CATALOG/`
-- validation: `docs/features/FEATURE-CATALOG/test-plan.md`, `docs/features/FEATURE-CATALOG/test-matrix.md`, `docs/features/FEATURE-CATALOG/fixtures.md`
-- experience validation: `docs/features/FEATURE-CATALOG/experience-validation.md`
+- active artifact: `docs/features/FEATURE-WEB-PREVIEW/`
+- active requirements: `docs/features/FEATURE-WEB-PREVIEW/feature-prd.md`
+- active specification: `docs/features/FEATURE-WEB-PREVIEW/feature-spec.md`
+- active validation: `docs/features/FEATURE-WEB-PREVIEW/test-plan.md`,
+  `docs/features/FEATURE-WEB-PREVIEW/test-matrix.md`,
+  `docs/features/FEATURE-WEB-PREVIEW/red-evidence.md`
+- browser plan: `docs/features/FEATURE-WEB-PREVIEW/browser-verification.md`
+- GREEN evidence: `docs/features/FEATURE-WEB-PREVIEW/green-evidence.md`
+- Dia 4 evidence: `docs/features/FEATURE-WEB-PREVIEW/day4-evidence.md`
+- asset provenance: `docs/features/FEATURE-WEB-PREVIEW/asset-provenance.md`
+- previous artifact: `docs/features/FEATURE-CATALOG/` (`READY_FOR_RELEASE`)
 - release candidate: `docs/releases/SR-MVP-01-catalog-release-candidate.md`
 - release readiness: `docs/features/FEATURE-CATALOG/release-readiness.md`
 - rollback: `docs/features/FEATURE-CATALOG/rollback-plan.md`
@@ -58,9 +73,9 @@ Revisar o release candidate da `SR-MVP-01` e, após decisão humana, definir a p
 
 ## Next Action
 
-Revisar/mesclar o PR #6 e iniciar o discovery de uma small release `apps/web`
-demonstrável na Vercel. Não reativar o Supabase, aplicar migration ou criar
-Storage sem autorização específica.
+Aguardar comando/aprovação humana para executar o Dia 5 da
+`FEATURE-WEB-PREVIEW`. Não fazer merge, promover produção, reativar Supabase,
+aplicar migration ou criar Storage automaticamente.
 
 ## History
 

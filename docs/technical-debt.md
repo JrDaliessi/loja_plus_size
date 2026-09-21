@@ -2,6 +2,22 @@
 
 ## Active
 
+### DEBT-WEB-001 — Optimize source preview images
+
+- Severity: `LOW`
+- Capability: `software`
+- Affects: `FEATURE-WEB-PREVIEW`, repository and deployment artifact size.
+- Problem: the four approved 1122x1402 PNG source assets total 6,745,439 bytes.
+- Current control: `next/image` serves responsive optimized variants, all images
+  declare dimensions and `sizes`, and browser verification showed successful
+  loading without layout overflow.
+- Risk of delay: unnecessary repository and deployment transfer weight even
+  though runtime delivery is optimized.
+- Recommended phase: Dia 5 hardening, after visual approval is stable.
+- Resolution criterion: lossless or visually reviewed WebP/AVIF source variants
+  materially reduce bytes while hashes/provenance, tests and browser quality
+  remain valid.
+
 ### DEBT-PERF-001 — Optimize deep catalog cursor predicates
 
 - Severity: `MEDIUM`
