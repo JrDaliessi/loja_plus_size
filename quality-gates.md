@@ -75,6 +75,55 @@
 - [x] PostgreSQL isolado encerrado e nenhuma integração remota adicionada
 - [ ] verificação na Preview Deployment permanece para `AC-013`
 
+### Dia 5 — 2026-09-21
+
+- [x] RED observado para otimização de assets e headers antes da implementação
+- [x] RED adicional observado para remoção de `X-Powered-By`
+- [x] quatro WebPs preservam 1122x1402, framing e qualidade visual aprovada
+- [x] assets reduziram de 6.745.439 para 307.958 bytes (95,43%)
+- [x] hashes e proveniência atuais registrados; PNGs preservados no histórico Git
+- [x] Permissions, Referrer, MIME e frame protection presentes na resposta HTTP
+- [x] header de identificação do framework ausente
+- [x] 25/25 testes web e 80/80 testes API verdes (105/105 total)
+- [x] lint, type-check e build completos verdes
+- [x] cinco breakpoints sem overflow/overlay; quatro imagens carregadas
+- [x] console do navegador sem warnings ou errors
+- [x] PostgreSQL isolado encerrado após regressão
+- [ ] verificação na Preview Deployment permanece para `AC-013`
+
+### Dia 6 — 2026-09-21
+
+- [x] RED reproduziu a ocultação indevida do link `Início` no mobile
+- [x] os três links primários permanecem visíveis em 320–1440 px
+- [x] contrato de movimento reduzido preserva todo o conteúdo
+- [x] skip link é o primeiro foco e transfere foco ao `main`
+- [x] ordem de teclado alcança marca, navegação, CTA e rodapé
+- [x] CTA `#colecao` navega para um destino existente e visível
+- [x] oito amostras de contraste WCAG AA passaram (7,01:1–12,24:1)
+- [x] landmarks, `h1`, idioma, metadata, robots e textos alternativos validados
+- [x] 27/27 testes web e 80/80 testes API verdes (107/107 total)
+- [x] lint, type-check, build e cinco breakpoints verdes
+- [x] console do navegador sem warnings ou errors
+- [x] PostgreSQL isolado encerrado após regressão
+- [ ] verificação na Preview Deployment permanece para `AC-013`
+
+### Dia 7 — 2026-09-21
+
+- [x] 14/14 requisitos e critérios de aceite continuam rastreados
+- [x] 27/27 testes web e 80/80 testes API verdes (107/107 total)
+- [x] lint, type-check e builds completos verdes
+- [x] auditorias completa e de produção sem vulnerabilidades conhecidas
+- [x] fluxo rota → aplicação → adapter demo → apresentação verificado
+- [x] browser local retorna HTTP 200 com conteúdo, sem overlay ou console issue
+- [x] disclosure, ausência de commerce e `noindex, nofollow` preservados
+- [x] fronteiras web sem `fetch`, Supabase, Prisma, secrets ou Client Component
+- [x] provenance, readiness, rollback e release candidate registrados
+- [x] PostgreSQL isolado encerrado após regressão
+- [x] Hot Context compactado e próximo passo definido
+- [ ] commit e push do candidato dependem de autorização humana
+- [ ] Vercel Preview `READY` e inspeção remota permanecem para `AC-013`
+- [ ] produção permanece inalterada até aprovação explícita
+
 ## Evidência do Dia 3 — 2026-09-20
 
 - [x] domínio e casos de uso mínimos implementados a partir dos testes RED

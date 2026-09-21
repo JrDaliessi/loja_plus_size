@@ -76,3 +76,20 @@ runtime/build logs when a remote failure occurs.
 - 1280/1440 px: four columns and no horizontal overflow;
 - screenshots: desktop full page and mobile viewport visually inspected;
 - evidence: `green-evidence.md`.
+
+## Dia 6 Local Result — 2026-09-21
+
+- 320, 375, 768, 1280 and 1440 px: PASS without horizontal overflow;
+- `Início`, `Coleção` and `Manifesto`: visible at every validated width;
+- full-page mobile and desktop visual inspection: PASS;
+- skip link: first keyboard target, 3 px outline and focus transfer to
+  `main#conteudo-principal`: PASS;
+- keyboard order reaches brand, primary navigation, CTA and footer link: PASS;
+- CTA fragment and visible `#colecao` target: PASS;
+- one `h1`, landmarks, `pt-BR`, title, description and `noindex, nofollow`:
+  PASS;
+- four WebPs loaded with useful alt text and non-zero natural width: PASS;
+- eight representative WCAG AA contrast samples: PASS (7.01:1–12.24:1);
+- reduced-motion stylesheet contract: PASS;
+- browser warnings/errors and overlays: zero;
+- evidence: `day6-evidence.md`.

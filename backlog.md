@@ -11,7 +11,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DONE |
 | PRISMA-002 | Technical Foundation | Substituir Prisma 8 RC por Prisma 7 estável | P0 | PRISMA-001, aprovação humana | versão estável pinada, migration/spike validados e auditoria limpa | DONE |
 | DEBT-DEP-001 | Dívida Técnica | Remover `glob@10.5.0` deprecated da árvore de cobertura Jest | P3 | atualização upstream de `test-exclude`/Jest | instalação sem a versão deprecated e regressão verde | READY |
-| DEBT-WEB-001 | Dívida Técnica | Reduzir o peso dos quatro assets-fonte da preview sem perder qualidade visual | P3 | aprovação visual estável | WebP/AVIF revisado reduz 6,745,439 bytes e mantém browser/tests verdes | READY |
+| DEBT-WEB-001 | Dívida Técnica | Reduzir o peso dos quatro assets-fonte da preview sem perder qualidade visual | P3 | aprovação visual estável | WebP revisado reduziu 95,43% e manteve browser/tests verdes | DONE |
 | DEBT-PERF-001 | Dívida Técnica | Otimizar predicate de cursor profundo do catálogo | P2 | dados representativos ou `SR-MVP-03` | `EXPLAIN` demonstra linhas examinadas limitadas por página sem quebrar consistência | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |
@@ -81,7 +81,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 21 | TEST-WEBPREVIEW-001 | Materializar matriz, fixtures, testes RED e plano de browser verification | DONE — 19 testes, 14 RED e 5 guards verdes |
 | 22 | IMPL-WEBPREVIEW-001 | Implementação mínima GREEN e browser verification local | DONE — 19/19 web, 99/99 regressão e cinco viewports, 2026-09-21 |
 | 23 | EXP-WEBPREVIEW-001 | Expansão controlada da preview sem integração remota | DONE — 23/23 web, 103/103 regressão e browser verde, 2026-09-21 |
-| 24 | HARDEN-WEBPREVIEW-001 | Refinar estrutura e otimizar assets preservando comportamento | READY — próximo Dia 5 |
+| 24 | HARDEN-WEBPREVIEW-001 | Refinar estrutura e otimizar assets preservando comportamento | DONE — 95,43% menor, headers e 105/105 regressão verdes, 2026-09-21 |
+| 25 | UX-WEBPREVIEW-001 | Validar experiência, acessibilidade e formato final da preview | DONE — 27/27 web, 107/107 regressão e browser acessível, 2026-09-21 |
+| 26 | REL-WEBPREVIEW-001 | Executar gates finais, registrar entrega e compactar contexto | DONE — `SR-WEB-PREVIEW-01-RC1`, 2026-09-21 |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -96,9 +98,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
-| FEATURE-WEB-PREVIEW | `docs/features/FEATURE-WEB-PREVIEW/` | escopo humano aprovado | IN_PROGRESS |
+| FEATURE-WEB-PREVIEW | `docs/features/FEATURE-WEB-PREVIEW/` | Preview remota e aprovação humana | READY_FOR_RELEASE |
 | TEST-WEB-PREVIEW | matriz, fixtures e cenários RED | requisitos/spec aprovados | DONE |
-| APP-WEB-PREVIEW | `apps/web` + slice Purple Noir | expansão e hardening dos Dias 4–6 | IN_PROGRESS |
+| APP-WEB-PREVIEW | `apps/web` + slice Purple Noir | Preview remota e aprovação humana | READY_FOR_RELEASE |
 | VERCEL-WEB-PREVIEW | URL compartilhável de Preview Deployment | gates finais e push autorizado | READY |
 
 ## Política de priorização

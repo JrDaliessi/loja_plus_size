@@ -10,8 +10,9 @@ Date: 2026-09-21
   `aria-live="assertive"` and no provider, endpoint or stack detail.
 - Open Graph metadata declares the Brazilian locale (`pt_BR`) while preserving
   `noindex, nofollow`.
-- The four local PNG contracts now verify path, PNG signature, physical
-  dimensions (`1122x1402`) and approved SHA-256 hashes.
+- At the Dia 4 checkpoint, the four local PNG contracts verified path, PNG
+  signature, physical dimensions (`1122x1402`) and approved SHA-256 hashes.
+  Dia 5 later replaced the deployment copies with traced WebPs.
 
 ## TDD evidence
 
@@ -39,8 +40,8 @@ Date: 2026-09-21
 No Supabase access, remote API, secret, commercial claim, additional route,
 architecture rewrite, production promotion or new generated asset was added.
 
-## Remaining work
+## Subsequent resolution
 
-- `DEBT-WEB-001`: optimize the 6,745,439-byte source asset set during Dia 5
-  without changing the approved visual result.
+- `DEBT-WEB-001` was resolved in Dia 5 with a 95.43% reduction and preserved
+  visual result; see `day5-evidence.md`.
 - Preview Deployment validation remains planned for `FPRD-WEBPREVIEW001-AC-013`.

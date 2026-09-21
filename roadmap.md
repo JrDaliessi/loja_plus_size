@@ -31,8 +31,9 @@ remota e só será promovida além de Preview Deployment após aceite humano.
 | Dia 2 | matriz 14/14, fixtures, 19 testes e RED válido | DONE — `VALIDATION_READY`, 2026-09-20 |
 | Dia 3 | implementação mínima GREEN e verificação local | DONE — 2026-09-21 |
 | Dia 4 | estados acessíveis, contratos de assets e metadata localizados | DONE — 2026-09-21 |
-| Dia 5 | hardening e otimização dos assets-fonte | READY — aguarda comando/aprovação |
-| Dias 6–7 | experiência final e entrega | BLOCKED pelo gate anterior |
+| Dia 5 | WebPs 95,43% menores e headers de segurança | DONE — 2026-09-21 |
+| Dia 6 | experiência, acessibilidade e formato final | DONE — `QUALITY_VALIDATION`, 2026-09-21 |
+| Dia 7 | gates finais, release candidate e compactação | DONE — `READY_FOR_RELEASE`, 2026-09-21 |
 
 ### MVP — Commerce Core
 

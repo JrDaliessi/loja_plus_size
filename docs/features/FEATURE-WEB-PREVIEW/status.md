@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-WEB-PREVIEW-01`
-- Artifact state: `IN_PROGRESS`
-- Review status: `DAY_4_COMPLETE_2026-09-21`
+- Artifact state: `READY_FOR_RELEASE`
+- Review status: `DAY_7_COMPLETE_2026-09-21`
 - Project state: `OPERATING`
-- Phase: Dia 4 concluído; aguardando comando/aprovação para Dia 5
+- Phase: Dia 7 concluído; release candidate local aguardando commit/push autorizado
 
 ## Completed
 
@@ -33,12 +33,30 @@
   desnecessários e composição proporcional ao recorte.
 - Estados vazio e erro foram isolados em componentes de apresentação com
   anúncios acessíveis `status`/`alert` e mensagens atômicas.
-- Contratos de asset validam assinatura PNG, dimensão física `1122x1402` e
-  SHA-256; a divergência documental anterior foi corrigida sem alterar imagens.
+- No Dia 4, contratos de asset validaram assinatura PNG, dimensão física
+  `1122x1402` e SHA-256; o Dia 5 substituiu esse formato por WebP rastreado.
 - Metadata Open Graph agora declara `pt_BR`, preservando `noindex, nofollow`.
 - 23/23 testes web e 80/80 testes API passaram (103/103 total), com lint,
   type-check e build integrais verdes.
 - A regressão de navegador repetiu os cinco breakpoints sem overflow ou erros.
+- Quatro WebPs visualmente revisados substituíram os PNGs, reduzindo o conjunto
+  de 6.745.439 para 307.958 bytes (95,43%) sem alterar dimensões ou composição.
+- Headers de permissões, referência, MIME e framing foram adicionados e
+  `X-Powered-By` foi removido da resposta.
+- 25/25 testes web e 80/80 testes API passaram (105/105 total); lint,
+  type-check, build e navegador permaneceram verdes.
+- O Dia 6 reproduziu em RED e corrigiu a ocultação do link `Início` no mobile;
+  os três destinos primários agora permanecem visíveis em todas as larguras.
+- Skip link, ordem de teclado, foco no `main`, CTA `#colecao`, landmarks,
+  metadados e oito combinações de contraste foram validados no navegador.
+- 27/27 testes web e 80/80 testes API passaram (107/107 total); lint,
+  type-check, build e os cinco breakpoints permaneceram verdes.
+- O gate final repetiu 107/107 testes, lint, type-check e builds com sucesso;
+  auditorias completa e de produção não encontraram vulnerabilidades conhecidas.
+- A história `/` → caso de uso → adapter demo → apresentação foi verificada no
+  código, nos contratos e no navegador, sem integração remota.
+- Release readiness, rollback, evidência do Dia 7 e o record
+  `SR-WEB-PREVIEW-01-RC1` foram materializados.
 
 ## Decisions
 
@@ -46,29 +64,37 @@
 2. A página inicial é a única rota deste recorte.
 3. Dados e imagens são locais, determinísticos e explicitamente ilustrativos.
 4. Nenhum claim comercial ou integração remota entra antes do slice previsto.
-5. Push da branch foi autorizado; merge e promoção de produção permanecem fora
-   do Dia 4.
+5. Commit, push, PR, merge, Preview Deployment e promoção de produção permanecem
+   operações separadas do gate local do Dia 7.
 
 ## Blockers
 
-Não há bloqueio duro para o Dia 5. O Supabase inativo não afeta esta preview
-local porque banco, Auth, Storage e API remota seguem fora do escopo.
+Não há bloqueio duro para criar e enviar o commit candidato. O Supabase inativo
+não afeta esta preview porque banco, Auth, Storage e API remota estão fora do
+escopo.
 
-O deployment de Preview permanece pendente, não bloqueado por código: depende
-do pipeline acionado pelo push e da validação da URL gerada.
+As mudanças dos Dias 5–7 permanecem locais. `RELEASED` continua bloqueado até
+um push autorizado, o deployment Vercel `READY` e a inspeção da URL gerada.
 
-Risco leve registrado: os quatro PNGs de origem totalizam 6,745,439 bytes.
-`next/image` otimiza a entrega e `DEBT-WEB-001` agenda a redução no Dia 5.
+`DEBT-WEB-001` foi resolvida com redução de 95,43%, inspeção visual, hashes e
+regressão. O critério de deployment continua pendente até validar a URL Preview.
 
 ## Evidence
 
 - GREEN: `green-evidence.md`
 - Dia 4: `day4-evidence.md`
+- Dia 5: `day5-evidence.md`
+- Dia 6: `day6-evidence.md`
+- Dia 7: `day7-evidence.md`
+- readiness: `release-readiness.md`
+- rollback: `rollback-plan.md`
+- release candidate: `../../releases/SR-WEB-PREVIEW-01-release-candidate.md`
 - assets: `asset-provenance.md`
 - matriz: `test-matrix.md`
 - plano/browser: `browser-verification.md`
 
 ## Next Action
 
-Aguardar comando/aprovação humana para o Dia 5 — hardening da preview. Não fazer
-merge, PR adicional ou promoção de produção automaticamente.
+Aguardar autorização humana para organizar o commit e push da branch. Depois,
+validar a Vercel Preview e `AC-013`. Não fazer merge ou promoção de produção
+automaticamente.

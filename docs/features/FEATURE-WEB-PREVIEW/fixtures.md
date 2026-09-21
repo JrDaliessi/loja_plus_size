@@ -12,10 +12,10 @@
 
 | ID | Name | Category | Label | Image contract |
 |---|---|---|---|---|
-| `concept-01` | Vestido Aurora | Vestidos | Conceito visual | `/preview/vestido-aurora.png`, 1122x1402, conceptual alt |
-| `concept-02` | Conjunto Horizonte | Conjuntos | Conceito visual | `/preview/conjunto-horizonte.png`, 1122x1402, conceptual alt |
-| `concept-03` | Blusa Essência | Blusas | Conceito visual | `/preview/blusa-essencia.png`, 1122x1402, conceptual alt |
-| `concept-04` | Saia Movimento | Saias | Conceito visual | `/preview/saia-movimento.png`, 1122x1402, conceptual alt |
+| `concept-01` | Vestido Aurora | Vestidos | Conceito visual | `/preview/vestido-aurora.webp`, 1122x1402, conceptual alt |
+| `concept-02` | Conjunto Horizonte | Conjuntos | Conceito visual | `/preview/conjunto-horizonte.webp`, 1122x1402, conceptual alt |
+| `concept-03` | Blusa Essência | Blusas | Conceito visual | `/preview/blusa-essencia.webp`, 1122x1402, conceptual alt |
+| `concept-04` | Saia Movimento | Saias | Conceito visual | `/preview/saia-movimento.webp`, 1122x1402, conceptual alt |
 
 Canonical executable fixture:
 `apps/web/src/features/storefront-preview/tests/fixtures.ts`.
