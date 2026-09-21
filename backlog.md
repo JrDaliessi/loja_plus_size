@@ -11,9 +11,11 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | PRISMA-001 | Spike | Validar Prisma 8 RC no primeiro slice | P0 | Node 24.11+, Supabase baseline | CRUD, constraints, transação, erros e migration validados com versões pinadas | DONE |
 | PRISMA-002 | Technical Foundation | Substituir Prisma 8 RC por Prisma 7 estável | P0 | PRISMA-001, aprovação humana | versão estável pinada, migration/spike validados e auditoria limpa | DONE |
 | DEBT-DEP-001 | Dívida Técnica | Remover `glob@10.5.0` deprecated da árvore de cobertura Jest | P3 | atualização upstream de `test-exclude`/Jest | instalação sem a versão deprecated e regressão verde | READY |
+| DEBT-WEB-001 | Dívida Técnica | Reduzir o peso dos quatro assets-fonte da preview sem perder qualidade visual | P3 | aprovação visual estável | WebP revisado reduziu 95,43% e manteve browser/tests verdes | DONE |
 | DEBT-PERF-001 | Dívida Técnica | Otimizar predicate de cursor profundo do catálogo | P2 | dados representativos ou `SR-MVP-03` | `EXPLAIN` demonstra linhas examinadas limitadas por página sem quebrar consistência | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
-| DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | DISCOVERY |
+| DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |
+| WEBPREVIEW-001 | Small Release | Vitrine Purple Noir demonstrativa e revisável em Preview Deployment | P0 | DS-001, arquitetura, Vercel | preview sem claims comerciais passa gates web e recebe aceite humano | IN_PROGRESS |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IN_PROGRESS |
 | VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IN_PROGRESS |
 | INV-001 | Feature | Estoque e movimentos por SKU como fonte única | P0 | VAR-001 | nenhuma operação vende quantidade indisponível | IDEA |
@@ -68,12 +70,20 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 10 | PRISMA-001 | Executar spike do Prisma 8 antes de persistence | DONE — riscos RC documentados |
 | 11 | PRISMA-002 | Migrar para Prisma 7 estável e repetir gates do Dia 2 | DONE — ADR-004, versão 7.10.0 e auditoria limpa |
 | 12 | SEC-BASE-001 | Definir e testar autorização mínima de staff | IN_PROGRESS — `getClaims` e `app_metadata` validados localmente; configuração remota de permissões pendente |
-| 13 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | VALIDATION_READY |
+| 13 | DS-001 | Derivar tokens e critérios acessíveis quando o primeiro slice de UI entrar | IN_PROGRESS — tokens, contraste e foco verdes no Dia 3 |
 | 14 | IMPL-CAT-001 | Implementação mínima GREEN do catálogo | DONE — 28/28 testes, lint, type-check e build verdes |
 | 15 | EXP-CAT-001 | Expandir contratos HTTP, Prisma, Auth e Storage | DONE — 66/66 testes, runtime smoke, build ESM executável e auditoria limpa |
 | 16 | HARDEN-CAT-001 | Refinar segurança, falhas externas, limites de transação e pipeline | DONE — 76/76 testes, thresholds de cobertura, build e auditorias verdes |
 | 17 | UX-CAT-001 | Validar experiência e formato consumível da API | DONE — OpenAPI/Swagger corrigidos e 80/80 testes verdes |
 | 18 | REL-CAT-001 | Executar gate final e preparar release candidate do catálogo | DONE — `READY_FOR_RELEASE`; promoção remota bloqueada pelo Supabase inativo |
+| 19 | FPRD-WEBPREVIEW-001 | Aprovar requisitos da preview Purple Noir na Vercel | DONE — 14 requisitos e 14 ACs, 2026-09-20 |
+| 20 | FSPEC-WEBPREVIEW-001 | Definir arquitetura, baseline estável e contrato de entrega da preview | DONE — `SPEC_READY`, 2026-09-20 |
+| 21 | TEST-WEBPREVIEW-001 | Materializar matriz, fixtures, testes RED e plano de browser verification | DONE — 19 testes, 14 RED e 5 guards verdes |
+| 22 | IMPL-WEBPREVIEW-001 | Implementação mínima GREEN e browser verification local | DONE — 19/19 web, 99/99 regressão e cinco viewports, 2026-09-21 |
+| 23 | EXP-WEBPREVIEW-001 | Expansão controlada da preview sem integração remota | DONE — 23/23 web, 103/103 regressão e browser verde, 2026-09-21 |
+| 24 | HARDEN-WEBPREVIEW-001 | Refinar estrutura e otimizar assets preservando comportamento | DONE — 95,43% menor, headers e 105/105 regressão verdes, 2026-09-21 |
+| 25 | UX-WEBPREVIEW-001 | Validar experiência, acessibilidade e formato final da preview | DONE — 27/27 web, 107/107 regressão e browser acessível, 2026-09-21 |
+| 26 | REL-WEBPREVIEW-001 | Executar gates finais, registrar entrega e compactar contexto | DONE — `SR-WEB-PREVIEW-01-RC1`, 2026-09-21 |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -83,6 +93,15 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | ARCHITECTURE | `architecture.md` | aprovação humana dos ADRs | DONE |
 | FEATURE-CATALOG | `docs/features/FEATURE-CATALOG/` | revisão/merge do release candidate; promoção remota separada | READY_FOR_RELEASE |
 | TEST-CATALOG | matriz, fixtures e cenários RED | Supabase/PostgreSQL isolado | DONE |
+
+## Artifact/Feature Backlog — SR-WEB-PREVIEW-01
+
+| ID | Entregável | Dependência | Estado |
+|---|---|---|---|
+| FEATURE-WEB-PREVIEW | `docs/features/FEATURE-WEB-PREVIEW/` | Preview remota e aprovação humana | READY_FOR_RELEASE |
+| TEST-WEB-PREVIEW | matriz, fixtures e cenários RED | requisitos/spec aprovados | DONE |
+| APP-WEB-PREVIEW | `apps/web` + slice Purple Noir | Preview remota e aprovação humana | READY_FOR_RELEASE |
+| VERCEL-WEB-PREVIEW | URL compartilhável de Preview Deployment | gates finais e push autorizado | READY |
 
 ## Política de priorização
 

@@ -18,6 +18,23 @@ O roadmap preserva integralmente a visão dos documentos, mas entrega valor em p
 
 ## Evolução do produto
 
+### Preview demonstrativa — Vercel
+
+`SR-WEB-PREVIEW-01` entrega uma única página Purple Noir para revisão visual e
+técnica antes da vitrine comercial. Usa conteúdo local explicitamente
+ilustrativo, não exibe preço/estoque/compra, não depende do Supabase ou API
+remota e só será promovida além de Preview Deployment após aceite humano.
+
+| Gate | Resultado | Estado |
+|---|---|---|
+| Dia 1 | requisitos, ACs e spec da preview | DONE — `SPEC_READY`, 2026-09-20 |
+| Dia 2 | matriz 14/14, fixtures, 19 testes e RED válido | DONE — `VALIDATION_READY`, 2026-09-20 |
+| Dia 3 | implementação mínima GREEN e verificação local | DONE — 2026-09-21 |
+| Dia 4 | estados acessíveis, contratos de assets e metadata localizados | DONE — 2026-09-21 |
+| Dia 5 | WebPs 95,43% menores e headers de segurança | DONE — 2026-09-21 |
+| Dia 6 | experiência, acessibilidade e formato final | DONE — `QUALITY_VALIDATION`, 2026-09-21 |
+| Dia 7 | gates finais, release candidate e compactação | DONE — `READY_FOR_RELEASE`, 2026-09-21 |
+
 ### MVP — Commerce Core
 
 Catálogo, categorias, busca inicial, página de produto, variantes cor/tamanho, SKU, estoque, carrinho de visitante, checkout sem conta obrigatória, Mercado Pago, frete, pedido e administração mínima.

@@ -32,3 +32,13 @@
 - Recommended phase: next compatible Jest/test-exclude release.
 - Resolution criterion: dependency installation contains no deprecated version and
   the complete regression remains green without an unsafe override.
+
+## Resolved
+
+### DEBT-WEB-001 — Optimize source preview images
+
+- Resolved: `2026-09-21`, Dia 5.
+- Result: visually reviewed WebPs reduced 6,745,439 bytes to 307,958 bytes
+  (`95.43%`) while preserving dimensions, responsive rendering and all gates.
+- Evidence: `docs/features/FEATURE-WEB-PREVIEW/day5-evidence.md` and
+  `docs/features/FEATURE-WEB-PREVIEW/asset-provenance.md`.

@@ -78,4 +78,4 @@ validation_evidence:
   remote_project_status: inactive
   keyset_explain: index_used_with_5000_rows_filtered_at_midpoint
   supabase_remote_mutated: false
-next_action: review_release_candidate_then_define_first_apps_web_slice
+next_action: preserve_release_candidate_until_remote_supabase_promotion_is_authorized

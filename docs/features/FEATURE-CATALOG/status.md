@@ -6,7 +6,7 @@
 - Artifact state: `READY_FOR_RELEASE`
 - Review status: `DAY_7_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 7 concluído; release candidate aguardando revisão/merge, sem promoção remota
+- Phase: Dia 7 concluído; PR #6 mesclado em `main`, sem promoção remota do banco
 
 ## Completed
 
@@ -143,6 +143,6 @@
 
 ## Next Action
 
-Review/merge PR #6, then define and approve the first demonstrable `apps/web`
-small release for Vercel. Remote Supabase activation, migrations and Storage
-mutations remain separate actions requiring explicit authorization.
+`SR-WEB-PREVIEW-01` foi definida em `docs/features/FEATURE-WEB-PREVIEW/` e segue
+como artefato ativo. A promoção remota do catálogo, ativação do Supabase,
+migrations e Storage permanecem ações separadas que exigem autorização.

@@ -71,12 +71,14 @@ relations:
       - architecture.md
       - docs/domain/catalog.md
       - docs/features/FEATURE-CATALOG/
+      - docs/features/FEATURE-WEB-PREVIEW/
   architecture.md:
     depends_on:
       - docs/product/prd.md
       - project-stack.md
     affects:
       - docs/features/FEATURE-CATALOG/feature-spec.md
+      - docs/features/FEATURE-WEB-PREVIEW/feature-spec.md
   design_system_purple_noir_loja_plus_size.md:
     derived_from:
       - docs/sources/source-map.md
@@ -84,3 +86,97 @@ relations:
       - apps/web
       - packages/ui
       - quality-gates.md
+      - docs/features/FEATURE-WEB-PREVIEW/
+  docs/features/FEATURE-WEB-PREVIEW/feature-prd.md:
+    derived_from:
+      - docs/product/prd.md
+      - design_system_purple_noir_loja_plus_size.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/feature-spec.md
+      - apps/web
+      - packages/ui
+  docs/features/FEATURE-WEB-PREVIEW/feature-spec.md:
+    depends_on:
+      - architecture.md
+      - docs/adr/ADR-001-web-api-boundaries.md
+    affects:
+      - apps/web
+      - packages/ui
+      - vercel.json
+  docs/features/FEATURE-WEB-PREVIEW/test-plan.md:
+    derived_from:
+      - docs/features/FEATURE-WEB-PREVIEW/feature-prd.md
+      - docs/features/FEATURE-WEB-PREVIEW/feature-spec.md
+    affects:
+      - apps/web/src/features/storefront-preview/tests/
+      - docs/features/FEATURE-WEB-PREVIEW/browser-verification.md
+  docs/features/FEATURE-WEB-PREVIEW/test-matrix.md:
+    depends_on:
+      - docs/features/FEATURE-WEB-PREVIEW/test-plan.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/status.md
+  docs/features/FEATURE-WEB-PREVIEW/green-evidence.md:
+    derived_from:
+      - docs/features/FEATURE-WEB-PREVIEW/test-plan.md
+      - docs/features/FEATURE-WEB-PREVIEW/browser-verification.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/status.md
+      - project-context.md
+  docs/features/FEATURE-WEB-PREVIEW/day4-evidence.md:
+    derived_from:
+      - docs/features/FEATURE-WEB-PREVIEW/test-plan.md
+      - docs/features/FEATURE-WEB-PREVIEW/browser-verification.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/status.md
+      - docs/features/FEATURE-WEB-PREVIEW/test-matrix.md
+      - project-context.md
+  docs/features/FEATURE-WEB-PREVIEW/day5-evidence.md:
+    derived_from:
+      - docs/features/FEATURE-WEB-PREVIEW/day4-evidence.md
+      - docs/technical-debt.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/status.md
+      - docs/features/FEATURE-WEB-PREVIEW/asset-provenance.md
+      - docs/technical-debt.md
+      - project-context.md
+  docs/features/FEATURE-WEB-PREVIEW/day6-evidence.md:
+    derived_from:
+      - docs/features/FEATURE-WEB-PREVIEW/day5-evidence.md
+      - docs/features/FEATURE-WEB-PREVIEW/browser-verification.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/status.md
+      - docs/features/FEATURE-WEB-PREVIEW/test-matrix.md
+      - quality-gates.md
+      - project-context.md
+  docs/features/FEATURE-WEB-PREVIEW/day7-evidence.md:
+    derived_from:
+      - docs/features/FEATURE-WEB-PREVIEW/day6-evidence.md
+      - docs/features/FEATURE-WEB-PREVIEW/test-matrix.md
+      - docs/features/FEATURE-WEB-PREVIEW/browser-verification.md
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/release-readiness.md
+      - docs/releases/SR-WEB-PREVIEW-01-release-candidate.md
+      - quality-gates.md
+      - project-context.md
+  docs/releases/SR-WEB-PREVIEW-01-release-candidate.md:
+    depends_on:
+      - docs/features/FEATURE-WEB-PREVIEW/day7-evidence.md
+      - docs/features/FEATURE-WEB-PREVIEW/release-readiness.md
+      - docs/features/FEATURE-WEB-PREVIEW/rollback-plan.md
+    affects:
+      - backlog.md
+      - roadmap.md
+      - project-context.md
+  docs/features/FEATURE-WEB-PREVIEW/asset-provenance.md:
+    derived_from:
+      - human-approved-image-generation-2026-09-21
+    affects:
+      - apps/web/public/preview/
+  docs/features/FEATURE-WEB-PREVIEW/visual-references.md:
+    derived_from:
+      - human-provided-visual-references-2026-09-20
+    affects:
+      - docs/features/FEATURE-WEB-PREVIEW/feature-spec.md
+      - apps/web
+    related_context:
+      - design_system_purple_noir_loja_plus_size.md
