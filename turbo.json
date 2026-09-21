@@ -10,7 +10,7 @@
     },
     "build": {
       "dependsOn": ["type-check", "^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "test": {
       "dependsOn": ["^type-check"],
@@ -24,6 +24,10 @@
     },
     "test:catalog:red": {
       "dependsOn": ["type-check"],
+      "outputs": [],
+      "cache": false
+    },
+    "test:web:red": {
       "outputs": [],
       "cache": false
     }

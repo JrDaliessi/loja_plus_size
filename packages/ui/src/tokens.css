@@ -1,0 +1,21 @@
+:root {
+  --color-ink: #0B090D;
+  --color-ink-soft: #15101C;
+  --color-surface-dark: #21152B;
+  --color-surface-editorial: #FAF7FB;
+  --color-surface-card: #FFFFFF;
+  --color-text-primary: #1A121F;
+  --color-text-secondary: #5B5260;
+  --color-text-inverse: #F8F5FA;
+  --color-text-inverse-muted: #B8AFC1;
+  --color-action-primary: #C4B5FD;
+  --color-action-strong: #8B5CF6;
+  --color-border-dark: #35263F;
+  --color-border-editorial: #E8E1EB;
+  --radius-small: 0.75rem;
+  --radius-medium: 1.25rem;
+  --radius-large: 2rem;
+  --shadow-soft: 0 1.5rem 4rem rgb(48 25 58 / 10%);
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  --content-max: 90rem;
+}

@@ -7,6 +7,7 @@ export default tseslint.config(
       '**/node_modules/**',
       '**/dist/**',
       '**/coverage/**',
+      '**/.next/**',
       '**/.turbo/**',
       'apps/api/prisma/generated/**',
       'apps/api/spikes/**/generated/**',
@@ -21,6 +22,21 @@ export default tseslint.config(
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
+    },
+  },
+  {
+    files: ['apps/web/src/**/*.{ts,tsx}'],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: ['apps/web/src/**/tests/**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/require-await': 'off',
     },
   },
   {
