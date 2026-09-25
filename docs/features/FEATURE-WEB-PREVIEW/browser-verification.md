@@ -93,3 +93,16 @@ runtime/build logs when a remote failure occurs.
 - reduced-motion stylesheet contract: PASS;
 - browser warnings/errors and overlays: zero;
 - evidence: `day6-evidence.md`.
+
+## Vercel Preview Result — 2026-09-25
+
+- deployment `dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC`: `READY`;
+- source commit `14685840fdda5893fe320be558f1d91114e0c29f`;
+- HTTP 200 with meaningful content and no Next.js error overlay;
+- browser console errors: zero;
+- four WebP images loaded with useful alt text and non-zero natural width;
+- primary navigation targets: `#inicio`, `#colecao`, `#manifesto`;
+- 320 px and 1440 px: navigation visible and no horizontal overflow;
+- response headers include HSTS, frame denial, MIME protection, permissions
+  policy, strict referrer policy and `x-robots-tag: noindex`;
+- production was not promoted.

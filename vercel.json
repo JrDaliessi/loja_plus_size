@@ -1,8 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm --filter @plus-store/web build",
-  "outputDirectory": "apps/web/.next",
-  "ignoreCommand": "node -e \"process.exit(require('node:fs').existsSync('apps/web') ? 1 : 0)\""
-}

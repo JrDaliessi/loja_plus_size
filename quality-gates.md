@@ -41,7 +41,7 @@
 - [x] comportamento mínimo GREEN — Dia 3
 - [x] lint, regressão completa e build Next.js verdes
 - [x] verificação em navegador local
-- [ ] verificação na Preview Deployment
+- [x] verificação na Preview Deployment
 
 ### Dia 3 — 2026-09-21
 
@@ -73,7 +73,7 @@
 - [x] browser verde em 320, 375, 768, 1280 e 1440 px, sem overflow ou console error
 - [x] revisão React preservou Server Components e fronteiras de apresentação
 - [x] PostgreSQL isolado encerrado e nenhuma integração remota adicionada
-- [ ] verificação na Preview Deployment permanece para `AC-013`
+- [x] verificação na Preview Deployment concluída em 2026-09-25 para `AC-013`
 
 ### Dia 5 — 2026-09-21
 
@@ -89,7 +89,7 @@
 - [x] cinco breakpoints sem overflow/overlay; quatro imagens carregadas
 - [x] console do navegador sem warnings ou errors
 - [x] PostgreSQL isolado encerrado após regressão
-- [ ] verificação na Preview Deployment permanece para `AC-013`
+- [x] verificação na Preview Deployment concluída em 2026-09-25 para `AC-013`
 
 ### Dia 6 — 2026-09-21
 
@@ -105,12 +105,12 @@
 - [x] lint, type-check, build e cinco breakpoints verdes
 - [x] console do navegador sem warnings ou errors
 - [x] PostgreSQL isolado encerrado após regressão
-- [ ] verificação na Preview Deployment permanece para `AC-013`
+- [x] verificação na Preview Deployment concluída em 2026-09-25 para `AC-013`
 
 ### Dia 7 — 2026-09-21
 
 - [x] 14/14 requisitos e critérios de aceite continuam rastreados
-- [x] 27/27 testes web e 80/80 testes API verdes (107/107 total)
+- [x] 28/28 testes web e 80/80 testes API verdes (108/108 total)
 - [x] lint, type-check e builds completos verdes
 - [x] auditorias completa e de produção sem vulnerabilidades conhecidas
 - [x] fluxo rota → aplicação → adapter demo → apresentação verificado
@@ -121,7 +121,7 @@
 - [x] PostgreSQL isolado encerrado após regressão
 - [x] Hot Context compactado e próximo passo definido
 - [ ] commit e push do candidato dependem de autorização humana
-- [ ] Vercel Preview `READY` e inspeção remota permanecem para `AC-013`
+- [x] Vercel Preview `READY` e inspeção remota concluídas para `AC-013`
 - [ ] produção permanece inalterada até aprovação explícita
 
 ## Evidência do Dia 3 — 2026-09-20

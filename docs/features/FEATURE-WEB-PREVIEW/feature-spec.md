@@ -225,9 +225,8 @@ substituir os tokens Purple Noir ou autorizar cópia de marca, dados e layout.
 - Projeto existente: `loja-plus-size` (`prj_F7vW8iP7sqyItuyVPbEk3tgFF3Nm`).
 - Team: `JrDaliessi's projects` (`team_cHPC6ZPXvRJsgt7H9mROAu9C`).
 - Git integration já está ativa no repositório.
-- O `vercel.json` atual ignora deploy enquanto `apps/web` não existe; o primeiro
-  commit de implementação deve deixar lint, testes e build verdes porque a
-  criação do diretório habilitará builds automaticamente.
+- O projeto Vercel usa `apps/web` como Root Directory e lê o contrato mínimo em
+  `apps/web/vercel.json`, permitindo detecção nativa do Next.js no monorepo.
 - Push de branch gera preview; merge em `main` geraria produção e, portanto,
   depende de aceite explícito posterior.
 - Não usar variáveis de produção, Supabase ou dados reais na preview.

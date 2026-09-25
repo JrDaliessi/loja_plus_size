@@ -5,20 +5,20 @@ project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-WEB-PREVIEW
 artifact_state: READY_FOR_RELEASE
-phase: Dia 7 concluído — release candidate local validado
+phase: Dia 7 concluído — Vercel Preview validada
 last_release: none
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Organizar commit/push autorizado da `SR-WEB-PREVIEW-01` e validar a Vercel
-Preview sem promover produção.
+Obter aprovação humana do Preview da `SR-WEB-PREVIEW-01` e decidir o merge do
+PR corretivo sem promover produção.
 
 ## Blockers
 
-- Não há bloqueio duro para criar/enviar o commit candidato.
-- `RELEASED` está bloqueado até a Vercel Preview ficar `READY`, ser inspecionada
-  e receber aprovação humana (`AC-013`).
+- Não há bloqueio duro técnico: CI e Vercel Preview estão verdes.
+- `RELEASED` está bloqueado até aprovação humana do Preview e decisão explícita
+  sobre merge/promoção.
 - O Supabase principal continua `INACTIVE`, bloqueando somente promoção remota
   do catálogo, Auth, migrations e Storage; a preview não depende desses recursos.
 
@@ -31,8 +31,8 @@ Preview sem promover produção.
 - Provedor de frete e hospedagem do backend ainda não foram selecionados.
 - Conteúdo e assets demonstrativos podem ser confundidos com catálogo real se o
   disclosure, a ausência de preço/estoque e o `noindex` não forem preservados.
-- As mudanças dos Dias 5–7 ainda não foram enviadas; o próximo push autorizado precisa
-  gerar uma nova Preview para validar headers e WebPs fora do ambiente local.
+- O Preview do commit `1468584` foi validado remotamente; produção permanece
+  inalterada e o PR corretivo #8 aguarda decisão humana.
 - A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
 - A paginação keyset usa o índice correto, mas o predicate `OR` emitido pelo Prisma filtrou 5.000 entradas em um cursor intermediário com 10.000 registros; ver `DEBT-PERF-001`.
 
@@ -74,8 +74,7 @@ Preview sem promover produção.
 
 ## Next Action
 
-Aguardar autorização humana para commit/push da `FEATURE-WEB-PREVIEW`; então
-inspecionar a Vercel Preview e concluir `AC-013`. Não fazer merge, promover
+Aguardar aprovação humana do Preview e decisão sobre o PR #8. Não promover
 produção, reativar Supabase, aplicar migration ou criar Storage automaticamente.
 
 ## History

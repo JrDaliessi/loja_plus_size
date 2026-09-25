@@ -14,7 +14,7 @@ depends_on:
   - project-stack.md
   - project-toolchain.md
   - quality-gates.md
-  - vercel.json
+  - apps/web/vercel.json
 related_context:
   - docs/features/FEATURE-CATALOG/
   - docs/releases/SR-MVP-01-catalog-release-candidate.md
@@ -30,7 +30,7 @@ acceptance_criteria:
 active_risks:
   - demo_content_may_be_mistaken_for_live_catalog
   - demo_assets_require_origin_and_license_evidence
-  - release_candidate_requires_authorized_commit_push_and_preview_validation
+  - release_candidate_requires_human_preview_approval
   - production_must_not_be_promoted_before_preview_approval
 hard_blockers_before_validation: []
 implementation_prerequisites: []
@@ -61,14 +61,14 @@ validation:
   asset_provenance: docs/features/FEATURE-WEB-PREVIEW/asset-provenance.md
   acceptance_criteria_mapped: 14
   acceptance_criteria_total: 14
-  executable_tests: 27
+  executable_tests: 28
   red_tests_before_implementation: 14
-  green_tests: 27
+  green_tests: 28
   passing_guards_before_implementation: 5
   type_check: passed_web_and_monorepo
   lint: passed_web_and_monorepo
   build: passed_web_and_monorepo
-  regression: passed_80_api_and_27_web
+  regression: passed_80_api_and_28_web
   local_browser: passed_320_375_768_1280_1440
   browser_console_errors: 0
   keyboard_navigation: passed
@@ -80,6 +80,7 @@ validation:
   production_dependency_audit: zero_known_vulnerabilities
   full_dependency_audit: zero_known_vulnerabilities
   final_local_gate: passed_2026_09_21
+  remote_preview: passed_2026_09_25
 implementation:
   app: apps/web/
   feature: apps/web/src/features/storefront-preview/
@@ -89,9 +90,12 @@ vercel:
   project_id: prj_F7vW8iP7sqyItuyVPbEk3tgFF3Nm
   team_id: team_cHPC6ZPXvRJsgt7H9mROAu9C
   delivery_target: preview
+  root_directory: apps/web
+  preview_deployment_id: dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC
+  preview_state: READY
   production_promotion_authorized: false
 versions:
   next: 16.3.5
   react: 19.3.0
   react_dom: 19.3.0
-next_action: await_human_authorization_for_commit_push_and_vercel_preview_validation
+next_action: await_human_preview_approval_and_pr_8_merge_decision
