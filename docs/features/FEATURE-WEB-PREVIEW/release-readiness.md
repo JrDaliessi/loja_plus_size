@@ -1,13 +1,13 @@
 # Release Readiness — SR-WEB-PREVIEW-01
 
-Date: 2026-09-21
+Date: 2026-09-25
 Status: `READY_FOR_RELEASE`
 
 ## Ready locally
 
 - [x] requirements and 14 acceptance criteria remain mapped;
 - [x] TDD history preserves RED, GREEN and regression evidence;
-- [x] 27/27 web and 80/80 API tests pass;
+- [x] 28/28 web and 80/80 API tests pass;
 - [x] lint, type-check and production build pass;
 - [x] complete and production dependency audits are clean;
 - [x] responsive, keyboard, contrast and reduced-motion gates pass;
@@ -18,12 +18,12 @@ Status: `READY_FOR_RELEASE`
 
 ## Required before release
 
-- [ ] create an organized commit for the Dia 5–7 candidate;
-- [ ] push the feature branch with human authorization;
-- [ ] observe the Vercel Preview reach `READY`;
-- [ ] repeat browser, console, responsive and header checks on the Preview URL;
+- [x] create organized commits for the candidate and deployment correction;
+- [x] push the authorized branches and open PRs #7 and #8;
+- [x] observe the Vercel Preview reach `READY`;
+- [x] repeat browser, console, responsive and header checks on the Preview URL;
 - [ ] obtain human approval of the Preview URL;
-- [ ] decide separately whether to open/update a PR or merge;
+- [ ] decide separately whether to merge PR #8;
 - [ ] keep production unchanged until explicit promotion approval.
 
 ## Release boundary

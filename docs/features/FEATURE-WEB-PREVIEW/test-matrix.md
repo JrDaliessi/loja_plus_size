@@ -3,7 +3,7 @@
 Status legend:
 
 - `GREEN`: observed passing locally in unit/component/static/browser validation;
-- `PLANNED`: requires the Vercel Preview environment;
+- `PLANNED`: not yet executed in the required environment;
 - `RED HISTORY`: failing baseline observed before implementation in Dia 2.
 
 | AC | Requirement | Primary validation | Layer | Day 7 status |
@@ -20,17 +20,17 @@ Status legend:
 | `FPRD-WEBPREVIEW001-AC-010` | `FPRD-WEBPREVIEW001-RQ-011` | `WEBPREVIEW-ARCH-002`; build/client bundle inspection | architecture/build | GREEN |
 | `FPRD-WEBPREVIEW001-AC-011` | `FPRD-WEBPREVIEW001-RQ-014` | `WEBPREVIEW-APP-001..003`; `WEBPREVIEW-UI-007`, `008` | application/component | GREEN |
 | `FPRD-WEBPREVIEW001-AC-012` | `FPRD-WEBPREVIEW001-RQ-012` | `WEBPREVIEW-TOOL-001`; lint, full test and `next build` | static/build | GREEN |
-| `FPRD-WEBPREVIEW001-AC-013` | `FPRD-WEBPREVIEW001-RQ-013` | `WEBPREVIEW-VERCEL-001`; preview browser verification | deployment/browser | PLANNED |
+| `FPRD-WEBPREVIEW001-AC-013` | `FPRD-WEBPREVIEW001-RQ-013` | `WEBPREVIEW-VERCEL-001`; `WEBPREVIEW-D7-VERCEL-001`; preview browser verification | deployment/browser | GREEN |
 | `FPRD-WEBPREVIEW001-AC-014` | `FPRD-WEBPREVIEW001-RQ-005`, `FPRD-WEBPREVIEW001-RQ-011` | `WEBPREVIEW-ARCH-001`; tracked-secret and bundle scans | architecture/security | GREEN local |
 
 ## Traceability Result
 
 - acceptance criteria mapped: 14/14;
 - requirements represented: 14/14;
-- executable tests: 27/27 GREEN;
+- executable tests: 28/28 GREEN;
 - local browser scenarios: 9/9 GREEN;
-- acceptance criteria locally satisfied: 13/14;
-- deployment criterion still planned: 1/14 (`AC-013`);
+- acceptance criteria satisfied: 14/14;
+- deployment criterion validated remotely: 1/1 (`AC-013`);
 - Dia 2 RED history remains in `red-evidence.md`.
 
 ## Dia 4 supplemental contracts
@@ -58,9 +58,9 @@ Status legend:
 
 ## Dia 7 final gate
 
-- 27/27 web tests and 80/80 API tests: GREEN;
+- 28/28 web tests and 80/80 API tests: GREEN;
 - lint, type-check and production builds: GREEN;
 - production and complete dependency audits: GREEN;
 - local full-story browser verification: GREEN;
-- Vercel Preview `WEBPREVIEW-VERCEL-001`: PLANNED;
+- Vercel Preview `WEBPREVIEW-VERCEL-001`: GREEN;
 - release decision: `READY_FOR_RELEASE`, not `RELEASED`.

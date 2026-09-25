@@ -4,9 +4,9 @@
 
 - Small release: `SR-WEB-PREVIEW-01`
 - Artifact state: `READY_FOR_RELEASE`
-- Review status: `DAY_7_COMPLETE_2026-09-21`
+- Review status: `PREVIEW_VALIDATED_2026-09-25`
 - Project state: `OPERATING`
-- Phase: Dia 7 concluído; release candidate local aguardando commit/push autorizado
+- Phase: Dia 7 concluído; release candidate validado na Vercel Preview
 
 ## Completed
 
@@ -57,6 +57,10 @@
   código, nos contratos e no navegador, sem integração remota.
 - Release readiness, rollback, evidência do Dia 7 e o record
   `SR-WEB-PREVIEW-01-RC1` foram materializados.
+- O PR #7 foi mesclado; a correção do Root Directory está no PR #8.
+- O commit `1468584` passou em 28/28 testes web, CI e Vercel Preview.
+- O deployment `dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC` atingiu `READY` e
+  passou em HTTP, console, imagens, headers e responsividade 320/1440 px.
 
 ## Decisions
 
@@ -65,19 +69,18 @@
 3. Dados e imagens são locais, determinísticos e explicitamente ilustrativos.
 4. Nenhum claim comercial ou integração remota entra antes do slice previsto.
 5. Commit, push, PR, merge, Preview Deployment e promoção de produção permanecem
-   operações separadas do gate local do Dia 7.
+   operações separadas; somente os três primeiros e a Preview foram concluídos.
 
 ## Blockers
 
-Não há bloqueio duro para criar e enviar o commit candidato. O Supabase inativo
-não afeta esta preview porque banco, Auth, Storage e API remota estão fora do
-escopo.
+Não há bloqueio duro técnico. O Supabase inativo não afeta esta preview porque
+banco, Auth, Storage e API remota estão fora do escopo.
 
-As mudanças dos Dias 5–7 permanecem locais. `RELEASED` continua bloqueado até
-um push autorizado, o deployment Vercel `READY` e a inspeção da URL gerada.
+`RELEASED` continua bloqueado até aprovação humana do Preview e decisão de
+merge/promoção. Produção permanece inalterada.
 
 `DEBT-WEB-001` foi resolvida com redução de 95,43%, inspeção visual, hashes e
-regressão. O critério de deployment continua pendente até validar a URL Preview.
+regressão. O critério de deployment `AC-013` está GREEN.
 
 ## Evidence
 
@@ -95,6 +98,5 @@ regressão. O critério de deployment continua pendente até validar a URL Previ
 
 ## Next Action
 
-Aguardar autorização humana para organizar o commit e push da branch. Depois,
-validar a Vercel Preview e `AC-013`. Não fazer merge ou promoção de produção
-automaticamente.
+Aguardar aprovação humana da Vercel Preview e decisão sobre o merge do PR #8.
+Não promover produção automaticamente.

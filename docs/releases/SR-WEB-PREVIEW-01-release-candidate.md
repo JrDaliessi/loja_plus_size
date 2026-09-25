@@ -3,9 +3,9 @@ id: SR-WEB-PREVIEW-01-RC1
 small_release: SR-WEB-PREVIEW-01
 feature: FEATURE-WEB-PREVIEW
 status: READY_FOR_RELEASE
-date: 2026-09-21
-commit: pending
-preview_deployment: pending
+date: 2026-09-25
+commit: 14685840fdda5893fe320be558f1d91114e0c29f
+preview_deployment: dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC
 ---
 
 # SR-WEB-PREVIEW-01 — Purple Noir Preview Release Candidate
@@ -35,8 +35,8 @@ review before the commercial storefront is implemented.
 ## Evidence
 
 - 14/14 requirements and acceptance criteria mapped;
-- 13/14 acceptance criteria satisfied locally; remote `AC-013` remains pending;
-- 27/27 web and 80/80 API tests pass (107/107 total);
+- 14/14 acceptance criteria satisfied, including remote `AC-013`;
+- 28/28 web and 80/80 API tests pass (108/108 total);
 - lint, type-check and production builds pass;
 - production and complete dependency audits report zero known vulnerabilities;
 - five responsive widths, keyboard flow and eight WCAG AA contrast samples pass;
@@ -47,13 +47,14 @@ review before the commercial storefront is implemented.
 
 ## Risks and debt
 
-- the candidate changes are local until an authorized commit and push;
-- Vercel Preview status and remote response headers are not yet verified;
+- PR #7 was merged; the Root Directory correction is isolated in PR #8;
+- the Vercel Preview is `READY` and its response headers were verified;
 - demonstrative content must retain disclosure and must not be presented as
   sellable inventory;
 - `DEBT-DEP-001` remains low-severity, test-tooling-only maintenance debt.
 
 ## Release decision
 
-The local artifact is ready to be committed and sent to the feature branch for
-Vercel Preview validation. It is not released and production remains unchanged.
+The candidate passed local, CI and Vercel Preview validation. It remains
+`READY_FOR_RELEASE`, not `RELEASED`: PR #8, human approval and production
+promotion remain separate decisions, and production is unchanged.

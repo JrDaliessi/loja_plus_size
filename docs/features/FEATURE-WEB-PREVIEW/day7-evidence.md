@@ -1,10 +1,10 @@
 # Dia 7 Evidence — FEATURE-WEB-PREVIEW
 
-Date: 2026-09-21
+Date: 2026-09-25
 
 ## Final gate result
 
-- 27/27 web tests and 80/80 API tests passed (107/107 total).
+- 28/28 web tests and 80/80 API tests passed (108/108 total).
 - Monorepo lint, TypeScript and production builds passed.
 - Production and complete dependency audits reported zero known
   vulnerabilities.
@@ -43,8 +43,23 @@ architecture guards independently prove that no remote request path exists.
 - no commit, push, pull request, deployment, merge or production promotion was
   performed in Dia 7.
 
+## Remote Preview evidence
+
+- GitHub Actions run `36166771641`: PASS;
+- Vercel deployment `dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC`: `READY`;
+- source commit: `14685840fdda5893fe320be558f1d91114e0c29f`;
+- HTTP 200, four images loaded, no framework overlay and zero console errors;
+- 320 px and 1440 px: navigation visible and no horizontal overflow;
+- security headers and `x-robots-tag: noindex` present in the remote response;
+- `FPRD-WEBPREVIEW001-AC-013`: GREEN.
+
+The first two attempts failed with `STATIC_BUILD_NO_OUT_DIR` and
+`NEXT_NO_VERSION`. The project Root Directory was corrected to `apps/web`, and
+the deployment contract was moved beside the Next.js app before the successful
+Preview.
+
 ## Decision
 
-The repository artifact is `READY_FOR_RELEASE` as a local release candidate.
-It is not `RELEASED`: `FPRD-WEBPREVIEW001-AC-013` remains pending until an
-authorized push creates a Vercel Preview that reaches `READY` and is inspected.
+The repository artifact remains `READY_FOR_RELEASE`. It is not `RELEASED`:
+technical validation is complete, but human Preview approval, PR merge and any
+production promotion are separate decisions.
