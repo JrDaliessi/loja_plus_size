@@ -3,10 +3,10 @@
 ## Current State
 
 - Small release: `SR-WEB-PREVIEW-01`
-- Artifact state: `READY_FOR_RELEASE`
-- Review status: `PREVIEW_VALIDATED_2026-09-25`
+- Artifact state: `RELEASED`
+- Review status: `PRODUCTION_VALIDATED_2026-09-25`
 - Project state: `OPERATING`
-- Phase: Dia 7 concluído; release candidate validado na Vercel Preview
+- Phase: Dia 7 concluído; release demonstrativa publicada na Vercel
 
 ## Completed
 
@@ -51,7 +51,8 @@
   metadados e oito combinações de contraste foram validados no navegador.
 - 27/27 testes web e 80/80 testes API passaram (107/107 total); lint,
   type-check, build e os cinco breakpoints permaneceram verdes.
-- O gate final repetiu 107/107 testes, lint, type-check e builds com sucesso;
+- O gate final, incluindo o contrato Vercel, totalizou 108/108 testes; lint,
+  type-check e builds passaram com sucesso;
   auditorias completa e de produção não encontraram vulnerabilidades conhecidas.
 - A história `/` → caso de uso → adapter demo → apresentação foi verificada no
   código, nos contratos e no navegador, sem integração remota.
@@ -61,6 +62,9 @@
 - O commit `1468584` passou em 28/28 testes web, CI e Vercel Preview.
 - O deployment `dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC` atingiu `READY` e
   passou em HTTP, console, imagens, headers e responsividade 320/1440 px.
+- O PR #8 foi aprovado e mesclado no commit `5c874f8`.
+- O deployment de produção `dpl_jQHa6UPru2CMbYZfXp8Q6kPLL7v4` atingiu
+  `READY`; `https://loja-plus-size.vercel.app` respondeu HTTP 200.
 
 ## Decisions
 
@@ -68,16 +72,16 @@
 2. A página inicial é a única rota deste recorte.
 3. Dados e imagens são locais, determinísticos e explicitamente ilustrativos.
 4. Nenhum claim comercial ou integração remota entra antes do slice previsto.
-5. Commit, push, PR, merge, Preview Deployment e promoção de produção permanecem
-   operações separadas; somente os três primeiros e a Preview foram concluídos.
+5. Commit, push, PR, merge, Preview e promoção foram aprovados e concluídos;
+   futuras mudanças continuam exigindo seus próprios gates.
 
 ## Blockers
 
 Não há bloqueio duro técnico. O Supabase inativo não afeta esta preview porque
 banco, Auth, Storage e API remota estão fora do escopo.
 
-`RELEASED` continua bloqueado até aprovação humana do Preview e decisão de
-merge/promoção. Produção permanece inalterada.
+Não há bloqueio remanescente para esta release. O bloqueio Supabase pertence ao
+catálogo e não altera o resultado demonstrativo publicado.
 
 `DEBT-WEB-001` foi resolvida com redução de 95,43%, inspeção visual, hashes e
 regressão. O critério de deployment `AC-013` está GREEN.
@@ -98,5 +102,5 @@ regressão. O critério de deployment `AC-013` está GREEN.
 
 ## Next Action
 
-Aguardar aprovação humana da Vercel Preview e decisão sobre o merge do PR #8.
-Não promover produção automaticamente.
+Retomar `FEATURE-CATALOG` somente após reativação e nova inspeção read-only do
+Supabase. Não aplicar migration ou criar Storage automaticamente.

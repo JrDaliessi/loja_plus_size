@@ -1,7 +1,7 @@
 # Release Readiness — SR-WEB-PREVIEW-01
 
 Date: 2026-09-25
-Status: `READY_FOR_RELEASE`
+Status: `RELEASED`
 
 ## Ready locally
 
@@ -22,12 +22,11 @@ Status: `READY_FOR_RELEASE`
 - [x] push the authorized branches and open PRs #7 and #8;
 - [x] observe the Vercel Preview reach `READY`;
 - [x] repeat browser, console, responsive and header checks on the Preview URL;
-- [ ] obtain human approval of the Preview URL;
-- [ ] decide separately whether to merge PR #8;
-- [ ] keep production unchanged until explicit promotion approval.
+- [x] obtain human approval of the Preview URL;
+- [x] merge PR #8 after explicit approval;
+- [x] validate the production deployment as `READY` and HTTP 200.
 
 ## Release boundary
 
-This checklist authorizes no external mutation by itself. Until the remote
-items are complete, the artifact is a release candidate and not a released
-production experience.
+The approved demonstrative artifact is released. This does not authorize adding
+commerce behavior, real catalog data or Supabase integration to the page.

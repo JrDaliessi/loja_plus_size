@@ -15,7 +15,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | DEBT-PERF-001 | Dívida Técnica | Otimizar predicate de cursor profundo do catálogo | P2 | dados representativos ou `SR-MVP-03` | `EXPLAIN` demonstra linhas examinadas limitadas por página sem quebrar consistência | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |
-| WEBPREVIEW-001 | Small Release | Vitrine Purple Noir demonstrativa e revisável em Preview Deployment | P0 | DS-001, arquitetura, Vercel | preview sem claims comerciais passa gates web e recebe aceite humano | IN_PROGRESS |
+| WEBPREVIEW-001 | Small Release | Vitrine Purple Noir demonstrativa e revisável em Preview Deployment | P0 | DS-001, arquitetura, Vercel | preview sem claims comerciais passa gates web e recebe aceite humano | DONE |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IN_PROGRESS |
 | VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IN_PROGRESS |
 | INV-001 | Feature | Estoque e movimentos por SKU como fonte única | P0 | VAR-001 | nenhuma operação vende quantidade indisponível | IDEA |
@@ -83,7 +83,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 23 | EXP-WEBPREVIEW-001 | Expansão controlada da preview sem integração remota | DONE — 23/23 web, 103/103 regressão e browser verde, 2026-09-21 |
 | 24 | HARDEN-WEBPREVIEW-001 | Refinar estrutura e otimizar assets preservando comportamento | DONE — 95,43% menor, headers e 105/105 regressão verdes, 2026-09-21 |
 | 25 | UX-WEBPREVIEW-001 | Validar experiência, acessibilidade e formato final da preview | DONE — 27/27 web, 107/107 regressão e browser acessível, 2026-09-21 |
-| 26 | REL-WEBPREVIEW-001 | Executar gates finais, registrar entrega e compactar contexto | DONE — `SR-WEB-PREVIEW-01-RC1`, 2026-09-21 |
+| 26 | REL-WEBPREVIEW-001 | Executar gates finais, registrar entrega e compactar contexto | DONE — `SR-WEB-PREVIEW-01` publicada, 2026-09-25 |
+| 27 | SUPA-RECHECK-001 | Revalidar o Supabase antes da promoção do catálogo | BLOCKED — projeto `INACTIVE`; schema/migrations com timeout em 2026-09-25 |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -98,10 +99,10 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
-| FEATURE-WEB-PREVIEW | `docs/features/FEATURE-WEB-PREVIEW/` | Preview remota e aprovação humana | READY_FOR_RELEASE |
+| FEATURE-WEB-PREVIEW | `docs/features/FEATURE-WEB-PREVIEW/` | Preview remota e aprovação humana | DONE |
 | TEST-WEB-PREVIEW | matriz, fixtures e cenários RED | requisitos/spec aprovados | DONE |
-| APP-WEB-PREVIEW | `apps/web` + slice Purple Noir | Preview remota e aprovação humana | READY_FOR_RELEASE |
-| VERCEL-WEB-PREVIEW | URL compartilhável de Preview Deployment | gates finais e push autorizado | READY |
+| APP-WEB-PREVIEW | `apps/web` + slice Purple Noir | Preview remota e aprovação humana | DONE |
+| VERCEL-WEB-PREVIEW | publicação demonstrativa na Vercel | gates finais e aprovação humana | DONE |
 
 ## Política de priorização
 
