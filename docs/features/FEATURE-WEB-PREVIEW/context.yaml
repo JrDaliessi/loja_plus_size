@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-WEB-PREVIEW
   small_release: SR-WEB-PREVIEW-01
   capability: software
-  state: READY_FOR_RELEASE
-  review_status: day_7_complete_2026_09_21
+  state: RELEASED
+  review_status: production_validated_2026_09_25
 derived_from:
   - docs/product/prd.md
   - design_system_purple_noir_loja_plus_size.md
@@ -30,8 +30,7 @@ acceptance_criteria:
 active_risks:
   - demo_content_may_be_mistaken_for_live_catalog
   - demo_assets_require_origin_and_license_evidence
-  - release_candidate_requires_human_preview_approval
-  - production_must_not_be_promoted_before_preview_approval
+  - demonstrative_release_must_not_be_mistaken_for_commercial_storefront
 hard_blockers_before_validation: []
 implementation_prerequisites: []
 remote_integration_prerequisites: []
@@ -81,6 +80,7 @@ validation:
   full_dependency_audit: zero_known_vulnerabilities
   final_local_gate: passed_2026_09_21
   remote_preview: passed_2026_09_25
+  production_http: passed_2026_09_25
 implementation:
   app: apps/web/
   feature: apps/web/src/features/storefront-preview/
@@ -89,13 +89,16 @@ implementation:
 vercel:
   project_id: prj_F7vW8iP7sqyItuyVPbEk3tgFF3Nm
   team_id: team_cHPC6ZPXvRJsgt7H9mROAu9C
-  delivery_target: preview
+  delivery_target: production
   root_directory: apps/web
   preview_deployment_id: dpl_FMdHXYoXZ5DDwdkVJZyK57xXX3TC
   preview_state: READY
-  production_promotion_authorized: false
+  production_deployment_id: dpl_jQHa6UPru2CMbYZfXp8Q6kPLL7v4
+  production_url: https://loja-plus-size.vercel.app
+  production_state: READY
+  production_promotion_authorized: true
 versions:
   next: 16.3.5
   react: 19.3.0
   react_dom: 19.3.0
-next_action: await_human_preview_approval_and_pr_8_merge_decision
+next_action: resume_feature_catalog_after_supabase_reactivation_and_read_only_baseline

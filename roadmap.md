@@ -33,7 +33,10 @@ remota e só será promovida além de Preview Deployment após aceite humano.
 | Dia 4 | estados acessíveis, contratos de assets e metadata localizados | DONE — 2026-09-21 |
 | Dia 5 | WebPs 95,43% menores e headers de segurança | DONE — 2026-09-21 |
 | Dia 6 | experiência, acessibilidade e formato final | DONE — `QUALITY_VALIDATION`, 2026-09-21 |
-| Dia 7 | gates finais, release candidate e compactação | DONE — `READY_FOR_RELEASE`, 2026-09-21 |
+| Dia 7 | gates finais, publicação e compactação | DONE — `RELEASED`, 2026-09-25 |
+
+Produção: `https://loja-plus-size.vercel.app` — deployment
+`dpl_jQHa6UPru2CMbYZfXp8Q6kPLL7v4` (`READY`).
 
 ### MVP — Commerce Core
 

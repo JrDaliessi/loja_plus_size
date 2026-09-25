@@ -120,9 +120,9 @@
 - [x] provenance, readiness, rollback e release candidate registrados
 - [x] PostgreSQL isolado encerrado após regressão
 - [x] Hot Context compactado e próximo passo definido
-- [ ] commit e push do candidato dependem de autorização humana
+- [x] commit, push e merge concluídos com autorização humana
 - [x] Vercel Preview `READY` e inspeção remota concluídas para `AC-013`
-- [ ] produção permanece inalterada até aprovação explícita
+- [x] produção promovida somente após aprovação explícita e validada `READY`
 
 ## Evidência do Dia 3 — 2026-09-20
 

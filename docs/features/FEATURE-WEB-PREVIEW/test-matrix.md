@@ -63,4 +63,5 @@ Status legend:
 - production and complete dependency audits: GREEN;
 - local full-story browser verification: GREEN;
 - Vercel Preview `WEBPREVIEW-VERCEL-001`: GREEN;
-- release decision: `READY_FOR_RELEASE`, not `RELEASED`.
+- release decision: `RELEASED` em 2026-09-25 após aprovação humana e
+  deployment de produção `READY`.

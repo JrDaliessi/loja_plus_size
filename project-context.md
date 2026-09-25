@@ -3,24 +3,24 @@
 project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
-active_artifact: FEATURE-WEB-PREVIEW
+active_artifact: FEATURE-CATALOG
 artifact_state: READY_FOR_RELEASE
-phase: Dia 7 concluído — Vercel Preview validada
-last_release: none
+phase: pós-release — readiness remoto do catálogo
+last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Obter aprovação humana do Preview da `SR-WEB-PREVIEW-01` e decidir o merge do
-PR corretivo sem promover produção.
+Desbloquear com segurança a promoção remota da `SR-MVP-01` sem alterar o
+Supabase enquanto o projeto permanecer inativo.
 
 ## Blockers
 
-- Não há bloqueio duro técnico: CI e Vercel Preview estão verdes.
-- `RELEASED` está bloqueado até aprovação humana do Preview e decisão explícita
-  sobre merge/promoção.
-- O Supabase principal continua `INACTIVE`, bloqueando somente promoção remota
-  do catálogo, Auth, migrations e Storage; a preview não depende desses recursos.
+- `SR-WEB-PREVIEW-01` foi publicada e validada em produção.
+- O Supabase principal está `INACTIVE`; schema e migrations retornaram timeout
+  na revalidação read-only de 2026-09-25.
+- A promoção remota do catálogo, Auth, RLS e Storage permanece bloqueada até
+  reativação e nova inspeção somente leitura.
 
 ## Active Risks
 
@@ -31,8 +31,8 @@ PR corretivo sem promover produção.
 - Provedor de frete e hospedagem do backend ainda não foram selecionados.
 - Conteúdo e assets demonstrativos podem ser confundidos com catálogo real se o
   disclosure, a ausência de preço/estoque e o `noindex` não forem preservados.
-- O Preview do commit `1468584` foi validado remotamente; produção permanece
-  inalterada e o PR corretivo #8 aguarda decisão humana.
+- A preview demonstrativa está publicada em `https://loja-plus-size.vercel.app`
+  pelo deployment `dpl_jQHa6UPru2CMbYZfXp8Q6kPLL7v4`.
 - A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
 - A paginação keyset usa o índice correto, mas o predicate `OR` emitido pelo Prisma filtrou 5.000 entradas em um cursor intermediário com 10.000 registros; ver `DEBT-PERF-001`.
 
@@ -41,18 +41,13 @@ PR corretivo sem promover produção.
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
-- active artifact: `docs/features/FEATURE-WEB-PREVIEW/`
-- active requirements: `docs/features/FEATURE-WEB-PREVIEW/feature-prd.md`
-- active specification: `docs/features/FEATURE-WEB-PREVIEW/feature-spec.md`
-- active validation: `docs/features/FEATURE-WEB-PREVIEW/test-plan.md`,
-  `docs/features/FEATURE-WEB-PREVIEW/test-matrix.md`,
-  `docs/features/FEATURE-WEB-PREVIEW/red-evidence.md`
-- active status: `docs/features/FEATURE-WEB-PREVIEW/status.md`
-- final evidence: `docs/features/FEATURE-WEB-PREVIEW/day7-evidence.md`
-- readiness/rollback: `docs/features/FEATURE-WEB-PREVIEW/release-readiness.md`,
-  `docs/features/FEATURE-WEB-PREVIEW/rollback-plan.md`
-- release candidate: `docs/releases/SR-WEB-PREVIEW-01-release-candidate.md`
-- previous artifact: `docs/features/FEATURE-CATALOG/` (`READY_FOR_RELEASE`)
+- active artifact: `docs/features/FEATURE-CATALOG/` (`READY_FOR_RELEASE`)
+- active requirements: `docs/features/FEATURE-CATALOG/feature-prd.md`
+- active specification: `docs/features/FEATURE-CATALOG/feature-spec.md`
+- active validation: `docs/features/FEATURE-CATALOG/test-plan.md`,
+  `docs/features/FEATURE-CATALOG/test-matrix.md`
+- active status: `docs/features/FEATURE-CATALOG/status.md`
+- previous release: `docs/releases/SR-WEB-PREVIEW-01.md`
 - release candidate: `docs/releases/SR-MVP-01-catalog-release-candidate.md`
 - release readiness: `docs/features/FEATURE-CATALOG/release-readiness.md`
 - rollback: `docs/features/FEATURE-CATALOG/rollback-plan.md`
@@ -67,6 +62,7 @@ PR corretivo sem promover produção.
 - repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `main`)
 - infrastructure: `docs/infrastructure/supabase.md`
 - Supabase baseline: `docs/infrastructure/supabase-baseline-2026-09-14.md`
+- Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-25.md`
 - Prisma 7 spike: `docs/features/FEATURE-CATALOG/prisma7-spike.md`
 - superseded Prisma 8 evidence: `docs/features/FEATURE-CATALOG/prisma8-spike.md`
 - sources: `docs/sources/source-map.md`
@@ -74,8 +70,9 @@ PR corretivo sem promover produção.
 
 ## Next Action
 
-Aguardar aprovação humana do Preview e decisão sobre o PR #8. Não promover
-produção, reativar Supabase, aplicar migration ou criar Storage automaticamente.
+Solicitar ao proprietário a reativação do Supabase. Depois repetir baseline
+read-only e somente então preparar decisão humana sobre migrations, Auth, RLS e
+Storage da `SR-MVP-01`.
 
 ## History
 

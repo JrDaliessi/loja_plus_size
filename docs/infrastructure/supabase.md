@@ -99,3 +99,15 @@ necessidade no Dia 2.
 - O PostgreSQL 17 local confirmou migrations do zero, idempotência, RLS em 10/10
   tabelas, nenhum grant Data API e nenhuma FK sem índice.
 - O projeto principal permaneceu sem mutação.
+
+## Revalidação pós-release — 2026-09-25
+
+- O project ref continua acessível diretamente pela conta conectada.
+- O status permanece `INACTIVE`.
+- Leituras de migrations e tabelas `public`/`app` terminaram por timeout.
+- Advisors retornaram zero findings, mas continuam inconclusivos sem conexão ao
+  banco ativo.
+- Nenhuma restauração ou mutação foi executada.
+
+Evidência detalhada:
+`docs/infrastructure/supabase-revalidation-2026-09-25.md`.

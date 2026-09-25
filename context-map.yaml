@@ -26,6 +26,7 @@ routes:
     - project-toolchain.md
   infrastructure:
     - docs/infrastructure/supabase.md
+    - docs/infrastructure/supabase-revalidation-2026-09-25.md
   active-artifact:
     - docs/features/${ACTIVE_ARTIFACT}/
   planning:
@@ -102,7 +103,7 @@ relations:
     affects:
       - apps/web
       - packages/ui
-      - vercel.json
+      - apps/web/vercel.json
   docs/features/FEATURE-WEB-PREVIEW/test-plan.md:
     derived_from:
       - docs/features/FEATURE-WEB-PREVIEW/feature-prd.md
@@ -163,6 +164,14 @@ relations:
       - docs/features/FEATURE-WEB-PREVIEW/day7-evidence.md
       - docs/features/FEATURE-WEB-PREVIEW/release-readiness.md
       - docs/features/FEATURE-WEB-PREVIEW/rollback-plan.md
+    affects:
+      - backlog.md
+      - roadmap.md
+      - project-context.md
+  docs/releases/SR-WEB-PREVIEW-01.md:
+    derived_from:
+      - docs/releases/SR-WEB-PREVIEW-01-release-candidate.md
+      - docs/features/FEATURE-WEB-PREVIEW/day7-evidence.md
     affects:
       - backlog.md
       - roadmap.md
