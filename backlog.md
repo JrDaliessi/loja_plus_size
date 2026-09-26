@@ -14,6 +14,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | DEBT-WEB-001 | Dívida Técnica | Reduzir o peso dos quatro assets-fonte da preview sem perder qualidade visual | P3 | aprovação visual estável | WebP revisado reduziu 95,43% e manteve browser/tests verdes | DONE |
 | DEBT-PERF-001 | Dívida Técnica | Otimizar predicate de cursor profundo do catálogo | P2 | dados representativos ou `SR-MVP-03` | `EXPLAIN` demonstra linhas examinadas limitadas por página sem quebrar consistência | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
+| SEC-PRISMA-001 | Security Item | Isolar o histórico de migrations do Prisma da Data API | P0 | promoção remota, CAT-SEC-009 | RLS ativa e zero CRUD para `anon`/`authenticated` | DONE |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |
 | WEBPREVIEW-001 | Small Release | Vitrine Purple Noir demonstrativa e revisável em Preview Deployment | P0 | DS-001, arquitetura, Vercel | preview sem claims comerciais passa gates web e recebe aceite humano | DONE |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IN_PROGRESS |
@@ -75,7 +76,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 15 | EXP-CAT-001 | Expandir contratos HTTP, Prisma, Auth e Storage | DONE — 66/66 testes, runtime smoke, build ESM executável e auditoria limpa |
 | 16 | HARDEN-CAT-001 | Refinar segurança, falhas externas, limites de transação e pipeline | DONE — 76/76 testes, thresholds de cobertura, build e auditorias verdes |
 | 17 | UX-CAT-001 | Validar experiência e formato consumível da API | DONE — OpenAPI/Swagger corrigidos e 80/80 testes verdes |
-| 18 | REL-CAT-001 | Executar gate final e preparar release candidate do catálogo | DONE — `READY_FOR_RELEASE`; promoção remota bloqueada pelo Supabase inativo |
+| 18 | REL-CAT-001 | Executar gate final e preparar release candidate do catálogo | DONE — `READY_FOR_RELEASE`; schema remoto promovido, backend/Auth/Storage pendentes |
 | 19 | FPRD-WEBPREVIEW-001 | Aprovar requisitos da preview Purple Noir na Vercel | DONE — 14 requisitos e 14 ACs, 2026-09-20 |
 | 20 | FSPEC-WEBPREVIEW-001 | Definir arquitetura, baseline estável e contrato de entrega da preview | DONE — `SPEC_READY`, 2026-09-20 |
 | 21 | TEST-WEBPREVIEW-001 | Materializar matriz, fixtures, testes RED e plano de browser verification | DONE — 19 testes, 14 RED e 5 guards verdes |
@@ -84,7 +85,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 24 | HARDEN-WEBPREVIEW-001 | Refinar estrutura e otimizar assets preservando comportamento | DONE — 95,43% menor, headers e 105/105 regressão verdes, 2026-09-21 |
 | 25 | UX-WEBPREVIEW-001 | Validar experiência, acessibilidade e formato final da preview | DONE — 27/27 web, 107/107 regressão e browser acessível, 2026-09-21 |
 | 26 | REL-WEBPREVIEW-001 | Executar gates finais, registrar entrega e compactar contexto | DONE — `SR-WEB-PREVIEW-01` publicada, 2026-09-25 |
-| 27 | SUPA-RECHECK-001 | Revalidar o Supabase antes da promoção do catálogo | BLOCKED — projeto `INACTIVE`; schema/migrations com timeout em 2026-09-25 |
+| 27 | SUPA-RECHECK-001 | Revalidar o Supabase antes da promoção do catálogo | DONE — `ACTIVE_HEALTHY`, alvo vazio e advisors sem findings em 2026-09-26 |
+| 28 | SUPA-PROMOTE-001 | Promover e auditar as migrations do catálogo pelo Prisma Migrate | DONE — três migrations aplicadas; RLS/grants/advisors revalidados em 2026-09-26 |
+| 29 | SEC-PRISMA-001 | Proteger `public._prisma_migrations` da Data API | DONE — CAT-SEC-009 RED/GREEN e hardening remoto verificado |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 

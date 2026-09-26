@@ -344,4 +344,39 @@ describe('FEATURE-CATALOG PostgreSQL RED contract', () => {
 
     expect(privileges).toBe('f,f');
   });
+
+  test('CAT-SEC-009 protects Prisma migration history from Data API roles', () => {
+    prepareDatabase();
+    expectSqlSuccess(`
+      do $$
+      begin
+        if not exists (select 1 from pg_roles where rolname = 'anon') then
+          create role anon nologin;
+        end if;
+        if not exists (select 1 from pg_roles where rolname = 'authenticated') then
+          create role authenticated nologin;
+        end if;
+      end
+      $$;
+    `);
+
+    const protection = expectSqlSuccess(`
+      select concat_ws(',',
+        c.relrowsecurity,
+        has_table_privilege('anon', 'public._prisma_migrations', 'select'),
+        has_table_privilege('anon', 'public._prisma_migrations', 'insert'),
+        has_table_privilege('anon', 'public._prisma_migrations', 'update'),
+        has_table_privilege('anon', 'public._prisma_migrations', 'delete'),
+        has_table_privilege('authenticated', 'public._prisma_migrations', 'select'),
+        has_table_privilege('authenticated', 'public._prisma_migrations', 'insert'),
+        has_table_privilege('authenticated', 'public._prisma_migrations', 'update'),
+        has_table_privilege('authenticated', 'public._prisma_migrations', 'delete')
+      )
+      from pg_class c
+      join pg_namespace n on n.oid = c.relnamespace
+      where n.nspname = 'public' and c.relname = '_prisma_migrations';
+    `);
+
+    expect(protection).toBe('t,f,f,f,f,f,f,f,f');
+  });
 });

@@ -136,7 +136,7 @@
 - [x] auditorias de produção e completa sem vulnerabilidades conhecidas
 - [x] Supabase principal preservado sem mutação
 - [x] adapters NestJS/Prisma/Auth/Storage e contratos HTTP/OpenAPI implementados no Dia 4
-- [ ] migration remota, advisors pós-migration e rollback de promoção permanecem bloqueados até ambiente autorizado
+- [x] migrations remotas e advisors pós-migration validados em 2026-09-26; backend/Auth/Storage continuam separados
 
 ## Evidência do Dia 4 — 2026-09-20
 
@@ -265,6 +265,22 @@
 - [x] rollback e recuperação documentados
 - [x] dívida e riscos remanescentes classificados
 - [x] backlog, contexto, release candidate e rastreabilidade atualizados
-- [ ] Supabase reativado e conexão remota segura disponível
-- [ ] migration, Auth, advisors pós-promoção e Storage validados no ambiente remoto
+- [x] Supabase reativado e conexão direta de migration usada sem persistir segredo no Git
+- [x] migrations, RLS, grants e advisors pós-promoção validados no ambiente remoto
+- [ ] Auth e Storage validados no ambiente remoto
 - [ ] backend implantado e observabilidade pública validada
+
+## Gate de promoção Supabase — 2026-09-26
+
+- [x] autorização humana registrada para as duas migrations do catálogo
+- [x] Prisma Migrate aplicou as duas migrations e confirmou o status remoto
+- [x] auditoria pós-promoção detectou exposição de `public._prisma_migrations`
+- [x] `CAT-SEC-009` falhou pelo motivo correto antes da correção
+- [x] autorização humana separada registrada para a migration de hardening
+- [x] terceira migration habilitou RLS e removeu CRUD de `anon`/`authenticated`
+- [x] 10/10 tabelas comerciais com RLS e zero grants de cliente
+- [x] advisors sem finding de segurança `ERROR`; findings `INFO` documentados
+- [x] 81 testes API e 28 testes web verdes
+- [x] type-check, lint, builds e auditorias completa/produção verdes
+- [x] evidência e lesson atualizadas
+- [ ] backend, Auth, Storage e observabilidade pública aprovados em releases próprias

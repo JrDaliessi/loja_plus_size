@@ -111,3 +111,36 @@ necessidade no Dia 2.
 
 Evidência detalhada:
 `docs/infrastructure/supabase-revalidation-2026-09-25.md`.
+
+## Revalidação após reativação — 2026-09-26
+
+- O status do projeto passou para `ACTIVE_HEALTHY`.
+- O PostgreSQL 17.6 respondeu às consultas somente leitura.
+- Não há migrations remotas de aplicação, tabelas ou views em `public`/`app`,
+  grants de cliente, policies comerciais, buckets ou Edge Functions.
+- Não há funções expostas em `public`/`app`, inclusive `SECURITY DEFINER` ou
+  executáveis por `PUBLIC`.
+- Advisors de segurança e performance retornaram zero findings.
+- O estado vazio não conflita com as duas migrations locais revisadas.
+- Nenhuma mutação foi executada; o histórico remoto deverá ser promovido pelo
+  Prisma Migrate, sem misturar mecanismos de migration.
+
+Evidência detalhada:
+`docs/infrastructure/supabase-revalidation-2026-09-26.md`.
+
+## Promoção e hardening — 2026-09-26
+
+- As duas migrations revisadas do catálogo foram aplicadas após autorização
+  humana explícita pelo Prisma Migrate.
+- A auditoria pós-promoção detectou `_prisma_migrations` em `public` com RLS
+  desabilitada e grants para `anon`/`authenticated`.
+- `CAT-SEC-009` reproduziu a falha antes da correção.
+- Uma terceira migration, autorizada separadamente, habilitou RLS e revogou os
+  acessos públicos/Data API ao histórico.
+- O estado final tem 10/10 tabelas comerciais com RLS, zero grants comerciais e
+  nenhum finding de segurança com severidade `ERROR`.
+- Auth, Storage, backend público e dados comerciais não fizeram parte da
+  promoção e continuam pendentes.
+
+Evidência detalhada:
+`docs/infrastructure/supabase-promotion-2026-09-26.md`.
