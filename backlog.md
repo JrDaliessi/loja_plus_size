@@ -75,7 +75,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 15 | EXP-CAT-001 | Expandir contratos HTTP, Prisma, Auth e Storage | DONE — 66/66 testes, runtime smoke, build ESM executável e auditoria limpa |
 | 16 | HARDEN-CAT-001 | Refinar segurança, falhas externas, limites de transação e pipeline | DONE — 76/76 testes, thresholds de cobertura, build e auditorias verdes |
 | 17 | UX-CAT-001 | Validar experiência e formato consumível da API | DONE — OpenAPI/Swagger corrigidos e 80/80 testes verdes |
-| 18 | REL-CAT-001 | Executar gate final e preparar release candidate do catálogo | DONE — `READY_FOR_RELEASE`; promoção remota bloqueada pelo Supabase inativo |
+| 18 | REL-CAT-001 | Executar gate final e preparar release candidate do catálogo | DONE — `READY_FOR_RELEASE`; promoção remota aguarda autorização explícita |
 | 19 | FPRD-WEBPREVIEW-001 | Aprovar requisitos da preview Purple Noir na Vercel | DONE — 14 requisitos e 14 ACs, 2026-09-20 |
 | 20 | FSPEC-WEBPREVIEW-001 | Definir arquitetura, baseline estável e contrato de entrega da preview | DONE — `SPEC_READY`, 2026-09-20 |
 | 21 | TEST-WEBPREVIEW-001 | Materializar matriz, fixtures, testes RED e plano de browser verification | DONE — 19 testes, 14 RED e 5 guards verdes |
@@ -84,7 +84,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 24 | HARDEN-WEBPREVIEW-001 | Refinar estrutura e otimizar assets preservando comportamento | DONE — 95,43% menor, headers e 105/105 regressão verdes, 2026-09-21 |
 | 25 | UX-WEBPREVIEW-001 | Validar experiência, acessibilidade e formato final da preview | DONE — 27/27 web, 107/107 regressão e browser acessível, 2026-09-21 |
 | 26 | REL-WEBPREVIEW-001 | Executar gates finais, registrar entrega e compactar contexto | DONE — `SR-WEB-PREVIEW-01` publicada, 2026-09-25 |
-| 27 | SUPA-RECHECK-001 | Revalidar o Supabase antes da promoção do catálogo | BLOCKED — projeto `INACTIVE`; schema/migrations com timeout em 2026-09-25 |
+| 27 | SUPA-RECHECK-001 | Revalidar o Supabase antes da promoção do catálogo | DONE — `ACTIVE_HEALTHY`, alvo vazio e advisors sem findings em 2026-09-26 |
+| 28 | SUPA-PROMOTE-001 | Promover as duas migrations revisadas pelo Prisma Migrate | READY — aguarda autorização humana explícita e conexões via secret manager |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 

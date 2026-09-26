@@ -111,3 +111,19 @@ necessidade no Dia 2.
 
 Evidência detalhada:
 `docs/infrastructure/supabase-revalidation-2026-09-25.md`.
+
+## Revalidação após reativação — 2026-09-26
+
+- O status do projeto passou para `ACTIVE_HEALTHY`.
+- O PostgreSQL 17.6 respondeu às consultas somente leitura.
+- Não há migrations remotas de aplicação, tabelas ou views em `public`/`app`,
+  grants de cliente, policies comerciais, buckets ou Edge Functions.
+- Não há funções expostas em `public`/`app`, inclusive `SECURITY DEFINER` ou
+  executáveis por `PUBLIC`.
+- Advisors de segurança e performance retornaram zero findings.
+- O estado vazio não conflita com as duas migrations locais revisadas.
+- Nenhuma mutação foi executada; o histórico remoto deverá ser promovido pelo
+  Prisma Migrate, sem misturar mecanismos de migration.
+
+Evidência detalhada:
+`docs/infrastructure/supabase-revalidation-2026-09-26.md`.

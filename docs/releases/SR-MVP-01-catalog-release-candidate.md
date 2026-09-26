@@ -51,7 +51,8 @@ truth required by later inventory, storefront and administration releases.
 - `DEBT-PERF-001` — medium: deep cursor predicate scans preceding index entries;
 - `DEBT-DEP-001` — low: deprecated transitive test-only `glob@10.5.0`;
 - remote staff permissions, Storage and secure database connections remain pending;
-- principal Supabase project was `INACTIVE` during the final read-only check.
+- principal Supabase project was reactivated and the 2026-09-26 read-only
+  baseline found an empty, healthy target; promotion remains explicitly gated.
 
 ## Release Decision
 
