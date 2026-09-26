@@ -32,6 +32,7 @@
 | `CAT-DB-001..006` | sete testes executados contra PostgreSQL 17 isolado | RED por schema de produto ainda ausente |
 | `CAT-SEC-002` | roles locais + baseline remoto sem grants comerciais | RED e boundary verificados |
 | Storage contract | `CAT-STO-001..002` + baseline remoto sem bucket | contrato RED; criação remota adiada para release autorizada |
+| `CAT-SEC-009` | PostgreSQL isolado + auditoria pós-promoção no Supabase | RED com RLS desligada; GREEN após migration de hardening; remoto sem CRUD Data API |
 
 Nenhum teste foi marcado como aprovado a partir de mock. Fakes validam somente orquestração de aplicação.
 

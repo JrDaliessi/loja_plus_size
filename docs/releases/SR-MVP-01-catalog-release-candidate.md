@@ -29,19 +29,21 @@ truth required by later inventory, storefront and administration releases.
 - `apps/web`, Purple Noir UI and Vercel preview;
 - inventory availability;
 - complete admin CRUD;
-- remote database migration or backend deployment;
+- backend deployment and runtime database connection;
 - live Auth staff provisioning;
 - Storage bucket/policies and product media objects.
 
 ## Evidence
 
 - 20/20 acceptance criteria traced to tests;
-- 16 suites and 80 tests passed;
+- 16 API suites and 81 API tests, plus 28 web tests, passed;
 - 82.65% statements, 67.32% branches, 84.09% functions and 84.19% lines;
 - type-check, lint, build and dependency audits passed;
 - [GitHub Actions run 35539866962](https://github.com/JrDaliessi/loja_plus_size/actions/runs/35539866962) passed for release-candidate commit `f2f2a16` in 1m00s;
 - fresh and idempotent migration deployment passed in isolated PostgreSQL 17;
 - RLS enabled on all 10 commercial tables, with no public/Data API grants;
+- three migrations promoted to the principal Supabase project and the Prisma
+  history table hardened against Data API roles;
 - zero missing FK indexes;
 - [release readiness](../features/FEATURE-CATALOG/release-readiness.md);
 - [rollback plan](../features/FEATURE-CATALOG/rollback-plan.md).
@@ -50,13 +52,13 @@ truth required by later inventory, storefront and administration releases.
 
 - `DEBT-PERF-001` — medium: deep cursor predicate scans preceding index entries;
 - `DEBT-DEP-001` — low: deprecated transitive test-only `glob@10.5.0`;
-- remote staff permissions, Storage and secure database connections remain pending;
-- principal Supabase project was reactivated and the 2026-09-26 read-only
-  baseline found an empty, healthy target; promotion remains explicitly gated.
+- remote staff permissions, Storage, backend runtime connection and public
+  observability remain pending;
+- post-promotion advisors have no security `ERROR`; informational no-policy and
+  unused-index findings are documented in the promotion evidence.
 
 ## Release Decision
 
-The repository artifact is ready for review and merge. Promotion to a remote
-environment remains a separate, explicitly authorized operation. Therefore this
-record is a release candidate and `last_release` remains `none` until promotion
-evidence exists.
+The database schema is promoted and secured, but the complete backend release is
+not live. This record remains a release candidate until the API runtime, Auth,
+Storage and production observability pass their own approved gates.

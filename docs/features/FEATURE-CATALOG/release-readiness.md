@@ -17,9 +17,9 @@ affects:
 
 ## Decision
 
-The source artifact is `READY_FOR_RELEASE`. It is not `RELEASED`: no migration,
-backend deployment, Auth configuration, Storage resource or application data has
-been promoted to the principal Supabase project.
+The source artifact is `READY_FOR_RELEASE`. The database schema was promoted and
+secured, but it is not `RELEASED`: backend deployment, Auth configuration,
+Storage resources and application data have not been promoted.
 
 ## Final Gate
 
@@ -27,11 +27,11 @@ been promoted to the principal Supabase project.
 |---|---|---|
 | Requirements and traceability | 20/20 acceptance criteria mapped; `CAT-*` and `CAT-EXP-*` contracts | PASS |
 | Architecture | domain/application remain independent; NestJS, Prisma and Supabase stay in adapters | PASS |
-| Automated validation | 16 suites, 80 tests; coverage thresholds satisfied | PASS |
+| Automated validation | API: 16 suites, 81 tests; web: 10 files, 28 tests; coverage thresholds satisfied | PASS |
 | Static/build | type-check, lint and build | PASS |
 | Supply chain | production and complete audits | PASS — zero known vulnerabilities |
 | Remote CI | GitHub Actions run `35539866962` for commit `f2f2a16` | PASS — 1m00s |
-| Fresh migration | two migrations applied to an empty PostgreSQL 17 database | PASS |
+| Fresh migration | three migrations applied locally and remotely to PostgreSQL 17 | PASS |
 | Migration idempotency | second `migrate deploy` reported no pending migrations | PASS |
 | Database constraints | 10 PKs, 12 FKs, 18 checks and 32 indexes in the isolated target | PASS |
 | FK indexing | catalog query found zero unindexed FK columns | PASS |
@@ -39,8 +39,9 @@ been promoted to the principal Supabase project.
 | OpenAPI experience | Swagger HTML, OpenAPI JSON, auth, pagination and outcomes | PASS |
 | Secrets | tracked-file scan found zero JWT/secret-key patterns | PASS |
 | Remote Supabase identity | project `olkadbgumpiybehslobk`, region `sa-east-1`, PostgreSQL 17 | PASS |
-| Remote advisors | security and performance returned zero findings after reactivation | PASS FOR PRE-PROMOTION BASELINE |
-| Remote migration/table drift | active database has no application migrations, tables, views, grants, policies or buckets | PASS — EMPTY TARGET |
+| Remote advisors | no security `ERROR`; deny-by-default/no-policy and unused-index findings are informational | PASS WITH DOCUMENTED INFO |
+| Remote schema promotion | three migrations complete; 10/10 catalog tables protected; no client grants | PASS |
+| Prisma history hardening | `public._prisma_migrations` has RLS and denies CRUD to `anon`/`authenticated` | PASS |
 | Recovery | additive-schema rollback and promotion recovery documented | PASS FOR CANDIDATE |
 
 ## PostgreSQL Review
@@ -63,14 +64,12 @@ uses the correct index but filters preceding entries for deep cursors. It must b
 resolved before storefront-scale traffic or when representative data is
 available.
 
-## Remote Promotion Blockers
+## Remaining Release Blockers
 
-1. Obtain explicit human approval for promotion of the two reviewed catalog migrations.
-2. Provide pooled runtime and direct migration connections through a secret manager.
-3. Apply the reviewed migrations through Prisma Migrate and rerun table/grant/RLS checks plus advisors.
-4. Validate staff permissions against live Supabase Auth in its own approved release.
-5. Create and validate the private Storage bucket/policies in their own approved release.
-6. Configure request body limits, rate limiting and production observability before public API exposure.
+1. Select and configure backend hosting with pooled runtime connection in its secret manager.
+2. Validate staff permissions against live Supabase Auth in its own approved release.
+3. Create and validate the private Storage bucket/policies in their own approved release.
+4. Configure request body limits, rate limiting and production observability before public API exposure.
 
 None of these blockers prevents starting a separately approved web discovery
 slice, but the web preview must not pretend that the remote catalog API is live.

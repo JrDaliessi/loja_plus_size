@@ -127,3 +127,20 @@ Evidência detalhada:
 
 Evidência detalhada:
 `docs/infrastructure/supabase-revalidation-2026-09-26.md`.
+
+## Promoção e hardening — 2026-09-26
+
+- As duas migrations revisadas do catálogo foram aplicadas após autorização
+  humana explícita pelo Prisma Migrate.
+- A auditoria pós-promoção detectou `_prisma_migrations` em `public` com RLS
+  desabilitada e grants para `anon`/`authenticated`.
+- `CAT-SEC-009` reproduziu a falha antes da correção.
+- Uma terceira migration, autorizada separadamente, habilitou RLS e revogou os
+  acessos públicos/Data API ao histórico.
+- O estado final tem 10/10 tabelas comerciais com RLS, zero grants comerciais e
+  nenhum finding de segurança com severidade `ERROR`.
+- Auth, Storage, backend público e dados comerciais não fizeram parte da
+  promoção e continuam pendentes.
+
+Evidência detalhada:
+`docs/infrastructure/supabase-promotion-2026-09-26.md`.

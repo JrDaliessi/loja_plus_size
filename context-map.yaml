@@ -27,6 +27,7 @@ routes:
   infrastructure:
     - docs/infrastructure/supabase.md
     - docs/infrastructure/supabase-revalidation-2026-09-26.md
+    - docs/infrastructure/supabase-promotion-2026-09-26.md
   active-artifact:
     - docs/features/${ACTIVE_ARTIFACT}/
   planning:

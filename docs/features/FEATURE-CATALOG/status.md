@@ -6,7 +6,7 @@
 - Artifact state: `READY_FOR_RELEASE`
 - Review status: `DAY_7_COMPLETE_2026-09-20`
 - Project state: `OPERATING`
-- Phase: Dia 7 concluído; PR #6 mesclado em `main`, sem promoção remota do banco
+- Phase: Dia 7 concluído; schema remoto promovido e protegido; backend/Auth/Storage pendentes
 
 ## Completed
 
@@ -106,6 +106,17 @@
   created. The artifact is not marked `RELEASED`.
 - GitHub Actions run `35539866962` passed the complete API Quality pipeline for
   release-candidate commit `f2f2a16` in 1m00s.
+- On 2026-09-26 the two reviewed catalog migrations were promoted to the
+  principal Supabase project after explicit human approval.
+- Post-promotion inspection found Prisma migration history in `public` with RLS
+  disabled and Data API grants; `CAT-SEC-009` reproduced the issue in RED.
+- A separately authorized third migration enabled RLS and revoked all public,
+  `anon` and `authenticated` access to the migration history.
+- Final remote verification confirmed all three migrations complete, 10/10
+  catalog tables protected, zero commercial client grants and no security
+  advisor finding with severity `ERROR`.
+- Final regression passed 81 API tests and 28 web tests, with type-check, lint,
+  builds and both dependency audits green.
 
 ## Resolved Blockers
 
@@ -126,7 +137,7 @@
 
 ## Prerequisites Before Remote Integration
 
-- provide the backend database connection through a secure environment manager;
+- provide the pooled backend runtime connection through a secure environment manager;
 - create and validate the Storage bucket/policies only in an approved release;
 - re-audit Prisma and remove transitives overrides when upstream packages incorporate the patches.
 
@@ -141,8 +152,8 @@
 
 ## Remaining Expansion Work
 
-- promote the two reviewed migrations only after explicit human approval, then
-  rerun remote schema, RLS, grants and advisor checks;
+- deploy the NestJS backend with pooled runtime connection, request limits,
+  rate limiting and production observability;
 - real staff permissions in Supabase Auth and end-to-end verification, including
   regression against the historical JWT rejection incident recorded on 2026-09-20;
 - creation/review of the private Storage bucket and policies in an authorized environment;
@@ -150,6 +161,6 @@
 
 ## Next Action
 
-Obter autorização explícita para promover somente as migrations do catálogo
-pelo Prisma Migrate. Auth de staff, Storage e exposição pública do backend
-permanecem ações separadas que exigem seus próprios gates.
+Revisar e mesclar a PR #10. Depois selecionar/configurar a hospedagem do backend
+e sua conexão runtime; Auth de staff, Storage e exposição pública permanecem
+ações separadas que exigem seus próprios gates.

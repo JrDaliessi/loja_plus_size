@@ -5,23 +5,22 @@ project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-CATALOG
 artifact_state: READY_FOR_RELEASE
-phase: pós-release — readiness remoto do catálogo
+phase: pós-promoção do schema — backend/Auth/Storage pendentes
 last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Preparar a decisão humana de promoção remota da `SR-MVP-01` após confirmar que
-o Supabase reativado está saudável, vazio e sem drift conflitante.
+Concluir a evidência da promoção segura do schema da `SR-MVP-01` e preparar a
+decisão de implantação do backend sem misturar Auth ou Storage no mesmo escopo.
 
 ## Blockers
 
 - `SR-WEB-PREVIEW-01` foi publicada e validada em produção.
-- O Supabase principal está `ACTIVE_HEALTHY`; o baseline read-only de 2026-09-26
-  confirmou superfície comercial vazia e zero findings nos advisors.
-- A promoção das migrations aguarda autorização humana explícita e conexões
-  backend pelo gerenciador de segredos. Auth de staff e Storage continuam
-  releases separadas.
+- O schema remoto do catálogo foi promovido e protegido por três migrations;
+  RLS, grants, histórico do Prisma e advisors foram revalidados.
+- A feature ainda não está `RELEASED`: hospedagem/conexão runtime do backend,
+  Auth de staff, Storage e observabilidade pública continuam releases separadas.
 
 ## Active Risks
 
@@ -36,6 +35,8 @@ o Supabase reativado está saudável, vazio e sem drift conflitante.
   pelo deployment `dpl_jQHa6UPru2CMbYZfXp8Q6kPLL7v4`.
 - A página de status do Supabase ainda registrava em 2026-09-20 um incidente de rejeição de JWT; a integração Auth remota precisa ser revalidada após resolução.
 - A paginação keyset usa o índice correto, mas o predicate `OR` emitido pelo Prisma filtrou 5.000 entradas em um cursor intermediário com 10.000 registros; ver `DEBT-PERF-001`.
+- Os advisors remotos reportam somente findings informativos: tabelas com RLS e
+  sem policies, coerentes com deny-by-default, e índices ainda sem uso no banco vazio.
 
 ## Current Context
 
@@ -64,6 +65,8 @@ o Supabase reativado está saudável, vazio e sem drift conflitante.
 - infrastructure: `docs/infrastructure/supabase.md`
 - Supabase baseline: `docs/infrastructure/supabase-baseline-2026-09-14.md`
 - Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-26.md`
+- Supabase promotion: `docs/infrastructure/supabase-promotion-2026-09-26.md`
+- active AI lesson: `docs/ai-lessons/AI-002-protect-prisma-migration-history.md`
 - Prisma 7 spike: `docs/features/FEATURE-CATALOG/prisma7-spike.md`
 - superseded Prisma 8 evidence: `docs/features/FEATURE-CATALOG/prisma8-spike.md`
 - sources: `docs/sources/source-map.md`
@@ -71,9 +74,9 @@ o Supabase reativado está saudável, vazio e sem drift conflitante.
 
 ## Next Action
 
-Obter autorização humana explícita para promover as duas migrations revisadas
-do catálogo pelo Prisma Migrate. Depois repetir os gates remotos de schema, RLS,
-grants e advisors; Auth de staff e Storage permanecem fora dessa promoção.
+Concluir e revisar a PR #10. Depois escolher/configurar a hospedagem do backend e
+suas conexões runtime no gerenciador de segredos; Auth de staff e Storage devem
+permanecer em releases próprias com aprovação e validação específicas.
 
 ## History
 
