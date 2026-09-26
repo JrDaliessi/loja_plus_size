@@ -39,8 +39,8 @@ been promoted to the principal Supabase project.
 | OpenAPI experience | Swagger HTML, OpenAPI JSON, auth, pagination and outcomes | PASS |
 | Secrets | tracked-file scan found zero JWT/secret-key patterns | PASS |
 | Remote Supabase identity | project `olkadbgumpiybehslobk`, region `sa-east-1`, PostgreSQL 17 | PASS |
-| Remote advisors | security and performance returned zero findings | INCONCLUSIVE FOR PROMOTION — database is inactive |
-| Remote migration/table drift | connection timed out because project status is `INACTIVE` | BLOCKED FOR PROMOTION |
+| Remote advisors | security and performance returned zero findings after reactivation | PASS FOR PRE-PROMOTION BASELINE |
+| Remote migration/table drift | active database has no application migrations, tables, views, grants, policies or buckets | PASS — EMPTY TARGET |
 | Recovery | additive-schema rollback and promotion recovery documented | PASS FOR CANDIDATE |
 
 ## PostgreSQL Review
@@ -65,10 +65,10 @@ available.
 
 ## Remote Promotion Blockers
 
-1. Reactivate the Supabase project through an explicitly authorized account action.
+1. Obtain explicit human approval for promotion of the two reviewed catalog migrations.
 2. Provide pooled runtime and direct migration connections through a secret manager.
-3. Validate staff permissions against live Supabase Auth.
-4. Apply the reviewed migrations and rerun table/grant/RLS checks plus advisors.
+3. Apply the reviewed migrations through Prisma Migrate and rerun table/grant/RLS checks plus advisors.
+4. Validate staff permissions against live Supabase Auth in its own approved release.
 5. Create and validate the private Storage bucket/policies in their own approved release.
 6. Configure request body limits, rate limiting and production observability before public API exposure.
 

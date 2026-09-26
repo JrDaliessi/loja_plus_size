@@ -11,16 +11,17 @@ last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Desbloquear com segurança a promoção remota da `SR-MVP-01` sem alterar o
-Supabase enquanto o projeto permanecer inativo.
+Preparar a decisão humana de promoção remota da `SR-MVP-01` após confirmar que
+o Supabase reativado está saudável, vazio e sem drift conflitante.
 
 ## Blockers
 
 - `SR-WEB-PREVIEW-01` foi publicada e validada em produção.
-- O Supabase principal está `INACTIVE`; schema e migrations retornaram timeout
-  na revalidação read-only de 2026-09-25.
-- A promoção remota do catálogo, Auth, RLS e Storage permanece bloqueada até
-  reativação e nova inspeção somente leitura.
+- O Supabase principal está `ACTIVE_HEALTHY`; o baseline read-only de 2026-09-26
+  confirmou superfície comercial vazia e zero findings nos advisors.
+- A promoção das migrations aguarda autorização humana explícita e conexões
+  backend pelo gerenciador de segredos. Auth de staff e Storage continuam
+  releases separadas.
 
 ## Active Risks
 
@@ -62,7 +63,7 @@ Supabase enquanto o projeto permanecer inativo.
 - repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `main`)
 - infrastructure: `docs/infrastructure/supabase.md`
 - Supabase baseline: `docs/infrastructure/supabase-baseline-2026-09-14.md`
-- Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-25.md`
+- Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-26.md`
 - Prisma 7 spike: `docs/features/FEATURE-CATALOG/prisma7-spike.md`
 - superseded Prisma 8 evidence: `docs/features/FEATURE-CATALOG/prisma8-spike.md`
 - sources: `docs/sources/source-map.md`
@@ -70,9 +71,9 @@ Supabase enquanto o projeto permanecer inativo.
 
 ## Next Action
 
-Solicitar ao proprietário a reativação do Supabase. Depois repetir baseline
-read-only e somente então preparar decisão humana sobre migrations, Auth, RLS e
-Storage da `SR-MVP-01`.
+Obter autorização humana explícita para promover as duas migrations revisadas
+do catálogo pelo Prisma Migrate. Depois repetir os gates remotos de schema, RLS,
+grants e advisors; Auth de staff e Storage permanecem fora dessa promoção.
 
 ## History
 

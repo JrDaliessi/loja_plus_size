@@ -96,6 +96,12 @@
   out and no reactivation or mutation was attempted.
 - Security and performance advisors returned zero findings, but remain
   inconclusive for promotion while the database is inactive.
+- On 2026-09-26 the project returned to `ACTIVE_HEALTHY`; a new read-only
+  baseline confirmed no application migrations, tables, views, client grants,
+  policies, buckets, exposed functions or Edge Functions, and both advisor sets
+  remained empty.
+- The inactivity blocker is resolved. Remote migration promotion still requires
+  explicit approval and backend connections from a secret manager.
 - A release candidate, release-readiness report and rollback/recovery plan were
   created. The artifact is not marked `RELEASED`.
 - GitHub Actions run `35539866962` passed the complete API Quality pipeline for
@@ -135,14 +141,15 @@
 
 ## Remaining Expansion Work
 
-- migration review against an authorized preview environment and Supabase advisors before remote promotion.
-- real staff permissions in Supabase Auth and end-to-end verification after the
-  current JWT rejection incident is resolved;
+- promote the two reviewed migrations only after explicit human approval, then
+  rerun remote schema, RLS, grants and advisor checks;
+- real staff permissions in Supabase Auth and end-to-end verification, including
+  regression against the historical JWT rejection incident recorded on 2026-09-20;
 - creation/review of the private Storage bucket and policies in an authorized environment;
 - remaining admin commands and queries from the Feature Spec in later approved increments.
 
 ## Next Action
 
-`SR-WEB-PREVIEW-01` foi definida em `docs/features/FEATURE-WEB-PREVIEW/` e segue
-como artefato ativo. A promoção remota do catálogo, ativação do Supabase,
-migrations e Storage permanecem ações separadas que exigem autorização.
+Obter autorização explícita para promover somente as migrations do catálogo
+pelo Prisma Migrate. Auth de staff, Storage e exposição pública do backend
+permanecem ações separadas que exigem seus próprios gates.
