@@ -5,7 +5,7 @@
 - Small release: `SR-INFRA-API-01`
 - Artifact state: `HARDENING`
 - Project state: `OPERATING`
-- Phase: Dia 5 concluído localmente em 2026-09-27; runner do branch pendente
+- Phase: Dia 5 concluído em 2026-09-27; local e runner Linux GREEN
 
 ## Completed
 
@@ -53,6 +53,8 @@
 - IAM, custos, digest imutável, rollback e teardown foram materializados em
   `docs/infrastructure/aws-hardening.yaml`;
 - 8/8 contratos do Dia 5, 105/105 regressões e smoke do bundle ficaram verdes.
+- build, smoke, Trivy e SBOM passaram no run `36356216865`;
+- qualidade da API passou no run `36356216882`; OIDC permaneceu `skipped`.
 
 ## Decisions
 
@@ -87,5 +89,5 @@
 
 ## Next Action
 
-Validar a branch no runner Linux e então solicitar confirmação humana para o Dia
-6. Não executar OIDC, publicar imagem nem criar serviço ECS.
+Aguardar confirmação humana para iniciar o Dia 6. Não executar OIDC, publicar
+imagem nem criar serviço ECS.

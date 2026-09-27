@@ -281,7 +281,8 @@
 - [x] bundle e smoke real verdes no Node.js 24.21.0
 - [x] audits de produção e completo sem vulnerabilidades conhecidas
 - [x] nenhuma mutação AWS, Supabase ou Vercel foi executada
-- [ ] build/smoke/Trivy/SBOM do branch no runner Linux
+- [x] build/smoke/Trivy/SBOM no runner Linux — run `36356216865`
+- [x] lint/test/build/audit no runner Linux — run `36356216882`
 - [ ] estimativa e budget AWS aprovados antes de qualquer criação remota
 
 ## Gate de software

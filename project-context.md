@@ -5,14 +5,14 @@ project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-AWS-API-DEPLOY
 artifact_state: HARDENING
-phase: Dia 5 da implantação AWS concluído localmente — runner do branch pendente
+phase: Dia 5 da implantação AWS concluído — local e runner Linux GREEN
 last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Validar no runner Linux o hardening de pool, borda e plano operacional do Dia 5,
-preservando a proibição de deploy remoto e execução OIDC.
+Aguardar o gate humano do Dia 6, preservando a proibição de deploy remoto e
+execução OIDC.
 
 ## Blockers
 
@@ -86,8 +86,8 @@ preservando a proibição de deploy remoto e execução OIDC.
 
 ## Next Action
 
-Validar a branch do Dia 5 no GitHub Linux runner. Manter
-`validate-aws-identity` sem execução e não avançar ao Dia 6 sem confirmação.
+Aguardar comando humano para iniciar o Dia 6. Manter `validate-aws-identity` sem
+execução e não criar recursos AWS.
 
 ## History
 

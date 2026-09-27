@@ -95,7 +95,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 32 | TEST-AWSAPI-001 | Criar matriz 17/17, testes RED e validações locais | DONE — 8 REDs corretos + 1 guard verde no Node 24.21.0 |
 | 33 | IMPL-AWSAPI-001 | Implementar container/health/shutdown mínimos GREEN | DONE — 10 contratos locais e 81 regressões verdes |
 | 34 | EXP-AWSAPI-001 | Expandir CI/OIDC, build/scan/SBOM e observabilidade controlada | DONE — runner `36320602513` GREEN; OIDC skipped por desenho |
-| 35 | HARDEN-AWSAPI-001 | Refinar IAM, imagem, pool, custo, rollback e teardown | IN_PROGRESS — local GREEN; runner do branch pendente |
+| 35 | HARDEN-AWSAPI-001 | Refinar IAM, imagem, pool, custo, rollback e teardown | DONE — local e runner Linux GREEN, 2026-09-27 |
 | 36 | REL-AWSAPI-001 | Executar gates finais e publicar a API aprovada | BLOCKED — depende de alvo isolado, orçamento e autorização |
 
 ## Artifact/Feature Backlog — SR-MVP-01

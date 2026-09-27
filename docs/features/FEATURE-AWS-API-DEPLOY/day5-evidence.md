@@ -47,8 +47,10 @@ The contracts cover:
   same client `200, 200, 429`, independent client `200`, Swagger `404`;
 - lint and type-check: passed on Node.js 24.21.0;
 - production and full dependency audits: no known vulnerabilities;
-- Docker is not installed locally, so the existing GitHub Linux runner remains
-  the authoritative image build, smoke, Trivy and SBOM gate after push.
+- Docker is not installed locally; the GitHub Linux runner is therefore the
+  authoritative image gate. Run `36356216865` passed build, smoke, Trivy and
+  CycloneDX SBOM; run `36356216882` passed lint, tests, build and audit.
+- Vercel preview passed; the read-only AWS identity job was `skipped` by design.
 
 ## Database Boundary
 
@@ -64,5 +66,4 @@ Supabase target.
 - select the non-production Supabase target;
 - approve the AWS Pricing Calculator estimate, monthly budget and alerts;
 - choose IaC;
-- validate the branch on GitHub Actions;
 - exercise deployment and rollback only after a separate authorization.

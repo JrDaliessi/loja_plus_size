@@ -1,6 +1,6 @@
 # Test Plan — FEATURE-AWS-API-DEPLOY
 
-Status: `HARDENING`; Dia 5 GREEN localmente e runner do branch pendente.
+Status: `HARDENING`; Dia 5 GREEN localmente e no runner Linux.
 
 ## Objective
 
@@ -86,4 +86,5 @@ contrato do runtime falhou antes da remoção de npm/corepack. O run
 No Dia 5, `AWS-HARD-001..008` cobrem pool, configuração fail-fast, CORS,
 rate limit, Swagger e o plano operacional. O último contrato recebeu uma
 escalada RED adicional para exigir ingresso da task somente pelo security group
-do ALB. O resultado local é 8/8 GREEN e a regressão completa é 105/105.
+do ALB. O resultado local é 8/8 GREEN e a regressão completa é 105/105. Os runs
+`36356216865` e `36356216882` validaram imagem e qualidade; OIDC ficou skipped.
