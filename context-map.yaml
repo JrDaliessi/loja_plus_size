@@ -26,6 +26,7 @@ routes:
     - project-toolchain.md
   infrastructure:
     - docs/infrastructure/supabase.md
+    - docs/infrastructure/aws.md
     - docs/infrastructure/supabase-revalidation-2026-09-26.md
     - docs/infrastructure/supabase-promotion-2026-09-26.md
   active-artifact:
@@ -81,6 +82,73 @@ relations:
     affects:
       - docs/features/FEATURE-CATALOG/feature-spec.md
       - docs/features/FEATURE-WEB-PREVIEW/feature-spec.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md
+  docs/features/FEATURE-AWS-API-DEPLOY/feature-prd.md:
+    derived_from:
+      - project-brief.md
+      - project-stack.md
+      - architecture.md
+      - docs/adr/ADR-005-aws-ecs-express-mode.md
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md
+      - apps/api
+      - .github/workflows/
+  docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md:
+    depends_on:
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-prd.md
+      - docs/adr/ADR-005-aws-ecs-express-mode.md
+      - docs/infrastructure/supabase.md
+    affects:
+      - apps/api/src/main.ts
+      - apps/api/src/shared/health/
+      - apps/api/Dockerfile
+      - docs/infrastructure/aws.md
+  docs/features/FEATURE-AWS-API-DEPLOY/test-plan.md:
+    derived_from:
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-prd.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
+      - apps/api/src/features/deployment/tests/red/
+  docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md:
+    depends_on:
+      - docs/features/FEATURE-AWS-API-DEPLOY/test-plan.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/fixtures.md
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/status.md
+  docs/features/FEATURE-AWS-API-DEPLOY/red-evidence.md:
+    derived_from:
+      - apps/api/src/features/deployment/tests/red/aws-deployment.red.spec.ts
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/status.md
+      - project-context.md
+  docs/features/FEATURE-AWS-API-DEPLOY/green-evidence.md:
+    derived_from:
+      - apps/api/src/features/deployment/tests/red/aws-deployment.red.spec.ts
+      - apps/api/src/shared/health/
+      - apps/api/src/shared/runtime/
+      - apps/api/Dockerfile
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/status.md
+      - project-context.md
+      - quality-gates.md
+  docs/features/FEATURE-AWS-API-DEPLOY/day4-evidence.md:
+    derived_from:
+      - apps/api/src/features/deployment/tests/red/aws-deployment.red.spec.ts
+      - .github/workflows/api-deploy.yml
+      - apps/api/src/shared/observability/
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/status.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
+      - project-context.md
+      - quality-gates.md
+  docs/infrastructure/aws.md:
+    derived_from:
+      - docs/adr/ADR-005-aws-ecs-express-mode.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md
+    affects:
+      - project-toolchain.md
+      - quality-gates.md
   design_system_purple_noir_loja_plus_size.md:
     derived_from:
       - docs/sources/source-map.md

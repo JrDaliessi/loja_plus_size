@@ -20,6 +20,9 @@ import {
   type PrismaProductClient,
 } from './features/catalog/infrastructure/persistence/prisma-product.repository';
 import { loadApiConfig } from './shared/config/api.config';
+import { BoundedReadinessProbe } from './shared/health/infrastructure/bounded-readiness.probe';
+import { createRequestTelemetry } from './shared/observability/request-telemetry';
+import { createShutdownHandler } from './shared/runtime/api-lifecycle';
 
 const bootstrap = async (): Promise<void> => {
   const config = loadApiConfig(process.env);
@@ -46,8 +49,20 @@ const bootstrap = async (): Promise<void> => {
     supabase,
     `${new URL(config.supabaseUrl).origin}/auth/v1`,
   );
+  const readinessProbe = new BoundedReadinessProbe(
+    () => prisma.$queryRaw`SELECT 1`,
+    1_000,
+  );
   const app = await NestFactory.create(
-    AppModule.register({ catalogIdentity, catalogService }),
+    AppModule.register({ catalogIdentity, catalogService, readinessProbe }),
+  );
+  app.use(
+    createRequestTelemetry({
+      environment: process.env['NODE_ENV'] ?? 'development',
+      revision: process.env['APP_REVISION'] ?? 'local',
+      service: 'plus-store-api',
+      write: (record) => process.stdout.write(`${JSON.stringify(record)}\n`),
+    }),
   );
   const openApi = SwaggerModule.createDocument(
     app,
@@ -59,16 +74,14 @@ const bootstrap = async (): Promise<void> => {
       .build(),
   );
   SwaggerModule.setup('docs', app, openApi);
-  app.enableShutdownHooks();
-
-  const shutdown = async (): Promise<void> => {
-    await app.close();
-    await prisma.$disconnect();
-  };
+  const shutdown = createShutdownHandler({
+    closeApplication: () => app.close(),
+    disconnectDatabase: () => prisma.$disconnect(),
+  });
   process.once('SIGINT', () => void shutdown());
   process.once('SIGTERM', () => void shutdown());
 
-  await app.listen(config.port);
+  await app.listen(config.port, '0.0.0.0');
 };
 
 bootstrap().catch(() => {

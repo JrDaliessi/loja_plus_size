@@ -1,0 +1,89 @@
+version: 4
+artifact:
+  id: FEATURE-AWS-API-DEPLOY
+  small_release: SR-INFRA-API-01
+  capability: software
+  state: IN_PROGRESS
+  review_status: day_4_local_green_runner_pending_2026_09_27
+derived_from:
+  - project-brief.md
+  - project-stack.md
+  - architecture.md
+  - docs/adr/ADR-005-aws-ecs-express-mode.md
+depends_on:
+  - apps/api/package.json
+  - apps/api/src/main.ts
+  - apps/api/src/shared/config/api.config.ts
+  - docs/infrastructure/supabase.md
+  - quality-gates.md
+related_context:
+  - docs/features/FEATURE-CATALOG/
+  - docs/releases/SR-MVP-01-catalog-release-candidate.md
+affects:
+  - apps/api
+  - .github/workflows
+  - project-stack.md
+  - project-toolchain.md
+  - architecture.md
+requirements:
+  range: FPRD-AWSAPI001-RQ-001..017
+acceptance_criteria:
+  range: FPRD-AWSAPI001-AC-001..017
+active_risks:
+  - fargate_alb_cloudwatch_cost
+  - iam_or_secret_misconfiguration
+  - external_database_latency_and_pool_exhaustion
+  - accidental_production_data_use_in_staging
+hard_blockers_before_remote_deploy:
+  - aws_account_profile_and_target_not_validated
+  - non_production_supabase_target_not_selected
+  - budget_scaling_limits_and_cost_not_approved
+  - iac_mechanism_not_selected
+implementation_prerequisites:
+  - human_approval_for_day_4
+quality_gates:
+  - requirements_traceability
+  - tdd_red_before_green
+  - container_security
+  - secrets_and_iam
+  - cost_and_resource_inventory
+  - health_observability_and_rollback
+  - lint_typecheck_test_build
+validation:
+  acceptance_criteria_mapped: 17
+  acceptance_criteria_total: 17
+  plan: docs/features/FEATURE-AWS-API-DEPLOY/test-plan.md
+  matrix: docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
+  fixtures: docs/features/FEATURE-AWS-API-DEPLOY/fixtures.md
+  red_evidence: docs/features/FEATURE-AWS-API-DEPLOY/red-evidence.md
+  green_evidence: docs/features/FEATURE-AWS-API-DEPLOY/green-evidence.md
+  day_4_evidence: docs/features/FEATURE-AWS-API-DEPLOY/day4-evidence.md
+  executable_tests: 16
+  original_red_tests: 8
+  escalated_red_tests: 2
+  passing_guards: 1
+  type_check: passed_node_24_21_0
+  red_runtime: node_24_21_0
+  day_4_red_tests: 6
+  local_green_tests: 16
+  deferred_red_tests: 0
+  api_regression: passed_97_of_97
+  lint: passed
+  build: passed
+  runtime_smoke: passed_live_ready_bind_shutdown
+  workflow_yaml: passed
+  immutable_action_pins: passed_7_of_7
+  prohibited_workflow_content: zero_findings
+  container_build: pending_github_linux_runner
+  oidc_identity_check: defined_manual_not_executed
+aws:
+  region: sa-east-1
+  runtime: ecs_express_mode_fargate
+  registry: ecr_private
+  mcp: not_configured_read_only_first
+  resource_creation_authorized: false
+supabase:
+  production_project_ref: olkadbgumpiybehslobk
+  staging_target: not_selected
+  shared_production_credentials_allowed: false
+next_action: request_human_authorization_for_git_publish_and_ci_execution

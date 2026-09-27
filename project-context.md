@@ -3,24 +3,24 @@
 project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
-active_artifact: FEATURE-CATALOG
-artifact_state: READY_FOR_RELEASE
-phase: pós-promoção do schema — backend/Auth/Storage pendentes
+active_artifact: FEATURE-AWS-API-DEPLOY
+artifact_state: IN_PROGRESS
+phase: Dia 4 da implantação AWS — implementação local GREEN, runner pendente
 last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Concluir a evidência da promoção segura do schema da `SR-MVP-01` e preparar a
-decisão de implantação do backend sem misturar Auth ou Storage no mesmo escopo.
+Executar no GitHub o workflow de build/smoke/scan/SBOM já validado localmente,
+sem executar OIDC, publicar imagem, criar ECS ou aceitar custos AWS.
 
 ## Blockers
 
-- `SR-WEB-PREVIEW-01` foi publicada e validada em produção.
-- O schema remoto do catálogo foi promovido e protegido por três migrations;
-  RLS, grants, histórico do Prisma e advisors foram revalidados.
-- A feature ainda não está `RELEASED`: hospedagem/conexão runtime do backend,
-  Auth de staff, Storage e observabilidade pública continuam releases separadas.
+- Docker não está instalado neste host; build, smoke, scan e SBOM reais aguardam
+  commit/push e execução do runner Linux do GitHub Actions.
+- Antes de deploy remoto: validar conta/perfil/região AWS, escolher um Supabase
+  não produtivo, aprovar custos/limites e decidir o mecanismo de IaC.
+- Nenhum recurso AWS ou custo foi criado; AWS MCP ainda não está configurado.
 
 ## Active Risks
 
@@ -28,7 +28,9 @@ decisão de implantação do backend sem misturar Auth ou Storage no mesmo escop
 - Dados de medidas corporais e CRM exigem minimização e controles LGPD.
 - Estoque, pagamento e webhooks exigem idempotência, consistência e rollback.
 - Overrides transitivos de segurança devem ser reavaliados em toda atualização do Prisma e removidos quando o upstream incorporar os patches.
-- Provedor de frete e hospedagem do backend ainda não foram selecionados.
+- ECS/Fargate, ALB, CloudWatch e tráfego geram custo mesmo com baixa utilização.
+- IAM/Secrets mal configurados podem expor credenciais ou ampliar privilégios.
+- Conectar staging ao Supabase principal violaria isolamento de ambientes.
 - Conteúdo e assets demonstrativos podem ser confundidos com catálogo real se o
   disclosure, a ausência de preço/estoque e o `noindex` não forem preservados.
 - A preview demonstrativa está publicada em `https://loja-plus-size.vercel.app`
@@ -43,30 +45,37 @@ decisão de implantação do backend sem misturar Auth ou Storage no mesmo escop
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
-- active artifact: `docs/features/FEATURE-CATALOG/` (`READY_FOR_RELEASE`)
-- active requirements: `docs/features/FEATURE-CATALOG/feature-prd.md`
-- active specification: `docs/features/FEATURE-CATALOG/feature-spec.md`
-- active validation: `docs/features/FEATURE-CATALOG/test-plan.md`,
-  `docs/features/FEATURE-CATALOG/test-matrix.md`
-- active status: `docs/features/FEATURE-CATALOG/status.md`
+- active artifact: `docs/features/FEATURE-AWS-API-DEPLOY/` (`IN_PROGRESS`)
+- active requirements: `docs/features/FEATURE-AWS-API-DEPLOY/feature-prd.md`
+- active specification: `docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md`
+- active validation: `docs/features/FEATURE-AWS-API-DEPLOY/test-plan.md`,
+  `docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md`,
+  `docs/features/FEATURE-AWS-API-DEPLOY/red-evidence.md`,
+  `docs/features/FEATURE-AWS-API-DEPLOY/green-evidence.md`,
+  `docs/features/FEATURE-AWS-API-DEPLOY/day4-evidence.md`
+- active status: `docs/features/FEATURE-AWS-API-DEPLOY/status.md`
 - previous release: `docs/releases/SR-WEB-PREVIEW-01.md`
 - release candidate: `docs/releases/SR-MVP-01-catalog-release-candidate.md`
 - release readiness: `docs/features/FEATURE-CATALOG/release-readiness.md`
 - rollback: `docs/features/FEATURE-CATALOG/rollback-plan.md`
-- implementation: `apps/api/src/features/catalog/`, `apps/api/src/main.ts`, `apps/api/src/app.module.ts`
+- implementation: `apps/api/src/features/catalog/`, `apps/api/src/shared/health/`,
+  `apps/api/src/shared/runtime/`, `apps/api/src/main.ts`, `apps/api/src/app.module.ts`,
+  `apps/api/src/shared/observability/`, `apps/api/Dockerfile`,
+  `.github/workflows/api-deploy.yml`
 - database schema: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`
-- relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`
+- relevant ADRs: `docs/adr/ADR-001-web-api-boundaries.md`, `docs/adr/ADR-002-supabase-data-boundary.md`, `docs/adr/ADR-004-prisma-7-stable-adoption.md`, `docs/adr/ADR-005-aws-ecs-express-mode.md`
 - quality gates: `quality-gates.md`
 - technical debt: `docs/technical-debt.md`
 - CI: `.github/workflows/api-quality.yml`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
-- repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `main`)
-- infrastructure: `docs/infrastructure/supabase.md`
+- repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `codex/aws-api-deployment`)
+- infrastructure: `docs/infrastructure/supabase.md`, `docs/infrastructure/aws.md`
 - Supabase baseline: `docs/infrastructure/supabase-baseline-2026-09-14.md`
 - Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-26.md`
 - Supabase promotion: `docs/infrastructure/supabase-promotion-2026-09-26.md`
-- active AI lesson: `docs/ai-lessons/AI-002-protect-prisma-migration-history.md`
+- active AI lessons: `docs/ai-lessons/AI-002-protect-prisma-migration-history.md`,
+  `docs/ai-lessons/AI-003-docker-build-context-contract.md`
 - Prisma 7 spike: `docs/features/FEATURE-CATALOG/prisma7-spike.md`
 - superseded Prisma 8 evidence: `docs/features/FEATURE-CATALOG/prisma8-spike.md`
 - sources: `docs/sources/source-map.md`
@@ -74,9 +83,8 @@ decisão de implantação do backend sem misturar Auth ou Storage no mesmo escop
 
 ## Next Action
 
-Concluir e revisar a PR #10. Depois escolher/configurar a hospedagem do backend e
-suas conexões runtime no gerenciador de segredos; Auth de staff e Storage devem
-permanecer em releases próprias com aprovação e validação específicas.
+Solicitar autorização para commit/push e acompanhar o job `verify-image` no
+GitHub. Manter `validate-aws-identity` sem execução até aprovação própria.
 
 ## History
 

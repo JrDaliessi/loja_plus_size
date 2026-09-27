@@ -285,10 +285,16 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 ## Deployment Architecture
 
 - Web: Vercel, conforme decisão aprovada.
-- API: provider permanece `OPEN` entre Railway, Render, Fly.io ou infraestrutura própria.
+- API: AWS ECS Express Mode sobre Fargate em `sa-east-1`, conforme ADR-005.
+- Imagem: ECR privado, scan e referência imutável por digest/tag.
+- Runtime: HTTPS/load balancer, health checks, logs, limites de escala e rollback
+  gerenciados pelo ECS Express Mode.
+- Segredos e acesso: Secrets Manager, IAM mínimo e GitHub OIDC; nenhuma access
+  key permanente no repositório ou CI.
 - Banco/Auth/Storage: Supabase projeto `olkadbgumpiybehslobk`.
 - Ambientes de desenvolvimento, preview e produção não compartilharão credenciais ou dados reais por conveniência.
-- Deploy do backend exige migrations verificadas, health checks e plano de rollback.
+- Deploy do backend exige migrations separadas do startup, health checks, custo
+  aprovado, observabilidade, inventário, teardown e plano de rollback.
 
 ## Architecture Decisions
 
@@ -298,10 +304,11 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 | `ADR-002` | Backend-only para dados comerciais e schema não exposto no Supabase | `ACCEPTED` |
 | `ADR-003` | Adoção condicionada do Prisma 8 RC | `SUPERSEDED` |
 | `ADR-004` | Adoção do Prisma 7 estável | `ACCEPTED` |
+| `ADR-005` | API no AWS ECS Express Mode/Fargate em `sa-east-1` | `ACCEPTED` |
 
 ## Explicitly Deferred
 
-- provider de hospedagem da API;
+- mecanismo de IaC do ambiente AWS;
 - provider de frete;
 - Redis/BullMQ;
 - estratégia de cache da vitrine;
@@ -323,14 +330,16 @@ O banco guarda identidade, path, tipo, ordem, texto alternativo, dimensões quan
 - [x] ADRs e arquitetura aprovados pelo humano.
 - [x] Baseline real do Supabase verificado antes de schema/migrations.
 - [x] Node.js 24 LTS validado com o Prisma 7 (`24.21.0`).
+- [x] Hospedagem da API definida por ADR-005 sem criar infraestrutura remota.
 
 ## Approval
 
 Status: **APROVADO PELO HUMANO EM 2026-09-14**.
 
 Gate atingido: `ARCHITECTURE_READY`. ADR-004, aprovado em 2026-09-15,
-substitui somente ADR-003. Baseline Supabase e toolchain Node/Prisma foram
-validados; implementação continua dependendo do comando explícito do Dia 3.
+substitui somente ADR-003. ADR-005, aprovado em 2026-09-26, define o deploy da
+API sem autorizar recursos ou custos. Implementação continua dependendo dos
+testes RED e do comando explícito do Dia 3.
 
 ## Official Technical References
 
@@ -340,3 +349,5 @@ validados; implementação continua dependendo do comando explícito do Dia 3.
 - Supabase RLS: `https://supabase.com/docs/guides/database/postgres/row-level-security`
 - Prisma ORM release status: `https://www.prisma.io/docs/prisma-orm/release-status`
 - Prisma 7 PostgreSQL: `https://www.prisma.io/docs/orm/v7/core-concepts/supported-databases/postgresql`
+- ECS Express Mode: `https://docs.aws.amazon.com/AmazonECS/latest/developerguide/express-service-overview.html`
+- Fargate pricing: `https://aws.amazon.com/fargate/pricing/`
