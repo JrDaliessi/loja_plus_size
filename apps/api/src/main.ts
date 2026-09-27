@@ -20,14 +20,20 @@ import {
   type PrismaProductClient,
 } from './features/catalog/infrastructure/persistence/prisma-product.repository';
 import { loadApiConfig } from './shared/config/api.config';
+import { createPrismaPgOptions } from './shared/database/prisma-pg-options';
 import { BoundedReadinessProbe } from './shared/health/infrastructure/bounded-readiness.probe';
 import { createRequestTelemetry } from './shared/observability/request-telemetry';
 import { createShutdownHandler } from './shared/runtime/api-lifecycle';
+import {
+  configureTrustedProxy,
+  createCorsOptions,
+  createPublicCatalogRateLimiter,
+} from './shared/security/public-edge-policy';
 
 const bootstrap = async (): Promise<void> => {
   const config = loadApiConfig(process.env);
   const prisma = new PrismaClient({
-    adapter: new PrismaPg({ connectionString: config.databaseUrl }),
+    adapter: new PrismaPg(createPrismaPgOptions(config)),
   });
   const persistence = prisma as unknown as PrismaProductClient & PrismaTransactionalClient;
   const transactionContext = new PrismaCatalogTransactionContext();
@@ -56,6 +62,12 @@ const bootstrap = async (): Promise<void> => {
   const app = await NestFactory.create(
     AppModule.register({ catalogIdentity, catalogService, readinessProbe }),
   );
+  configureTrustedProxy(app, config.rateLimit.trustProxyHops);
+  app.enableCors(createCorsOptions(config.allowedOrigins));
+  app.use(
+    '/v1/catalog/products',
+    createPublicCatalogRateLimiter(config.rateLimit),
+  );
   app.use(
     createRequestTelemetry({
       environment: process.env['NODE_ENV'] ?? 'development',
@@ -64,16 +76,18 @@ const bootstrap = async (): Promise<void> => {
       write: (record) => process.stdout.write(`${JSON.stringify(record)}\n`),
     }),
   );
-  const openApi = SwaggerModule.createDocument(
-    app,
-    new DocumentBuilder()
-      .setTitle('Plus Store Catalog API')
-      .setDescription('Versioned catalog contracts for Plus Store')
-      .setVersion('1')
-      .addBearerAuth()
-      .build(),
-  );
-  SwaggerModule.setup('docs', app, openApi);
+  if (config.swaggerEnabled) {
+    const openApi = SwaggerModule.createDocument(
+      app,
+      new DocumentBuilder()
+        .setTitle('Plus Store Catalog API')
+        .setDescription('Versioned catalog contracts for Plus Store')
+        .setVersion('1')
+        .addBearerAuth()
+        .build(),
+    );
+    SwaggerModule.setup('docs', app, openApi);
+  }
   const shutdown = createShutdownHandler({
     closeApplication: () => app.close(),
     disconnectDatabase: () => prisma.$disconnect(),
