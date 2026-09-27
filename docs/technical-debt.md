@@ -2,6 +2,22 @@
 
 ## Active
 
+### DEBT-RATE-001 — Distribuir o rate limit antes da escala horizontal
+
+- Severity: `MEDIUM`
+- Capability: `software`
+- Affects: `FEATURE-AWS-API-DEPLOY`, catálogo público
+- Problem: o limiter atual usa memória por task; com mais de uma task o limite
+  agregado deixa de ser global.
+- Current control: `desired_tasks: 1`, limite por cliente, proxy confiável e teto
+  documentado; o controle já reduz abuso casual sem criar infraestrutura extra.
+- Risk of delay: escala horizontal pode multiplicar o volume aceito pelo número
+  de tasks e reinícios perdem contadores locais.
+- Recommended phase: antes de aumentar `desired_tasks` ou abrir operação
+  comercial.
+- Resolution criterion: WAF ou store distribuído aprovado aplica limite global,
+  possui teste multi-instância e preserva fail-closed/observabilidade.
+
 ### DEBT-PERF-001 — Optimize deep catalog cursor predicates
 
 - Severity: `MEDIUM`

@@ -3,9 +3,9 @@
 ## Current State
 
 - Small release: `SR-INFRA-API-01`
-- Artifact state: `IN_PROGRESS`
+- Artifact state: `HARDENING`
 - Project state: `OPERATING`
-- Phase: Dia 4 concluído em 2026-09-27; runner Linux GREEN
+- Phase: Dia 5 concluído localmente em 2026-09-27; runner do branch pendente
 
 ## Completed
 
@@ -45,6 +45,14 @@
 - build, smoke, Trivy e SBOM passaram no run `36320602513`;
 - API Quality passou no run `36320602528`;
 - o job OIDC foi explicitamente ignorado (`skipped`) pelo gatilho do PR.
+- pool PostgreSQL explícito e limitado a cinco conexões por task;
+- configuração de produção falha sem origens HTTPS explícitas e bloqueia
+  Swagger público;
+- CORS por allowlist e rate limit do catálogo por cliente/proxy foram validados;
+- task futura aceita tráfego somente do security group do ALB;
+- IAM, custos, digest imutável, rollback e teardown foram materializados em
+  `docs/infrastructure/aws-hardening.yaml`;
+- 8/8 contratos do Dia 5, 105/105 regressões e smoke do bundle ficaram verdes.
 
 ## Decisions
 
@@ -75,8 +83,9 @@
 - RED: `red-evidence.md`
 - GREEN: `green-evidence.md`
 - Dia 4: `day4-evidence.md`
+- Dia 5: `day5-evidence.md`
 
 ## Next Action
 
-Aguardar comando humano para iniciar o Dia 5, dedicado a hardening de imagem,
-IAM, pool, custo e rollback. Não executar OIDC nem criar serviço ECS.
+Validar a branch no runner Linux e então solicitar confirmação humana para o Dia
+6. Não executar OIDC, publicar imagem nem criar serviço ECS.

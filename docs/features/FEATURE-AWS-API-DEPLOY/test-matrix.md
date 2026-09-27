@@ -10,16 +10,16 @@
 | `FPRD-AWSAPI001-RQ-004` | `FPRD-AWSAPI001-AC-004` | `AWS-HEALTH-001` | HTTP | RED | GREEN |
 | `FPRD-AWSAPI001-RQ-005` | `FPRD-AWSAPI001-AC-005` | `AWS-HEALTH-002`, `AWS-HEALTH-003`, `AWS-HEALTH-004`, isolated PostgreSQL timeout | HTTP/integration | RED | GREEN |
 | `FPRD-AWSAPI001-RQ-006` | `FPRD-AWSAPI001-AC-006` | `AWS-LIFE-001`, child-process SIGTERM smoke | runtime | RED | GREEN |
-| `FPRD-AWSAPI001-RQ-007` | `FPRD-AWSAPI001-AC-007` | `AWS-MIG-001`, startup smoke sem `DIRECT_URL` | static/runtime | GREEN guard | GREEN |
+| `FPRD-AWSAPI001-RQ-007` | `FPRD-AWSAPI001-AC-007` | `AWS-MIG-001`, `AWS-HARD-001`, startup smoke sem `DIRECT_URL` | static/runtime | GREEN guard | GREEN; pool 5/task explícito |
 | `FPRD-AWSAPI001-RQ-008` | `FPRD-AWSAPI001-AC-008` | manifest/IaC review + ECR digest evidence | infrastructure | BLOCKED remote | BLOCKED remote |
-| `FPRD-AWSAPI001-RQ-009` | `FPRD-AWSAPI001-AC-009` | IAM/Secrets matrix + policy simulator/review | security | PLANNED | PLANNED |
+| `FPRD-AWSAPI001-RQ-009` | `FPRD-AWSAPI001-AC-009` | `AWS-HARD-008` + policy simulator/review | security | PLANNED | LOCAL GREEN plan; simulator blocked remote |
 | `FPRD-AWSAPI001-RQ-010` | `FPRD-AWSAPI001-AC-010` | `AWS-CI-001`, `AWS-CI-003`, `AWS-CI-004` + OIDC claim review | CI/security | RED | LOCAL GREEN; OIDC not executed |
 | `FPRD-AWSAPI001-RQ-011` | `FPRD-AWSAPI001-AC-011` | `AWS-OBS-001`, `AWS-OBS-002`, correlated smoke + CloudWatch redaction query | observability | BLOCKED remote | LOCAL GREEN; CloudWatch blocked remote |
-| `FPRD-AWSAPI001-RQ-012` | `FPRD-AWSAPI001-AC-012` | cost estimate + Budget + scaling review | FinOps | BLOCKED approval | BLOCKED approval |
-| `FPRD-AWSAPI001-RQ-013` | `FPRD-AWSAPI001-AC-013` | unhealthy revision/canary rollback exercise | release | BLOCKED remote | BLOCKED remote |
+| `FPRD-AWSAPI001-RQ-012` | `FPRD-AWSAPI001-AC-012` | `AWS-HARD-008`, cost estimate + Budget + scaling review | FinOps | BLOCKED approval | PLAN GREEN; estimate/approval blocked |
+| `FPRD-AWSAPI001-RQ-013` | `FPRD-AWSAPI001-AC-013` | `AWS-HARD-008`, unhealthy revision/canary rollback exercise | release | BLOCKED remote | PLAN GREEN; exercise blocked remote |
 | `FPRD-AWSAPI001-RQ-014` | `FPRD-AWSAPI001-AC-014` | target-ref/credential separation evidence | environment | BLOCKED target | BLOCKED target |
 | `FPRD-AWSAPI001-RQ-015` | `FPRD-AWSAPI001-AC-015` | `AWS-CI-001`, `AWS-CI-004`, scanner report + SBOM | supply chain | RED | GREEN; Trivy + CycloneDX `36320602513` |
-| `FPRD-AWSAPI001-RQ-016` | `FPRD-AWSAPI001-AC-016` | HTTP contracts for CORS/rate limit/Swagger | edge/security | PLANNED Day 4 | DEFERRED Day 5; outside approved slice |
+| `FPRD-AWSAPI001-RQ-016` | `FPRD-AWSAPI001-AC-016` | `AWS-HARD-002..007`, bundle smoke | edge/security | PLANNED Day 4 | LOCAL GREEN; 7 contracts + smoke |
 | `FPRD-AWSAPI001-RQ-017` | `FPRD-AWSAPI001-AC-017` | change record with account/region/action/rollback | governance | BLOCKED mutation | BLOCKED mutation |
 
 ## Coverage Summary

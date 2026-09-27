@@ -3,8 +3,8 @@ artifact:
   id: FEATURE-AWS-API-DEPLOY
   small_release: SR-INFRA-API-01
   capability: software
-  state: IN_PROGRESS
-  review_status: day_4_runner_green_2026_09_27
+  state: HARDENING
+  review_status: day_5_local_green_runner_pending_2026_09_27
 derived_from:
   - project-brief.md
   - project-stack.md
@@ -40,7 +40,7 @@ hard_blockers_before_remote_deploy:
   - budget_scaling_limits_and_cost_not_approved
   - iac_mechanism_not_selected
 implementation_prerequisites:
-  - human_approval_for_day_5
+  - github_linux_runner_validation_for_day_5
 quality_gates:
   - requirements_traceability
   - tdd_red_before_green
@@ -58,7 +58,8 @@ validation:
   red_evidence: docs/features/FEATURE-AWS-API-DEPLOY/red-evidence.md
   green_evidence: docs/features/FEATURE-AWS-API-DEPLOY/green-evidence.md
   day_4_evidence: docs/features/FEATURE-AWS-API-DEPLOY/day4-evidence.md
-  executable_tests: 16
+  day_5_evidence: docs/features/FEATURE-AWS-API-DEPLOY/day5-evidence.md
+  executable_tests: 24
   original_red_tests: 8
   escalated_red_tests: 2
   passing_guards: 1
@@ -67,7 +68,6 @@ validation:
   day_4_red_tests: 6
   local_green_tests: 16
   deferred_red_tests: 0
-  api_regression: passed_97_of_97
   lint: passed
   build: passed
   runtime_smoke: passed_live_ready_bind_shutdown
@@ -80,6 +80,11 @@ validation:
   cyclone_dx_sbom: generated_and_uploaded_run_36320602513
   api_quality_ci: passed_run_36320602528
   oidc_identity_check: skipped_by_design_not_executed
+  day_5_red_observations: 13
+  day_5_contracts: 8
+  day_5_green_tests: 8
+  api_regression: passed_105_of_105
+  production_bundle_smoke: passed_cors_rate_limit_swagger
 aws:
   region: sa-east-1
   runtime: ecs_express_mode_fargate
@@ -90,4 +95,4 @@ supabase:
   production_project_ref: olkadbgumpiybehslobk
   staging_target: not_selected
   shared_production_credentials_allowed: false
-next_action: request_human_approval_for_day_5_hardening
+next_action: validate_day_5_branch_on_github_linux_runner
