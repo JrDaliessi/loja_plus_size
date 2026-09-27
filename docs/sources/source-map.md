@@ -48,3 +48,29 @@ por hash; não são assets versionados do produto.
 - A Vercel documenta Preview Deployments por branch/PR, com URL própria e
   produção inalterada até merge/promoção:
   `https://vercel.com/academy/svelte-on-vercel/preview-deployments`.
+
+## Verificações temporais da FEATURE-AWS-API-DEPLOY
+
+- Em 2026-09-26, a documentação oficial descreve ECS Express Mode como uma
+  configuração gerenciada de ECS/Fargate com HTTPS/load balancer, health,
+  autoscaling, logs, alarmes e rollback:
+  `https://docs.aws.amazon.com/AmazonECS/latest/developerguide/express-service-overview.html`.
+- ECS/Fargate está disponível em `sa-east-1`; Express Mode não adiciona taxa
+  própria, mas Fargate, ALB, CloudWatch e transferência permanecem cobrados:
+  `https://docs.aws.amazon.com/pt_br/AmazonECS/latest/developerguide/AWS_Fargate-Regions.html`
+  e `https://aws.amazon.com/fargate/pricing/`.
+- A AWS documenta MCP do ECS em preview; a decisão do projeto é começar
+  somente leitura e manter mutações sob aprovação:
+  `https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-mcp-introduction.html`.
+- O changelog do Supabase de 2026-09-25 foi comparado com schema/migrations. Não
+  foram encontrados `ltree`, `pgcrypto`, `btree_gist` ou operadores customizados
+  afetados no projeto atual: `https://supabase.com/changelog`.
+- O workflow do Dia 4 segue os contratos oficiais do Docker Buildx/Build Push,
+  Trivy Action e GitHub artifact upload, todos fixados por SHA:
+  `https://github.com/docker/setup-buildx-action`,
+  `https://github.com/docker/build-push-action`,
+  `https://github.com/aquasecurity/trivy-action` e
+  `https://github.com/actions/upload-artifact`.
+- OIDC usa credenciais temporárias e `id-token: write` conforme a Action oficial
+  da AWS; o job do projeto é manual, read-only e não foi executado:
+  `https://github.com/aws-actions/configure-aws-credentials`.

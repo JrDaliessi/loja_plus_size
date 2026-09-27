@@ -51,7 +51,7 @@ Filas futuras: Redis + BullMQ.
 | Observabilidade | Sentry + logs estruturados e correlação de fluxo |
 | CI/CD | GitHub Actions |
 | Deploy web | Vercel |
-| Deploy API | Decisão pendente entre Railway, Render, Fly.io ou infraestrutura própria |
+| Deploy API | AWS ECS Express Mode sobre Fargate em `sa-east-1`, conforme ADR-005 |
 
 ## Fronteiras arquiteturais
 
@@ -81,10 +81,19 @@ O runtime usa `DATABASE_URL` pooled; CLI, introspection e migrations usam
 unicidade são mapeados por `P2002` e campo afetado. Prisma 8 só será reavaliado
 após GA e novo ADR.
 
+## Deploy AWS aprovado
+
+- imagens privadas no Amazon ECR e deploy por digest/tag imutável;
+- HTTPS, health checks, autoscaling e rollback pelo ECS Express Mode;
+- Secrets Manager, IAM mínimo, CloudWatch e GitHub OIDC;
+- Supabase permanece PostgreSQL/Auth/Storage, sem duplicação em AWS;
+- custo, teto de escala, alvo Supabase não produtivo e IaC exigem aprovação
+  antes do primeiro recurso remoto.
+
 ## Decisões deliberadamente adiadas
 
 - Nome comercial definitivo.
-- Hospedagem do NestJS.
+- mecanismo de IaC entre Terraform, CDK ou configuração exportável do ECS;
 - Provedor inicial de frete.
 - Adoção de Stripe.
 - Primeiro marketplace externo.

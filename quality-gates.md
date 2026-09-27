@@ -201,6 +201,72 @@
 - Escalada executada ao encontrar referência ausente.
 - Histórico não carregado automaticamente.
 
+## Gate DEPLOY-API-AWS — Dia 1 (2026-09-26)
+
+- [x] decisão AWS aprovada e registrada no ADR-005
+- [x] 17 requisitos e 17 critérios de aceite possuem IDs estáveis
+- [x] arquitetura Vercel → ECS/Fargate → Supabase está explícita
+- [x] `sa-east-1`, ECR e ECS Express Mode estão definidos
+- [x] contratos de container, health, readiness e SIGTERM estão definidos
+- [x] `DATABASE_URL` pooled e migrations separadas do startup estão definidos
+- [x] Secrets Manager, IAM mínimo e GitHub OIDC estão no contrato
+- [x] logs, retenção, custo, limites, inventário, rollback e teardown estão no contrato
+- [x] ambiente Supabase não produtivo é gate antes de deploy remoto
+- [x] AWS MCP começa read-only e mutações permanecem sob aprovação
+- [x] changelog Supabase revisado; schema atual não usa extensões/operações afetadas
+- [x] nenhum arquivo de código, recurso AWS, credencial ou custo foi criado
+- [x] matriz 17/17 e testes RED — Dia 2
+- [x] implementação local do container/health — Dia 3
+- [ ] deploy remoto — somente após gates e autorização específicos
+
+## Gate DEPLOY-API-AWS — Dia 2 (2026-09-26)
+
+- [x] matriz cobre 17/17 requisitos e critérios de aceite
+- [x] fixtures são sintéticas e não apontam para conta/banco real
+- [x] suíte isolada possui nove contratos executáveis
+- [x] Node.js 24.21.0 executou a suíte
+- [x] oito REDs falharam pela ausência correta do comportamento/artefato
+- [x] guard contra migration/`DIRECT_URL` no startup permaneceu verde
+- [x] type-check da API passou no runtime pinado
+- [x] regras de pooling, limites, timeout e prepared statements foram incorporadas
+- [x] nenhum Supabase remoto, AWS, imagem, custo ou deployment foi acessado
+- [x] container/health/shutdown local GREEN — Dia 3
+- [x] workflow AWS/OIDC/scan/SBOM materializado — Dia 4
+
+## Gate DEPLOY-API-AWS — Dia 3 (2026-09-27)
+
+- [x] `AWS-HEALTH-001..004` verdes com falha genérica e timeout limitado
+- [x] bind explícito em `0.0.0.0:$PORT`
+- [x] shutdown idempotente fecha aplicação e Prisma uma única vez
+- [x] Dockerfile fixa Node 24.21.0/pnpm 11.19.0 e usuário não-root
+- [x] Dockerfile-specific ignore protege o contexto raiz do monorepo
+- [x] build limpa outputs antigos antes de gerar o bundle
+- [x] pacote runtime contém somente `dist/main.js`, sourcemap e `package.json`
+- [x] 10 contratos locais verdes; `AWS-CI-001` diferido explicitamente
+- [x] type-check, lint e build verdes no Node.js 24.21.0
+- [x] 81/81 testes existentes da API verdes no PostgreSQL local isolado
+- [x] smoke HTTP: live/ready 200, listener `0.0.0.0:3101`, shutdown limpo
+- [x] PostgreSQL local encerrado e zero acesso Supabase/AWS remoto
+- [x] build/run da imagem e smoke no runner Linux — run `36320602513`
+- [x] scan e SBOM no runner; OIDC skipped por design — Dia 4
+
+## Gate DEPLOY-API-AWS — Dia 4 (2026-09-27)
+
+- [x] quatro contratos CI falharam antes da criação do workflow
+- [x] dois contratos de observabilidade falharam antes da implementação
+- [x] 16/16 contratos locais da feature ficaram GREEN
+- [x] 97/97 testes completos da API ficaram GREEN no PostgreSQL isolado
+- [x] type-check, lint e build passaram no Node.js 24.21.0
+- [x] workflow YAML contém build, smoke, Trivy e CycloneDX
+- [x] sete Actions estão fixadas por SHA completo
+- [x] nenhum access key, login ECR, push de imagem ou deploy ECS foi definido
+- [x] OIDC é manual, protegido por environment e limitado a caller identity
+- [x] telemetry usa allowlist sem headers, bodies ou detalhes de erro
+- [x] nenhum AWS/Supabase remoto ou custo foi acessado
+- [x] workflow executado em runner Linux e evidências anexadas — PR #11,
+  run `36320602513`
+- [ ] CORS/rate limit/Swagger de produção — escopo proposto para Dia 5
+
 ## Gate de software
 
 - Requisito e critério de aceite possuem IDs estáveis.

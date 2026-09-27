@@ -20,6 +20,9 @@
 | Zod | estável atual | `4.6.5` | request e JSON Schema sincronizados |
 | esbuild | estável atual | `0.28.2` | bundle Node ESM executável validado |
 | GitHub Actions | actions oficiais fixadas por SHA | checkout `v7.0.1`, pnpm/setup `v2.1.0` | pipeline API materializado |
+| Docker Actions | versões fixadas por SHA | setup-buildx `v4.1.0`, build-push `v7.4.0` | build/smoke verdes no run `36320602513` |
+| Trivy Action | versão fixada por SHA | `0.35.0` | scan/SBOM verdes no run `36320602513` |
+| AWS credentials Action | versão fixada por SHA | `v6.3.0` | OIDC read-only manual; não executado |
 
 ## Ferramentas planejadas
 
@@ -31,6 +34,11 @@
 - Banco: Prisma 7 CLI, `@prisma/adapter-pg`, Supabase CLI e SQL revisado.
 - E2E: Playwright.
 - CI: GitHub Actions.
+- Container: Docker/BuildKit multi-stage, scanner e SBOM, após testes RED do Dia 2.
+- AWS: CLI v2 e AWS MCP somente quando necessários; primeira conexão read-only.
+- Runtime remoto: ECR + ECS Express Mode/Fargate em `sa-east-1`.
+- Autenticação CI: GitHub OIDC; access keys permanentes são proibidas.
+- IaC: decisão humana pendente entre Terraform, CDK ou configuração exportável.
 
 ## Política de dependências
 
@@ -76,6 +84,9 @@ Turborepo deverá declarar dependências e outputs corretos, permitir dry-run e 
 
 ## Pré-requisitos remanescentes
 
-- fornecer a conexão PostgreSQL do backend pelo gerenciador de segredos antes de integração/deploy remoto;
+- validar identidade/conta/região AWS em modo read-only antes de qualquer mutação;
+- selecionar alvo Supabase não produtivo e fornecer `DATABASE_URL` pooled pelo Secrets Manager;
+- aprovar estimativa de custo, budget, retenção e limites de escala;
+- decidir o mecanismo de IaC antes do primeiro ambiente AWS durável;
 - criar bucket/policies de Storage somente na release autorizada;
 - reauditar a árvore completa e os overrides transitivos em toda atualização do Prisma.

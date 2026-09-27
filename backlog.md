@@ -13,10 +13,12 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | DEBT-DEP-001 | Dívida Técnica | Remover `glob@10.5.0` deprecated da árvore de cobertura Jest | P3 | atualização upstream de `test-exclude`/Jest | instalação sem a versão deprecated e regressão verde | READY |
 | DEBT-WEB-001 | Dívida Técnica | Reduzir o peso dos quatro assets-fonte da preview sem perder qualidade visual | P3 | aprovação visual estável | WebP revisado reduziu 95,43% e manteve browser/tests verdes | DONE |
 | DEBT-PERF-001 | Dívida Técnica | Otimizar predicate de cursor profundo do catálogo | P2 | dados representativos ou `SR-MVP-03` | `EXPLAIN` demonstra linhas examinadas limitadas por página sem quebrar consistência | READY |
+| DEBT-CI-001 | Dívida Técnica | Remover warning de `actions/cache` em Node.js 20 transitivo do Trivy | P3 | release upstream compatível | runner não emite warning e preserva scan/SBOM verdes | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
 | SEC-PRISMA-001 | Security Item | Isolar o histórico de migrations do Prisma da Data API | P0 | promoção remota, CAT-SEC-009 | RLS ativa e zero CRUD para `anon`/`authenticated` | DONE |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |
 | WEBPREVIEW-001 | Small Release | Vitrine Purple Noir demonstrativa e revisável em Preview Deployment | P0 | DS-001, arquitetura, Vercel | preview sem claims comerciais passa gates web e recebe aceite humano | DONE |
+| AWS-API-001 | Small Release | Empacotar e implantar a API NestJS de forma observável e reversível na AWS | P0 | catálogo, ADR-005, ambiente isolado, orçamento | API saudável em ECS/Fargate, sem segredos, com smoke e rollback | IN_PROGRESS |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IN_PROGRESS |
 | VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IN_PROGRESS |
 | INV-001 | Feature | Estoque e movimentos por SKU como fonte única | P0 | VAR-001 | nenhuma operação vende quantidade indisponível | IDEA |
@@ -88,6 +90,13 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 27 | SUPA-RECHECK-001 | Revalidar o Supabase antes da promoção do catálogo | DONE — `ACTIVE_HEALTHY`, alvo vazio e advisors sem findings em 2026-09-26 |
 | 28 | SUPA-PROMOTE-001 | Promover e auditar as migrations do catálogo pelo Prisma Migrate | DONE — três migrations aplicadas; RLS/grants/advisors revalidados em 2026-09-26 |
 | 29 | SEC-PRISMA-001 | Proteger `public._prisma_migrations` da Data API | DONE — CAT-SEC-009 RED/GREEN e hardening remoto verificado |
+| 30 | FPRD-AWSAPI-001 | Aprovar requisitos e ACs da implantação AWS | DONE — 17/17, 2026-09-26 |
+| 31 | FSPEC-AWSAPI-001 | Definir arquitetura, container, segurança, custo e rollback | DONE — ADR-005 e `SPEC_READY`, 2026-09-26 |
+| 32 | TEST-AWSAPI-001 | Criar matriz 17/17, testes RED e validações locais | DONE — 8 REDs corretos + 1 guard verde no Node 24.21.0 |
+| 33 | IMPL-AWSAPI-001 | Implementar container/health/shutdown mínimos GREEN | DONE — 10 contratos locais e 81 regressões verdes |
+| 34 | EXP-AWSAPI-001 | Expandir CI/OIDC, build/scan/SBOM e observabilidade controlada | IN_PROGRESS — local GREEN; build/scan/SBOM no runner pendentes |
+| 35 | HARDEN-AWSAPI-001 | Refinar IAM, imagem, pool, custo, rollback e teardown | BLOCKED — depende de ambiente AWS |
+| 36 | REL-AWSAPI-001 | Executar gates finais e publicar a API aprovada | BLOCKED — depende de alvo isolado, orçamento e autorização |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -106,6 +115,16 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | TEST-WEB-PREVIEW | matriz, fixtures e cenários RED | requisitos/spec aprovados | DONE |
 | APP-WEB-PREVIEW | `apps/web` + slice Purple Noir | Preview remota e aprovação humana | DONE |
 | VERCEL-WEB-PREVIEW | publicação demonstrativa na Vercel | gates finais e aprovação humana | DONE |
+
+## Artifact/Feature Backlog — SR-INFRA-API-01
+
+| ID | Entregável | Dependência | Estado |
+|---|---|---|---|
+| FEATURE-AWS-API-DEPLOY | `docs/features/FEATURE-AWS-API-DEPLOY/` | ADR-005 e aprovação humana | IN_PROGRESS — Dia 3 local GREEN |
+| TEST-AWS-API | matriz, fixtures, REDs e smoke local | requisitos/spec aprovados | DONE |
+| CONTAINER-AWS-API | Dockerfile, health e shutdown | Dia 2 validado | IN_PROGRESS — contrato local GREEN; build Docker pendente |
+| AWS-ENVIRONMENT | ECR/ECS/IAM/Secrets/CloudWatch | alvo isolado, custo, IaC e autorização | BLOCKED |
+| AWS-RELEASE | deployment, smoke e rollback | ambiente verde e gates finais | BLOCKED |
 
 ## Política de priorização
 

@@ -1,0 +1,166 @@
+name: API Image Verification
+
+on:
+  pull_request:
+    paths:
+      - apps/api/**
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - turbo.json
+      - .github/workflows/api-deploy.yml
+  push:
+    branches: [main]
+    paths:
+      - apps/api/**
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - turbo.json
+      - .github/workflows/api-deploy.yml
+  workflow_dispatch:
+    inputs:
+      validate_aws_identity:
+        description: Validate the approved read-only AWS role through OIDC
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: api-image-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE_TAG: plus-store-api:${{ github.sha }}
+
+jobs:
+  verify-image:
+    name: Build, smoke, scan and generate SBOM
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: plus_store_aws_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d plus_store_aws_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
+
+      - name: Build local verification image
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: apps/api/Dockerfile
+          load: true
+          push: false
+          tags: ${{ env.IMAGE_TAG }}
+
+      - name: Smoke liveness, readiness and graceful shutdown
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          docker run --detach --rm \
+            --name plus-store-api-smoke \
+            --network host \
+            --env DATABASE_URL=postgresql://postgres@127.0.0.1:55432/plus_store_aws_test \
+            --env SUPABASE_URL=https://example.supabase.co \
+            --env SUPABASE_PUBLISHABLE_KEY=sb_publishable_test_only_not_a_real_key \
+            --env SUPABASE_STORAGE_BUCKET=product-media-test \
+            --env PORT=3101 \
+            "${IMAGE_TAG}"
+
+          cleanup() {
+            docker logs plus-store-api-smoke || true
+            docker stop --time 15 plus-store-api-smoke || true
+          }
+          trap cleanup EXIT
+
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:3101/health/ready > /dev/null; then
+              break
+            fi
+            if [[ "${attempt}" == "20" ]]; then
+              exit 1
+            fi
+            sleep 1
+          done
+
+          curl --fail --silent http://127.0.0.1:3101/health/live \
+            | grep --fixed-strings '"status":"ok"'
+          curl --fail --silent http://127.0.0.1:3101/health/ready \
+            | grep --fixed-strings '"status":"ready"'
+
+          docker stop --time 15 plus-store-api-smoke
+          trap - EXIT
+
+      - name: Scan image for high and critical vulnerabilities
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        with:
+          scan-type: image
+          image-ref: ${{ env.IMAGE_TAG }}
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: HIGH,CRITICAL
+
+      - name: Generate CycloneDX SBOM
+        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 # 0.35.0
+        with:
+          scan-type: image
+          image-ref: ${{ env.IMAGE_TAG }}
+          format: cyclonedx
+          output: api-image.cdx.json
+          exit-code: "0"
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: api-image-sbom-${{ github.sha }}
+          path: api-image.cdx.json
+          if-no-files-found: error
+          retention-days: 14
+
+  validate-aws-identity:
+    name: Validate read-only AWS identity
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.validate_aws_identity }}
+    needs: verify-image
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: aws-staging-readonly
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Exchange GitHub OIDC token for the approved read-only role
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_READONLY_ROLE_ARN }}
+          aws-region: sa-east-1
+          allowed-account-ids: ${{ vars.AWS_ACCOUNT_ID }}
+          role-session-name: plus-store-readonly-${{ github.run_id }}
+          mask-aws-account-id: true
+          translate-env-variables: false
+
+      - name: Confirm caller identity without mutating AWS
+        shell: bash
+        run: aws sts get-caller-identity --query Account --output text > /dev/null
