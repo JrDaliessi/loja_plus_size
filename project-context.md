@@ -5,19 +5,17 @@ project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-AWS-API-DEPLOY
 artifact_state: IN_PROGRESS
-phase: Dia 4 da implantação AWS — implementação local GREEN, runner pendente
+phase: Dia 4 da implantação AWS concluído — runner Linux GREEN
 last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Executar no GitHub o workflow de build/smoke/scan/SBOM já validado localmente,
-sem executar OIDC, publicar imagem, criar ECS ou aceitar custos AWS.
+Preparar o gate humano do Dia 5 para hardening de imagem, IAM, pool, custo e
+rollback, preservando a proibição de deploy remoto e execução OIDC.
 
 ## Blockers
 
-- Docker não está instalado neste host; build, smoke, scan e SBOM reais aguardam
-  commit/push e execução do runner Linux do GitHub Actions.
 - Antes de deploy remoto: validar conta/perfil/região AWS, escolher um Supabase
   não produtivo, aprovar custos/limites e decidir o mecanismo de IaC.
 - Nenhum recurso AWS ou custo foi criado; AWS MCP ainda não está configurado.
@@ -69,7 +67,7 @@ sem executar OIDC, publicar imagem, criar ECS ou aceitar custos AWS.
 - CI: `.github/workflows/api-quality.yml`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
-- repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `codex/aws-api-deployment`)
+- repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, branch `codex/aws-api-deployment`, PR `#11`)
 - infrastructure: `docs/infrastructure/supabase.md`, `docs/infrastructure/aws.md`
 - Supabase baseline: `docs/infrastructure/supabase-baseline-2026-09-14.md`
 - Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-26.md`
@@ -83,8 +81,8 @@ sem executar OIDC, publicar imagem, criar ECS ou aceitar custos AWS.
 
 ## Next Action
 
-Solicitar autorização para commit/push e acompanhar o job `verify-image` no
-GitHub. Manter `validate-aws-identity` sem execução até aprovação própria.
+Aguardar comando humano para iniciar o Dia 5. Manter
+`validate-aws-identity` sem execução até aprovação própria.
 
 ## History
 

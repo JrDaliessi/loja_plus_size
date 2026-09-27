@@ -4,7 +4,7 @@ artifact:
   small_release: SR-INFRA-API-01
   capability: software
   state: IN_PROGRESS
-  review_status: day_4_local_green_runner_pending_2026_09_27
+  review_status: day_4_runner_green_2026_09_27
 derived_from:
   - project-brief.md
   - project-stack.md
@@ -40,7 +40,7 @@ hard_blockers_before_remote_deploy:
   - budget_scaling_limits_and_cost_not_approved
   - iac_mechanism_not_selected
 implementation_prerequisites:
-  - human_approval_for_day_4
+  - human_approval_for_day_5
 quality_gates:
   - requirements_traceability
   - tdd_red_before_green
@@ -74,8 +74,12 @@ validation:
   workflow_yaml: passed
   immutable_action_pins: passed_7_of_7
   prohibited_workflow_content: zero_findings
-  container_build: pending_github_linux_runner
-  oidc_identity_check: defined_manual_not_executed
+  container_build: passed_github_linux_runner_run_36320602513
+  container_smoke: passed_live_ready_sigterm_run_36320602513
+  trivy_scan: passed_high_critical_gate_run_36320602513
+  cyclone_dx_sbom: generated_and_uploaded_run_36320602513
+  api_quality_ci: passed_run_36320602528
+  oidc_identity_check: skipped_by_design_not_executed
 aws:
   region: sa-east-1
   runtime: ecs_express_mode_fargate
@@ -86,4 +90,4 @@ supabase:
   production_project_ref: olkadbgumpiybehslobk
   staging_target: not_selected
   shared_production_credentials_allowed: false
-next_action: request_human_authorization_for_git_publish_and_ci_execution
+next_action: request_human_approval_for_day_5_hardening

@@ -5,7 +5,7 @@
 - Small release: `SR-INFRA-API-01`
 - Artifact state: `IN_PROGRESS`
 - Project state: `OPERATING`
-- Phase: Dia 4 implementado localmente em 2026-09-27; runner pendente
+- Phase: Dia 4 concluído em 2026-09-27; runner Linux GREEN
 
 ## Completed
 
@@ -37,6 +37,14 @@
 - logs estruturados por allowlist e correlação foram integrados ao entrypoint;
 - 16/16 contratos locais e 97/97 testes completos da API passaram;
 - YAML, sete action pins e ausência de keys/push/deploy foram validados.
+- PR #11 criado com três commits organizados na branch
+  `codex/aws-api-deployment`;
+- primeiro scan bloqueou quatro vulnerabilidades HIGH corrigíveis do npm
+  embarcado na imagem runtime;
+- contrato RED/GREEN e commit `1391c95` removeram npm/corepack do estágio final;
+- build, smoke, Trivy e SBOM passaram no run `36320602513`;
+- API Quality passou no run `36320602528`;
+- o job OIDC foi explicitamente ignorado (`skipped`) pelo gatilho do PR.
 
 ## Decisions
 
@@ -47,12 +55,6 @@
 5. IaC permanece decisão humana aberta antes do primeiro ambiente durável.
 
 ## Blockers
-
-### Para encerrar o Dia 4
-
-Docker não está disponível neste host. O workflow precisa ser commitado e
-enviado ao GitHub para produzir as evidências reais de build, smoke, scan e
-SBOM no runner Linux. O OIDC deve continuar sem execução nesta validação.
 
 ### Antes de deploy remoto
 
@@ -76,5 +78,5 @@ SBOM no runner Linux. O OIDC deve continuar sem execução nesta validação.
 
 ## Next Action
 
-Solicitar autorização para commit/push e acompanhar o workflow de validação da
-imagem. Não executar o job OIDC nem criar serviço ECS.
+Aguardar comando humano para iniciar o Dia 5, dedicado a hardening de imagem,
+IAM, pool, custo e rollback. Não executar OIDC nem criar serviço ECS.

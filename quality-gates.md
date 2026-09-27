@@ -247,8 +247,8 @@
 - [x] 81/81 testes existentes da API verdes no PostgreSQL local isolado
 - [x] smoke HTTP: live/ready 200, listener `0.0.0.0:3101`, shutdown limpo
 - [x] PostgreSQL local encerrado e zero acesso Supabase/AWS remoto
-- [ ] build/run da imagem — Docker indisponível neste host
-- [ ] workflow OIDC, scan e SBOM — Dia 4
+- [x] build/run da imagem e smoke no runner Linux — run `36320602513`
+- [x] scan e SBOM no runner; OIDC skipped por design — Dia 4
 
 ## Gate DEPLOY-API-AWS — Dia 4 (2026-09-27)
 
@@ -263,7 +263,8 @@
 - [x] OIDC é manual, protegido por environment e limitado a caller identity
 - [x] telemetry usa allowlist sem headers, bodies ou detalhes de erro
 - [x] nenhum AWS/Supabase remoto ou custo foi acessado
-- [ ] workflow executado em runner Linux e evidências anexadas
+- [x] workflow executado em runner Linux e evidências anexadas — PR #11,
+  run `36320602513`
 - [ ] CORS/rate limit/Swagger de produção — escopo proposto para Dia 5
 
 ## Gate de software

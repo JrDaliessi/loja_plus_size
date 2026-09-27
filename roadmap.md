@@ -49,7 +49,7 @@ Mode/Fargate `sa-east-1` e preserva PostgreSQL/Auth/Storage no Supabase.
 | Dia 1 | requisitos 17/17, ADR-005 e spec AWS | DONE — `SPEC_READY`, 2026-09-26 |
 | Dia 2 | matriz 17/17, 9 contratos e RED válido | DONE — `VALIDATION_READY`, 2026-09-26 |
 | Dia 3 | health/bind/shutdown/container contract mínimos GREEN | DONE — 10 locais + 81 regressão, 2026-09-27 |
-| Dia 4 | CI, OIDC, build/scan/SBOM e observabilidade controlada | IN_PROGRESS — local 16/16 + regressão 97/97; runner pendente |
+| Dia 4 | CI, OIDC, build/scan/SBOM e observabilidade controlada | DONE — runner Linux GREEN, OIDC skipped, 2026-09-27 |
 | Dia 5 | hardening de imagem, IAM, pool, custo e rollback | PENDING |
 | Dia 6 | experiência operacional e validação remota controlada | PENDING |
 | Dia 7 | gates finais, deployment aprovado e compactação | PENDING |

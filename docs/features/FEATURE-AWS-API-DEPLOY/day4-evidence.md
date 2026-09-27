@@ -1,7 +1,7 @@
 # Day 4 Evidence — FEATURE-AWS-API-DEPLOY
 
 Date: 2026-09-27
-State: `IN_PROGRESS`; local expansion GREEN, Linux runner evidence pending.
+State: `IN_PROGRESS`; Day 4 GREEN locally and on the Linux runner.
 
 ## Approved Scope
 
@@ -60,15 +60,27 @@ strings are not accepted by the record contract.
 - prohibited workflow content scan: zero findings;
 - local PostgreSQL and API listeners: stopped after validation.
 
-## Pending Runner Evidence
+## Linux Runner Evidence
 
-Docker is not installed on this host. Therefore the following evidence remains
-pending until this branch is committed/pushed and GitHub Actions executes:
+PR [#11](https://github.com/JrDaliessi/loja_plus_size/pull/11) executed the
+container gate on GitHub-hosted Linux. The first run correctly blocked four
+fixed HIGH findings bundled with the runtime image's unused npm toolchain. The
+fix in commit `1391c95` removed npm/corepack and their shims from the final
+stage, after a new contract first failed and then passed.
 
-- real BuildKit image build;
-- container smoke in Linux;
-- Trivy report;
-- generated CycloneDX artifact.
+The second [API Image Verification run](https://github.com/JrDaliessi/loja_plus_size/actions/runs/36320602513)
+completed successfully:
 
-The OIDC identity job must remain unexecuted until the human approves the AWS
-read-only role, account variable, trust policy and protected environment.
+- BuildKit image build: passed;
+- liveness, readiness and graceful SIGTERM smoke: passed;
+- Trivy HIGH/CRITICAL blocking policy: passed;
+- CycloneDX SBOM generation and 14-day artifact upload: passed;
+- `Validate read-only AWS identity`: skipped by design.
+
+The independent [API Quality run](https://github.com/JrDaliessi/loja_plus_size/actions/runs/36320602528)
+also passed. No AWS identity exchange, ECR publication, ECS deployment,
+Supabase remote access or billable AWS resource was created.
+
+The runner emitted one non-blocking warning because the Trivy composite action
+still calls an `actions/cache` revision targeting Node.js 20; GitHub forced it
+to Node.js 24. This upstream maintenance item is tracked as `DEBT-CI-001`.

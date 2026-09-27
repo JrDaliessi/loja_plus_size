@@ -1,6 +1,6 @@
 # Test Plan — FEATURE-AWS-API-DEPLOY
 
-Status: `IN_PROGRESS`; Dia 4 local GREEN e validação no runner Linux pendente.
+Status: `IN_PROGRESS`; Dia 4 GREEN localmente e no runner Linux.
 
 ## Objective
 
@@ -77,5 +77,6 @@ obsoletos. O GREEN local passa a cobrir dez comportamentos, preservando
 
 No Dia 4, `AWS-CI-001..004` falharam pela ausência correta do workflow e
 `AWS-OBS-001..002` falharam pela ausência da telemetry. Os 16 contratos locais
-ficaram GREEN. A construção e o scan reais da imagem permanecem pendentes no
-runner Linux, sem falso aceite local.
+ficaram GREEN. No PR #11, o primeiro Trivy bloqueou quatro HIGH corrigíveis; o
+contrato do runtime falhou antes da remoção de npm/corepack. O run
+`36320602513` comprovou build, smoke, scan e SBOM verdes, com OIDC skipped.

@@ -33,6 +33,20 @@
 - Resolution criterion: dependency installation contains no deprecated version and
   the complete regression remains green without an unsafe override.
 
+### DEBT-CI-001 — Replace transitive Node.js 20 cache action
+
+- Severity: `LOW`
+- Capability: `software`
+- Affects: API Image Verification workflow only.
+- Problem: Trivy Action 0.35.0 invokes an `actions/cache` revision that still
+  targets Node.js 20; GitHub currently forces it to Node.js 24 and emits a warning.
+- Current control: the Trivy Action is pinned by full SHA, the runner completed
+  build/scan/SBOM successfully, and no deprecated runtime enters the API image.
+- Risk of delay: a future runner may stop applying the compatibility fallback.
+- Recommended phase: update when Trivy publishes a compatible pinned revision.
+- Resolution criterion: the image verification run completes without a Node.js 20
+  action warning and preserves the same scan/SBOM gates.
+
 ## Resolved
 
 ### DEBT-WEB-001 — Optimize source preview images

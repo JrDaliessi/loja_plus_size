@@ -13,6 +13,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | DEBT-DEP-001 | Dívida Técnica | Remover `glob@10.5.0` deprecated da árvore de cobertura Jest | P3 | atualização upstream de `test-exclude`/Jest | instalação sem a versão deprecated e regressão verde | READY |
 | DEBT-WEB-001 | Dívida Técnica | Reduzir o peso dos quatro assets-fonte da preview sem perder qualidade visual | P3 | aprovação visual estável | WebP revisado reduziu 95,43% e manteve browser/tests verdes | DONE |
 | DEBT-PERF-001 | Dívida Técnica | Otimizar predicate de cursor profundo do catálogo | P2 | dados representativos ou `SR-MVP-03` | `EXPLAIN` demonstra linhas examinadas limitadas por página sem quebrar consistência | READY |
+| DEBT-CI-001 | Dívida Técnica | Remover warning de `actions/cache` em Node.js 20 transitivo do Trivy | P3 | release upstream compatível | runner não emite warning e preserva scan/SBOM verdes | READY |
 | SEC-BASE-001 | Security Item | Validar identidade Supabase e permissões mínimas de staff | P0 | acesso Supabase, arquitetura aprovada | mutações admin negam por padrão e passam testes de autorização | IN_PROGRESS |
 | SEC-PRISMA-001 | Security Item | Isolar o histórico de migrations do Prisma da Data API | P0 | promoção remota, CAT-SEC-009 | RLS ativa e zero CRUD para `anon`/`authenticated` | DONE |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |

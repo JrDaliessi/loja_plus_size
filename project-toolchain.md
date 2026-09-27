@@ -20,8 +20,8 @@
 | Zod | estável atual | `4.6.5` | request e JSON Schema sincronizados |
 | esbuild | estável atual | `0.28.2` | bundle Node ESM executável validado |
 | GitHub Actions | actions oficiais fixadas por SHA | checkout `v7.0.1`, pnpm/setup `v2.1.0` | pipeline API materializado |
-| Docker Actions | versões fixadas por SHA | setup-buildx `v4.1.0`, build-push `v7.4.0` | workflow de verificação materializado; runner pendente |
-| Trivy Action | versão fixada por SHA | `0.35.0` | scan/SBOM materializados; runner pendente |
+| Docker Actions | versões fixadas por SHA | setup-buildx `v4.1.0`, build-push `v7.4.0` | build/smoke verdes no run `36320602513` |
+| Trivy Action | versão fixada por SHA | `0.35.0` | scan/SBOM verdes no run `36320602513` |
 | AWS credentials Action | versão fixada por SHA | `v6.3.0` | OIDC read-only manual; não executado |
 
 ## Ferramentas planejadas
