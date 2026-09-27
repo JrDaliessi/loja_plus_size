@@ -30,6 +30,11 @@
     "test:web:red": {
       "outputs": [],
       "cache": false
+    },
+    "test:aws:red": {
+      "dependsOn": ["type-check"],
+      "outputs": [],
+      "cache": false
     }
   }
 }
