@@ -130,6 +130,10 @@ describe('FEATURE-AWS-API-DEPLOY RED contracts', () => {
     const source = readFileSync(dockerfile, 'utf8');
     expect(source).toContain('24.21.0');
     expect(source).toContain('11.19.0');
+    expect(source).toContain('rm -rf /usr/local/lib/node_modules/npm');
+    expect(source).toContain('/usr/local/bin/npm');
+    expect(source).toContain('/usr/local/bin/npx');
+    expect(source).toContain('/usr/local/lib/node_modules/corepack');
     expect(source).toMatch(/^USER\s+(?!root\b).+/mu);
     expect(source).toContain('CMD ["node", "dist/main.js"]');
   });

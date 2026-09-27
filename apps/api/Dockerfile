@@ -30,7 +30,14 @@ ENV PORT=3001
 
 WORKDIR /app
 
-RUN groupadd --system --gid 10001 plusstore \
+RUN rm -rf /usr/local/lib/node_modules/npm \
+    /usr/local/lib/node_modules/corepack \
+  && rm -f /usr/local/bin/npm \
+    /usr/local/bin/npx \
+    /usr/local/bin/corepack \
+    /usr/local/bin/pnpm \
+    /usr/local/bin/pnpx \
+  && groupadd --system --gid 10001 plusstore \
   && useradd --system --uid 10001 --gid plusstore plusstore
 
 COPY --from=build --chown=10001:10001 /runtime/ ./
