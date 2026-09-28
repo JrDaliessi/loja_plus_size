@@ -3,9 +3,9 @@
 ## Current State
 
 - Small release: `SR-INFRA-API-01`
-- Artifact state: `HARDENING`
+- Artifact state: `EXPERIENCE_VALIDATION`
 - Project state: `OPERATING`
-- Phase: Dia 5 concluído em 2026-09-27; local e runner Linux GREEN
+- Phase: Dia 6 concluído localmente em 2026-09-28; runner do branch pendente
 
 ## Completed
 
@@ -55,6 +55,12 @@
 - 8/8 contratos do Dia 5, 105/105 regressões e smoke do bundle ficaram verdes.
 - build, smoke, Trivy e SBOM passaram no run `36356216865`;
 - qualidade da API passou no run `36356216882`; OIDC permaneceu `skipped`.
+- health e respostas `429` receberam `Cache-Control: no-store`;
+- telemetria agora precede o rate limiter e preserva correlação de rejeições;
+- preflight CORS permitido/negado e correlação insegura foram validados;
+- smoke da imagem passou a verificar headers operacionais;
+- runbook seguro de smoke, diagnóstico, rollback e teardown foi criado;
+- 9/9 contratos do Dia 6 e 114/114 regressões ficaram verdes localmente.
 
 ## Decisions
 
@@ -86,8 +92,9 @@
 - GREEN: `green-evidence.md`
 - Dia 4: `day4-evidence.md`
 - Dia 5: `day5-evidence.md`
+- Dia 6: `day6-evidence.md`
 
 ## Next Action
 
-Aguardar confirmação humana para iniciar o Dia 6. Não executar OIDC, publicar
-imagem nem criar serviço ECS.
+Validar a branch do Dia 6 no runner Linux e então solicitar confirmação humana
+para o Dia 7. Não executar OIDC, publicar imagem nem criar serviço ECS.

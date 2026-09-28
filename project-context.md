@@ -4,15 +4,15 @@ project: Plus Store
 project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-AWS-API-DEPLOY
-artifact_state: HARDENING
-phase: Dia 5 da implantação AWS concluído — local e runner Linux GREEN
+artifact_state: EXPERIENCE_VALIDATION
+phase: Dia 6 da implantação AWS concluído localmente — runner do branch pendente
 last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Aguardar o gate humano do Dia 6, preservando a proibição de deploy remoto e
-execução OIDC.
+Validar no runner Linux a experiência operacional do Dia 6, preservando a
+proibição de deploy remoto e execução OIDC.
 
 ## Blockers
 
@@ -45,7 +45,7 @@ execução OIDC.
 - brief: `project-brief.md`
 - requirements: `docs/product/prd.md` (`1.0`, `REQUIREMENTS_APPROVED`)
 - architecture: `architecture.md` (`1.0`, `APPROVED`)
-- active artifact: `docs/features/FEATURE-AWS-API-DEPLOY/` (`HARDENING`)
+- active artifact: `docs/features/FEATURE-AWS-API-DEPLOY/` (`EXPERIENCE_VALIDATION`)
 - active requirements: `docs/features/FEATURE-AWS-API-DEPLOY/feature-prd.md`
 - active specification: `docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md`
 - active validation: `docs/features/FEATURE-AWS-API-DEPLOY/test-plan.md`,
@@ -53,7 +53,8 @@ execução OIDC.
   `docs/features/FEATURE-AWS-API-DEPLOY/red-evidence.md`,
   `docs/features/FEATURE-AWS-API-DEPLOY/green-evidence.md`,
   `docs/features/FEATURE-AWS-API-DEPLOY/day4-evidence.md`,
-  `docs/features/FEATURE-AWS-API-DEPLOY/day5-evidence.md`
+  `docs/features/FEATURE-AWS-API-DEPLOY/day5-evidence.md`,
+  `docs/features/FEATURE-AWS-API-DEPLOY/day6-evidence.md`
 - active status: `docs/features/FEATURE-AWS-API-DEPLOY/status.md`
 - previous release: `docs/releases/SR-WEB-PREVIEW-01.md`
 - release candidate: `docs/releases/SR-MVP-01-catalog-release-candidate.md`
@@ -71,9 +72,9 @@ execução OIDC.
 - CI: `.github/workflows/api-quality.yml`
 - stack: `project-stack.md`
 - toolchain: `project-toolchain.md`
-- repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, active branch `codex/aws-api-hardening`; PR `#11` merged)
+- repository: `https://github.com/JrDaliessi/loja_plus_size.git` (`origin`, active branch `codex/aws-api-experience`; PR `#12` merged)
 - infrastructure: `docs/infrastructure/supabase.md`, `docs/infrastructure/aws.md`,
-  `docs/infrastructure/aws-hardening.yaml`
+  `docs/infrastructure/aws-hardening.yaml`, `docs/infrastructure/aws-runbook.md`
 - Supabase baseline: `docs/infrastructure/supabase-baseline-2026-09-14.md`
 - Supabase revalidation: `docs/infrastructure/supabase-revalidation-2026-09-26.md`
 - Supabase promotion: `docs/infrastructure/supabase-promotion-2026-09-26.md`
@@ -86,8 +87,8 @@ execução OIDC.
 
 ## Next Action
 
-Aguardar comando humano para iniciar o Dia 6. Manter `validate-aws-identity` sem
-execução e não criar recursos AWS.
+Validar a branch do Dia 6 no GitHub Linux runner. Manter
+`validate-aws-identity` sem execução e não avançar ao Dia 7 sem confirmação.
 
 ## History
 

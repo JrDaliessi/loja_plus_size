@@ -285,6 +285,21 @@
 - [x] lint/test/build/audit no runner Linux — run `36356216882`
 - [ ] estimativa e budget AWS aprovados antes de qualquer criação remota
 
+## Gate DEPLOY-API-AWS — Dia 6 (2026-09-28)
+
+- [x] aplicabilidade registrada: experiência de API, sem duplicar WCAG visual da Vercel
+- [x] cinco observações RED precederam o comportamento e o smoke novos
+- [x] health JSON possui `Cache-Control: no-store` e correlação segura
+- [x] preflight permitido retorna `204`; origem negada não recebe CORS
+- [x] `429` é JSON estável, não-cacheável e correlacionado
+- [x] telemetria precede o rate limiter terminador
+- [x] runbook separa gates, smoke, diagnóstico, rollback e teardown
+- [x] smoke da imagem verifica headers operacionais
+- [x] 9/9 contratos do Dia 6 e 114/114 testes da API verdes
+- [x] cobertura, lint, type-check, build e audits locais verdes
+- [x] nenhuma mutação AWS, Supabase ou Vercel foi executada
+- [ ] build/smoke/Trivy/SBOM do branch no runner Linux
+
 ## Gate de software
 
 - Requisito e critério de aceite possuem IDs estáveis.
