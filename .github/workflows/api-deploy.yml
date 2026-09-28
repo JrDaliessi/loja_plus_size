@@ -77,6 +77,7 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
+          live_headers="${RUNNER_TEMP}/plus-store-live-headers.txt"
           docker run --detach --rm \
             --name plus-store-api-smoke \
             --network host \
@@ -99,6 +100,7 @@ jobs:
           cleanup() {
             docker logs plus-store-api-smoke || true
             docker stop --time 15 plus-store-api-smoke || true
+            rm -f "${live_headers}"
           }
           trap cleanup EXIT
 
@@ -112,12 +114,19 @@ jobs:
             sleep 1
           done
 
-          curl --fail --silent http://127.0.0.1:3101/health/live \
+          curl --fail --silent \
+            --dump-header "${live_headers}" \
+            --header 'X-Correlation-ID: smoke-live-runner' \
+            http://127.0.0.1:3101/health/live \
             | grep --fixed-strings '"status":"ok"'
+          grep --ignore-case --fixed-strings 'cache-control: no-store' "${live_headers}"
+          grep --ignore-case --fixed-strings \
+            'x-correlation-id: smoke-live-runner' "${live_headers}"
           curl --fail --silent http://127.0.0.1:3101/health/ready \
             | grep --fixed-strings '"status":"ready"'
 
           docker stop --time 15 plus-store-api-smoke
+          rm -f "${live_headers}"
           trap - EXIT
 
       - name: Scan image for high and critical vulnerabilities

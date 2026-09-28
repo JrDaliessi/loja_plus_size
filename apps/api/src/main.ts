@@ -65,16 +65,16 @@ const bootstrap = async (): Promise<void> => {
   configureTrustedProxy(app, config.rateLimit.trustProxyHops);
   app.enableCors(createCorsOptions(config.allowedOrigins));
   app.use(
-    '/v1/catalog/products',
-    createPublicCatalogRateLimiter(config.rateLimit),
-  );
-  app.use(
     createRequestTelemetry({
       environment: process.env['NODE_ENV'] ?? 'development',
       revision: process.env['APP_REVISION'] ?? 'local',
       service: 'plus-store-api',
       write: (record) => process.stdout.write(`${JSON.stringify(record)}\n`),
     }),
+  );
+  app.use(
+    '/v1/catalog/products',
+    createPublicCatalogRateLimiter(config.rateLimit),
   );
   if (config.swaggerEnabled) {
     const openApi = SwaggerModule.createDocument(
