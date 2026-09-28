@@ -1,6 +1,6 @@
 # Test Plan — FEATURE-AWS-API-DEPLOY
 
-Status: `HARDENING`; Dia 5 GREEN localmente e no runner Linux.
+Status: `EXPERIENCE_VALIDATION`; Dia 6 GREEN localmente e no runner Linux.
 
 ## Objective
 
@@ -88,3 +88,10 @@ rate limit, Swagger e o plano operacional. O último contrato recebeu uma
 escalada RED adicional para exigir ingresso da task somente pelo security group
 do ALB. O resultado local é 8/8 GREEN e a regressão completa é 105/105. Os runs
 `36356216865` e `36356216882` validaram imagem e qualidade; OIDC ficou skipped.
+
+No Dia 6, `AWS-EXP-001..008` validam formato/cache dos health checks,
+correlação segura, preflight permitido/negado, readiness indisponível, erro
+`429`, ordem da telemetria, runbook e smoke da imagem. Cinco observações RED
+precederam a implementação; o resultado local final é 9/9 GREEN e 114/114 na
+regressão da API. Os runs `36386913042` e `36386912961` validaram imagem e
+qualidade; OIDC permaneceu skipped.

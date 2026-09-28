@@ -27,6 +27,8 @@ routes:
   infrastructure:
     - docs/infrastructure/supabase.md
     - docs/infrastructure/aws.md
+    - docs/infrastructure/aws-hardening.yaml
+    - docs/infrastructure/aws-runbook.md
     - docs/infrastructure/supabase-revalidation-2026-09-26.md
     - docs/infrastructure/supabase-promotion-2026-09-26.md
   active-artifact:
@@ -152,6 +154,24 @@ relations:
       - docs/features/FEATURE-AWS-API-DEPLOY/status.md
       - docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
       - project-context.md
+      - quality-gates.md
+  docs/features/FEATURE-AWS-API-DEPLOY/day6-evidence.md:
+    derived_from:
+      - apps/api/src/features/deployment/tests/day6/aws-api-experience.day6.spec.ts
+      - apps/api/src/shared/health/presentation/http/health.controller.ts
+      - apps/api/src/shared/security/public-edge-policy.ts
+      - docs/infrastructure/aws-runbook.md
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/status.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
+      - project-context.md
+      - quality-gates.md
+  docs/infrastructure/aws-runbook.md:
+    derived_from:
+      - docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md
+      - docs/infrastructure/aws-hardening.yaml
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/day6-evidence.md
       - quality-gates.md
   docs/infrastructure/aws-hardening.yaml:
     derived_from:

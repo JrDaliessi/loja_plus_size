@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Header,
   Inject,
   ServiceUnavailableException,
 } from '@nestjs/common';
@@ -18,11 +19,13 @@ export class HealthController {
   ) {}
 
   @Get('live')
+  @Header('Cache-Control', 'no-store')
   live(): { status: 'ok' } {
     return { status: 'ok' };
   }
 
   @Get('ready')
+  @Header('Cache-Control', 'no-store')
   async ready(): Promise<{ status: 'ready' }> {
     try {
       await this.readinessProbe.check();

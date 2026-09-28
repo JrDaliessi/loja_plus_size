@@ -6,6 +6,12 @@ interface ExpressProxySettings {
   set(setting: 'trust proxy', value: number): void;
 }
 
+interface RateLimitResponse {
+  json(body: unknown): void;
+  setHeader(name: string, value: string): void;
+  status(code: number): RateLimitResponse;
+}
+
 export const configureTrustedProxy = (
   app: Pick<INestApplication, 'getHttpAdapter'>,
   hops: number,
@@ -36,9 +42,12 @@ export const createPublicCatalogRateLimiter = (options: {
     standardHeaders: 'draft-7',
     legacyHeaders: false,
     passOnStoreError: false,
-    message: {
-      statusCode: 429,
-      error: 'Too Many Requests',
-      message: 'RATE_LIMIT_EXCEEDED',
+    handler: (_request, response: RateLimitResponse) => {
+      response.setHeader('Cache-Control', 'no-store');
+      response.status(429).json({
+        statusCode: 429,
+        error: 'Too Many Requests',
+        message: 'RATE_LIMIT_EXCEEDED',
+      });
     },
   });
