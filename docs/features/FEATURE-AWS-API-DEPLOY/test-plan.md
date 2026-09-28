@@ -1,6 +1,6 @@
 # Test Plan — FEATURE-AWS-API-DEPLOY
 
-Status: `EXPERIENCE_VALIDATION`; Dia 6 GREEN localmente e no runner Linux.
+Status: `BLOCKED`; Dia 7 auditado sem promover evidência local a release remota.
 
 ## Objective
 
@@ -95,3 +95,8 @@ correlação segura, preflight permitido/negado, readiness indisponível, erro
 precederam a implementação; o resultado local final é 9/9 GREEN e 114/114 na
 regressão da API. Os runs `36386913042` e `36386912961` validaram imagem e
 qualidade; OIDC permaneceu skipped.
+
+No Dia 7, todos os 17 critérios foram reavaliados contra evidência materializada:
+7 PASS, 6 PARTIAL e 4 BLOCKED. A regressão final permaneceu em 114/114 e os
+workflows da `main` passaram, mas identidade AWS, ambiente isolado, FinOps, IaC,
+deployment e rollback remoto continuam ausentes. Ver `release-readiness.md`.

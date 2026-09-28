@@ -301,6 +301,29 @@
 - [x] build/smoke/Trivy/SBOM no runner Linux — run `36386913042`
 - [x] lint/test/build/audit no runner Linux — run `36386912961`
 
+## Gate DEPLOY-API-AWS — Dia 7 (2026-09-28)
+
+- [x] PR #13 integrado como `51d81f4`
+- [x] 17/17 requisitos e critérios permanecem rastreados
+- [x] auditoria distingue 7 PASS, 6 PARTIAL e 4 BLOCKED
+- [x] 19 suítes e 114/114 testes da API verdes
+- [x] cobertura, lint, type-check, build e audits locais verdes
+- [x] smoke final do bundle com PostgreSQL isolado verde
+- [x] API Quality da `main` verde — run `36425538715`
+- [x] imagem/smoke/Trivy/SBOM da `main` verdes — run `36425538719`
+- [x] release readiness, rollback, evidência e RC1 materializados
+- [x] dívida ativa revisada; nenhuma dívida crítica oculta
+- [x] Hot Context compactado e rotas atualizadas
+- [x] nenhuma mutação AWS, Supabase ou Vercel executada
+- [ ] identidade/conta/região AWS validadas read-only
+- [ ] alvo Supabase não produtivo selecionado
+- [ ] custo, budget, alertas e teto de escala aprovados
+- [ ] IaC selecionada e políticas/inventário revisados
+- [ ] deployment, CloudWatch smoke e rollback remoto exercitados
+
+Decisão: `BLOCKED`. É proibido promover este candidato como serviço AWS ativo
+enquanto os gates remotos permanecerem abertos.
+
 ## Gate de software
 
 - Requisito e critério de aceite possuem IDs estáveis.

@@ -166,6 +166,38 @@ relations:
       - docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
       - project-context.md
       - quality-gates.md
+  docs/features/FEATURE-AWS-API-DEPLOY/day7-evidence.md:
+    derived_from:
+      - docs/features/FEATURE-AWS-API-DEPLOY/release-readiness.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/day6-evidence.md
+      - quality-gates.md
+    affects:
+      - docs/features/FEATURE-AWS-API-DEPLOY/status.md
+      - docs/releases/SR-INFRA-API-01-release-candidate.md
+      - project-context.md
+  docs/features/FEATURE-AWS-API-DEPLOY/release-readiness.md:
+    depends_on:
+      - docs/features/FEATURE-AWS-API-DEPLOY/test-matrix.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/day6-evidence.md
+    affects:
+      - docs/releases/SR-INFRA-API-01-release-candidate.md
+      - backlog.md
+      - roadmap.md
+  docs/features/FEATURE-AWS-API-DEPLOY/rollback-plan.md:
+    derived_from:
+      - docs/infrastructure/aws-hardening.yaml
+      - docs/infrastructure/aws-runbook.md
+    affects:
+      - docs/releases/SR-INFRA-API-01-release-candidate.md
+  docs/releases/SR-INFRA-API-01-release-candidate.md:
+    depends_on:
+      - docs/features/FEATURE-AWS-API-DEPLOY/day7-evidence.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/release-readiness.md
+      - docs/features/FEATURE-AWS-API-DEPLOY/rollback-plan.md
+    affects:
+      - backlog.md
+      - roadmap.md
+      - project-context.md
   docs/infrastructure/aws-runbook.md:
     derived_from:
       - docs/features/FEATURE-AWS-API-DEPLOY/feature-spec.md
