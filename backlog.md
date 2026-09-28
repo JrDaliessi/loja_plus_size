@@ -94,8 +94,8 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 31 | FSPEC-AWSAPI-001 | Definir arquitetura, container, segurança, custo e rollback | DONE — ADR-005 e `SPEC_READY`, 2026-09-26 |
 | 32 | TEST-AWSAPI-001 | Criar matriz 17/17, testes RED e validações locais | DONE — 8 REDs corretos + 1 guard verde no Node 24.21.0 |
 | 33 | IMPL-AWSAPI-001 | Implementar container/health/shutdown mínimos GREEN | DONE — 10 contratos locais e 81 regressões verdes |
-| 34 | EXP-AWSAPI-001 | Expandir CI/OIDC, build/scan/SBOM e observabilidade controlada | IN_PROGRESS — local GREEN; build/scan/SBOM no runner pendentes |
-| 35 | HARDEN-AWSAPI-001 | Refinar IAM, imagem, pool, custo, rollback e teardown | BLOCKED — depende de ambiente AWS |
+| 34 | EXP-AWSAPI-001 | Expandir CI/OIDC, build/scan/SBOM e observabilidade controlada | DONE — runner `36320602513` GREEN; OIDC skipped por desenho |
+| 35 | HARDEN-AWSAPI-001 | Refinar IAM, imagem, pool, custo, rollback e teardown | DONE — local e runner Linux GREEN, 2026-09-27 |
 | 36 | REL-AWSAPI-001 | Executar gates finais e publicar a API aprovada | BLOCKED — depende de alvo isolado, orçamento e autorização |
 
 ## Artifact/Feature Backlog — SR-MVP-01
@@ -120,9 +120,9 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
-| FEATURE-AWS-API-DEPLOY | `docs/features/FEATURE-AWS-API-DEPLOY/` | ADR-005 e aprovação humana | IN_PROGRESS — Dia 3 local GREEN |
+| FEATURE-AWS-API-DEPLOY | `docs/features/FEATURE-AWS-API-DEPLOY/` | ADR-005 e aprovação humana | HARDENING — Dia 5 local GREEN |
 | TEST-AWS-API | matriz, fixtures, REDs e smoke local | requisitos/spec aprovados | DONE |
-| CONTAINER-AWS-API | Dockerfile, health e shutdown | Dia 2 validado | IN_PROGRESS — contrato local GREEN; build Docker pendente |
+| CONTAINER-AWS-API | Dockerfile, health e shutdown | Dia 2 validado | DONE — build/smoke/scan/SBOM no runner `36320602513` |
 | AWS-ENVIRONMENT | ECR/ECS/IAM/Secrets/CloudWatch | alvo isolado, custo, IaC e autorização | BLOCKED |
 | AWS-RELEASE | deployment, smoke e rollback | ambiente verde e gates finais | BLOCKED |
 

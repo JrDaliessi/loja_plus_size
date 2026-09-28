@@ -84,6 +84,15 @@ jobs:
             --env SUPABASE_URL=https://example.supabase.co \
             --env SUPABASE_PUBLISHABLE_KEY=sb_publishable_test_only_not_a_real_key \
             --env SUPABASE_STORAGE_BUCKET=product-media-test \
+            --env API_ALLOWED_ORIGINS=https://preview.example.com \
+            --env API_RATE_LIMIT_WINDOW_MS=60000 \
+            --env API_RATE_LIMIT_MAX=60 \
+            --env API_TRUST_PROXY_HOPS=1 \
+            --env API_SWAGGER_ENABLED=false \
+            --env DATABASE_POOL_MAX=2 \
+            --env DATABASE_POOL_CONNECTION_TIMEOUT_MS=3000 \
+            --env DATABASE_POOL_IDLE_TIMEOUT_MS=10000 \
+            --env DATABASE_POOL_MAX_LIFETIME_SECONDS=300 \
             --env PORT=3101 \
             "${IMAGE_TAG}"
 

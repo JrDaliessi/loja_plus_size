@@ -1,6 +1,6 @@
 # Test Plan — FEATURE-AWS-API-DEPLOY
 
-Status: `IN_PROGRESS`; Dia 4 GREEN localmente e no runner Linux.
+Status: `HARDENING`; Dia 5 GREEN localmente e no runner Linux.
 
 ## Objective
 
@@ -19,6 +19,8 @@ e deixando mutações AWS apenas para o gate remoto aprovado.
    em staging.
 7. **Remote AWS:** identidade/custo/IAM/inventário antes da mutação; depois
    health, logs, smoke, canary, rollback e teardown.
+8. **Public edge:** CORS por allowlist, cliente real atrás de proxy confiável,
+   rate limit do catálogo e Swagger fechado em produção.
 
 ## RED Suite
 
@@ -80,3 +82,9 @@ No Dia 4, `AWS-CI-001..004` falharam pela ausência correta do workflow e
 ficaram GREEN. No PR #11, o primeiro Trivy bloqueou quatro HIGH corrigíveis; o
 contrato do runtime falhou antes da remoção de npm/corepack. O run
 `36320602513` comprovou build, smoke, scan e SBOM verdes, com OIDC skipped.
+
+No Dia 5, `AWS-HARD-001..008` cobrem pool, configuração fail-fast, CORS,
+rate limit, Swagger e o plano operacional. O último contrato recebeu uma
+escalada RED adicional para exigir ingresso da task somente pelo security group
+do ALB. O resultado local é 8/8 GREEN e a regressão completa é 105/105. Os runs
+`36356216865` e `36356216882` validaram imagem e qualidade; OIDC ficou skipped.

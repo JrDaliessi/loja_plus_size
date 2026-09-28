@@ -265,7 +265,25 @@
 - [x] nenhum AWS/Supabase remoto ou custo foi acessado
 - [x] workflow executado em runner Linux e evidências anexadas — PR #11,
   run `36320602513`
-- [ ] CORS/rate limit/Swagger de produção — escopo proposto para Dia 5
+- [x] CORS/rate limit/Swagger de produção — 8 contratos e bundle smoke no Dia 5
+
+## Gate DEPLOY-API-AWS — Dia 5 (2026-09-27)
+
+- [x] TDD registrou RED válido antes do pool e das políticas de borda
+- [x] pool de aplicação explícito: máximo 5 conexões por task e 10 no teto atual
+- [x] produção exige origens HTTPS explícitas; wildcard é rejeitado
+- [x] CORS sem credenciais permite somente a allowlist configurada
+- [x] rate limit do catálogo separa clientes atrás de um proxy confiável
+- [x] task futura recebe tráfego somente pelo security group do ALB
+- [x] Swagger permanece desabilitado em produção
+- [x] IAM, custo, digest, rollback e teardown têm plano legível por máquina
+- [x] 8/8 contratos do Dia 5 e 105/105 testes completos da API verdes
+- [x] bundle e smoke real verdes no Node.js 24.21.0
+- [x] audits de produção e completo sem vulnerabilidades conhecidas
+- [x] nenhuma mutação AWS, Supabase ou Vercel foi executada
+- [x] build/smoke/Trivy/SBOM no runner Linux — run `36356216865`
+- [x] lint/test/build/audit no runner Linux — run `36356216882`
+- [ ] estimativa e budget AWS aprovados antes de qualquer criação remota
 
 ## Gate de software
 

@@ -48,6 +48,30 @@ Supabase em 2026-09-26 não encontrou construções afetadas (`ltree`, `pgcrypto
 Será preenchido antes da primeira mutação. Cada item deve registrar ARN/ID,
 região, ambiente, owner, custo esperado, origem IaC e ordem de teardown.
 
+O contrato local de hardening está em `docs/infrastructure/aws-hardening.yaml`.
+Ele limita o primeiro desenho a uma task desejada, máximo de duas tasks e pool
+de cinco conexões por task. Esses valores são guardrails de pré-deploy, não
+autorização para criar recursos.
+
+## Day 5 Hardening Baseline
+
+- IAM foi separado em identidade read-only, publicação de imagem, deploy,
+  execution role e application task role; nenhuma role recebe administração;
+- a task de aplicação não precisa chamar APIs AWS no runtime atual;
+- imagem será promovida por digest, com tags imutáveis, scan e retenção limitada;
+- rollback usa o último digest saudável e não executa migration de banco;
+- a task não terá ingresso público direto: somente o security group do ALB
+  poderá alcançar a porta da aplicação, preservando a fronteira de proxy;
+- teardown exige inventário exato e preserva Supabase, Vercel e evidência de logs;
+- estimativa monetária permanece `pending_human_approval`: a AWS Pricing
+  Calculator de `sa-east-1`, orçamento e alertas devem ser aprovados antes de
+  qualquer criação, sem assumir créditos ou Free Tier;
+- o rate limit local é defesa em profundidade por task; enforcement distribuído
+  será obrigatório antes de escalar horizontalmente ou abrir operação comercial.
+
+Fontes de preço e componentes variáveis estão registrados no YAML para impedir
+que um valor temporal seja tratado como orçamento aprovado.
+
 ## Day 4 CI Safety Baseline
 
 `.github/workflows/api-deploy.yml` constrói uma imagem local no runner, executa

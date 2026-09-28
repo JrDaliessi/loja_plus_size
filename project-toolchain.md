@@ -17,6 +17,7 @@
 | ESLint | estável compatível com Node 24 | `eslint 10.10.0`, `@eslint/js 10.0.1`, `typescript-eslint 8.70.0` | lint verde |
 | NestJS/OpenAPI | estável atual | `@nestjs/core 12.0.3`, `@nestjs/swagger 12.0.1` | HTTP e OpenAPI validados |
 | Supabase JS | estável atual | `@supabase/supabase-js 2.116.0` | adapter `getClaims` e Storage validados localmente |
+| Express rate limit | estável atual | `express-rate-limit 8.7.0` | catálogo público validado por cliente atrás de proxy confiável |
 | Zod | estável atual | `4.6.5` | request e JSON Schema sincronizados |
 | esbuild | estável atual | `0.28.2` | bundle Node ESM executável validado |
 | GitHub Actions | actions oficiais fixadas por SHA | checkout `v7.0.1`, pnpm/setup `v2.1.0` | pipeline API materializado |

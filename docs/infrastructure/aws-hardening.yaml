@@ -1,0 +1,154 @@
+version: 1
+
+scope:
+  feature: FEATURE-AWS-API-DEPLOY
+  small_release: SR-INFRA-API-01
+  region: sa-east-1
+  environment: staging
+  remote_creation_authorized: false
+  iac_decision: pending_human_decision
+
+runtime_guardrails:
+  architecture: linux_x86_64
+  cpu_units: 256
+  memory_mib: 512
+  desired_tasks: 1
+  minimum_tasks: 1
+  maximum_tasks: 2
+  application_pool_max_per_task: 5
+  maximum_application_connections: 10
+  database_target: separate_non_production_supabase_required
+  database_transport: ssl_required
+  network_ingress: alb_security_group_only
+  direct_public_task_ingress: false
+  swagger_public_in_production: false
+  cors_wildcard: false
+  public_catalog_rate_limit:
+    requests: 60
+    window_ms: 60000
+    trusted_proxy_hops: 1
+    scope: per_task_defense_in_depth
+    distributed_enforcement: required_before_horizontal_scale_or_commercial_launch
+
+iam_matrix:
+  readonly_identity:
+    principal: github_environment_aws_staging_readonly
+    actions:
+      - sts:GetCallerIdentity
+    resource_scope: caller_identity_only
+  future_image_publisher:
+    principal: github_environment_aws_staging_deploy
+    actions:
+      - ecr:GetAuthorizationToken
+      - ecr:BatchCheckLayerAvailability
+      - ecr:CompleteLayerUpload
+      - ecr:InitiateLayerUpload
+      - ecr:PutImage
+      - ecr:UploadLayerPart
+    resource_scope: exact_plus_store_api_repository
+  future_service_deployer:
+    principal: github_environment_aws_staging_deploy
+    actions:
+      - ecs:DescribeServices
+      - ecs:DescribeTaskDefinition
+      - ecs:DescribeTasks
+      - ecs:RegisterTaskDefinition
+      - ecs:UpdateService
+      - iam:PassRole
+    resource_scope: exact_cluster_service_and_task_roles
+  future_task_execution:
+    principal: plus_store_api_execution_role
+    actions:
+      - ecr:BatchGetImage
+      - ecr:GetDownloadUrlForLayer
+      - logs:CreateLogStream
+      - logs:PutLogEvents
+      - secretsmanager:GetSecretValue
+      - kms:Decrypt
+    resource_scope: exact_repository_log_group_secrets_and_key
+  application_task:
+    principal: plus_store_api_task_role
+    actions: []
+    resource_scope: no_aws_api_access_required_by_current_runtime
+  prohibited:
+    - permanent_access_keys_in_github
+    - administrator_access
+    - account_wide_mutation
+    - secrets_read_by_deploy_role
+    - iam_role_creation_by_deploy_role
+
+cost_guardrails:
+  estimate_status: pending_human_approval
+  estimate_date: 2026-09-27
+  currency: USD
+  monthly_budget_usd: null
+  calculator_region: sa-east-1
+  calculator_required_before_creation: true
+  free_tier_or_credits_assumed: false
+  components:
+    - ecs_fargate_linux_x86_vcpu_and_memory
+    - application_load_balancer_hours_and_lcu
+    - public_ipv4_hours
+    - cloudwatch_logs_ingestion_storage_and_alarms
+    - ecr_storage_and_scanning
+    - secrets_manager_secret_and_api_calls
+    - outbound_data_transfer
+    - nat_gateway_only_if_network_design_adds_one
+  pricing_sources:
+    - https://aws.amazon.com/fargate/pricing/
+    - https://aws.amazon.com/elasticloadbalancing/pricing/
+    - https://aws.amazon.com/cloudwatch/pricing/
+    - https://aws.amazon.com/ecr/pricing/
+    - https://aws.amazon.com/secrets-manager/pricing/
+  approval_requires:
+    - calculator_estimate_url_or_export
+    - monthly_budget_usd
+    - alert_thresholds
+    - account_id_and_owner
+
+image_and_release:
+  private_ecr: true
+  immutable_tags: true
+  deploy_by_image_digest: true
+  scan_on_push: true
+  lifecycle_keep_release_images: 5
+  lifecycle_expire_untagged_days: 7
+  sbom_required: true
+  high_or_critical_findings_require_recorded_exception: true
+
+rollback:
+  last_known_healthy_digest: required_before_each_deploy
+  triggers:
+    - ecs_deployment_failure
+    - unhealthy_target
+    - correlated_smoke_failure
+    - sustained_http_5xx_alarm
+  procedure:
+    - stop_promotion
+    - select_last_known_healthy_digest
+    - register_rollback_revision_without_database_migration
+    - wait_for_service_stability
+    - run_correlated_live_ready_and_catalog_smoke
+    - record_revision_digest_timestamps_and_result
+  database_rule: expand_contract_only_with_separate_approved_plan
+
+teardown:
+  exact_inventory_required: true
+  preserve_cloudwatch_evidence: true
+  preserve_supabase: true
+  preserve_vercel: true
+  order:
+    - disable_pipeline_and_autoscaling
+    - scale_service_to_zero_after_target_verification
+    - remove_ecs_service_and_task_definitions_created_by_this_release
+    - remove_load_balancer_targets_listener_and_security_groups_created_by_this_release
+    - remove_ecr_images_and_repository_created_by_this_release
+    - schedule_secret_deletion_only_after_owner_approval
+    - retain_logs_for_the_approved_evidence_window
+    - remove_release_specific_budget_and_alarms_last
+  forbidden:
+    - recursive_account_cleanup
+    - deletion_by_name_glob
+    - supabase_mutation
+    - vercel_mutation
+    - deletion_without_account_region_and_resource_id_validation
