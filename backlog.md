@@ -18,7 +18,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | SEC-PRISMA-001 | Security Item | Isolar o histórico de migrations do Prisma da Data API | P0 | promoção remota, CAT-SEC-009 | RLS ativa e zero CRUD para `anon`/`authenticated` | DONE |
 | DS-001 | UX Improvement | Purple Noir: tokens, Dark Luxury, Light Editorial e componentes acessíveis | P0 | arquitetura, critérios WCAG | componentes do slice aplicam identidade e passam contraste/teclado | IN_PROGRESS |
 | WEBPREVIEW-001 | Small Release | Vitrine Purple Noir demonstrativa e revisável em Preview Deployment | P0 | DS-001, arquitetura, Vercel | preview sem claims comerciais passa gates web e recebe aceite humano | DONE |
-| AWS-API-001 | Small Release | Empacotar e implantar a API NestJS de forma observável e reversível na AWS | P0 | catálogo, ADR-005, ambiente isolado, orçamento | API saudável em ECS/Fargate, sem segredos, com smoke e rollback | IN_PROGRESS |
+| AWS-API-001 | Small Release | Empacotar e implantar a API NestJS de forma observável e reversível na AWS | P0 | catálogo, ADR-005, ambiente isolado, orçamento | API saudável em ECS/Fargate, sem segredos, com smoke e rollback | BLOCKED |
 | CAT-001 | Feature | Catálogo com produto, mídia, categoria, marca e coleção | P0 | PROD-001 | CRUD e consulta passam nos critérios | IN_PROGRESS |
 | VAR-001 | Feature | Variante cor+tamanho com SKU, preço, barcode, mídia e disponibilidade | P0 | CAT-001 | cada combinação é endereçável e única | IN_PROGRESS |
 | INV-001 | Feature | Estoque e movimentos por SKU como fonte única | P0 | VAR-001 | nenhuma operação vende quantidade indisponível | IDEA |
@@ -97,7 +97,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 | 34 | EXP-AWSAPI-001 | Expandir CI/OIDC, build/scan/SBOM e observabilidade controlada | DONE — runner `36320602513` GREEN; OIDC skipped por desenho |
 | 35 | HARDEN-AWSAPI-001 | Refinar IAM, imagem, pool, custo, rollback e teardown | DONE — local e runner Linux GREEN, 2026-09-27 |
 | 36 | EXPVAL-AWSAPI-001 | Validar experiência HTTP, diagnóstico e runbook operacional | DONE — local e runner Linux GREEN, 2026-09-28 |
-| 37 | REL-AWSAPI-001 | Executar gates finais e publicar a API aprovada | BLOCKED — depende de alvo isolado, orçamento e autorização |
+| 37 | REL-AWSAPI-001 | Executar gates finais e publicar a API aprovada | BLOCKED — RC1 auditado; 4 pré-requisitos remotos pendentes |
 
 ## Artifact/Feature Backlog — SR-MVP-01
 
@@ -121,7 +121,7 @@ Estados válidos: `IDEA`, `DISCOVERY`, `READY`, `IN_PROGRESS`, `DONE`, `BLOCKED`
 
 | ID | Entregável | Dependência | Estado |
 |---|---|---|---|
-| FEATURE-AWS-API-DEPLOY | `docs/features/FEATURE-AWS-API-DEPLOY/` | ADR-005 e aprovação humana | EXPERIENCE_VALIDATION — Dia 6 local GREEN |
+| FEATURE-AWS-API-DEPLOY | `docs/features/FEATURE-AWS-API-DEPLOY/` | ADR-005 e aprovação humana | BLOCKED — RC1 com 7 PASS, 6 PARTIAL, 4 BLOCKED |
 | TEST-AWS-API | matriz, fixtures, REDs e smoke local | requisitos/spec aprovados | DONE |
 | CONTAINER-AWS-API | Dockerfile, health e shutdown | Dia 2 validado | DONE — build/smoke/scan/SBOM no runner `36320602513` |
 | AWS-ENVIRONMENT | ECR/ECS/IAM/Secrets/CloudWatch | alvo isolado, custo, IaC e autorização | BLOCKED |

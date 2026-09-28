@@ -3,9 +3,9 @@
 ## Current State
 
 - Small release: `SR-INFRA-API-01`
-- Artifact state: `EXPERIENCE_VALIDATION`
+- Artifact state: `BLOCKED`
 - Project state: `OPERATING`
-- Phase: Dia 6 concluído em 2026-09-28; local e runner Linux GREEN
+- Phase: Dia 7 concluído em 2026-09-28; release candidate auditado e bloqueado
 
 ## Completed
 
@@ -63,6 +63,11 @@
 - 9/9 contratos do Dia 6 e 114/114 regressões ficaram verdes localmente.
 - imagem, smoke, Trivy e SBOM passaram no run `36386913042`;
 - API Quality passou no run `36386912961`; Vercel passou e OIDC ficou `skipped`.
+- PR #13 foi integrado como `51d81f4`;
+- workflows da `main` passaram nos runs `36425538715` e `36425538719`;
+- auditoria final classificou 17 critérios em 7 PASS, 6 PARTIAL e 4 BLOCKED;
+- release readiness, rollback e `SR-INFRA-API-01-RC1` foram materializados;
+- nenhum ambiente remoto foi tratado como evidência por existir apenas no plano.
 
 ## Decisions
 
@@ -95,8 +100,13 @@
 - Dia 4: `day4-evidence.md`
 - Dia 5: `day5-evidence.md`
 - Dia 6: `day6-evidence.md`
+- Dia 7: `day7-evidence.md`
+- release readiness: `release-readiness.md`
+- rollback: `rollback-plan.md`
+- release candidate: `../../releases/SR-INFRA-API-01-release-candidate.md`
 
 ## Next Action
 
-Aguardar confirmação humana para iniciar o Dia 7. Não executar OIDC, publicar
-imagem nem criar serviço ECS.
+Resolver, nesta ordem, identidade AWS read-only, Supabase não produtivo,
+FinOps/escala e decisão de IaC. Somente depois solicitar autorização separada
+para criar o ambiente e completar os critérios remotos.

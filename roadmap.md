@@ -52,7 +52,7 @@ Mode/Fargate `sa-east-1` e preserva PostgreSQL/Auth/Storage no Supabase.
 | Dia 4 | CI, OIDC, build/scan/SBOM e observabilidade controlada | DONE — runner Linux GREEN, OIDC skipped, 2026-09-27 |
 | Dia 5 | hardening de imagem, IAM, pool, custo e rollback | DONE — local e runner Linux GREEN, 2026-09-27 |
 | Dia 6 | experiência operacional e validação remota controlada | DONE — local e runner Linux GREEN, 2026-09-28 |
-| Dia 7 | gates finais, deployment aprovado e compactação | PENDING |
+| Dia 7 | gates finais, deployment aprovado e compactação | BLOCKED — RC1 auditado; ambiente remoto pendente, 2026-09-28 |
 
 Bloqueios antes do deployment: conta/perfil AWS validados, Supabase não
 produtivo, orçamento/limites aprovados e mecanismo de IaC decidido.
