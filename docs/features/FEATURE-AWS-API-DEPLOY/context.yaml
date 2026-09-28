@@ -4,7 +4,7 @@ artifact:
   small_release: SR-INFRA-API-01
   capability: software
   state: EXPERIENCE_VALIDATION
-  review_status: day_6_local_green_runner_pending_2026_09_28
+  review_status: day_6_runner_green_2026_09_28
 derived_from:
   - project-brief.md
   - project-stack.md
@@ -40,7 +40,7 @@ hard_blockers_before_remote_deploy:
   - budget_scaling_limits_and_cost_not_approved
   - iac_mechanism_not_selected
 implementation_prerequisites:
-  - github_linux_runner_validation_for_day_6
+  - human_approval_for_day_7
 quality_gates:
   - requirements_traceability
   - tdd_red_before_green
@@ -92,6 +92,8 @@ validation:
   day_6_contracts: 9
   day_6_green_tests: 9
   day_6_bundle_smoke: passed_health_preflight_rate_limit_cache_correlation
+  day_6_image_ci: passed_run_36386913042
+  day_6_api_quality_ci: passed_run_36386912961
 aws:
   region: sa-east-1
   runtime: ecs_express_mode_fargate
@@ -102,4 +104,4 @@ supabase:
   production_project_ref: olkadbgumpiybehslobk
   staging_target: not_selected
   shared_production_credentials_allowed: false
-next_action: validate_day_6_branch_on_github_linux_runner
+next_action: request_human_approval_for_day_7

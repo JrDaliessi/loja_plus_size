@@ -1,6 +1,6 @@
 # Test Plan — FEATURE-AWS-API-DEPLOY
 
-Status: `EXPERIENCE_VALIDATION`; Dia 6 GREEN localmente e runner pendente.
+Status: `EXPERIENCE_VALIDATION`; Dia 6 GREEN localmente e no runner Linux.
 
 ## Objective
 
@@ -93,4 +93,5 @@ No Dia 6, `AWS-EXP-001..008` validam formato/cache dos health checks,
 correlação segura, preflight permitido/negado, readiness indisponível, erro
 `429`, ordem da telemetria, runbook e smoke da imagem. Cinco observações RED
 precederam a implementação; o resultado local final é 9/9 GREEN e 114/114 na
-regressão da API.
+regressão da API. Os runs `36386913042` e `36386912961` validaram imagem e
+qualidade; OIDC permaneceu skipped.

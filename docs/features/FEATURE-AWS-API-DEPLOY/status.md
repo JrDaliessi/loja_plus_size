@@ -5,7 +5,7 @@
 - Small release: `SR-INFRA-API-01`
 - Artifact state: `EXPERIENCE_VALIDATION`
 - Project state: `OPERATING`
-- Phase: Dia 6 concluído localmente em 2026-09-28; runner do branch pendente
+- Phase: Dia 6 concluído em 2026-09-28; local e runner Linux GREEN
 
 ## Completed
 
@@ -61,6 +61,8 @@
 - smoke da imagem passou a verificar headers operacionais;
 - runbook seguro de smoke, diagnóstico, rollback e teardown foi criado;
 - 9/9 contratos do Dia 6 e 114/114 regressões ficaram verdes localmente.
+- imagem, smoke, Trivy e SBOM passaram no run `36386913042`;
+- API Quality passou no run `36386912961`; Vercel passou e OIDC ficou `skipped`.
 
 ## Decisions
 
@@ -96,5 +98,5 @@
 
 ## Next Action
 
-Validar a branch do Dia 6 no runner Linux e então solicitar confirmação humana
-para o Dia 7. Não executar OIDC, publicar imagem nem criar serviço ECS.
+Aguardar confirmação humana para iniciar o Dia 7. Não executar OIDC, publicar
+imagem nem criar serviço ECS.

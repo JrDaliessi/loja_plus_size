@@ -5,14 +5,14 @@ project_state: OPERATING
 active_capabilities: [product, software]
 active_artifact: FEATURE-AWS-API-DEPLOY
 artifact_state: EXPERIENCE_VALIDATION
-phase: Dia 6 da implantação AWS concluído localmente — runner do branch pendente
+phase: Dia 6 da implantação AWS concluído — local e runner Linux GREEN
 last_release: SR-WEB-PREVIEW-01
 last_release_candidate: SR-WEB-PREVIEW-01-RC1
 
 ## Current Goal
 
-Validar no runner Linux a experiência operacional do Dia 6, preservando a
-proibição de deploy remoto e execução OIDC.
+Aguardar o gate humano do Dia 7, preservando a proibição de deploy remoto e
+execução OIDC.
 
 ## Blockers
 
@@ -87,8 +87,8 @@ proibição de deploy remoto e execução OIDC.
 
 ## Next Action
 
-Validar a branch do Dia 6 no GitHub Linux runner. Manter
-`validate-aws-identity` sem execução e não avançar ao Dia 7 sem confirmação.
+Aguardar comando humano para iniciar o Dia 7. Manter `validate-aws-identity` sem
+execução e não criar recursos AWS.
 
 ## History
 

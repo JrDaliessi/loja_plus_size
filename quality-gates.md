@@ -298,7 +298,8 @@
 - [x] 9/9 contratos do Dia 6 e 114/114 testes da API verdes
 - [x] cobertura, lint, type-check, build e audits locais verdes
 - [x] nenhuma mutação AWS, Supabase ou Vercel foi executada
-- [ ] build/smoke/Trivy/SBOM do branch no runner Linux
+- [x] build/smoke/Trivy/SBOM no runner Linux — run `36386913042`
+- [x] lint/test/build/audit no runner Linux — run `36386912961`
 
 ## Gate de software
 

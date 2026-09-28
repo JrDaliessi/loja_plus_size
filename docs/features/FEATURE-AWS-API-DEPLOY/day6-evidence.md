@@ -54,12 +54,15 @@ contracts GREEN.
   limit `429`, with expected cache and correlation headers;
 - PostgreSQL was local and isolated; AWS, Supabase and Vercel were not mutated.
 
-Docker is unavailable locally. The GitHub Linux runner remains the authoritative
-container build, smoke, Trivy and SBOM validation for this branch.
+Docker is unavailable locally. The authoritative GitHub Linux validation passed:
+
+- image build, expanded smoke, Trivy and CycloneDX SBOM: run `36386913042`;
+- lint, test, build and audit: run `36386912961`;
+- Vercel preview: passed;
+- read-only AWS identity: `skipped` by design.
 
 ## Remaining Release Gates
 
-- validate this branch on the Linux runner;
 - validate the AWS identity/account/region read-only when separately approved;
 - select the non-production Supabase target;
 - approve cost, budget and scale limits;
